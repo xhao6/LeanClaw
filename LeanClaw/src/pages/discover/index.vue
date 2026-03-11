@@ -93,11 +93,21 @@ const items = ref([
 
 const handleItemClick = (item: any) => {
   console.log('Item clicked:', item.title)
-  uni.showModal({
-    title: item.title,
-    content: `你点击了 ${item.type === 'skill' ? 'Skill' : '内容'}: ${item.title}。MVP 版本暂不支持查看详情。`,
-    showCancel: false,
-  })
+  if (item.type === 'resource') {
+    // 模拟资源链接，实际应从后端获取
+    const url = 'https://uniapp.dcloud.io/'
+    uni.navigateTo({
+      url: `/pages/webview/index?url=${encodeURIComponent(url)}`
+    })
+  } else if (item.type === 'case') {
+    uni.navigateTo({
+      url: `/pages/case/detail?id=default&title=${encodeURIComponent(item.title)}`
+    })
+  } else if (item.type === 'skill') {
+    uni.navigateTo({
+      url: `/pages/skill/detail?name=${encodeURIComponent(item.title)}`
+    })
+  }
 }
 
 const filteredItems = computed(() => {
