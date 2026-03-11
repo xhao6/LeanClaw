@@ -12,6 +12,7 @@ export interface ResourceItem {
   stars?: string;
   category?: string;
   source?: string;
+  featured?: boolean;
 }
 
 export const resources: ResourceItem[] = [
@@ -24,7 +25,8 @@ export const resources: ResourceItem[] = [
     type: 'resource',
     tags: ['Lex Fridman', '创始人', '必听'],
     source: 'YouTube',
-    image: '/static/images/resources/lex.jpg' // Placeholder
+    image: '/static/images/resources/lex.jpg', // Placeholder
+    featured: true
   },
   // -- Video (New Products & Tutorials) --
   {
