@@ -36,12 +36,25 @@ export const getProgress = (): LearnProgress => {
   try {
     const data = uni.getStorageSync(STORAGE_KEY)
     if (data) {
-      return { ...defaultLearnProgress, ...data }
+      return {
+        ...defaultLearnProgress,
+        ...data,
+        completedLessons: [...(data.completedLessons || [])],
+        badges: [...(data.badges || [])],
+      }
     }
   } catch (e) {
     console.error('获取学习进度失败:', e)
   }
-  return { ...defaultLearnProgress }
+  return {
+    currentDay: defaultLearnProgress.currentDay,
+    completedLessons: [...defaultLearnProgress.completedLessons],
+    totalTime: defaultLearnProgress.totalTime,
+    streak: defaultLearnProgress.streak,
+    lastLearnDate: defaultLearnProgress.lastLearnDate,
+    badges: [...defaultLearnProgress.badges],
+    certificate: defaultLearnProgress.certificate,
+  }
 }
 
 // 保存进度
@@ -181,9 +194,22 @@ export const getCertificate = (): Certificate | null => {
 
 // 重置进度（用于测试）
 export const resetProgress = (): LearnProgress => {
-  const progress = { ...defaultLearnProgress }
+  const progress: LearnProgress = {
+    currentDay: 1,
+    completedLessons: [],
+    totalTime: 0,
+    streak: 0,
+    lastLearnDate: '',
+    badges: [],
+    certificate: false,
+  }
   saveProgress(progress)
   return progress
+}
+
+// 获取默认进度（导出函数形式）
+export const getDefaultProgress = (): LearnProgress => {
+  return { ...defaultLearnProgress }
 }
 
 // 检查并解锁徽章
