@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 
 const searchValue = ref('')
 const activeTab = ref('resource')
@@ -92,10 +92,11 @@ const items = ref([
 ])
 
 const handleItemClick = (item: any) => {
+  console.log('Item clicked:', item.title)
   uni.showModal({
     title: item.title,
     content: `你点击了 ${item.type === 'skill' ? 'Skill' : '内容'}: ${item.title}。MVP 版本暂不支持查看详情。`,
-    showCancel: false
+    showCancel: false,
   })
 }
 
@@ -120,10 +121,6 @@ const handleTabChange = () => {
   setTimeout(() => {
     loading.value = false
   }, 300)
-}
-
-const handleItemClick = (item: any) => {
-  console.log('Item clicked:', item.title)
 }
 </script>
 
