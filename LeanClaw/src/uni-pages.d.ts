@@ -5,9 +5,12 @@
 
 type _LocationUrl =
   "/pages/index/index" |
+  "/pages/case/detail" |
   "/pages/discover/index" |
   "/pages/learn/index" |
   "/pages/profile/index" |
+  "/pages/skill/detail" |
+  "/pages/webview/index" |
   "/pages/learn/detail/index";
 
 interface NavigateToOptions {
