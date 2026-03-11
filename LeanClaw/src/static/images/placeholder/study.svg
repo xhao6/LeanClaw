@@ -1,0 +1,6 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="20" fill="#FFF7ED"/>
+<path d="M100 50L40 80L100 110L160 80L100 50Z" fill="#F97316"/>
+<path d="M50 85V115C50 115 70 130 100 130C130 130 150 115 150 115V85" stroke="#FB923C" stroke-width="10" stroke-linecap="round"/>
+<text x="100" y="170" font-family="Arial" font-size="14" fill="#F97316" text-anchor="middle" font-weight="bold">STUDY</text>
+</svg>

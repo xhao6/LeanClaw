@@ -59,20 +59,20 @@
     <!-- Quick Entries -->
     <view class="grid grid-cols-3 gap-3 mb-8">
       <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoLearn">
-        <view class="w-12 h-12 rounded-2xl bg-orange/10 flex-center mb-2">
-           <wd-icon name="read" size="24px" class="text-orange" />
+        <view class="w-12 h-12 rounded-2xl bg-orange/10 flex-center mb-2 overflow-hidden">
+           <image src="/static/images/placeholder/study.svg" class="w-8 h-8" mode="aspectFit" />
         </view>
         <text class="text-sm font-medium text-gray-700">今日学习</text>
       </view>
       <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoDiscover">
-        <view class="w-12 h-12 rounded-2xl bg-blue-500/10 flex-center mb-2">
-           <wd-icon name="explore" size="24px" class="text-blue-500" />
+        <view class="w-12 h-12 rounded-2xl bg-blue-500/10 flex-center mb-2 overflow-hidden">
+           <image src="/static/images/placeholder/hot.svg" class="w-8 h-8" mode="aspectFit" />
         </view>
         <text class="text-sm font-medium text-gray-700">热门资源</text>
       </view>
       <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoSkills">
-        <view class="w-12 h-12 rounded-2xl bg-green-500/10 flex-center mb-2">
-           <wd-icon name="app" size="24px" class="text-green-500" />
+        <view class="w-12 h-12 rounded-2xl bg-green-500/10 flex-center mb-2 overflow-hidden">
+           <image src="/static/images/placeholder/skill.svg" class="w-8 h-8" mode="aspectFit" />
         </view>
         <text class="text-sm font-medium text-gray-700">推荐Skill</text>
       </view>
@@ -92,7 +92,7 @@
       
       <view class="space-y-3">
         <view v-for="i in 2" :key="i" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors">
-          <image src="https://via.placeholder.com/160" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
+          <image src="/static/images/placeholder/article.svg" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
           <view class="flex-1 flex flex-col justify-between py-1">
             <view>
               <view class="flex justify-between items-start">

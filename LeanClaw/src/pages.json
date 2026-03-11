@@ -85,26 +85,26 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-active.png"
+        "iconPath": "static/tabbar/home.svg",
+        "selectedIconPath": "static/tabbar/home-active.svg"
       },
       {
         "pagePath": "pages/learn/index",
         "text": "学习",
-        "iconPath": "static/tabbar/learn.png",
-        "selectedIconPath": "static/tabbar/learn-active.png"
+        "iconPath": "static/tabbar/learn.svg",
+        "selectedIconPath": "static/tabbar/learn-active.svg"
       },
       {
         "pagePath": "pages/discover/index",
         "text": "发现",
-        "iconPath": "static/tabbar/discover.png",
-        "selectedIconPath": "static/tabbar/discover-active.png"
+        "iconPath": "static/tabbar/discover.svg",
+        "selectedIconPath": "static/tabbar/discover-active.svg"
       },
       {
         "pagePath": "pages/profile/index",
         "text": "我的",
-        "iconPath": "static/tabbar/profile.png",
-        "selectedIconPath": "static/tabbar/profile-active.png"
+        "iconPath": "static/tabbar/profile.svg",
+        "selectedIconPath": "static/tabbar/profile-active.svg"
       }
     ]
   }
