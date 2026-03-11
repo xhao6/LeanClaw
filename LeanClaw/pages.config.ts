@@ -7,6 +7,12 @@ export default defineUniPages({
     navigationBarBackgroundColor: '#F8F8F8',
     backgroundColor: '#F8F8F8',
   },
+  easycom: {
+    autoscan: true,
+    custom: {
+      '^wd-(.*)': 'wot-design-uni/components/wd-$1/wd-$1.vue',
+    },
+  },
   tabBar: {
     color: '#999',
     selectedColor: '#1E3A5F',

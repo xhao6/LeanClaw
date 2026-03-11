@@ -1,0 +1,6 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="20" fill="#F0FFF4"/>
+<circle cx="100" cy="100" r="50" fill="#22C55E" fill-opacity="0.1"/>
+<path d="M100 60C77.9 60 60 77.9 60 100C60 115.6 69.5 128.9 83 135.5V145C83 147.8 85.2 150 88 150H112C114.8 150 117 147.8 117 145V135.5C130.5 128.9 140 115.6 140 100C140 77.9 122.1 60 100 60ZM100 130C94.5 130 90 125.5 90 120H110C110 125.5 105.5 130 100 130Z" fill="#22C55E"/>
+<text x="100" y="175" font-family="Arial" font-size="14" fill="#22C55E" text-anchor="middle" font-weight="bold">CASE STUDY</text>
+</svg>

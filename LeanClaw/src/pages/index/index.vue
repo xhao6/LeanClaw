@@ -8,69 +8,108 @@
 </route>
 
 <template>
-  <view class="p-4 bg-gray-50 min-h-screen">
+  <view class="p-4 bg-gray-50 min-h-screen box-border">
     <!-- Header -->
-    <view class="flex items-center mb-6">
-      <image src="/static/logo.png" class="w-10 h-10 mr-2" />
-      <view>
-        <text class="text-xl font-bold text-primary">LeanClaw</text>
-        <view class="text-xs text-gray-500 mt-0.5">养一只龙虾，做AI管家</view>
+    <view class="flex items-center justify-between mb-6 pt-2">
+      <view class="flex items-center">
+        <!-- Replace with actual logo or a better placeholder -->
+        <view class="w-10 h-10 bg-primary rounded-xl flex-center mr-3 shadow-sm">
+           <wd-icon name="github-filled" size="24px" color="#ffffff" />
+        </view>
+        <view>
+          <text class="text-xl font-bold text-primary block leading-tight">LeanClaw</text>
+          <text class="text-xs text-gray-400 block mt-0.5">Master Skills Faster</text>
+        </view>
       </view>
+      <wd-icon name="notification" size="24px" class="text-gray-400" />
     </view>
 
     <!-- Learning Progress Card -->
-    <wd-card custom-class="mb-4 !rounded-2xl shadow-sm overflow-hidden">
-      <view class="flex justify-between items-center mb-4">
-        <text class="font-bold text-lg">7天学习路径</text>
-        <wd-tag type="warning" plain>第 1 天 / 7 天</wd-tag>
-      </view>
-      <view class="mb-4">
-        <wd-progress :percentage="14" color="#FF6B35" />
-      </view>
-      <view class="flex justify-between text-xs text-gray-400">
-        <text>继续努力，开启今天的学习吧！</text>
-        <text>14%</text>
-      </view>
-      <template #footer>
-        <wd-button type="primary" block custom-class="!bg-orange !border-orange" @click="handleGoLearn">
-          继续学习
+    <view class="mb-6 relative overflow-hidden rounded-[24rpx] bg-white shadow-lg shadow-blue-900/5">
+      <view class="p-5">
+        <view class="flex justify-between items-center mb-6">
+          <view>
+            <text class="text-xs text-gray-400 block mb-1">当前进度</text>
+            <text class="font-bold text-2xl text-primary">Day 3 <text class="text-sm text-gray-400 font-normal">/ 7</text></text>
+          </view>
+          <view class="w-12 h-12 rounded-full border-4 border-orange/20 flex-center">
+             <text class="text-xs font-bold text-orange">42%</text>
+          </view>
+        </view>
+        
+        <view class="mb-6">
+          <view class="h-2 bg-gray-100 rounded-full overflow-hidden">
+            <view class="h-full bg-primary w-[42%] rounded-full relative">
+               <view class="absolute right-0 top-0 bottom-0 w-2 bg-white/20"></view>
+            </view>
+          </view>
+          <text class="text-xs text-gray-400 mt-2 block">下一章：Skills 核心原理解析</text>
+        </view>
+
+        <wd-button type="primary" block custom-class="!bg-orange !border-orange !rounded-xl !h-11 !text-base shadow-orange/20 shadow-lg" @click="handleGoLearn">
+          继续学习 Day 3
         </wd-button>
-      </template>
-    </wd-card>
+      </view>
+      
+      <!-- Decorative circles -->
+      <view class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-blue-50/50 pointer-events-none"></view>
+      <view class="absolute -left-4 bottom-8 w-16 h-16 rounded-full bg-orange/5 pointer-events-none"></view>
+    </view>
 
     <!-- Quick Entries -->
-    <view class="grid grid-cols-3 gap-4 mb-6">
-      <view class="flex-col-center p-3 bg-white rounded-xl shadow-sm" @click="handleGoLearn">
-        <wd-icon name="read" size="24px" class="text-orange mb-1" />
-        <text class="text-sm">今日学习</text>
+    <view class="grid grid-cols-3 gap-3 mb-8">
+      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoLearn">
+        <view class="w-12 h-12 rounded-2xl bg-orange/10 flex-center mb-2">
+           <wd-icon name="read" size="24px" class="text-orange" />
+        </view>
+        <text class="text-sm font-medium text-gray-700">今日学习</text>
       </view>
-      <view class="flex-col-center p-3 bg-white rounded-xl shadow-sm" @click="handleGoDiscover">
-        <wd-icon name="explore" size="24px" class="text-blue-500 mb-1" />
-        <text class="text-sm">热门资源</text>
+      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoDiscover">
+        <view class="w-12 h-12 rounded-2xl bg-blue-500/10 flex-center mb-2">
+           <wd-icon name="explore" size="24px" class="text-blue-500" />
+        </view>
+        <text class="text-sm font-medium text-gray-700">热门资源</text>
       </view>
-      <view class="flex-col-center p-3 bg-white rounded-xl shadow-sm" @click="handleGoSkills">
-        <wd-icon name="app" size="24px" class="text-green-500 mb-1" />
-        <text class="text-sm">推荐Skill</text>
+      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoSkills">
+        <view class="w-12 h-12 rounded-2xl bg-green-500/10 flex-center mb-2">
+           <wd-icon name="app" size="24px" class="text-green-500" />
+        </view>
+        <text class="text-sm font-medium text-gray-700">推荐Skill</text>
       </view>
     </view>
 
     <!-- Recommendations -->
     <view class="mb-4">
-      <view class="flex justify-between items-center mb-3">
-        <text class="font-bold text-base">今日推荐资源</text>
-        <text class="text-xs text-gray-400" @click="handleGoDiscover">更多 ></text>
+      <view class="flex justify-between items-center mb-4 px-1">
+        <view class="flex items-center">
+           <view class="w-1 h-4 bg-orange rounded-full mr-2"></view>
+           <text class="font-bold text-lg text-primary">今日推荐</text>
+        </view>
+        <text class="text-xs text-gray-400 flex items-center" @click="handleGoDiscover">
+          查看全部 <wd-icon name="arrow-right" size="12px" class="ml-0.5" />
+        </text>
       </view>
-      <wd-card v-for="i in 2" :key="i" custom-class="mb-3 !rounded-xl">
-        <view class="flex">
-          <image src="https://via.placeholder.com/80" class="w-20 h-20 rounded-lg mr-3" />
-          <view class="flex-1">
-            <view class="font-bold text-sm mb-1">OpenClaw 基础入门教程 #{{ i }}</view>
-            <view class="text-xs text-gray-400 line-clamp-2">
-              这是一段关于 OpenClaw 的入门介绍，帮助你快速理解其核心概念。
+      
+      <view class="space-y-3">
+        <view v-for="i in 2" :key="i" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors">
+          <image src="https://via.placeholder.com/160" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
+          <view class="flex-1 flex flex-col justify-between py-1">
+            <view>
+              <view class="flex justify-between items-start">
+                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">OpenClaw 基础入门教程 #{{ i }}</text>
+                 <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
+              </view>
+              <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">这是一段关于 OpenClaw 的入门介绍，帮助你快速理解其核心概念。</text>
+            </view>
+            <view class="flex items-center text-xs text-gray-400 mt-2">
+               <wd-icon name="view" size="14px" class="mr-1" />
+               <text class="mr-3">2.4k</text>
+               <wd-icon name="thumb-up" size="14px" class="mr-1" />
+               <text>128</text>
             </view>
           </view>
         </view>
-      </wd-card>
+      </view>
     </view>
   </view>
 </template>
