@@ -76,6 +76,12 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  console.log('Index Page Mounted')
+})
+
 const handleGoLearn = () => {
   uni.switchTab({ url: '/pages/learn/index' })
 }
