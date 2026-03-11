@@ -1,7 +1,6 @@
 import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
 
 export default defineUniPages({
-  pages: [], // Pages are auto-scanned from src/pages
   globalStyle: {
     navigationBarTextStyle: 'black',
     navigationBarTitleText: 'LeanClaw',

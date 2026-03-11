@@ -16,6 +16,13 @@
       }
     },
     {
+      "path": "pages/case/detail",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "案例详情"
+      }
+    },
+    {
       "path": "pages/discover/index",
       "type": "page",
       "layout": "tabbar",
@@ -37,6 +44,20 @@
       "layout": "tabbar",
       "style": {
         "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/skill/detail",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "Skill 详情"
+      }
+    },
+    {
+      "path": "pages/webview/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "资源详情"
       }
     },
     {
