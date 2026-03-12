@@ -27,6 +27,9 @@ Thumbs.db
 # test coverage
 coverage/
 
+# docs/plans
+docs/plans/
+
 # local env
 .env.local
 .env.*.local
