@@ -26,6 +26,8 @@ Thumbs.db
 
 # test coverage
 coverage/
+test-results/
+playwright-report/
 
 # docs/plans
 docs/plans/
