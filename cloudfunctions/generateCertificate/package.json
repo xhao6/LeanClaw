@@ -1,0 +1,11 @@
+{
+  "name": "generateCertificate",
+  "version": "1.0.0",
+  "description": "Generate course completion certificate",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest",
+    "jimp": "^0.22.10",
+    "dayjs": "^1.11.10"
+  }
+}

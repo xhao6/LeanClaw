@@ -1,0 +1,9 @@
+{
+  "name": "user-functions",
+  "version": "1.0.0",
+  "description": "User management functions",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

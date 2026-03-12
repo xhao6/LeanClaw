@@ -1,0 +1,9 @@
+{
+  "name": "sync-resources",
+  "version": "1.0.0",
+  "description": "Sync resources to CloudBase database",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
