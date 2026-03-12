@@ -1,3 +1,10 @@
 node_modules/*
 .agents/*
 .trae/*
+
+# Worktrees
+.worktrees/
+worktrees/
+
+# Design docs
+docs/plans/
