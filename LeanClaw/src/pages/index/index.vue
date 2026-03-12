@@ -91,21 +91,21 @@
       </view>
       
       <view class="space-y-3">
-        <view v-for="i in 2" :key="i" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors">
-          <image src="/static/images/placeholder/article.svg" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
+        <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
+          <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
           <view class="flex-1 flex flex-col justify-between py-1">
             <view>
               <view class="flex justify-between items-start">
-                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">OpenClaw 基础入门教程 #{{ i }}</text>
+                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
                  <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
               </view>
-              <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">这是一段关于 OpenClaw 的入门介绍，帮助你快速理解其核心概念。</text>
+              <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
             </view>
             <view class="flex items-center text-xs text-gray-400 mt-2">
                <wd-icon name="view" size="14px" class="mr-1" />
-               <text class="mr-3">2.4k</text>
+               <text class="mr-3">{{ item.stars || '0' }}</text>
                <wd-icon name="thumb-up" size="14px" class="mr-1" />
-               <text>128</text>
+               <text>{{ item.tags?.[0] || '' }}</text>
             </view>
           </view>
         </view>
@@ -117,9 +117,14 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { getProgress } from '@/utils/learnProgress'
+import { useRecommendations } from '@/composables/useRecommendations'
+import type { ResourceItem } from '@/data/mock'
 
 // 获取学习进度
 const progress = getProgress()
+
+// 今日推荐
+const { recommendations, loadRecommendations, addToViewed } = useRecommendations()
 
 // 计算进度百分比
 const progressPercent = computed(() => {
@@ -134,7 +139,17 @@ const nextChapter = computed(() => {
 
 onMounted(() => {
   console.log('Index Page Mounted')
+  loadRecommendations()
 })
+
+// 点击推荐项
+const handleRecommendClick = (item: ResourceItem) => {
+  addToViewed(item.id)
+  // 跳转到对应页面
+  if (item.url) {
+    window.open(item.url, '_blank')
+  }
+}
 
 const handleGoLearn = () => {
   uni.switchTab({ url: '/pages/learn/index' })
