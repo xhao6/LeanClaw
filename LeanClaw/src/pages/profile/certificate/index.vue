@@ -14,14 +14,14 @@
       <view class="bg-gradient-to-br from-ocean-dark via-ocean-dark to-ocean-light rounded-3xl p-1 shadow-2xl">
         <view class="bg-white rounded-[22px] p-6 relative overflow-hidden">
           <!-- 装饰元素 -->
-          <view class="absolute -right-8 -top-8 w-32 h-32 bg-lobster-orange/10 rounded-full"></view>
-          <view class="absolute -left-4 -bottom-4 w-20 h-20 bg-ocean-dark/5 rounded-full"></view>
+          <view class="absolute -right-8 -top-8 w-32 h-32 bg-lobster-orange-10 rounded-full"></view>
+          <view class="absolute -left-4 -bottom-4 w-20 h-20 bg-ocean-dark-5 rounded-full"></view>
 
           <!-- 证书内容 -->
           <view class="relative z-10">
             <!-- 顶部装饰 -->
             <view class="flex justify-center mb-4">
-              <view class="w-16 h-16 rounded-full bg-gradient-to-br from-lobster-orange to-lobster-orange/80 flex items-center justify-center shadow-lg">
+              <view class="w-16 h-16 rounded-full bg-gradient-to-br from-lobster-orange to-lobster-orange-80 flex items-center justify-center shadow-lg">
                 <text class="text-3xl">🦞</text>
               </view>
             </view>
@@ -62,11 +62,11 @@
 
             <!-- 学习统计 -->
             <view class="grid grid-cols-2 gap-3 mb-6">
-              <view class="bg-gradient-to-br from-ocean-light/20 to-ocean-light/10 rounded-xl p-3 text-center">
+              <view class="bg-gradient-to-br from-ocean-light-20 to-ocean-light-10 rounded-xl p-3 text-center">
                 <text class="text-xl font-bold text-ocean-dark">{{ learningDays }}</text>
                 <text class="text-xs text-gray-400 block mt-1">学习天数</text>
               </view>
-              <view class="bg-gradient-to-br from-lobster-orange/10 to-lobster-orange/5 rounded-xl p-3 text-center">
+              <view class="bg-gradient-to-br from-lobster-orange-10 to-lobster-orange-5 rounded-xl p-3 text-center">
                 <text class="text-xl font-bold text-lobster-orange">{{ badgeCount }}</text>
                 <text class="text-xs text-gray-400 block mt-1">获得徽章</text>
               </view>
@@ -74,7 +74,7 @@
 
             <!-- 保存按钮 -->
             <button
-              class="w-full h-12 bg-gradient-to-r from-lobster-orange to-lobster-orange/90 rounded-xl text-white font-medium flex items-center justify-center"
+              class="w-full h-12 bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-xl text-white font-medium flex items-center justify-center"
               @click="saveToAlbum"
             >
               <wd-icon name="photo" size="18px" class="mr-2" />
@@ -159,10 +159,10 @@ onMounted(() => {
 .text-ocean-dark {
   color: #0c2d48;
 }
-.bg-ocean-light\/10 {
+.bg-ocean-light-10 {
   background-color: rgba(26, 74, 110, 0.1);
 }
-.bg-ocean-light\/20 {
+.bg-ocean-light-20 {
   background-color: rgba(26, 74, 110, 0.2);
 }
 .text-ocean-light {
@@ -178,13 +178,16 @@ onMounted(() => {
 .from-lobster-orange {
   --tw-gradient-from: #e67e22;
 }
-.to-lobster-orange\/90 {
+.to-lobster-orange-90 {
   --tw-gradient-to: rgba(230, 126, 34, 0.9);
 }
-.bg-lobster-orange\/10 {
+.bg-lobster-orange-10 {
   background-color: rgba(230, 126, 34, 0.1);
 }
-.bg-lobster-orange\/5 {
-  background-color: rgba(230, 126, 34, 0.05);
+.bg-ocean-dark-5 {
+  background-color: rgba(12, 45, 72, 0.05);
+}
+.to-lobster-orange-80 {
+  --tw-gradient-to: rgba(230, 126, 34, 0.8);
 }
 </style>
