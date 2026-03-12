@@ -8,22 +8,31 @@
 </route>
 
 <template>
-  <view class="bg-gray-50 min-h-screen box-border">
+  <view class="bg-gray-50 min-h-screen box-border pb-20">
     <!-- Header/User Info -->
     <view class="bg-primary p-8 pt-12 pb-16 flex items-center space-x-4 relative overflow-hidden">
       <!-- Decorative circles -->
       <view class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none"></view>
       <view class="absolute left-10 bottom-0 w-20 h-20 rounded-full bg-white/5 pointer-events-none"></view>
 
-      <view class="relative z-10 border-2 border-solid border-white/30 rounded-full p-1">
-        <image src="/static/images/logo.svg" class="w-16 h-16 rounded-full bg-white" />
+      <view class="relative z-10 border-2 border-solid border-white/30 rounded-full p-1" @click="handleLogin">
+        <image :src="userInfo.avatar || '/static/images/placeholder/fun-avatar.svg'" class="w-16 h-16 rounded-full bg-white" />
       </view>
-      <view class="relative z-10 text-white">
-        <view class="text-xl font-bold flex items-center">
-          龙虾驯养员
-          <wd-icon name="edit" size="16px" class="ml-2 opacity-70" />
-        </view>
-        <view class="text-xs text-white/70 mt-1 bg-white/10 px-2 py-0.5 rounded-full inline-block">ID: 10245678</view>
+      
+      <view class="relative z-10 text-white flex-1" @click="handleLogin">
+        <template v-if="isLoggedIn">
+          <view class="text-xl font-bold flex items-center">
+            {{ userInfo.name || '龙虾驯养员' }}
+            <wd-icon name="edit" size="16px" class="ml-2 opacity-70" />
+          </view>
+          <view class="text-xs text-white/70 mt-1 bg-white/10 px-2 py-0.5 rounded-full inline-block">ID: {{ userInfo.id ? userInfo.id.substring(0, 8) : '...' }}</view>
+        </template>
+        <template v-else>
+          <view class="text-xl font-bold flex items-center">
+            点击登录
+          </view>
+          <view class="text-xs text-white/70 mt-1">登录同步学习进度</view>
+        </template>
       </view>
 
       <view class="absolute right-6 top-14 text-white/80" @click="goToSettings">
@@ -68,7 +77,7 @@
         </wd-cell-group>
       </view>
 
-      <view class="pt-4 pb-8">
+      <view v-if="isLoggedIn" class="pt-4 pb-8">
         <wd-button block type="error" plain custom-class="!rounded-xl !border-gray-200 !text-gray-500 !bg-white" @click="handleLogout">退出登录</wd-button>
       </view>
     </view>
@@ -77,12 +86,43 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store'
 import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount } from '@/utils/favorites'
+
+const userStore = useUserStore()
+const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
 const progress = getProgress()
 const favoritesCount = computed(() => getFavoritesCount())
 const completedLessonsCount = computed(() => progress.completedLessons?.length || 0)
+
+onShow(() => {
+  if (isLoggedIn.value) {
+    userStore.fetchProfile()
+  }
+})
+
+const handleLogin = async () => {
+  if (isLoggedIn.value) return
+  
+  uni.showLoading({ title: '登录中...' })
+  try {
+    await userStore.login()
+    uni.showToast({ title: '登录成功', icon: 'success' })
+  } catch (e) {
+    uni.showToast({ title: '登录失败', icon: 'none' })
+  } finally {
+    uni.hideLoading()
+  }
+}
+
+const handleLogout = () => {
+  userStore.logout()
+  uni.showToast({ title: '已退出', icon: 'none' })
+}
 
 // 跳转收藏页面
 const goToFavorites = () => {

@@ -7,11 +7,12 @@ test.describe('我的页面测试', () => {
     await waitForPageLoad(page)
   })
 
-  test('显示用户信息', async ({ page }) => {
+  test('显示未登录状态', async ({ page }) => {
     await page.goto(`${BASE_URL}/#/pages/profile/index`)
 
-    // 验证用户信息
-    await expect(page.locator('text=龙虾驯养员')).toBeVisible()
+    // 验证未登录状态
+    await expect(page.locator('text=点击登录')).toBeVisible()
+    await expect(page.locator('text=登录同步学习进度')).toBeVisible()
   })
 
   test('显示学习统计', async ({ page }) => {
