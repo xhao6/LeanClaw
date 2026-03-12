@@ -1,5 +1,6 @@
 <route lang="json">
 {
+  "layout": "default",
   "style": {
     "navigationBarTitleText": "学习统计"
   }
