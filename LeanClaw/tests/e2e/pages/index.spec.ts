@@ -7,10 +7,10 @@ test.describe('首页测试', () => {
     await waitForPageLoad(page)
   })
 
-  test('默认进度显示 Day 1, 14%', async ({ page }) => {
+  test('默认进度显示 Day 1, 0%', async ({ page }) => {
     await page.goto(BASE_URL)
     await expect(page.locator('text=Day 1 /').first()).toBeVisible()
-    await expect(page.locator('text=14%').first()).toBeVisible()
+    await expect(page.locator('text=0%').first()).toBeVisible()
   })
 
   test('下一章标题为初识 OpenClaw', async ({ page }) => {

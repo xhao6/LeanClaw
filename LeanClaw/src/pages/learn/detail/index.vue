@@ -175,11 +175,11 @@ onPageScroll((e) => {
   // Calculate read progress (simplified)
   const query = uni.createSelectorQuery()
   query.select('.markdown-body').boundingClientRect(data => {
-    if (data) {
+    if (data && !Array.isArray(data) && data.height) {
       const height = data.height
       const scrollTop = e.scrollTop
       const windowHeight = uni.getSystemInfoSync().windowHeight
-      
+
       let percentage = Math.round(((scrollTop + windowHeight) / (height + 200)) * 100)
       if (percentage > 100) percentage = 100
       scrollPercentage.value = percentage

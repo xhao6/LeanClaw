@@ -15,7 +15,7 @@ const mockSetStorageSync = vi.fn((key: string, value: unknown) => {
 globalThis.uni = {
   getStorageSync: mockGetStorageSync,
   setStorageSync: mockSetStorageSync,
-}
+} as any
 
 import {
   getProgress,
@@ -114,7 +114,8 @@ describe('learnProgress 工具函数', () => {
     it('应在完成更高天数时更新当前天数', () => {
       markLessonComplete('day-3')
       const progress = getProgress()
-      expect(progress.currentDay).toBe(3)
+      // 完成 day-3 后应解锁下一课（day-4）
+      expect(progress.currentDay).toBe(4)
     })
   })
 

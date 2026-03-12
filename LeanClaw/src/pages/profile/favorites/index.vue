@@ -59,6 +59,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { getFavorites, removeFavorite, type FavoriteItem } from '@/utils/favorites'
 
 const activeTab = ref<string>('all')
@@ -94,8 +95,8 @@ const getTypeLabel = (type: string) => {
   return map[type] || type
 }
 
-const getTypeTagType = (type: string) => {
-  const map: Record<string, string> = {
+const getTypeTagType = (type: string): 'default' | 'primary' | 'success' | 'warning' | 'danger' => {
+  const map: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'danger'> = {
     resource: 'primary',
     case: 'success',
     skill: 'warning'
@@ -130,7 +131,7 @@ const handleRemoveFavorite = (id: string) => {
 }
 
 // 页面显示时刷新数据
-uni.onShow(() => {
+onShow(() => {
   favorites.value = getFavorites()
 })
 </script>

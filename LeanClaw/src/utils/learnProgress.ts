@@ -79,10 +79,14 @@ export const markLessonComplete = (lessonId: string): LearnProgress => {
   const progress = getProgress()
   if (!progress.completedLessons.includes(lessonId)) {
     progress.completedLessons.push(lessonId)
-    // 更新当前天数
+    // 完成后自动解锁下一课
     const dayNum = parseInt(lessonId.replace('day-', ''), 10)
-    if (dayNum && dayNum > progress.currentDay) {
-      progress.currentDay = dayNum
+    if (dayNum && dayNum < 7) {
+      // 将 currentDay 设置为下一课
+      progress.currentDay = dayNum + 1
+    } else if (dayNum === 7) {
+      // 完成最后一课
+      progress.currentDay = 7
     }
     saveProgress(progress)
   }

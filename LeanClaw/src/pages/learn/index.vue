@@ -61,8 +61,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { getProgress } from '@/utils/learnProgress'
+
+// 用于触发重新计算
+const refreshKey = ref(0)
+
+onShow(() => {
+  // 每次页面显示时重新获取进度
+  refreshKey.value++
+})
 
 const learnDays = computed(() => {
   const days = [
@@ -75,15 +84,24 @@ const learnDays = computed(() => {
     { title: 'Day 7: 进阶与未来', desc: '微调模型、RAG 知识库以及 OpenClaw 的未来展望', id: 'day-7' },
   ]
 
+  // 强制响应式更新
+  refreshKey.value
+
   const progress = getProgress()
   const completedLessons = progress.completedLessons || []
-  const currentDay = progress.currentDay || 1
+
+  // 计算当前可学习的课程：已完成的最大天数 + 1
+  const maxCompletedDay = completedLessons.reduce((max, lessonId) => {
+    const dayNum = parseInt(lessonId.replace('day-', ''), 10)
+    return dayNum > max ? dayNum : max
+  }, 0)
+  const currentLearnableDay = Math.min(maxCompletedDay + 1, 7) // 最多7天
 
   return days.map((day, index) => {
     const dayNum = index + 1
     const isCompleted = completedLessons.includes(day.id)
-    const isCurrent = dayNum === currentDay && !isCompleted
-    const isLocked = dayNum > currentDay && !isCompleted
+    const isCurrent = dayNum === currentLearnableDay && !isCompleted
+    const isLocked = dayNum > currentLearnableDay
 
     return {
       ...day,

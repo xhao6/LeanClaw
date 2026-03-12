@@ -115,7 +115,7 @@
         <!-- 底部状态 -->
         <view class="py-4 text-center">
           <view v-if="loading" class="flex items-center justify-center text-gray-400">
-            <wd-loading type="circle" size="16px" />
+            <wd-loading type="spinner" size="16px" />
             <text class="ml-2 text-xs">加载中...</text>
           </view>
           <text v-else-if="!hasMore" class="text-xs text-gray-400">没有更多了</text>
@@ -137,15 +137,17 @@ const progress = getProgress()
 // 今日推荐
 const { recommendations, loading, hasMore, loadRecommendations, loadMore, addToViewed } = useRecommendations()
 
-// 计算进度百分比
+// 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
-  return Math.round((progress.currentDay / 7) * 100)
+  return Math.round((progress.completedLessons.length / 7) * 100)
 })
 
-// 获取下一章标题
+// 获取下一章标题：基于已完成课程数显示下一课
 const nextChapter = computed(() => {
   const dayTitles = ['', '初识 OpenClaw', '你的第一个 AI 助手', '记忆与灵魂', '技能系统 (Skills)', '自动化工作流', '本地化与隐私', '进阶与未来']
-  return dayTitles[progress.currentDay] || '全部完成'
+  const completedCount = progress.completedLessons.length
+  if (completedCount >= 7) return '全部完成'
+  return dayTitles[completedCount + 1] || '开始学习'
 })
 
 onMounted(() => {
