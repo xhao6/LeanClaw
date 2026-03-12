@@ -17,7 +17,7 @@ RESOURCES_FILE = 'src/data/mock.ts'
 OUTPUT_DIR = 'static/images/resources'
 THREADS = 5  # 并发数
 TIMEOUT = 15  # 请求超时秒数
-TARGET_SIZE = (100, 100)  # 目标尺寸
+TARGET_SIZE = (200, 200)  # 目标尺寸
 
 # 创建输出目录
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -107,8 +107,32 @@ def extract_og_image(html: str, original_url: str) -> str | None:
     except Exception as e:
         return None
 
+def resize_and_crop_to_square(img: Image.Image, target_size: tuple) -> Image.Image:
+    """将图片裁剪为正方形，保持比例，允许上下留白"""
+    width, height = img.size
+    target_width, target_height = target_size
+
+    # 计算缩放比例（取较小值以确保完整覆盖）
+    scale = max(target_width / width, target_height / height)
+    new_width = int(width * scale)
+    new_height = int(height * scale)
+
+    # 缩放图片
+    img = img.resize((new_width, new_height), Image.LANCZOS)
+
+    # 计算裁剪位置（居中）
+    left = (new_width - target_width) // 2
+    top = (new_height - target_height) // 2
+    right = left + target_width
+    bottom = top + target_height
+
+    # 裁剪
+    img = img.crop((left, top, right, bottom))
+
+    return img
+
 def download_and_convert(img_url: str, filename: str) -> str | None:
-    """下载图片并转为 100x100 WebP"""
+    """下载图片并转为 200x200 WebP，保持比例，居中裁剪"""
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -119,8 +143,8 @@ def download_and_convert(img_url: str, filename: str) -> str | None:
 
         img = Image.open(BytesIO(resp.content)).convert('RGB')
 
-        # 缩放为 100x100，保持比例裁剪
-        img.thumbnail(TARGET_SIZE, Image.LANCZOS)
+        # 使用 cover 模式：居中裁剪为正方形，保持比例
+        img = resize_and_crop_to_square(img, TARGET_SIZE)
 
         # 保存为 WebP
         filepath = os.path.join(OUTPUT_DIR, f"{filename}.webp")
