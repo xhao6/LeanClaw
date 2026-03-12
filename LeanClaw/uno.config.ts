@@ -27,5 +27,11 @@ export default defineConfig({
   shortcuts: {
     'flex-center': 'flex items-center justify-center',
     'flex-col-center': 'flex flex-col items-center justify-center',
+    
+    // Typography Shortcuts
+    'text-h1': 'text-xl font-bold text-primary',       // 页面大标题 (20px)
+    'text-h2': 'text-base font-bold text-gray-900',    // 卡片/列表标题 (16px)
+    'text-body': 'text-sm text-gray-600 leading-relaxed', // 正文描述 (14px)
+    'text-caption': 'text-xs text-gray-400',           // 辅助文字 (12px)
   },
 })

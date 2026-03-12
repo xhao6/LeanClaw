@@ -57,13 +57,13 @@
           <image :src="item.image || getPlaceholder(item)" class="w-24 h-24 rounded-xl mr-4 object-cover bg-gray-100 shrink-0" />
           <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
             <view class="flex-1">
-              <view class="flex justify-between items-start">
-                 <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1 flex-1">{{ item.title }}</text>
-                 <view class="flex items-center gap-1 ml-2 shrink-0" @click.stop="handleToggleFavorite(item)">
-                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="18px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
+              <view class="flex justify-between items-start mb-2">
+                 <text class="text-h2 line-clamp-2 flex-1 leading-snug">{{ item.title }}</text>
+                 <view class="flex items-center gap-1 ml-2 shrink-0 pt-0.5" @click.stop="handleToggleFavorite(item)">
+                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
                  </view>
               </view>
-              <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
+              <text class="text-body line-clamp-2">{{ item.desc }}</text>
             </view>
           </view>
         </view>
@@ -173,5 +173,14 @@ const handleToggleFavorite = (item: ResourceItem) => {
 }
 :deep(.wd-tabs__nav) {
   background-color: white !important;
+}
+:deep(.wd-tabs__nav-item) {
+  font-size: 16px !important;
+  font-weight: bold;
+  color: #111827; /* gray-900 */
+}
+:deep(.wd-tabs__nav-item.is-active) {
+  color: #FF6B35 !important;
+  font-size: 18px !important; /* 选中时稍微大一点 */
 }
 </style>

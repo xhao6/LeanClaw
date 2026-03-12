@@ -38,7 +38,7 @@
           </view>
         </view>
         <view class="absolute right-[5%] top-[5%] z-20">
-          <text class="text-4xl font-bold text-orange/90">{{ progressPercent }}%</text>
+          <text class="text-2xl font-bold text-orange/90">{{ progressPercent }}%</text>
         </view>
         
         <view class="mb-6">
