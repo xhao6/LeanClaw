@@ -38,8 +38,8 @@
            >
              <view class="flex justify-between items-start mb-1">
                <text class="font-bold text-sm" :class="day.status === 'locked' ? 'text-gray-500' : 'text-gray-800'">{{ day.title }}</text>
-               <wd-tag v-if="day.status === 'in-progress'" type="warning" size="small" custom-class="!h-5 !px-1.5 !text-[10px]">进行中</wd-tag>
-               <wd-tag v-if="day.status === 'completed'" type="success" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">已完成</wd-tag>
+               <image v-if="day.status === 'in-progress'" src="/static/images/badges/in-progress-badge.svg" class="h-5 w-12 shrink-0 ml-2" mode="aspectFit" />
+               <image v-if="day.status === 'completed'" src="/static/images/badges/completed-badge.svg" class="h-5 w-12 shrink-0 ml-2" mode="aspectFit" />
              </view>
              <text class="text-xs mt-1 block leading-relaxed" :class="day.status === 'locked' ? 'text-gray-400' : 'text-gray-500'">{{ day.desc }}</text>
              

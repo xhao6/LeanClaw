@@ -26,15 +26,19 @@
 
     <!-- Learning Progress Card -->
     <view class="mb-6 relative overflow-hidden rounded-[24rpx] bg-white shadow-lg shadow-blue-900/5">
-      <view class="p-5">
+      <!-- Decorative circles -->
+      <view class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-blue-50/50 pointer-events-none"></view>
+      <view class="absolute -left-4 bottom-8 w-16 h-16 rounded-full bg-orange/5 pointer-events-none"></view>
+
+      <view class="p-5 relative z-10">
         <view class="flex justify-between items-center mb-6">
           <view>
             <text class="text-xs text-gray-400 block mb-1">当前进度</text>
             <text class="font-bold text-2xl text-primary">Day {{ progress.currentDay }} <text class="text-sm text-gray-400 font-normal">/ 7</text></text>
           </view>
-          <view class="w-12 h-12 rounded-full border-4 border-orange/20 flex-center">
-             <text class="text-xs font-bold text-orange">{{ progressPercent }}%</text>
-          </view>
+        </view>
+        <view class="absolute right-[5%] top-[5%] z-20">
+          <text class="text-4xl font-bold text-orange/90">{{ progressPercent }}%</text>
         </view>
         
         <view class="mb-6">
@@ -50,10 +54,6 @@
           {{ buttonText }}
         </wd-button>
       </view>
-      
-      <!-- Decorative circles -->
-      <view class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-blue-50/50 pointer-events-none"></view>
-      <view class="absolute -left-4 bottom-8 w-16 h-16 rounded-full bg-orange/5 pointer-events-none"></view>
     </view>
 
     <!-- Quick Entries -->
@@ -98,7 +98,7 @@
               <view>
                 <view class="flex justify-between items-start">
                    <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
-                   <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
+                   <image src="/static/images/badges/new.svg" class="h-5 w-10 shrink-0 ml-2" mode="aspectFit" />
                 </view>
                 <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
               </view>

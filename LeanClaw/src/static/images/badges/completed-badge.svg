@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 20" fill="none">
+  <rect x="0.5" y="0.5" width="47" height="19" rx="3.5" stroke="#22C55E" fill="white"/>
+  <text x="24" y="14" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#22C55E" text-anchor="middle" font-weight="bold">已完成</text>
+</svg>
