@@ -2,6 +2,7 @@
 // 使用 uni.setStorageSync / uni.getStorageSync 进行数据持久化
 
 import type { ResourceItem } from '@/data/mock'
+import { toggleFavorite as apiToggleFavorite } from '@/api/modules/user'
 
 // 收藏项接口
 export interface FavoriteItem {
@@ -54,6 +55,9 @@ export const addFavorite = (item: ResourceItem): boolean => {
     return false
   }
 
+  // Cloud Sync
+  apiToggleFavorite(item.id, item.type, 'add').catch(e => console.warn('Cloud add fav failed', e))
+
   const favorites = getFavorites()
 
   const favoriteItem: FavoriteItem = {
@@ -81,6 +85,10 @@ export const removeFavorite = (id: string): boolean => {
   if (index === -1) {
     return false
   }
+
+  // Cloud Sync
+  const item = favorites[index]
+  apiToggleFavorite(id, item.type, 'remove').catch(e => console.warn('Cloud remove fav failed', e))
 
   favorites.splice(index, 1)
   saveFavorites(favorites)

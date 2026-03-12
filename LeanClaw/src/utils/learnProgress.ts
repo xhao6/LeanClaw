@@ -4,6 +4,7 @@
 // 导入徽章模块
 import { badges, type Badge } from '@/data/badges'
 import { createCertificate, type Certificate } from '@/data/certificate'
+import { updateProgress as apiUpdateProgress } from '@/api/modules/user'
 
 // 存储 key
 const STORAGE_KEY = 'learn_progress'
@@ -74,11 +75,56 @@ export const updateCurrentDay = (day: number): LearnProgress => {
   return progress
 }
 
+// Sync cloud progress to local storage
+export const syncCloudProgress = (cloudData: any[]) => {
+  const progress = getProgress()
+  let changed = false
+  
+  // Merge cloud data
+  cloudData.forEach(item => {
+    if (item.status === 'completed' && !progress.completedLessons.includes(item.lessonId)) {
+      progress.completedLessons.push(item.lessonId)
+      changed = true
+    }
+  })
+  
+  if (changed) {
+    // Recalculate current day
+    const maxDay = progress.completedLessons.reduce((max, id) => {
+      const dayNum = parseInt(id.replace('day-', ''), 10)
+      return dayNum > max ? dayNum : max
+    }, 0)
+    
+    if (maxDay < 7) {
+      progress.currentDay = maxDay + 1
+    } else {
+      progress.currentDay = 7
+    }
+    
+    saveProgress(progress)
+  }
+  
+  return progress
+}
+
 // 标记 lesson 完成
 export const markLessonComplete = (lessonId: string): LearnProgress => {
   const progress = getProgress()
   if (!progress.completedLessons.includes(lessonId)) {
     progress.completedLessons.push(lessonId)
+    
+    // Sync to cloud (fire and forget)
+    // Check if logged in via global variable or token check, or just try
+    // Ideally use store, but to avoid circular dependency, just try call
+    try {
+      apiUpdateProgress(lessonId, 'completed').catch(err => {
+         // Silent fail or retry queue
+         console.warn('Cloud sync failed', err)
+      })
+    } catch (e) {
+      // ignore
+    }
+
     // 完成后自动解锁下一课
     const dayNum = parseInt(lessonId.replace('day-', ''), 10)
     if (dayNum && dayNum < 7) {

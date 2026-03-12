@@ -1,5 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
+// Mock API
+vi.mock('@/api/modules/user', () => ({
+  toggleFavorite: vi.fn(() => Promise.resolve({ success: true }))
+}))
+import { toggleFavorite as mockApiToggleFavorite } from '@/api/modules/user'
+
 // 模拟存储
 const storage: Record<string, unknown> = {}
 
@@ -98,6 +104,21 @@ describe('favorites 收藏功能', () => {
       addFavorite({ ...mockItem, id: 'test-2' })
       clearAllFavorites()
       expect(getFavorites()).toHaveLength(0)
+    })
+  })
+
+  describe('Cloud Sync', () => {
+    it('addFavorite should call cloud API with add', () => {
+      mockApiToggleFavorite.mockClear()
+      addFavorite(mockItem)
+      expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'add')
+    })
+
+    it('removeFavorite should call cloud API with remove', () => {
+      addFavorite(mockItem)
+      mockApiToggleFavorite.mockClear()
+      removeFavorite(mockItem.id)
+      expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'remove')
     })
   })
 })

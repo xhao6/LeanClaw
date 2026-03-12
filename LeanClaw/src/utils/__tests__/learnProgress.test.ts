@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
+// Mock API module
+vi.mock('@/api/modules/user', () => ({
+  updateProgress: vi.fn(() => Promise.resolve({ success: true }))
+}))
+
 // 模拟存储
 const storage: Record<string, unknown> = {}
 
@@ -32,6 +37,7 @@ import {
   getCertificateDate,
   getCertificate,
   checkAndUnlockBadges,
+  syncCloudProgress,
 } from '../learnProgress'
 
 describe('learnProgress 工具函数', () => {
@@ -246,6 +252,15 @@ describe('learnProgress 工具函数', () => {
       expect(defaultProgress.currentDay).toBe(1)
       expect(defaultProgress.completedLessons).toEqual([])
       expect(defaultProgress.certificate).toBe(false)
+    })
+  })
+
+  describe('syncCloudProgress', () => {
+    it('应同步云端进度到本地', () => {
+      const cloudData = [{ lessonId: 'day-1', status: 'completed' }]
+      const progress = syncCloudProgress(cloudData)
+      expect(progress.completedLessons).toContain('day-1')
+      expect(progress.currentDay).toBe(2)
     })
   })
 })
