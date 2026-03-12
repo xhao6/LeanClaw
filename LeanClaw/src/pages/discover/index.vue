@@ -145,8 +145,10 @@ const handleTabChange = (e: any) => {
 
 const handleItemClick = (item: ResourceItem) => {
   if (item.type === 'skill') {
-    // Navigate to skill detail (mock)
-    uni.showToast({ title: 'Skill 详情页开发中', icon: 'none' })
+    // Navigate to skill detail page
+    uni.navigateTo({
+      url: `/pages/skill/detail?name=${encodeURIComponent(item.title)}`
+    })
   } else if (item.url) {
     // Handle external link
     // #ifdef H5
