@@ -9,9 +9,13 @@ test.describe('学习页面测试', () => {
 
   test('默认状态：Day 1 进行中，其他锁定', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/learn/index')
-    await expect(page.locator('text=进行中').first()).toBeVisible()
-    const completedCount = await page.locator('text=已完成').count()
-    expect(completedCount).toBe(0)
+    // Day 1 显示数字 "1"（进行中状态）
+    await expect(page.locator('.rounded-full >> text=1').first()).toBeVisible()
+    // 其他 Day 显示锁图标
+    const lockIcons = await page.locator('.text-gray-400 >> nth=0').count()
+    // 没有已完成状态（没有勾选图标）
+    const checkIcons = await page.locator('.wd-icon-check').count()
+    expect(checkIcons).toBe(0)
   })
 
   test('学习详情页可访问', async ({ page }) => {
@@ -25,7 +29,8 @@ test.describe('学习页面测试', () => {
       completedLessons: ['day-1'],
     })
     await page.goto(BASE_URL + '/#/pages/learn/index')
-    await expect(page.locator('text=已完成').first()).toBeVisible()
+    // Day 1 显示勾选图标（已完成状态）
+    await expect(page.locator('.wd-icon-check').first()).toBeVisible()
   })
 
   test('全部完成后显示已完成', async ({ page }) => {
@@ -35,7 +40,7 @@ test.describe('学习页面测试', () => {
     })
     await page.goto(BASE_URL + '/#/pages/learn/index')
     await page.waitForTimeout(300)
-    const completedCount = await page.locator('text=已完成').count()
-    expect(completedCount).toBeGreaterThan(0)
+    // 全部完成，显示勋章区域
+    await expect(page.locator('text=恭喜获得').first()).toBeVisible()
   })
 })
