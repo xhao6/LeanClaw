@@ -58,8 +58,10 @@
           <view class="flex-1 flex flex-col justify-between py-1">
             <view>
               <view class="flex justify-between items-start">
-                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
-                 <wd-tag v-if="index < 2" type="danger" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">HOT</wd-tag>
+                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1 flex-1">{{ item.title }}</text>
+                 <view class="flex items-center gap-1 ml-2" @click.stop="handleToggleFavorite(item)">
+                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="18px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
+                 </view>
               </view>
               <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
             </view>
@@ -86,6 +88,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { resources, type ResourceItem } from '@/data/mock'
+import { toggleFavorite, isFavorited } from '@/utils/favorites'
 
 const searchValue = ref('')
 const activeTab = ref<string>('resource')
@@ -154,7 +157,7 @@ const handleItemClick = (item: ResourceItem) => {
     // #ifdef H5
     window.open(item.url, '_blank')
     // #endif
-    
+
     // #ifndef H5
     uni.setClipboardData({
       data: item.url,
@@ -163,6 +166,15 @@ const handleItemClick = (item: ResourceItem) => {
       }
     })
     // #endif
+  }
+}
+
+const handleToggleFavorite = (item: ResourceItem) => {
+  toggleFavorite(item)
+  if (isFavorited(item.id)) {
+    uni.showToast({ title: '已收藏', icon: 'success' })
+  } else {
+    uni.showToast({ title: '已取消收藏', icon: 'none' })
   }
 }
 </script>

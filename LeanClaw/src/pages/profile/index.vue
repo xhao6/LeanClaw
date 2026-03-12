@@ -14,7 +14,7 @@
       <!-- Decorative circles -->
       <view class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none"></view>
       <view class="absolute left-10 bottom-0 w-20 h-20 rounded-full bg-white/5 pointer-events-none"></view>
-      
+
       <view class="relative z-10 border-2 border-solid border-white/30 rounded-full p-1">
         <wd-avatar src="https://via.placeholder.com/100" shape="circle" size="72px" />
       </view>
@@ -25,8 +25,8 @@
         </view>
         <view class="text-xs text-white/70 mt-1 bg-white/10 px-2 py-0.5 rounded-full inline-block">ID: 10245678</view>
       </view>
-      
-      <view class="absolute right-6 top-14 text-white/80">
+
+      <view class="absolute right-6 top-14 text-white/80" @click="goToSettings">
         <wd-icon name="setting" size="24px" />
       </view>
     </view>
@@ -35,18 +35,18 @@
     <view class="px-4 -mt-8 relative z-20">
       <view class="bg-white rounded-2xl shadow-lg shadow-blue-900/5 p-5 flex justify-around items-center">
         <view class="text-center">
-          <view class="text-xl font-bold text-primary mb-1">7</view>
+          <view class="text-xl font-bold text-primary mb-1">{{ progress.currentDay - 1 }}</view>
           <view class="text-xs text-gray-400">已学天数</view>
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
         <view class="text-center">
-          <view class="text-xl font-bold text-orange">12</view>
-          <view class="text-xs text-gray-400">完成案例</view>
+          <view class="text-xl font-bold text-orange mb-1">{{ completedLessonsCount }}</view>
+          <view class="text-xs text-gray-400">完成课程</view>
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
         <view class="text-center">
-          <view class="text-xl font-bold text-green-500">3</view>
-          <view class="text-xs text-gray-400">获得证书</view>
+          <view class="text-xl font-bold text-green-500 mb-1">{{ progress.badges?.length || 0 }}</view>
+          <view class="text-xs text-gray-400">获得徽章</view>
         </view>
       </view>
     </view>
@@ -55,28 +55,90 @@
     <view class="p-4 mt-2 space-y-4">
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
-          <wd-cell title="我的收藏" is-link icon="star" size="large" />
-          <wd-cell title="我的证书" is-link icon="medal" size="large" />
-          <wd-cell title="学习统计" is-link icon="chart-bar" size="large" />
+          <wd-cell title="我的收藏" is-link icon="star" size="large" @click="goToFavorites">
+            <template #value>
+              <text v-if="favoritesCount > 0" class="text-gray-400">{{ favoritesCount }}</text>
+            </template>
+          </wd-cell>
+          <wd-cell title="我的证书" is-link icon="medal" size="large" @click="goToCertificate" />
+          <wd-cell title="学习统计" is-link icon="chart-bar" size="large" @click="goToStats" />
         </wd-cell-group>
       </view>
 
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
-          <wd-cell title="消息通知" is-link icon="notification" size="large" value="2" />
-          <wd-cell title="关于 LeanClaw" is-link icon="info-circle" size="large" />
+          <wd-cell title="消息通知" is-link icon="notification" size="large" @click="goToNotifications" />
+          <wd-cell title="关于 LeanClaw" is-link icon="info-circle" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
-      
+
       <view class="pt-4 pb-8">
-        <wd-button block type="error" plain custom-class="!rounded-xl !border-gray-200 !text-gray-500 !bg-white">退出登录</wd-button>
+        <wd-button block type="error" plain custom-class="!rounded-xl !border-gray-200 !text-gray-500 !bg-white" @click="handleLogout">退出登录</wd-button>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-// Profile logic
+import { computed } from 'vue'
+import { getProgress } from '@/utils/learnProgress'
+import { getFavoritesCount } from '@/utils/favorites'
+
+const progress = getProgress()
+const favoritesCount = computed(() => getFavoritesCount())
+const completedLessonsCount = computed(() => progress.completedLessons?.length || 0)
+
+// 跳转收藏页面
+const goToFavorites = () => {
+  uni.navigateTo({
+    url: '/pages/profile/favorites/index'
+  })
+}
+
+// 跳转证书页面
+const goToCertificate = () => {
+  uni.navigateTo({
+    url: '/pages/profile/certificate/index'
+  })
+}
+
+// 跳转统计页面
+const goToStats = () => {
+  uni.navigateTo({
+    url: '/pages/profile/stats/index'
+  })
+}
+
+// 跳转消息通知
+const goToNotifications = () => {
+  uni.navigateTo({
+    url: '/pages/profile/notifications/index'
+  })
+}
+
+// 跳转关于页面
+const goToAbout = () => {
+  uni.navigateTo({
+    url: '/pages/profile/about/index'
+  })
+}
+
+// 跳转设置页面
+const goToSettings = () => {
+  uni.navigateTo({
+    url: '/pages/profile/settings/index'
+  })
+}
+
+// 退出登录
+const handleLogout = () => {
+  uni.showModal({
+    title: '退出登录',
+    content: '当前为游客模式，无法退出登录',
+    showCancel: false,
+    confirmText: '知道了'
+  })
+}
 </script>
 
 <style scoped>

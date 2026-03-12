@@ -25,7 +25,13 @@ import {
   addLearningTime,
   checkAndUpdateStreak,
   resetProgress,
-  getDefaultProgress
+  getDefaultProgress,
+  addBadge,
+  grantCertificate,
+  canGrantCertificate,
+  getCertificateDate,
+  getCertificate,
+  checkAndUnlockBadges,
 } from '../learnProgress'
 
 describe('learnProgress 工具函数', () => {
@@ -46,6 +52,32 @@ describe('learnProgress 工具函数', () => {
       expect(progress.streak).toBe(0)
       expect(progress.badges).toEqual([])
       expect(progress.certificate).toBe(false)
+    })
+
+    it('应返回存储的进度数据', () => {
+      storage['learn_progress'] = {
+        currentDay: 3,
+        completedLessons: ['day-1', 'day-2'],
+        totalTime: 60,
+        streak: 2,
+        lastLearnDate: '2024-01-15',
+        badges: ['day1-badge'],
+        certificate: false,
+      }
+      const progress = getProgress()
+      expect(progress.currentDay).toBe(3)
+      expect(progress.completedLessons).toEqual(['day-1', 'day-2'])
+      expect(progress.totalTime).toBe(60)
+      expect(progress.streak).toBe(2)
+    })
+  })
+
+  describe('saveProgress', () => {
+    it('应保存进度到存储', () => {
+      const progress = getProgress()
+      progress.currentDay = 5
+      saveProgress(progress)
+      expect(mockSetStorageSync).toHaveBeenCalled()
     })
   })
 
@@ -78,6 +110,12 @@ describe('learnProgress 工具函数', () => {
       const progress = getProgress()
       expect(progress.completedLessons.filter(l => l === 'day-1').length).toBe(1)
     })
+
+    it('应在完成更高天数时更新当前天数', () => {
+      markLessonComplete('day-3')
+      const progress = getProgress()
+      expect(progress.currentDay).toBe(3)
+    })
   })
 
   describe('addLearningTime', () => {
@@ -94,6 +132,96 @@ describe('learnProgress 工具函数', () => {
       expect(result.streak).toBe(1)
       expect(getProgress().streak).toBe(1)
     })
+
+    it('同一天重复打卡不应增加连续天数', () => {
+      checkAndUpdateStreak()
+      const result = checkAndUpdateStreak()
+      expect(result.streak).toBe(1)
+    })
+  })
+
+  describe('addBadge', () => {
+    it('应添加新徽章', () => {
+      addBadge('day1-badge')
+      const progress = getProgress()
+      expect(progress.badges).toContain('day1-badge')
+    })
+
+    it('不应重复添加相同徽章', () => {
+      addBadge('day1-badge')
+      addBadge('day1-badge')
+      const progress = getProgress()
+      expect(progress.badges.filter(b => b === 'day1-badge').length).toBe(1)
+    })
+  })
+
+  describe('canGrantCertificate', () => {
+    it('未完成所有课程时应返回 false', () => {
+      markLessonComplete('day-1')
+      expect(canGrantCertificate()).toBe(false)
+    })
+
+    it('完成所有7天课程时应返回 true', () => {
+      for (let i = 1; i <= 7; i++) {
+        markLessonComplete(`day-${i}`)
+      }
+      expect(canGrantCertificate()).toBe(true)
+    })
+  })
+
+  describe('grantCertificate', () => {
+    it('应在满足条件时颁发证书', () => {
+      for (let i = 1; i <= 7; i++) {
+        markLessonComplete(`day-${i}`)
+      }
+      const cert = grantCertificate('测试用户')
+      expect(cert.holderName).toBe('测试用户')
+      expect(getProgress().certificate).toBe(true)
+    })
+
+    it('应保存证书颁发日期', () => {
+      for (let i = 1; i <= 7; i++) {
+        markLessonComplete(`day-${i}`)
+      }
+      grantCertificate()
+      const dateStr = getCertificateDate()
+      expect(dateStr).toMatch(/\d{4}-\d{2}-\d{2}/)
+    })
+  })
+
+  describe('getCertificate', () => {
+    it('未获得证书时应返回 null', () => {
+      const cert = getCertificate()
+      expect(cert).toBeNull()
+    })
+
+    it('已获得证书时应返回证书信息', () => {
+      for (let i = 1; i <= 7; i++) {
+        markLessonComplete(`day-${i}`)
+      }
+      grantCertificate('测试用户')
+      const cert = getCertificate()
+      expect(cert).not.toBeNull()
+      // getCertificate 使用默认 holderName，因为没有保存自定义名称
+      expect(cert?.holderName).toBe('龙虾驯养员')
+      expect(cert?.title).toBe('龙虾驯养师')
+    })
+  })
+
+  describe('checkAndUnlockBadges', () => {
+    it('应在满足条件时解锁新徽章', () => {
+      markLessonComplete('day-1')
+      const newBadges = checkAndUnlockBadges()
+      expect(newBadges.length).toBeGreaterThan(0)
+      expect(newBadges[0].id).toBe('day1-badge')
+    })
+
+    it('不应重复解锁已拥有的徽章', () => {
+      addBadge('day1-badge')
+      markLessonComplete('day-1')
+      const newBadges = checkAndUnlockBadges()
+      expect(newBadges.length).toBe(0)
+    })
   })
 
   describe('resetProgress', () => {
@@ -108,6 +236,15 @@ describe('learnProgress 工具函数', () => {
       expect(progress.currentDay).toBe(1)
       expect(progress.totalTime).toBe(0)
       expect(progress.completedLessons).toEqual([])
+    })
+  })
+
+  describe('getDefaultProgress', () => {
+    it('应返回默认进度对象', () => {
+      const defaultProgress = getDefaultProgress()
+      expect(defaultProgress.currentDay).toBe(1)
+      expect(defaultProgress.completedLessons).toEqual([])
+      expect(defaultProgress.certificate).toBe(false)
     })
   })
 })
