@@ -72,6 +72,7 @@ import { ref, computed, onMounted } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
+import { markLessonComplete } from '@/utils/learnProgress'
 
 const md = new MarkdownIt({
   html: true,
@@ -159,11 +160,14 @@ onMounted(() => {
   const pages = getCurrentPages()
   const currentPage = pages[pages.length - 1] as any
   const options = currentPage.options || {}
-  
-  if (options.id) {
+
+  // 支持 day 和 id 两种参数名
+  if (options.day) {
+    dayId.value = options.day
+  } else if (options.id) {
     dayId.value = options.id
   }
-  
+
   loadContent()
 })
 
@@ -200,21 +204,43 @@ const handlePrev = () => {
   const prevId = parseInt(dayId.value) - 1
   if (prevId > 0) {
     uni.redirectTo({
-      url: `/pages/learn/detail/index?id=${prevId}`
+      url: `/pages/learn/detail/index?day=${prevId}`
     })
   }
 }
 
 const handleComplete = () => {
-  uni.showToast({
-    title: '打卡成功！',
-    icon: 'success'
-  })
-  
-  // Save progress (mock)
-  setTimeout(() => {
-    uni.navigateBack()
-  }, 1500)
+  const lessonId = `day-${dayId.value}`
+
+  // 标记课程完成
+  markLessonComplete(lessonId)
+
+  uni.showToast({ title: '课程已完成', icon: 'success' })
+
+  // 如果还有下一课，提示继续
+  if (parseInt(dayId.value) < 7) {
+    setTimeout(() => {
+      uni.showModal({
+        title: '恭喜完成',
+        content: '是否继续学习下一课？',
+        success: (res) => {
+          if (res.confirm) {
+            uni.redirectTo({
+              url: `/pages/learn/detail/index?day=${parseInt(dayId.value) + 1}`
+            })
+          } else {
+            // 返回学习页面
+            uni.navigateBack()
+          }
+        }
+      })
+    }, 1500)
+  } else {
+    // 全部完成
+    setTimeout(() => {
+      uni.navigateBack()
+    }, 1500)
+  }
 }
 </script>
 
