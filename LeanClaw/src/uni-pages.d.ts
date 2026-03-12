@@ -14,7 +14,10 @@ type _LocationUrl =
   "/pages/learn/detail/index" |
   "/pages/profile/about/index" |
   "/pages/profile/certificate/index" |
-  "/pages/profile/settings/index";
+  "/pages/profile/favorites/index" |
+  "/pages/profile/notifications/index" |
+  "/pages/profile/settings/index" |
+  "/pages/profile/stats/index";
 
 interface NavigateToOptions {
   url: _LocationUrl;

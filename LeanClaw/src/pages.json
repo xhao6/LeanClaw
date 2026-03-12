@@ -88,10 +88,33 @@
       }
     },
     {
+      "path": "pages/profile/favorites/index",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "我的收藏"
+      }
+    },
+    {
+      "path": "pages/profile/notifications/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "消息通知"
+      }
+    },
+    {
       "path": "pages/profile/settings/index",
       "type": "page",
       "style": {
         "navigationBarTitleText": "设置"
+      }
+    },
+    {
+      "path": "pages/profile/stats/index",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "学习统计"
       }
     }
   ],
