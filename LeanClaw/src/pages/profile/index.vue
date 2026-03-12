@@ -16,7 +16,7 @@
       <view class="absolute left-10 bottom-0 w-20 h-20 rounded-full bg-white/5 pointer-events-none"></view>
 
       <view class="relative z-10 border-2 border-solid border-white/30 rounded-full p-1">
-        <wd-avatar src="https://via.placeholder.com/100" shape="circle" size="72px" />
+        <image src="/static/images/logo.svg" class="w-16 h-16 rounded-full bg-white" />
       </view>
       <view class="relative z-10 text-white">
         <view class="text-xl font-bold flex items-center">
@@ -55,12 +55,8 @@
     <view class="p-4 mt-2 space-y-4">
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
-          <wd-cell title="我的收藏" is-link icon="star" size="large" @click="goToFavorites">
-            <template #value>
-              <text v-if="favoritesCount > 0" class="text-gray-400">{{ favoritesCount }}</text>
-            </template>
-          </wd-cell>
-          <wd-cell title="我的证书" is-link icon="medal" size="large" @click="goToCertificate" />
+          <wd-cell title="我的收藏" is-link icon="star" size="large" @click="goToFavorites" />
+          <wd-cell title="我的证书" is-link icon="thumb-up" size="large" @click="goToCertificate" />
           <wd-cell title="学习统计" is-link icon="chart-bar" size="large" @click="goToStats" />
         </wd-cell-group>
       </view>

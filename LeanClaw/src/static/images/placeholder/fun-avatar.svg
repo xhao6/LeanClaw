@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9966;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF5E62;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="50" fill="url(#bg)" />
+  <!-- Eyes -->
+  <circle cx="35" cy="45" r="5" fill="white" />
+  <circle cx="65" cy="45" r="5" fill="white" />
+  <circle cx="35" cy="45" r="2" fill="#333" />
+  <circle cx="65" cy="45" r="2" fill="#333" />
+  <!-- Cheeks -->
+  <circle cx="25" cy="55" r="4" fill="#FFC0CB" opacity="0.6" />
+  <circle cx="75" cy="55" r="4" fill="#FFC0CB" opacity="0.6" />
+  <!-- Smile -->
+  <path d="M 35 60 Q 50 70 65 60" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" />
+  <!-- Antennae (Lobster feel) -->
+  <path d="M 30 25 Q 20 10 10 20" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 70 25 Q 80 10 90 20" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+</svg>

@@ -12,10 +12,8 @@
     <!-- Header -->
     <view class="flex items-center justify-between mb-6 pt-2">
       <view class="flex items-center">
-        <!-- Replace with actual logo or a better placeholder -->
-        <view class="w-10 h-10 bg-primary rounded-xl flex-center mr-3 shadow-sm">
-           <wd-icon name="github-filled" size="24px" color="#ffffff" />
-        </view>
+        <!-- Logo -->
+        <image src="/static/images/logo.svg" class="w-10 h-10 rounded-xl mr-3 shadow-sm bg-white" mode="aspectFit" />
         <view>
           <text class="text-xl font-bold text-primary block leading-tight">轻学龙虾</text>
           <text class="text-xs text-gray-400 block mt-0.5">养只龙虾做管家</text>
