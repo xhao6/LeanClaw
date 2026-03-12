@@ -89,27 +89,38 @@
           查看全部 <wd-icon name="arrow-right" size="12px" class="ml-0.5" />
         </text>
       </view>
-      
-      <view class="space-y-3">
-        <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
-          <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
-          <view class="flex-1 flex flex-col justify-between py-1">
-            <view>
-              <view class="flex justify-between items-start">
-                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
-                 <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
+
+      <scroll-view scroll-y class="h-[400px]" @scrolltolower="handleLoadMore">
+        <view class="space-y-3">
+          <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
+            <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
+            <view class="flex-1 flex flex-col justify-between py-1">
+              <view>
+                <view class="flex justify-between items-start">
+                   <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
+                   <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
+                </view>
+                <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
               </view>
-              <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
-            </view>
-            <view class="flex items-center text-xs text-gray-400 mt-2">
-               <wd-icon name="view" size="14px" class="mr-1" />
-               <text class="mr-3">{{ item.stars || '0' }}</text>
-               <wd-icon name="thumb-up" size="14px" class="mr-1" />
-               <text>{{ item.tags?.[0] || '' }}</text>
+              <view class="flex items-center text-xs text-gray-400 mt-2">
+                 <wd-icon name="view" size="14px" class="mr-1" />
+                 <text class="mr-3">{{ item.stars || '0' }}</text>
+                 <wd-icon name="thumb-up" size="14px" class="mr-1" />
+                 <text>{{ item.tags?.[0] || '' }}</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
+
+        <!-- 底部状态 -->
+        <view class="py-4 text-center">
+          <view v-if="loading" class="flex items-center justify-center text-gray-400">
+            <wd-loading type="circle" size="16px" />
+            <text class="ml-2 text-xs">加载中...</text>
+          </view>
+          <text v-else-if="!hasMore" class="text-xs text-gray-400">没有更多了</text>
+        </view>
+      </scroll-view>
     </view>
   </view>
 </template>
@@ -124,7 +135,7 @@ import type { ResourceItem } from '@/data/mock'
 const progress = getProgress()
 
 // 今日推荐
-const { recommendations, loadRecommendations, addToViewed } = useRecommendations()
+const { recommendations, loading, hasMore, loadRecommendations, loadMore, addToViewed } = useRecommendations()
 
 // 计算进度百分比
 const progressPercent = computed(() => {
@@ -149,6 +160,11 @@ const handleRecommendClick = (item: ResourceItem) => {
   if (item.url) {
     window.open(item.url, '_blank')
   }
+}
+
+// 滚动到底部加载更多
+const handleLoadMore = () => {
+  loadMore()
 }
 
 const handleGoLearn = () => {

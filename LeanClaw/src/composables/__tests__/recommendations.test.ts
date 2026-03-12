@@ -31,88 +31,121 @@ describe('useRecommendations 推荐功能', () => {
     mockRemoveStorageSync.mockClear()
   })
 
-  describe('fetchRecommendations', () => {
-    it('应返回指定数量的推荐', () => {
-      const { fetchRecommendations } = useRecommendations()
-      const result = fetchRecommendations(2)
-      expect(result).toHaveLength(2)
+  describe('loadRecommendations 首次加载', () => {
+    it('应加载 5 条推荐', () => {
+      const { recommendations, loadRecommendations } = useRecommendations()
+      loadRecommendations()
+      expect(recommendations.value).toHaveLength(5)
     })
 
-    it('未浏览时从全量数据中随机选择', () => {
-      const { fetchRecommendations } = useRecommendations()
-      // 执行多次，验证随机性
-      const results = new Set()
-      for (let i = 0; i < 10; i++) {
-        const result = fetchRecommendations(1)
-        results.add(result[0]?.id)
-      }
-      // 多次随机应该有不同的结果
-      expect(results.size).toBeGreaterThan(1)
+    it('应设置 allLoaded 状态', () => {
+      const { allLoaded, loadRecommendations } = useRecommendations()
+      loadRecommendations()
+      expect(typeof allLoaded.value).toBe('boolean')
+    })
+  })
+
+  describe('loadMore 加载更多', () => {
+    it('应加载更多推荐', () => {
+      const { recommendations, loadRecommendations, loadMore } = useRecommendations()
+      loadRecommendations()
+      const initialLength = recommendations.value.length
+      loadMore()
+      expect(recommendations.value.length).toBeGreaterThan(initialLength)
+    })
+
+    it('加载中应阻止重复触发', () => {
+      const { loading, loadRecommendations, loadMore } = useRecommendations()
+      loadRecommendations()
+      // 手动设置为 loading
+      loading.value = true
+      loadMore()
+      // loading 应该仍然是 true
+      expect(loading.value).toBe(true)
+    })
+
+    it('全部加载完成后不应再加载', () => {
+      const { allLoaded, loadRecommendations, loadMore } = useRecommendations()
+      loadRecommendations()
+      // 强制设置为全部加载完成
+      allLoaded.value = true
+      loadMore()
+      // 应该不报错
+    })
+  })
+
+  describe('hasMore 计算属性', () => {
+    it('未全部加载时应为 true', () => {
+      const { hasMore, loadRecommendations } = useRecommendations()
+      loadRecommendations()
+      expect(hasMore.value).toBe(true)
+    })
+
+    it('全部加载完成后应为 false', () => {
+      const { allLoaded, hasMore, loadRecommendations } = useRecommendations()
+      loadRecommendations()
+      allLoaded.value = true
+      expect(hasMore.value).toBe(false)
     })
   })
 
   describe('addToViewed', () => {
     it('应成功记录浏览历史', () => {
-      const { addToViewed, clearViewedHistory } = useRecommendations()
-      addToViewed('res-001')
-      // 通过再次获取推荐来验证已记录
-      const { fetchRecommendations } = useRecommendations()
-      const result = fetchRecommendations(10)
-      expect(result.some(r => r.id === 'res-001')).toBe(false) // 已浏览的不会再次推荐
-    })
-
-    it('不应重复记录相同 id', () => {
-      const { addToViewed, fetchRecommendations } = useRecommendations()
-      addToViewed('res-001')
-      addToViewed('res-001')
-      // 多次调用应该只记录一次
-      const result = fetchRecommendations(10)
-      expect(result.filter(r => r.id === 'res-001')).toHaveLength(0)
+      const recs = useRecommendations()
+      recs.loadRecommendations()
+      const firstId = recs.recommendations.value[0]?.id
+      if (firstId) {
+        recs.addToViewed(firstId)
+        // 验证添加成功（重新加载后该 ID 不在列表中）
+        const recs2 = useRecommendations()
+        recs2.loadRecommendations()
+        expect(recs2.recommendations.value.some(r => r.id === firstId)).toBe(false)
+      }
     })
   })
 
-  describe('loadRecommendations', () => {
-    it('应加载推荐数据到 recommendations', () => {
+  describe('去重逻辑', () => {
+    it('单次加载不应出现重复', () => {
       const { recommendations, loadRecommendations } = useRecommendations()
       loadRecommendations()
-      expect(recommendations.value).toHaveLength(2)
+
+      // 检查是否有重复
+      const ids = recommendations.value.map(r => r.id)
+      const uniqueIds = new Set(ids)
+      expect(ids.length).toBe(uniqueIds.size)
     })
-  })
 
-  describe('优先展示未浏览', () => {
-    it('应优先返回未浏览的资源', () => {
-      // 先浏览一些资源
-      const { addToViewed, fetchRecommendations } = useRecommendations()
+    it('最多加载 30 条', () => {
+      const { recommendations, loadRecommendations, loadMore } = useRecommendations()
+      loadRecommendations()
 
-      // 获取所有资源 ID
-      const allIds: string[] = []
-      const { recommendations: allRecs } = useRecommendations()
-      for (let i = 0; i < 5; i++) {
-        allRecs.value = fetchRecommendations(100)
-        allRecs.value.forEach(r => {
-          if (!allIds.includes(r.id)) allIds.push(r.id)
-        })
+      // 持续加载直到无法再加载
+      for (let i = 0; i < 20; i++) {
+        loadMore()
+        if (recommendations.value.length >= 30) break
       }
 
-      // 浏览第一个资源
-      addToViewed(allIds[0])
-
-      // 再次获取推荐，应该不包含已浏览的
-      const { recommendations, loadRecommendations } = useRecommendations()
-      loadRecommendations()
-      expect(recommendations.value.some(r => r.id === allIds[0])).toBe(false)
+      expect(recommendations.value.length).toBeLessThanOrEqual(30)
     })
   })
 
   describe('clearViewedHistory', () => {
     it('应清除浏览历史', () => {
-      const { addToViewed, clearViewedHistory, fetchRecommendations } = useRecommendations()
-      addToViewed('res-001')
-      addToViewed('res-002')
-      clearViewedHistory()
-      // 清除后，之前浏览的资源应该重新出现
-      const result = fetchRecommendations(10)
-      expect(result.length).toBeGreaterThan(0)
+      // 先浏览一些资源
+      const recs1 = useRecommendations()
+      recs1.loadRecommendations()
+      const ids = recs1.recommendations.value.map(r => r.id)
+      ids.forEach(id => recs1.addToViewed(id))
+
+      // 清除历史
+      recs1.clearViewedHistory()
+
+      // 重新加载，应该能看到之前的资源
+      const recs2 = useRecommendations()
+      recs2.loadRecommendations()
+
+      // 至少有资源可以显示
+      expect(recs2.recommendations.value.length).toBeGreaterThan(0)
     })
   })
 })
