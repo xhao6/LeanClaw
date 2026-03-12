@@ -42,14 +42,14 @@
         <wd-loading color="#FF6B35" />
       </view>
 
-      <view v-else-if="filteredItems.length === 0" class="flex-col-center py-20 text-gray-400">
+      <view v-else-if="items.length === 0" class="flex-col-center py-20 text-gray-400">
         <wd-icon name="warning" size="48px" class="mb-3 text-gray-300" />
         <text>未找到相关内容</text>
       </view>
 
       <view v-else class="space-y-4">
         <view
-          v-for="(item, index) in filteredItems"
+          v-for="(item, index) in items"
           :key="index"
           class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-all active:scale-[0.99]"
           @click="handleItemClick(item)"
@@ -73,13 +73,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { resources, type ResourceItem } from '@/data/mock'
+import { ref, onMounted, watch } from 'vue'
+import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
+import type { ResourceItem } from '@/data/mock'
 
 const searchValue = ref('')
 const activeTab = ref<string>('resource')
 const loading = ref(false)
+const items = ref<ResourceItem[]>([])
 
 const tabs = [
   { label: '优质资源', name: 'resource' },
@@ -87,31 +89,51 @@ const tabs = [
   { label: 'Skills', name: 'skill' }
 ]
 
-const filteredItems = computed(() => {
-  let items = resources.filter(item => {
-    // Filter by tab type
-    if (activeTab.value === 'resource') {
-      return item.type === 'resource' || item.type === 'case' // Combine for now or separate
+const fetchData = async () => {
+  loading.value = true
+  try {
+    const params: any = {
+      limit: 20 // Fetch more items
     }
-    return item.type === activeTab.value
-  })
-  
-  // Specific fix: resources tab should show resources; case tab show cases
-  if (activeTab.value === 'resource') items = resources.filter(i => i.type === 'resource')
-  if (activeTab.value === 'case') items = resources.filter(i => i.type === 'case')
-  if (activeTab.value === 'skill') items = resources.filter(i => i.type === 'skill')
+    
+    // Filter by type
+    // If activeTab is 'resource', we might want to show all resources (default)
+    // or specific logic. The API supports 'type' param.
+    // In original logic: 'resource' tab showed items with type 'resource' or 'case'.
+    // But API getResources expects single type or none.
+    // Let's stick to simple mapping:
+    if (activeTab.value !== 'resource') {
+        params.type = activeTab.value
+    } else {
+        params.type = 'resource'
+    }
 
-  // Filter by search
-  if (searchValue.value) {
-    const query = searchValue.value.toLowerCase()
-    items = items.filter(item => 
-      item.title.toLowerCase().includes(query) || 
-      item.desc.toLowerCase().includes(query) ||
-      item.tags.some(tag => tag.toLowerCase().includes(query))
-    )
+    const res = await getResources(params)
+    let fetchedItems = (res.list || []) as ResourceItem[]
+
+    // Client-side search filtering (since API might not support fuzzy search yet, or we use cloud DB regex)
+    // CloudBase API I wrote supports 'tag' but not generic search yet.
+    // So we filter locally for now if search is present
+    if (searchValue.value) {
+      const query = searchValue.value.toLowerCase()
+      fetchedItems = fetchedItems.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.desc.toLowerCase().includes(query) ||
+        item.tags.some(tag => tag.toLowerCase().includes(query))
+      )
+    }
+    
+    items.value = fetchedItems
+  } catch (error) {
+    console.error('Fetch resources failed', error)
+    items.value = []
+  } finally {
+    loading.value = false
   }
-  
-  return items
+}
+
+onMounted(() => {
+  fetchData()
 })
 
 const getPlaceholder = (item: ResourceItem) => {
@@ -122,15 +144,11 @@ const getPlaceholder = (item: ResourceItem) => {
 }
 
 const handleSearch = () => {
-  // Search is reactive, but we can add analytics or debouncing here
+  fetchData()
 }
 
 const handleTabChange = (e: any) => {
-  // Tab change logic
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-  }, 300)
+  fetchData()
 }
 
 const handleItemClick = (item: ResourceItem) => {
