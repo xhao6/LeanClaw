@@ -1,5 +1,5 @@
 // Mock data for the app
-// Sourced from openclaw101 project
+// Synced from openclaw101 project
 
 export interface ResourceItem {
   id: string;
@@ -16,167 +16,4649 @@ export interface ResourceItem {
 }
 
 export const resources: ResourceItem[] = [
-  // -- Video (Major: Lex Fridman Podcast) --
+  // official - resource
   {
-    id: 'vid-001',
-    title: 'Lex Fridman Podcast #491 — OpenClaw: The Viral AI Agent',
-    desc: 'GitHub 历史上增长最快的项目创始人 Peter Steinberger 接受 Lex Fridman 3 小时深度专访，必听',
-    url: 'https://www.youtube.com/watch?v=YFjfBk8HI5o',
+    id: 'res-001',
+    title: 'GitHub — openclaw/openclaw',
+    desc: '源代码、Issue 跟踪和社区贡献指南 (279k+ ⭐)',
+    image: '/static/images/placeholder/article.svg',
     type: 'resource',
-    tags: ['Lex Fridman', '创始人', '必听'],
-    source: 'YouTube',
-    image: '/static/images/resources/lex.jpg', // Placeholder
-    featured: true
-  },
-  // -- Video (New Products & Tutorials) --
-  {
-    id: 'vid-002',
-    title: 'Kimi Claw: 浏览器内运行 OpenClaw',
-    desc: 'Moonshot AI 推出 Kimi Claw：无需本地部署或 VPS，在浏览器云端运行 OpenClaw Agent 全教程',
-    url: 'https://www.youtube.com/watch?v=72voj6uefLY',
-    type: 'resource',
-    tags: ['Kimi Claw', '无需部署'],
-    source: 'YouTube',
-    category: 'video'
-  },
-  {
-    id: 'vid-003',
-    title: 'Tech With Tim: OpenClaw Full Course',
-    desc: '涵盖安装、技能、语音回复、记忆系统的完整系统课程，Hostinger 赞助',
-    url: 'https://www.youtube.com/watch?v=vte-fDoZczE',
-    type: 'resource',
-    tags: ['Tech With Tim', '完整课程'],
-    source: 'YouTube',
-    category: 'video'
-  },
-  {
-    id: 'vid-004',
-    title: 'OpenClaw Use Cases that Actually Work',
-    desc: 'Matt Berman 演示真正实用的 OpenClaw 场景，配 Greptile 集成和完整提示词',
-    url: 'https://www.youtube.com/watch?v=Q7r--i9lLck',
-    type: 'resource',
-    tags: ['用例演示', 'Greptile'],
-    source: 'YouTube',
-    category: 'video'
-  },
-  
-  // -- Getting Started --
-  {
-    id: 'gs-001',
-    title: 'Use OpenClaw to Make a Personal AI Assistant',
-    desc: 'Towards Data Science: OpenClaw 个人 AI 助手搭建完整指南，从安装到个性化配置',
-    url: 'https://towardsdatascience.com/use-openclaw-to-make-a-personal-ai-assistant/',
-    type: 'resource',
-    tags: ['TDS', '权威指南'],
-    source: 'Towards Data Science',
-    category: 'getting-started'
-  },
-  {
-    id: 'gs-002',
-    title: 'OpenClaw Tutorial 2026: Setting Up Your 24/7 AI Employee',
-    desc: '从 AI 软件到 AI Agent 的认知转变，全流程 24/7 部署配置指南',
-    url: 'https://travisnicholson.medium.com/openclaw-tutorial-2026-setting-up-your-24-7-ai-employee-step-by-step-guide-39f52a81707a',
-    type: 'resource',
-    tags: ['Medium', '24/7', '2026'],
-    source: 'Medium',
-    category: 'getting-started'
+    tags: ["\u6587\u6863", "\u5fc5\u8bfb"],
+    url: 'https://github.com/openclaw/openclaw',
+    category: 'official',
+    source: 'GitHub',
+    featured: true,
   },
 
-  // -- Deep Dive --
+  // official - resource
   {
-    id: 'dd-001',
-    title: 'Why OpenClaw Has Security Experts on Edge',
-    desc: 'Fortune 深度报道：OpenClaw 赋予 AI 真实自主权带来的新型安全风险',
-    url: 'https://fortune.com/2026/02/12/openclaw-ai-agents-security-risks-beware/',
+    id: 'res-002',
+    title: 'ClawHub 技能市场',
+    desc: '发现、安装和分享 AI 技能插件',
+    image: '/static/images/placeholder/article.svg',
     type: 'resource',
-    tags: ['Fortune', '安全风险'],
-    source: 'Fortune',
-    category: 'deep-dive'
-  },
-  {
-    id: 'dd-002',
-    title: 'OpenClaw Production Guide: 4 Weeks of Hard Lessons',
-    desc: '30 天自托管 AI Agent 的真实记录：可扩展性、监控、成本与运营指标综合报告',
-    url: 'https://www.sitepoint.com/openclaw-production-lessons-4-weeks-self-hosted-ai/',
-    type: 'resource',
-    tags: ['SitePoint', '生产环境'],
-    source: 'SitePoint',
-    category: 'deep-dive'
+    tags: ["\u6587\u6863", "\u5fc5\u8bfb"],
+    url: 'https://clawhub.com',
+    category: 'official',
+    source: 'ClawHub',
+    featured: true,
   },
 
-  // -- Use Cases --
+  // official - resource
   {
-    id: 'case-001',
-    title: '9 OpenClaw Projects to Build in 2026',
-    desc: '从 Reddit 摘要机器人到自愈服务器，每个项目附配置文件、提示词和社区 Setup 指南',
-    url: 'https://www.datacamp.com/blog/openclaw-projects',
-    type: 'case',
-    tags: ['DataCamp', '实战项目'],
-    source: 'DataCamp'
+    id: 'res-003',
+    title: 'Getting Started — 官方入门指南',
+    desc: '从零到第一次对话的最快路径',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6587\u6863", "\u5fc5\u8bfb"],
+    url: 'https://docs.openclaw.ai/start/getting-started',
+    category: 'official',
+    source: 'OpenClaw Docs',
+    featured: true,
   },
+
+  // official - resource
   {
-    id: 'case-002',
-    title: 'OpenClaw + Skool Community Automation',
-    desc: '结合 Skool 社区平台的 OpenClaw 正确玩法：从安装到真实工作流的完整演示',
-    url: 'https://www.youtube.com/watch?v=LV6Juz0xcrY',
-    type: 'case',
-    tags: ['社区自动化', 'Skool'],
-    source: 'YouTube'
+    id: 'res-004',
+    title: 'Discord 社区',
+    desc: '与数万开发者和用户实时交流',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6e90\u7801", "\u5f00\u6e90"],
+    url: 'https://discord.com/invite/clawd',
+    category: 'official',
+    source: 'Discord',
+    featured: true,
   },
-  
-  // -- Skills --
+
+  // official - resource
+  {
+    id: 'res-005',
+    title: 'OpenClaw — Wikipedia',
+    desc: '维基百科词条，了解 OpenClaw 的历史和影响',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6280\u80fd", "\u5e02\u573a"],
+    url: 'https://en.wikipedia.org/wiki/OpenClaw',
+    category: 'official',
+    source: 'Wikipedia',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-006',
+    title: 'ClawHub Skills 仓库',
+    desc: '所有已发布技能的源码归档',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5165\u95e8", "\u5fc5\u8bfb"],
+    url: 'https://github.com/openclaw/skills',
+    category: 'official',
+    source: 'GitHub',
+  },
+
+  // official - resource
+  {
+    id: 'res-007',
+    title: '阿里云 — 部署 OpenClaw 构建钉钉 AI 助理',
+    desc: '轻量应用服务器一键部署，可视化配置面板接入钉钉',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u767e\u79d1"],
+    url: 'https://help.aliyun.com/zh/simple-application-server/use-cases/quickly-deploy-and-use-openclaw',
+    category: 'official',
+    source: '阿里云',
+  },
+
+  // official - resource
+  {
+    id: 'res-008',
+    title: '阿里云 — AppFlow 集成企业微信',
+    desc: '通过应用连接器将 OpenClaw 与企业微信集成，群聊直接交互',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6280\u80fd", "\u6e90\u7801"],
+    url: 'https://help.aliyun.com/zh/simple-application-server/use-cases/openclaw-enterprise-wechat-integration',
+    category: 'official',
+    source: '阿里云',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-009',
+    title: '腾讯云 — OpenClaw 接入飞书保姆级教程',
+    desc: 'Lighthouse 一键部署 + 飞书机器人全流程配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u9489\u9489", "\u4e00\u952e\u90e8\u7f72"],
+    url: 'https://cloud.tencent.com/developer/article/2625073',
+    category: 'cloud-deploy',
+    source: '腾讯云',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-010',
+    title: '腾讯云 — OpenClaw 接入企业微信完全指南',
+    desc: '可视化配置面板，几步完成企业微信接入',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u4f01\u4e1a\u5fae\u4fe1", "AppFlow"],
+    url: 'https://cloud.tencent.com/developer/article/2625147',
+    category: 'cloud-deploy',
+    source: '腾讯云',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-011',
+    title: 'Hostinger — How to Set Up OpenClaw on a Private Server',
+    desc: 'Step-by-step guide for Hostinger VPS deployment',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u817e\u8baf\u4e91", "\u4f01\u4e1a\u5fae\u4fe1"],
+    url: 'https://www.hostinger.com/tutorials/how-to-set-up-openclaw',
+    category: 'cloud-deploy',
+    source: 'Hostinger',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-012',
+    title: 'OpenClaw 下载安装使用 — 详细图文教程',
+    desc: '系统要求、多种安装方式对比、常见问题排查、Web/终端两种界面入门',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["DigitalOcean", "\u4e00\u952e\u90e8\u7f72"],
+    url: 'https://apifox.com/apiskills/openclaw-installation-and-usage-guide/',
+    category: 'cloud-deploy',
+    source: 'Apifox',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-013',
+    title: '小白零基础教程 — 安装 OpenClaw',
+    desc: '零基础也能看懂，Telegram 连接详细步骤',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Hostinger", "VPS"],
+    url: 'https://www.cnblogs.com/gyc567/p/19561281',
+    category: 'cloud-deploy',
+    source: '博客园',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-014',
+    title: 'ClawdBot 火爆全网 — 手把手部署 + 钉钉操作',
+    desc: '国内用户部署指南，包含踩坑经验和钉钉接入',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u56fe\u6587", "\u65b0\u624b\u53cb\u597d"],
+    url: 'https://www.53ai.com/news/OpenSourceLLM/2026012862704.html',
+    category: 'getting-started',
+    source: '53AI',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-015',
+    title: '怎么用上一夜爆火的 Clawdbot — 详细配置教程',
+    desc: '实测踩了三个大坑，分享避坑指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u96f6\u57fa\u7840", "Telegram"],
+    url: 'https://news.qq.com/rain/a/20260127A05EEN00',
+    category: 'getting-started',
+    source: '腾讯新闻',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-016',
+    title: 'Openclaw 安装部署一文详解 + 国产平替方案',
+    desc: '产品介绍、官网资源、本地/云端部署四维度全面解析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u90e8\u7f72", "\u9489\u9489", "\u8e29\u5751"],
+    url: 'https://www.ai-indeed.com/article/15272.html',
+    category: 'getting-started',
+    source: '实在智能',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-017',
+    title: 'Codecademy — OpenClaw Installation to First Chat',
+    desc: 'Structured tutorial from installation to your first conversation',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u907f\u5751", "\u5b9e\u6d4b"],
+    url: 'https://www.codecademy.com/article/open-claw-tutorial-installation-to-first-chat-setup',
+    category: 'getting-started',
+    source: 'Codecademy',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-018',
+    title: 'Full Tutorial: Set Up Your 24/7 AI Employee in 20 Minutes',
+    desc: 'From zero to a running AI agent in 20 minutes flat',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5168\u9762", "\u5e73\u66ff"],
+    url: 'https://creatoreconomy.so/p/full-tutorial-set-up-your-247-ai-employee-clawd-molt',
+    category: 'getting-started',
+    source: 'Creator Economy',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-019',
+    title: 'How to Get OpenClaw Set Up in an Afternoon',
+    desc: 'Practical guide from the AI Product Playbook newsletter',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Codecademy", "\u7ed3\u6784\u5316"],
+    url: 'https://amankhan1.substack.com/p/how-to-get-clawdbotmoltbotopenclaw',
+    category: 'getting-started',
+    source: 'Substack',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-020',
+    title: '保姆级飞书对接教程 — 手把手搭建 AI 助手',
+    desc: 'Linux 下安装 OpenClaw 并对接飞书机器人，打造专属智能助理',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5feb\u901f", "20\u5206\u949f"],
+    url: 'https://www.cnblogs.com/catchadmin/p/19556552',
+    category: 'getting-started',
+    source: '博客园',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-021',
+    title: '飞书对接教程 — CSDN 版',
+    desc: '详细的 OpenClaw 飞书机器人配置指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b9e\u7528"],
+    url: 'https://blog.csdn.net/qq_31470439/article/details/157578441',
+    category: 'getting-started',
+    source: 'CSDN',
+    featured: true,
+  },
+
+  // channel-integration - resource
+  {
+    id: 'res-022',
+    title: 'MiniMax — Build AI Assistant on Telegram',
+    desc: 'Connect MiniMax M2.1 to Telegram via OpenClaw',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u98de\u4e66", "\u4fdd\u59c6\u7ea7"],
+    url: 'https://platform.minimax.io/docs/solutions/moltbot',
+    category: 'channel-integration',
+    source: 'MiniMax',
+    featured: true,
+  },
+
+  // channel-integration - resource
+  {
+    id: 'res-023',
+    title: 'ClawHub 技能开发文档',
+    desc: '如何创建、发布和管理自定义技能',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u98de\u4e66", "CSDN"],
+    url: 'https://docs.openclaw.ai/tools/clawhub',
+    category: 'channel-integration',
+    source: 'OpenClaw Docs',
+  },
+
+  // channel-integration - resource
+  {
+    id: 'res-024',
+    title: 'OpenClaw Skills 在 Claude Code 中使用',
+    desc: 'Reddit 社区分享：在 Claude Code 中运行 OpenClaw 的提示词和技能',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Telegram", "MiniMax"],
+    url: 'https://www.reddit.com/r/ClaudeAI/comments/1qs49hw/',
+    category: 'channel-integration',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // skill-dev - skill
   {
     id: 'skill-001',
-    title: 'Web & Frontend',
-    desc: 'Production-grade UI, Next.js apps, UI audits',
+    title: 'ClawHub Skill Directory 源码',
+    desc: 'ClawHub 的 GitHub 仓库，了解技能目录结构',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['Frontend', 'Next.js', 'UI'],
-    stars: '46 Skills',
-    image: '/static/images/skills/frontend.png'
+    tags: ["\u6280\u80fd", "\u5f00\u53d1"],
+    url: 'https://github.com/openclaw/clawhub',
+    category: 'skill-dev',
+    source: 'GitHub',
+    featured: true,
   },
+
+  // skill-dev - skill
   {
     id: 'skill-002',
-    title: 'Coding Agents',
-    desc: 'Claude Code, OpenCode control, Multi-worker agents',
+    title: 'OpenClaw 海量全玩法攻略 — 国内网络使用 + 本地部署',
+    desc: 'B站详细视频教程，涵盖所有主要功能和配置',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['Coding', 'Agents'],
-    stars: '55 Skills',
-    image: '/static/images/skills/coding.png'
+    tags: ["Claude Code", "Reddit"],
+    url: 'https://www.bilibili.com/video/BV1kH6nBFEPq/',
+    category: 'skill-dev',
+    source: 'Bilibili',
   },
+
+  // video - resource
+  {
+    id: 'res-025',
+    title: 'DigitalOcean — What is OpenClaw?',
+    desc: '全面介绍 OpenClaw 的功能、架构和使用场景',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "\u5168\u9762"],
+    url: 'https://www.digitalocean.com/resources/articles/what-is-openclaw',
+    category: 'video',
+    source: 'DigitalOcean',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-026',
+    title: 'Reddit — The Ultimate Guide to OpenClaw',
+    desc: '从功能到安全风险的全面指南，不回避争议话题',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["IBM", "\u6df1\u5ea6\u5206\u6790"],
+    url: 'https://www.reddit.com/r/ThinkingDeeplyAI/comments/1qsoq4h/',
+    category: 'deep-dive',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-027',
+    title: 'NxCode — OpenClaw Complete Guide 2026',
+    desc: 'Clawdbot → Moltbot → OpenClaw 完整演进指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6982\u89c8", "\u5165\u95e8"],
+    url: 'https://www.nxcode.io/resources/news/openclaw-complete-guide-2026',
+    category: 'deep-dive',
+    source: 'NxCode',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-028',
+    title: 'ClawdBot 一键部署工具',
+    desc: 'Mac/Linux 一键安装脚本，自动化环境配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Reddit", "\u5168\u9762", "\u5b89\u5168"],
+    url: 'https://github.com/miaoxworld/ClawdBotInstaller',
+    category: 'deep-dive',
+    source: 'GitHub',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-029',
+    title: 'Clawdbot 中文文档',
+    desc: '社区翻译的中文 README 和使用指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5386\u53f2", "\u5b8c\u6574"],
+    url: 'https://github.com/bbylw/clawdbot-cn',
+    category: 'deep-dive',
+    source: 'GitHub',
+  },
+
+  // tools - resource
+  {
+    id: 'res-030',
+    title: '阿里云开发者社区 — 2026年 OpenClaw 部署教程及常见问题解答',
+    desc: '百炼模型配置、通义千问接入，含高频问题 FAQ 和完整 JSON 示例',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u4e00\u952e", "\u811a\u672c"],
+    url: 'https://developer.aliyun.com/article/1709761',
+    category: 'tools',
+    source: '阿里云开发者社区',
+  },
+
+  // tools - resource
+  {
+    id: 'res-031',
+    title: 'DataCamp — OpenClaw Tutorial: Control Your PC from WhatsApp',
+    desc: 'WhatsApp 远程控制电脑实操教程，涵盖 Skill 开发与 AgentSkills 标准',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u4e2d\u6587", "\u6587\u6863"],
+    url: 'https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial',
+    category: 'tools',
+    source: 'DataCamp',
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-032',
+    title: 'OpenClaw + Ollama 本地 AI Agent 搭建指南',
+    desc: '全面的 Ollama 本地模型 + OpenClaw 集成指南，含模型选型对比和性能基准',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u767e\u70bc", "\u901a\u4e49\u5343\u95ee", "FAQ"],
+    url: 'https://codersera.com/blog/openclaw-ollama-setup-guide-run-local-ai-agents-2026',
+    category: 'cloud-deploy',
+    source: 'CoderSera',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-033',
+    title: '掘金 — OpenClaw 安装教程：从 0 搭建本地 AI 助手完整记录',
+    desc: '掘金社区原创，从零到跑通的详实记录，含架构理解和踩坑笔记',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["DataCamp", "WhatsApp", "Skill"],
+    url: 'https://juejin.cn/post/7600752623068102666',
+    category: 'getting-started',
+    source: '掘金',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-034',
+    title: '至顶AI — OpenClaw 完整部署指南（全网最详细版）',
+    desc: '从环境准备到飞书插件配置、十大经典应用场景推荐，亲测有效',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Ollama", "\u672c\u5730\u6a21\u578b", "\u6027\u80fd\u5bf9\u6bd4"],
+    url: 'https://news.qq.com/rain/a/20260202A04NT600',
+    category: 'getting-started',
+    source: '腾讯新闻',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-035',
+    title: 'CSDN — OpenClaw 史上最全保姆级安装配置教程',
+    desc: '多平台接入、Docker 沙箱安全配置、Ollama 本地模型对接',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6398\u91d1", "\u5b9e\u6218\u8bb0\u5f55", "\u672c\u5730\u90e8\u7f72"],
+    url: 'https://blog.csdn.net/liwang0113/article/details/157579187',
+    category: 'getting-started',
+    source: 'CSDN',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-036',
+    title: 'DEV Community — Unleashing OpenClaw: Ultimate Guide for Developers',
+    desc: '开发者视角深度解析：Gateway 架构、Brain 模型层、自定义 Skill 编写',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u81f3\u9876AI", "\u5168\u9762", "\u98de\u4e66\u63d2\u4ef6"],
+    url: 'https://dev.to/mechcloud_academy/unleashing-openclaw-the-ultimate-guide-to-local-ai-agents-for-developers-in-2026-3k0h',
+    category: 'getting-started',
+    source: 'DEV Community',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-037',
+    title: 'The Hacker News — 341 个恶意 ClawHub 技能窃取用户数据',
+    desc: 'Koi Security 审计发现 ClawHavoc 供应链攻击，OpenClaw 用户必读安全警示',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CSDN", "\u4fdd\u59c6\u7ea7", "\u5b89\u5168\u914d\u7f6e"],
+    url: 'https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html',
+    category: 'deep-dive',
+    source: 'The Hacker News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-038',
+    title: 'CNBC — From Clawdbot to OpenClaw: The AI Agent Generating Buzz and Fear',
+    desc: 'CNBC 深度报道 OpenClaw 的崛起、259k+ GitHub Stars 背后的争议与风险',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["DEV", "\u67b6\u6784", "Skill\u5f00\u53d1"],
+    url: 'https://www.cnbc.com/2026/02/02/openclaw-open-source-ai-agent-rise-controversy-clawdbot-moltbot-moltbook.html',
+    category: 'deep-dive',
+    source: 'CNBC',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-039',
+    title: 'Medium — Stop Watching Install Tutorials, This Is How You Actually Tame It',
+    desc: '跳过安装，直接讲如何驾驭 OpenClaw：工作流设计、提示词策略和安全边界',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168", "ClawHub", "\u4f9b\u5e94\u94fe\u653b\u51fb"],
+    url: 'https://medium.com/activated-thinker/stop-watching-openclaw-install-tutorials-this-is-how-you-actually-tame-it-f3416f5d80bc',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-040',
+    title: 'Apiyi — OpenClaw 扩展生态全解析：50+ 官方集成',
+    desc: '700+ Skills 库、12 大平台集成总览，ClawHub 技能商店使用指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CNBC", "\u5a92\u4f53", "\u4e89\u8bae"],
+    url: 'https://help.apiyi.com/en/openclaw-extensions-ecosystem-guide-en.html',
+    category: 'deep-dive',
+    source: 'Apiyi',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-041',
+    title: 'YouTube — OpenClaw Tutorial For Beginners (2026)',
+    desc: '英文入门视频教程，从安装到主要功能和自动化任务演示',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "\u8fdb\u9636", "\u5de5\u4f5c\u6d41"],
+    url: 'https://www.youtube.com/watch?v=Gc4fyY0_8Rc',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // skill-dev - skill
   {
     id: 'skill-003',
-    title: 'DevOps & Cloud',
-    desc: 'Cloudflare Workers, Docker, K8s, Coolify',
+    title: 'B站 — OpenClaw 是什么？Skills/MCP/RAG/Memory/AI Agent 全解析',
+    desc: '架构科普视频：拆解 OpenClaw 与技能系统、MCP 协议、RAG、记忆系统的关系',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['DevOps', 'Docker', 'Cloud'],
-    stars: '144 Skills',
-    image: '/static/images/skills/devops.png'
+    tags: ["\u751f\u6001", "\u96c6\u6210", "ClawHub"],
+    url: 'https://www.bilibili.com/video/BV1Bm6bB5EJ3/',
+    category: 'skill-dev',
+    source: 'Bilibili',
   },
+
+  // video - resource
+  {
+    id: 'res-042',
+    title: 'B站 — Clawdbot 为什么能记住你说过的话？AI 记忆系统拆解',
+    desc: '深入分析 OpenClaw 的记忆机制：日记文件、长期记忆、上下文窗口管理',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5165\u95e8", "\u82f1\u6587"],
+    url: 'https://www.bilibili.com/video/BV1fv61B4EQ5/',
+    category: 'video',
+    source: 'Bilibili',
+  },
+
+  // video - resource
+  {
+    id: 'res-043',
+    title: 'B站 — OpenClaw 爆火 AI 自动化神器！本地部署教程 | 零度解说',
+    desc: '零度解说出品，本地部署 + 聊天软件对接全流程演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "\u67b6\u6784", "MCP", "RAG"],
+    url: 'https://www.bilibili.com/video/BV1vz6nBmEA3/',
+    category: 'video',
+    source: 'Bilibili',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-044',
+    title: 'Cisco Blogs — Personal AI Agents like OpenClaw Are a Security Nightmare',
+    desc: 'Security analysis of open-source personal AI agents: risks, attack vectors, and enterprise implications',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u79d1\u666e", "\u4e3b\u6d41\u5a92\u4f53", "\u6df1\u5ea6"],
+    url: 'https://blogs.cisco.com/ai/personal-ai-agents-like-openclaw-are-a-security-nightmare',
+    category: 'deep-dive',
+    source: 'Cisco',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-045',
+    title: 'CNET — From Clawdbot to Moltbot to OpenClaw: The Wild Ride',
+    desc: 'How OpenClaw routes messages to AI servers and the LLM selection flexibility (Claude, ChatGPT, Gemini)',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168", "\u4f01\u4e1a", "\u98ce\u9669\u5206\u6790"],
+    url: 'https://www.cnet.com/tech/services-and-software/from-clawdbot-to-moltbot-to-openclaw/',
+    category: 'deep-dive',
+    source: 'CNET',
+  },
+
+  // official - resource
+  {
+    id: 'res-046',
+    title: 'The Guardian — Viral AI personal assistant seen as step change',
+    desc: 'OpenClaw runs as a layer atop LLMs and can operate autonomously depending on permissions granted',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CNET", "\u67b6\u6784", "LLM\u9009\u62e9"],
+    url: 'https://www.theguardian.com/technology/2026/feb/02/openclaw-viral-ai-agent-personal-assistant-artificial-intelligence',
+    category: 'official',
+    source: 'The Guardian',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-047',
+    title: 'AWS 中国博客 — 基于 Mac 实例部署 OpenClaw',
+    desc: '亚马逊云科技 Mac 实例部署指南，深度苹果生态自动化的最佳选择',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["The Guardian", "\u82f1\u56fd\u5a92\u4f53", "\u5206\u6790"],
+    url: 'https://aws.amazon.com/cn/blogs/china/openclaw-deployment-aws-mac/',
+    category: 'deep-dive',
+    source: 'AWS',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-048',
+    title: '菜鸟教程 — OpenClaw (Clawdbot) 完整教程',
+    desc: '从 git clone 到 pnpm build，含 onboard 和 gateway:watch 开发模式',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["The Guardian", "\u82f1\u56fd\u5a92\u4f53", "\u5206\u6790"],
+    url: 'https://www.runoob.com/ai-agent/openclaw-clawdbot-tutorial.html',
+    category: 'deep-dive',
+    source: '菜鸟教程',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-049',
+    title: '痴者工良 — 手把手教你部署 OpenClaw',
+    desc: '博客园原创，openclaw configure 配置飞书全流程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["AWS", "Mac", "\u82f9\u679c\u751f\u6001"],
+    url: 'https://www.cnblogs.com/whuanle/p/19558535',
+    category: 'cloud-deploy',
+    source: '博客园',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-050',
+    title: 'DAMO 开发者矩阵 — Mac mini 接入国产大模型与飞书',
+    desc: '命令行安装 + DeepSeek 配置 + 飞书插件全流程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u83dc\u9e1f\u6559\u7a0b", "\u6e90\u7801\u7f16\u8bd1", "\u5f00\u53d1\u6a21\u5f0f"],
+    url: 'https://damodev.csdn.net/697dff7b7c1d88441d90f0e4.html',
+    category: 'getting-started',
+    source: 'CSDN DAMO',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-051',
+    title: 'Adven Boost — OpenClaw: 10 Steps to Set Up Your Personal AI Agent',
+    desc: 'Structured 10-step playbook from installation to optimization',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u535a\u5ba2\u56ed", "\u98de\u4e66", "\u914d\u7f6e\u5411\u5bfc"],
+    url: 'https://advenboost.com/en/openclaw-setup-10-steps-guide/',
+    category: 'getting-started',
+    source: 'Adven Boost',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-052',
+    title: '知乎 — 一文读懂 OpenClaw 分析与教程',
+    desc: '完整目录结构解析：AGENTS.md / SOUL.md / MEMORY.md / Skills 全拆解',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Mac mini", "DeepSeek", "\u98de\u4e66\u63d2\u4ef6"],
+    url: 'https://zhuanlan.zhihu.com/p/2000850539936765122',
+    category: 'getting-started',
+    source: '知乎',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-053',
+    title: 'Turing College — The AI Assistant That Actually Does Things',
+    desc: '深度解析 OpenClaw 三大核心能力：电脑控制、持久记忆、心跳机制',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["10\u6b65", "\u7ed3\u6784\u5316", "ROI\u5206\u6790"],
+    url: 'https://www.turingcollege.com/blog/openclaw',
+    category: 'getting-started',
+    source: 'Turing College',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-054',
+    title: 'OpenClaw 7天入门指南 — 飞书知识库',
+    desc: '从认识到进阶，每天一个主题的系统化学习路径',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u77e5\u4e4e", "\u67b6\u6784", "\u76ee\u5f55\u7ed3\u6784"],
+    url: 'https://my.feishu.cn/wiki/YkWgwqSchi9xW3kEuZscAm0lnFf',
+    category: 'deep-dive',
+    source: 'OpenClaw 101',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-055',
+    title: 'OpenClaw 汉化版 — CLI + Dashboard 全中文',
+    desc: '每小时自动同步官方仓库，含完整中文 README、全流程搭建教程和排错指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6df1\u5ea6", "\u5fc3\u8df3\u673a\u5236", "\u8bb0\u5fc6\u7cfb\u7edf"],
+    url: 'https://github.com/1186258278/OpenClawChineseTranslation',
+    category: 'getting-started',
+    source: 'GitHub',
+    featured: true,
+  },
+
+  // tools - resource
+  {
+    id: 'res-056',
+    title: '搬主题 — 一键安装部署超详细图文教程',
+    desc: '含钉钉/飞书/微信/Web 四种集成方法，国内用户首选参考',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["7\u5929", "\u7cfb\u7edf\u5316", "\u98de\u4e66"],
+    url: 'https://www.banzhuti.com/openclaw-moltbot-clawdbot-tutorial.html',
+    category: 'tools',
+    source: '搬主题',
+    featured: true,
+  },
+
+  // tools - resource
+  {
+    id: 'res-057',
+    title: '飞书官方 — 一文完全搞懂 Clawd Bot 附飞书对接指南',
+    desc: '来自飞书安全团队，Gateway-Node 架构深度解析、Canvas 画布、部署方案与成本分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6c49\u5316", "\u4e2d\u6587", "\u540c\u6b65"],
+    url: 'https://www.feishu.cn/content/article/7602519239445974205',
+    category: 'tools',
+    source: '飞书官网',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-058',
+    title: 'PromptLayer — How to Install OpenClaw: Step-by-Step Guide',
+    desc: 'From the agentic AI tracking team, covers installation, configuration, and first chat',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u9489\u9489", "\u98de\u4e66", "\u5fae\u4fe1", "Web"],
+    url: 'https://blog.promptlayer.com/how-to-install-openclaw-step-by-step-guide-formerly-clawdbot-moltbot/',
+    category: 'getting-started',
+    source: 'PromptLayer',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-059',
+    title: 'Medium — What is OpenClaw: Open-Source AI Agent in 2026',
+    desc: 'Covers Home Assistant integration, agent social networks, and privacy-first local deployment',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u98de\u4e66\u5b98\u65b9", "\u67b6\u6784", "\u5b89\u5168"],
+    url: 'https://medium.com/@gemQueenx/what-is-openclaw-open-source-ai-agent-in-2026-setup-features-8e020db20e5e',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-060',
+    title: 'AIML API — OpenClaw Tutorial: Installation to First Chat Setup',
+    desc: 'Step-by-step guide: installation, model setup, Telegram connection, skills, web search, and safety tips',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["PromptLayer", "Agent\u8ffd\u8e2a", "\u6700\u65b0"],
+    url: 'https://aimlapi.com/blog/openclaw-tutorial-installation-to-first-chat-setup',
+    category: 'getting-started',
+    source: 'AIML API',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-061',
+    title: 'BoostedHost — How to Install OpenClaw (For Beginner)',
+    desc: 'Plain language guide explaining gateways, tokens, VPS setup, and common errors from zero',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "Home Assistant", "\u9690\u79c1"],
+    url: 'https://boostedhost.com/blog/en/how-to-install-openclaw-get-started-guide/',
+    category: 'getting-started',
+    source: 'BoostedHost',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-062',
+    title: 'AIML API — OpenClaw Tutorial: Real Automation Use (Step by Step)',
+    desc: 'Practical guide on connecting email, files, websites, and APIs for real task execution on VPS',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Telegram", "Skills", "\u5b89\u5168"],
+    url: 'https://aimlapi.com/blog/openclaw-full-tutorial-installation-setup-real-automation-use-step-by-step',
+    category: 'getting-started',
+    source: 'AIML API',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-063',
+    title: 'YouTube — Full OpenClaw Setup Tutorial: Step-by-Step Walkthrough',
+    desc: 'Complete video walkthrough for installing and configuring OpenClaw AI assistant',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u65b0\u624b\u53cb\u597d", "VPS", "\u6392\u9519"],
+    url: 'https://www.youtube.com/watch?v=fcZMmP5dsl4',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-064',
+    title: 'YouTube — OpenClaw Tutorial: How to Run a Local AI Agent (2026)',
+    desc: 'Self-hosted, local-first AI assistant setup guide with practical demonstrations',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u81ea\u52a8\u5316", "API\u96c6\u6210", "VPS"],
+    url: 'https://www.youtube.com/watch?v=StKBpXSf08E',
+    category: 'deep-dive',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-065',
+    title: 'freeCodeCamp — OpenClaw Full Tutorial for Beginners',
+    desc: '从被动聊天到主动 Agent 的转变，freeCodeCamp 出品的全面入门教程',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5b8c\u6574\u6559\u7a0b", "\u6700\u65b0"],
+    url: 'https://www.freecodecamp.org/news/openclaw-full-tutorial-for-beginners/',
+    category: 'video',
+    source: 'freeCodeCamp',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-066',
+    title: 'AI Free API — OpenClaw 安装与集成完全指南 2026',
+    desc: '一条命令安装 + onboard 向导 + WhatsApp/Telegram/Discord/Browser Relay 全平台集成',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u672c\u5730\u90e8\u7f72", "2026"],
+    url: 'https://www.aifreeapi.com/en/posts/openclaw-installation-guide',
+    category: 'getting-started',
+    source: 'AI Free API',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-067',
+    title: 'Marc0.dev — OpenClaw Mac Mini M4 Pro 完全指南',
+    desc: 'M4 Pro 64GB Mac Mini 零云端部署，本地 Ollama 集成实测',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["freeCodeCamp", "\u5165\u95e8", "\u6743\u5a01"],
+    url: 'https://www.marc0.dev/en/blog/openclaw-mac-mini-the-complete-guide-to-running-your-own-ai-agent-in-2026-1770057455419',
+    category: 'getting-started',
+    source: 'Marc0.dev',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-068',
+    title: 'AMD Developer Cloud — OpenClaw + vLLM 免费运行指南',
+    desc: '使用 MI300X 192GB 企业级 GPU 免费运行本地大模型，连接 OpenClaw',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u591a\u5e73\u53f0", "Browser Relay", "\u6392\u9519"],
+    url: 'https://www.amd.com/en/developer/resources/technical-articles/2026/openclaw-with-vllm-running-for-free-on-amd-developer-cloud-.html',
+    category: 'getting-started',
+    source: 'AMD',
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-069',
+    title: 'Clawctl Blog — OpenClaw + 本地 LLM 完全指南',
+    desc: '零 API 费用，Ollama/vLLM/LM Studio 三种本地方案全覆盖',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["AMD", "vLLM", "\u514d\u8d39GPU", "MI300X"],
+    url: 'https://clawctl.com/blog/openclaw-local-llm-complete-guide',
+    category: 'cloud-deploy',
+    source: 'Clawctl',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-070',
+    title: 'ZDNet — From Clawdbot to OpenClaw: Nightmare Fuel for Security Pros',
+    desc: '34 个安全相关 commit，一键 RCE 修复，安全加固进展深度报道',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["AMD", "vLLM", "\u514d\u8d39GPU", "MI300X"],
+    url: 'https://www.zdnet.com/article/clawdbot-moltbot-openclaw-security-nightmare/',
+    category: 'cloud-deploy',
+    source: 'ZDNet',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-071',
+    title: 'CyberSecurity News — OpenClaw v2026.2.6 发布：Safety Scanner + Opus 4.6',
+    desc: '新版本支持 Opus 4.6/GPT-5.3-Codex，内置代码安全扫描器',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u672c\u5730LLM", "Ollama", "vLLM", "LM Studio"],
+    url: 'https://cybersecuritynews.com/openclaw-v2026-2-6-released/',
+    category: 'deep-dive',
+    source: 'CyberSecurity News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-072',
+    title: 'Medium — From Moltbot to OpenClaw: Multi-Agent AI with Qwen3 and Matrix',
+    desc: '私有多 Agent 架构：vLLM + Qwen3 + Matrix 协议，跨平台统一会话',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7248\u672c\u66f4\u65b0", "\u5b89\u5168\u626b\u63cf", "v2026.2.6"],
+    url: 'https://medium.com/@dorangao/from-moltbot-to-openclaw-upgrading-your-private-multi-agent-ai-with-qwen3-and-matrix-91a814833ae5',
+    category: 'deep-dive',
+    source: 'Medium',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-073',
+    title: 'YouTube — OpenClaw Tutorial for Beginners: Full VPS + Docker Setup',
+    desc: 'VPS Docker 部署全流程视频，从零到运行',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Yahoo", "\u4e3b\u6d41\u5a92\u4f53", "WhatsApp"],
+    url: 'https://www.youtube.com/watch?v=Zo7Putdga_4',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-074',
+    title: 'B站 — 超详细的最强AI部署教程，小白友好',
+    desc: '2026 年最新版部署教程，面向零基础用户的保姆级讲解',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Multi-Agent", "Qwen3", "Matrix", "vLLM"],
+    url: 'https://www.bilibili.com/video/BV1fMfZBuEMj/',
+    category: 'deep-dive',
+    source: 'Bilibili',
+  },
+
+  // video - resource
+  {
+    id: 'res-075',
+    title: 'Medium — How to Install & Secure Your Personal AI Bot',
+    desc: 'Security-focused setup guide: installation plus hardening to prevent strangers accessing your machine',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "VPS", "Docker", "\u6700\u65b0"],
+    url: 'https://medium.com/@proflead/openclaw-tutorial-how-to-install-secure-your-personal-ai-bot-0dde8dc71624',
+    category: 'video',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-076',
+    title: 'Contabo — What is OpenClaw: Self-Hosted AI Agent Guide',
+    desc: 'VPS hosting provider guide: OpenClaw vs n8n comparison, setup tips for self-hosted deployment',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "\u5b89\u5168", "\u52a0\u56fa"],
+    url: 'https://contabo.com/blog/what-is-openclaw-self-hosted-ai-agent-guide/',
+    category: 'getting-started',
+    source: 'Contabo',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-077',
+    title: 'Hostinger — How to Install OpenClaw on Hostinger VPS',
+    desc: 'One-click Docker template deployment on Hostinger VPS, official help center guide',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Habr", "\u5b89\u5168", "\u4fc4\u7f57\u65af\u793e\u533a"],
+    url: 'https://www.hostinger.com/support/how-to-install-openclaw-on-hostinger-vps/',
+    category: 'getting-started',
+    source: 'Hostinger',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-078',
+    title: '阿里云 — 2026年 OpenClaw 极速部署教程（更新版）',
+    desc: '预置镜像一键部署全流程、多渠道集成方法、高频问题解决方案，适配最新版本',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Contabo", "VPS", "n8n\u5bf9\u6bd4"],
+    url: 'https://developer.aliyun.com/article/1710373',
+    category: 'getting-started',
+    source: '阿里云开发者社区',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-079',
+    title: '阿里云 — OpenClaw 一键秒级部署全攻略指南',
+    desc: '轻量应用服务器专属页面直接部署，含实例配置和服务协议说明',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Hostinger", "Docker", "\u4e00\u952e\u90e8\u7f72"],
+    url: 'https://developer.aliyun.com/article/1710471',
+    category: 'getting-started',
+    source: '阿里云开发者社区',
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-080',
+    title: '阿里云 — OpenClaw 部署保姆级教程：接入微信/飞书/钉钉/QQ',
+    desc: '四大通讯平台全覆盖，App Key/Token 获取全流程详解',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u4e00\u952e\u90e8\u7f72", "\u6700\u65b0\u7248"],
+    url: 'https://developer.aliyun.com/article/1710679',
+    category: 'cloud-deploy',
+    source: '阿里云开发者社区',
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-081',
+    title: 'Adversa AI — OpenClaw Security 101: CVEs, Moltbook Breach & Hardening',
+    desc: 'Comprehensive security analysis: known CVEs, supply chain risks, and hardening recommendations',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u79d2\u7ea7\u90e8\u7f72", "\u8f7b\u91cf\u670d\u52a1\u5668"],
+    url: 'https://adversa.ai/blog/openclaw-security-101-vulnerabilities-hardening-2026/',
+    category: 'cloud-deploy',
+    source: 'Adversa AI',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-082',
+    title: 'Snyk — From SKILL.md to Shell Access in Three Lines of Markdown',
+    desc: 'Snyk threat modeling of agent skills: how malicious SKILL.md files can gain shell access',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u5fae\u4fe1", "\u98de\u4e66", "\u9489\u9489", "QQ"],
+    url: 'https://snyk.io/articles/skill-md-shell-access/',
+    category: 'deep-dive',
+    source: 'Snyk',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-083',
+    title: 'Snyk — ToxicSkills: 1467 Malicious Payloads in ClawHub Study',
+    desc: '36% of skills contain prompt injection, comprehensive supply chain compromise analysis',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168", "CVE", "\u52a0\u56fa\u6307\u5357"],
+    url: 'https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/',
+    category: 'deep-dive',
+    source: 'Snyk',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-084',
+    title: 'Substack — Is OpenClaw Worth the Hype? I Spent 10 Days Finding Out',
+    desc: 'Honest 10-day review with real cost analysis, VPS setup guide, and practical verdict',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Snyk", "\u5b89\u5168\u7814\u7a76", "\u6076\u610fSkill"],
+    url: 'https://aimaker.substack.com/p/openclaw-review-setup-guide',
+    category: 'deep-dive',
+    source: 'Substack',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-085',
+    title: 'Bright Data — Build a WhatsApp AI Assistant with OpenClaw',
+    desc: 'Integration guide: OpenClaw + Bright Data for web scraping enabled WhatsApp assistant',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u8eab\u4efd\u5b89\u5168", "\u4f9b\u5e94\u94fe", "\u51ed\u8bc1\u98ce\u9669"],
+    url: 'https://brightdata.com/blog/ai/openclaw-with-bright-data',
+    category: 'deep-dive',
+    source: 'Bright Data',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-086',
+    title: 'YouTube — OpenClaw Full Tutorial for Beginners (Comprehensive Course)',
+    desc: 'Comprehensive beginner course covering installation, configuration, and automation tasks',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u8bc4\u6d4b", "\u6210\u672c\u5206\u6790", "10\u5929\u5b9e\u6d4b"],
+    url: 'https://www.youtube.com/watch?v=n1sfrc-RjyM',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // channel-integration - resource
+  {
+    id: 'res-087',
+    title: 'YouTube — OpenClaw Skills Tutorial: Build Local AI Agent Skills + MoltBook',
+    desc: 'Step-by-step skill development with Ollama and MoltBook integration',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["WhatsApp", "Web Scraping", "Bright Data"],
+    url: 'https://www.youtube.com/watch?v=CENnPXxVUAc',
+    category: 'channel-integration',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-088',
+    title: 'YouTube — How to Set Up OpenClaw on a Budget VPS (Hetzner)',
+    desc: 'Budget-friendly setup: fresh Ubuntu Hetzner VPS with firewall rules and full walkthrough',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5b8c\u6574\u8bfe\u7a0b", "\u5165\u95e8"],
+    url: 'https://www.youtube.com/watch?v=j9Xp5_VNYc8',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-089',
+    title: 'B站 — 本地部署接入微信/飞书/钉钉/QQ 10分钟保姆级教程',
+    desc: '10分钟手把手教会，附完整操作文档，四大平台全覆盖',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Skill\u5f00\u53d1", "Ollama", "MoltBook"],
+    url: 'https://www.bilibili.com/video/BV1MfFAz6EnR/',
+    category: 'video',
+    source: 'Bilibili',
+  },
+
+  // video - resource
+  {
+    id: 'res-090',
+    title: 'B站 — 实测 Clawdbot 彻底改变工作方式！WhatsApp 远程控制电脑',
+    desc: '一条命令部署，自动编程开发，自我进化+无限记忆实测演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Hetzner", "\u4f4e\u6210\u672c", "VPS"],
+    url: 'https://www.bilibili.com/video/BV14z6GB1EAr/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-091',
+    title: 'Substack — Cheapest + Most Secure OpenClaw Setup (Hetzner)',
+    desc: 'Cost-optimized and security-hardened setup guide on cheap Hetzner VPS, 24/7 operation',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "\u5fae\u4fe1", "\u98de\u4e66", "\u9489\u9489", "QQ"],
+    url: 'https://www.learnwithmeai.com/p/clawdbotopenclaw-cheapest-most-secure',
+    category: 'video',
+    source: 'Substack',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-092',
+    title: 'Creator Economy — Master OpenClaw in 30 Minutes',
+    desc: '5 real use cases: calendar, documents, personalized briefings, and memory management',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "WhatsApp", "\u8fdc\u7a0b\u63a7\u5236", "\u81ea\u52a8\u5316"],
+    url: 'https://creatoreconomy.so/p/master-openclaw-in-30-minutes-full-tutorial',
+    category: 'video',
+    source: 'Creator Economy',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-093',
+    title: '阿里云 — OpenClaw 常见问题文档',
+    desc: '官方 FAQ：版本更新(2026.2.3)、镜像升级、常见错误排查',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Hetzner", "\u4f4e\u6210\u672c", "\u5b89\u5168\u52a0\u56fa", "24/7"],
+    url: 'https://help.aliyun.com/zh/simple-application-server/use-cases/openclaw-faq',
+    category: 'getting-started',
+    source: '阿里云',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-094',
+    title: 'Awesome OpenClaw Skills — 社区精选技能合集',
+    desc: 'VoltAgent 维护的 OpenClaw Skills 精选列表，分类清晰，持续更新',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["30\u5206\u949f", "\u5b9e\u7528\u573a\u666f", "\u4ed8\u8d39"],
+    url: 'https://github.com/VoltAgent/awesome-openclaw-skills',
+    category: 'getting-started',
+    source: 'GitHub',
+  },
+
+  // tools - resource
+  {
+    id: 'res-095',
+    title: 'The Hacker News — OpenClaw 集成 VirusTotal 扫描恶意 ClawHub 技能',
+    desc: 'OpenClaw 与 Google VirusTotal 合作，对 ClawHub 所有上传技能进行自动安全扫描',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "FAQ", "\u6392\u9519", "\u7248\u672c\u66f4\u65b0"],
+    url: 'https://thehackernews.com/2026/02/openclaw-integrates-virustotal-scanning.html',
+    category: 'tools',
+    source: 'The Hacker News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-096',
+    title: 'CyberSecurity News — OpenClaw 与 VirusTotal 合作保障 AI Agent 市场安全',
+    desc: 'ClawHub 技能市场安全升级：自动扫描、威胁情报、安全路线图',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Awesome", "\u6280\u80fd\u5408\u96c6", "\u793e\u533a"],
+    url: 'https://cybersecuritynews.com/openclaw-and-virustotal/',
+    category: 'deep-dive',
+    source: 'CyberSecurity News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-097',
+    title: 'CrowdStrike — 安全团队需要了解的 OpenClaw AI 超级代理',
+    desc: 'CrowdStrike 安全视角分析 OpenClaw 的风险面与防护建议，附 2/10 红队直播预告',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["VirusTotal", "\u5b89\u5168", "ClawHub", "\u91cc\u7a0b\u7891"],
+    url: 'https://www.crowdstrike.com/en-us/blog/what-security-teams-need-to-know-about-openclaw-ai-super-agent/',
+    category: 'deep-dive',
+    source: 'CrowdStrike',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-098',
+    title: 'eSecurity Planet — ClawHub 审计发现数百个恶意技能',
+    desc: 'Koi Security 审计 2,857 个技能发现 341 个恶意条目，ClawHavoc 攻击详解',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["VirusTotal", "\u5b89\u5168", "\u5e02\u573a\u5b89\u5168"],
+    url: 'https://www.esecurityplanet.com/threats/hundreds-of-malicious-skills-found-in-openclaws-clawhub/',
+    category: 'deep-dive',
+    source: 'eSecurity Planet',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-099',
+    title: 'Android Headlines — OpenClaw 解析：优势、风险与争议',
+    desc: '全面评估 OpenClaw 的功能、ClawHub 生态问题和安全隐患',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CrowdStrike", "\u5b89\u5168", "\u7ea2\u961f", "\u4f01\u4e1a"],
+    url: 'https://www.androidheadlines.com/2026/02/openclaw-explained-ai-agent-security-risks-moltbot-clawdbot-features.html',
+    category: 'deep-dive',
+    source: 'Android Headlines',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-100',
+    title: 'Robo Rhythms — OpenClaw 101 Beginner Friendly Guide',
+    desc: 'From first install to advanced workflows, covers common pitfalls like context loss and memory issues',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u5ba1\u8ba1", "ClawHavoc", "\u4f9b\u5e94\u94fe"],
+    url: 'https://www.roborhythms.com/openclaw-beginner-friendly-guide/',
+    category: 'deep-dive',
+    source: 'Robo Rhythms',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-101',
+    title: 'YouTube — Master OpenClaw in 30 Minutes (Peter Yang)',
+    desc: 'Calendar, documents, personalized briefings, voice reply, and memory management — 5 real use cases in 30 min',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5165\u95e8", "\u8e29\u5751", "\u8fdb\u9636\u5de5\u4f5c\u6d41"],
+    url: 'https://www.youtube.com/watch?v=ji_Sd4si7jo',
+    category: 'getting-started',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-102',
+    title: 'Snyk — Inside the clawdhub Malicious Campaign: Reverse Shells on OpenClaw',
+    desc: '深入分析 ClawHub 恶意技能投放反向 Shell 的完整攻击链，含时间线和 IoC',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["\u5165\u95e8", "\u8e29\u5751", "\u8fdb\u9636\u5de5\u4f5c\u6d41"],
+    url: 'https://snyk.io/articles/clawdhub-malicious-campaign-ai-agent-skills/',
+    category: 'video',
+    source: 'Snyk',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-103',
+    title: 'DeepWiki — OpenClaw 源码解析：Tools & Skills 架构',
+    desc: 'AI 自动索引的 OpenClaw 源码 Wiki，深入解析工具和技能系统架构',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["YouTube", "30\u5206\u949f", "\u5b9e\u7528\u573a\u666f", "Peter Yang"],
+    url: 'https://deepwiki.com/openclaw/openclaw/6-tools-and-skills',
+    category: 'deep-dive',
+    source: 'DeepWiki',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-104',
+    title: 'Molt Founders — OpenClaw Mega Cheatsheet 2026',
+    desc: '150+ CLI 命令速查、工作区文件、记忆系统、模型配置、多 Agent 设置全覆盖，附可打印 A4 PDF',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Snyk", "\u5b89\u5168", "\u53cd\u5411Shell", "\u653b\u51fb\u94fe"],
+    url: 'https://moltfounders.com/openclaw-mega-cheatsheet',
+    category: 'deep-dive',
+    source: 'Molt Founders',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-105',
+    title: 'Gadget Pilipinas — OpenClaw on MacBook Pro M5 虚拟环境部署',
+    desc: 'M5 Mac 虚拟化部署指南，含 Zapier MCP 集成和 MCPorter 沙箱安全配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u901f\u67e5\u8868", "CLI", "PDF", "\u5f00\u53d1\u8005"],
+    url: 'https://www.gadgetpilipinas.net/2026/02/openclaw-on-macbook-pro-m5/',
+    category: 'deep-dive',
+    source: 'Gadget Pilipinas',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-106',
+    title: 'YouTube — Install OpenClaw in 30 Seconds & Start Building (Wes Roth)',
+    desc: 'Local install and VPS full tutorial, from one-liner install to first automation',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b66\u672f", "\u9690\u79c1", "\u5b89\u5168", "\u5927\u5b66"],
+    url: 'https://www.youtube.com/watch?v=ZcIqiLLT7Fg',
+    category: 'getting-started',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-107',
+    title: 'Substack — OpenClaw/Moltbot/ClawdBot 101: The Complete Guide',
+    desc: 'Markdown 配置文件全解析，从 SOUL.md 到 Skills 的系统化入门',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Wes Roth", "\u5feb\u901f\u5b89\u88c5", "VPS"],
+    url: 'https://sidsaladi.substack.com/p/openclawmoltbotclawdbot-101-the-complete',
+    category: 'video',
+    source: 'Substack',
+  },
+
+  // video - resource
+  {
+    id: 'res-108',
+    title: 'Adven Boost — OpenClaw Setup: Zero to First Chat in 10 Minutes',
+    desc: '2026 最新精简版部署指南，砍掉冗余步骤直奔 10 分钟跑通',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Wes Roth", "\u5feb\u901f\u5b89\u88c5", "VPS"],
+    url: 'https://advenboost.com/en/openclaw-setup-fast-tutorial/',
+    category: 'video',
+    source: 'Adven Boost',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-109',
+    title: 'O-mega — OpenClaw: AI Agent Workforce 终极指南 2026',
+    desc: '多 Agent 协作架构深度解析，从单体 AI 到 Agent 编排的趋势分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Substack", "\u914d\u7f6e\u6587\u4ef6", "\u7cfb\u7edf\u5316"],
+    url: 'https://o-mega.ai/articles/openclaw-creating-the-ai-agent-workforce-ultimate-guide-2026',
+    category: 'deep-dive',
+    source: 'O-mega',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-110',
+    title: 'Zilliz — How to Install and Run OpenClaw on Mac',
+    desc: '最新 macOS 部署指南：从 Node.js 安装到 onboard 向导全流程，含守护进程配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["10\u5206\u949f", "\u7cbe\u7b80", "2026"],
+    url: 'https://medium.com/@zilliz_learn/how-to-install-and-run-openclaw-previously-clawdbot-moltbot-on-mac-9cb6adb64eef',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-111',
+    title: 'YouTube — Install OpenClaw in 10 Minutes (Feb 2026)',
+    desc: 'VPS 快速部署教程，修复所有常见错误的完整指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Mac", "\u6700\u65b0", "Zilliz", "\u5b88\u62a4\u8fdb\u7a0b"],
+    url: 'https://www.youtube.com/watch?v=khTA_AfJ01Y',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-112',
+    title: 'YouTube — How To Setup Clawdbot - Step by Step Guide to Openclaw on a VPS (2026)',
+    desc: 'Linux VPS 上完整的 OpenClaw 部署指南，支持 Opus 4.6',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Mac", "\u6700\u65b0", "Zilliz", "\u5b88\u62a4\u8fdb\u7a0b"],
+    url: 'https://www.youtube.com/watch?v=NjchJr1zmvk',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-113',
+    title: 'Skywork AI — Clawdbot (OpenClaw): 2026 Guide to AI Workflows & Risks',
+    desc: '2026 年 OpenClaw 崛起分析，安全风险评估和最佳实践清单',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "10\u5206\u949f", "VPS", "\u6700\u65b0"],
+    url: 'https://skywork.ai/blog/ai-agent/clawdbot-openclaw-ai-workflows/',
+    category: 'video',
+    source: 'Skywork AI',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-114',
+    title: 'Skywork AI — OpenClaw (Clawdbot): Agent Communities Guide — 2026',
+    desc: 'Agent 社区指南，温和的可视化引导教程和 DataCamp 推荐',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "VPS", "Linux", "Opus 4.6"],
+    url: 'https://skywork.ai/blog/ai-agent/openclaw-clawdbot-agent-communities/',
+    category: 'video',
+    source: 'Skywork AI',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-115',
+    title: 'Substack — The Ultimate Guide to OpenClaw',
+    desc: 'MidJourney 和 NanoBanana 视角的 OpenClaw 机器人自动化完整指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u98ce\u9669\u8bc4\u4f30", "\u6700\u4f73\u5b9e\u8df5", "Skywork"],
+    url: 'https://corpwaters.substack.com/p/the-ultimate-guide-to-openclaw',
+    category: 'deep-dive',
+    source: 'Substack',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-116',
+    title: 'WIRED — I Loved My OpenClaw AI Agent—Until It Turned on Me',
+    desc: '《连线》杂志深度报道：OpenClaw 的魅力与潜在风险',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u793e\u533a", "\u53ef\u89c6\u5316\u6559\u7a0b", "DataCamp"],
+    url: 'https://www.wired.com/story/malevolent-ai-agent-openclaw-clawdbot/',
+    category: 'deep-dive',
+    source: 'WIRED',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-117',
+    title: 'dougvos.com — Configuring OpenClaw',
+    desc: '最新版本 2026.2.13 安装配置指南，解决安全问题和 100+ 小时研究精华',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u81ea\u52a8\u5316", "MidJourney", "NanoBanana"],
+    url: 'https://dougvos.com/configuring-openclaw/',
+    category: 'deep-dive',
+    source: 'dougvos.com',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-118',
+    title: 'SitePoint — How to Set Up OpenClaw (formerly Clawdbot/Moltbot) on a Mac Mini',
+    desc: 'Mac Mini 本地部署，连接消息平台，作为后台服务运行',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["WIRED", "\u4e3b\u6d41\u5a92\u4f53", "\u98ce\u9669"],
+    url: 'https://www.sitepoint.com/how-to-set-up-openclaw-on-a-mac-mini/',
+    category: 'deep-dive',
+    source: 'SitePoint',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-119',
+    title: 'Apidog — How to update OpenClaw (Moltbot/Clawdbot) to the latest version',
+    desc: 'OpenClaw 版本升级完整指南，Docker/源码/systemd 三种部署方式的升级策略',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u914d\u7f6e", "\u5b89\u5168", "v2026.2.13"],
+    url: 'https://apidog.com/blog/update-openclaw/',
+    category: 'getting-started',
+    source: 'Apidog',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-120',
+    title: 'DEV.to — OpenClaw Setup Guide: From Zero to AI Assistant in 10 Minutes',
+    desc: 'Jetson/Mac Mini/Raspberry Pi/Linux 通用部署指南，面向硬件爱好者',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Mac Mini", "SitePoint", "\u540e\u53f0\u670d\u52a1"],
+    url: 'https://dev.to/yankoaleksandrov/openclaw-setup-guide-from-zero-to-ai-assistant-in-10-minutes-1md',
+    category: 'getting-started',
+    source: 'DEV Community',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-121',
+    title: 'CSDN — OpenClaw开源汉化发行版：介绍、下载、安装、配置教程',
+    desc: '完全汉化版 OpenClaw 部署指南，含阿里云/腾讯云/天翼云一键部署方法',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5347\u7ea7", "Docker", "systemd", "\u7248\u672c\u7ba1\u7406"],
+    url: 'https://blog.csdn.net/qq_44866828/article/details/157876493',
+    category: 'getting-started',
+    source: 'CSDN',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-122',
+    title: '知乎 — 2026年OpenClaw（Clawdbot）新手部署并使用超详细教程',
+    desc: '阿里云生态下的超详细部署教程，含私有化配置和高安全管控场景',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u786c\u4ef6", "Jetson", "Raspberry Pi"],
+    url: 'https://zhuanlan.zhihu.com/p/2004189250392974456',
+    category: 'getting-started',
+    source: '知乎',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-123',
+    title: 'CSDN — 【保姆级教程】手把手教你安装OpenClaw并接入飞书',
+    desc: 'Windows 系统保姆级教程，从零开始到飞书机器人完整配置流程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6c49\u5316", "\u963f\u91cc\u4e91", "\u817e\u8baf\u4e91", "\u5929\u7ffc\u4e91"],
+    url: 'https://damodev.csdn.net/697deb97a16c6648a9866d36.html',
+    category: 'getting-started',
+    source: 'CSDN',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-124',
+    title: 'YouTube — Install OpenClaw in 10 Minutes (Feb 2026) - VPS Setup',
+    desc: 'VPS 部署 + 常见问题全解决，2026年2月最新版本适配',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u963f\u91cc\u4e91", "\u79c1\u6709\u5316", "\u5b89\u5168"],
+    url: 'https://www.youtube.com/watch?v=khTA_AfJ01Y',
+    category: 'getting-started',
+    source: 'YouTube',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-125',
+    title: 'YouTube — Full OpenClaw Tutorial for Beginners',
+    desc: '完整入门课程：从安装到配置再到自动化任务演示',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Windows", "\u98de\u4e66", "\u4fdd\u59c6\u7ea7"],
+    url: 'https://www.youtube.com/watch?v=ZQOIlQg4CkA',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-126',
+    title: 'YouTube — Tutorial OpenClaw Lengkap 2026 (Indonesia)',
+    desc: '印尼语教程：36K VPS 部署 + Telegram Bot + 自动黄金价格查询',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "VPS", "\u5e38\u89c1\u95ee\u9898", "\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=qgShz6HGZjI',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-127',
+    title: 'DEV.to — OpenClaw Guide Ch8: Monitoring and Debugging',
+    desc: 'ELK Stack 日志分析、性能监控、调试技巧的完整指南',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5b8c\u6574\u8bfe\u7a0b", "\u81ea\u52a8\u5316"],
+    url: 'https://dev.to/linou518/openclaw-guide-ch8-monitoring-and-debugging-18f1',
+    category: 'video',
+    source: 'DEV Community',
+  },
+
+  // video - resource
+  {
+    id: 'res-128',
+    title: 'DEV.to — OpenClaw Guide Ch6: Multi-Agent Collaboration',
+    desc: '多 Agent 协作架构深度指南，Agent 编排和任务分发策略',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5370\u5c3c\u8bed", "Telegram", "\u5b9e\u7528\u6848\u4f8b"],
+    url: 'https://dev.to/linou518/openclaw-guide-ch6-multi-agent-collaboration-architecture-1hki',
+    category: 'video',
+    source: 'DEV Community',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-129',
+    title: 'GitHub Gist — Running OpenClaw Without Burning Money',
+    desc: '预算优化指南：配额管理、成本控制、理智部署的实战技巧',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u76d1\u63a7", "ELK", "\u8c03\u8bd5", "\u8fd0\u7ef4"],
+    url: 'https://gist.github.com/digitalknk/ec360aab27ca47cb4106a183b2c25a98',
+    category: 'deep-dive',
+    source: 'GitHub',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-130',
+    title: '25+ Real OpenClaw Use Cases — From Morning Briefings to Business Automation',
+    desc: '41 页免费 PDF，社区真实部署案例集：CEO 仪表盘、多 Agent 编排、视频制作流水线、智能家居控制',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Multi-Agent", "\u534f\u4f5c", "\u7f16\u6392"],
+    url: 'https://www.forwardfuture.ai/p/what-people-are-actually-doing-with-openclaw-25-use-cases',
+    category: 'deep-dive',
+    source: 'Forward Future',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-001',
+    title: 'OpenClaw Is Going Viral — #1 Use Case and 35 Ways to Automate Work and Life',
+    desc: 'TechStartups 深度报道：最热门的 35 种自动化玩法，从晨间简报到 DevOps 流水线、浏览器自动化',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u7528\u4f8b\u5927\u5168", "\u81ea\u52a8\u5316", "\u591a\u573a\u666f"],
+    url: 'https://techstartups.com/2026/02/12/openclaw-is-going-viral-the-1-use-case-and-35-ways-people-automate-work-and-life-with-it/',
+    category: 'use-cases',
+    source: 'TechStartups',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-002',
+    title: 'Hostinger — 25 Ways to Automate Work and Life with OpenClaw',
+    desc: '主机商视角的实用指南：晨间简报、日历管理、多邮箱管理、智能家居、开发自动化等 25 个场景',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u7528\u4f8b\u5927\u5168", "\u81ea\u52a8\u5316", "\u591a\u573a\u666f"],
+    url: 'https://www.hostinger.com/tutorials/openclaw-use-cases',
+    category: 'use-cases',
+    source: 'Hostinger',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-003',
+    title: '5 OpenClaw Automations That Actually Make Money in 2026',
+    desc: '赚钱导向的自动化方案：PR 自动审查、CI/CD 监控、Heartbeat 后台任务、主动式 AI 助手',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["35\u79cd\u73a9\u6cd5", "\u81ea\u52a8\u5316", "\u70ed\u95e8"],
+    url: 'https://markaicode.com/openclaw-money-making-automations-2026/',
+    category: 'use-cases',
+    source: 'MarkAICode',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-004',
+    title: 'Supercharge OpenClaw — 8 Advanced Real-World Use Cases',
+    desc: '进阶玩法：晨间简报 cron 配置、GitHub 自动化、Telegram 集成、多 Agent 编排实操',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u8d5a\u94b1", "DevOps", "Heartbeat"],
+    url: 'https://jangwook.net/en/blog/en/openclaw-advanced-usage/',
+    category: 'use-cases',
+    source: 'JangWook',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-005',
+    title: 'OpenClaw Cron Jobs — Building Proactive AI Automation',
+    desc: '从 Zapier 替代到晨间简报，深入 Cron 定时任务配置，让 AI 主动工作而非被动响应',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["10 Agent", "\u591aAgent", "\u65e5\u62a5"],
+    url: 'https://zenvanriel.nl/ai-engineer-blog/openclaw-cron-jobs-proactive-ai-guide/',
+    category: 'use-cases',
+    source: 'Zen van Riel',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-006',
+    title: 'How I Automated My Morning Routine with OpenClaw Cron Jobs',
+    desc: '手把手教你配置晨间自动化：天气 + 日历 + 邮件一条消息搞定，附完整 cron 配置',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u8fdb\u9636", "Cron", "\u591aAgent"],
+    url: 'https://openclawready.com/blog/openclaw-cron-jobs-daily-automation/',
+    category: 'use-cases',
+    source: 'OpenClaw Ready',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-007',
+    title: 'OpenClaw for Creative & Design Agencies — 10 AI Workflows',
+    desc: '创意团队玩法：项目收件自动化、修订跟踪、交付物协调，设计机构场景定制',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Cron", "\u4e3b\u52a8\u5f0f", "Zapier\u66ff\u4ee3"],
+    url: 'https://www.serif.ai/openclaw/creative-design-agencies',
+    category: 'use-cases',
+    source: 'Serif',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-008',
+    title: 'OpenClaw for Marketing Agencies — 10 AI-Powered Use Cases',
+    desc: '营销团队玩法：广告监控、客户报告、创意工作流自动化',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u6668\u95f4\u7b80\u62a5", "Cron", "\u5165\u95e8"],
+    url: 'https://www.serif.ai/openclaw/marketing-agencies',
+    category: 'use-cases',
+    source: 'Serif',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-009',
+    title: 'Build Your AI Agent Army in 60 Minutes',
+    desc: '60 分钟搭建多 Agent 团队：从单 Agent 到团队协作，含每日摘要 cron 配置',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u8bbe\u8ba1", "\u521b\u610f\u56e2\u961f", "\u5de5\u4f5c\u6d41"],
+    url: 'https://atalupadhyay.wordpress.com/2026/02/08/openclaw-build-your-ai-agent-army-in-60-minutes/',
+    category: 'use-cases',
+    source: 'Atal Upadhyay',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-010',
+    title: 'OpenClaw Use Cases: 15+ Powerful Workflows and Safety Guide',
+    desc: '15+ 工作流 + 安全指南：路由分发、三方集成、权限管控的实战经验',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u8425\u9500", "\u5e7f\u544a", "\u62a5\u544a"],
+    url: 'https://quantumbyte.ai/articles/openclaw-use-cases',
+    category: 'use-cases',
+    source: 'QuantumByte',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-011',
+    title: '12 Practical OpenClaw Use Cases (2026)',
+    desc: '12 个实用场景：从代码 Q&A、文档生成到浏览器自动化，含本地模型(Ollama)方案',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["60\u5206\u949f", "\u591aAgent", "\u56e2\u961f"],
+    url: 'https://skywork.ai/blog/ai-agent/openclaw-use-cases/',
+    category: 'use-cases',
+    source: 'Skywork',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-012',
+    title: 'Proposal for a Multimodal Multi-Agent System Using OpenClaw',
+    desc: '多模态多 Agent 架构提案：对比 Auto-GPT/LangChain，分析 OpenClaw 在编排层的优势',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u5b89\u5168", "\u5de5\u4f5c\u6d41", "\u6743\u9650"],
+    url: 'https://medium.com/@gwrx2005/proposal-for-a-multimodal-multi-agent-system-using-openclaw-81f5e4488233',
+    category: 'use-cases',
+    source: 'Medium',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-131',
+    title: 'YouTube — Install OpenClaw in 10 Minutes (Feb 2026 Guide)',
+    desc: 'VPS 部署速成指南，修复所有常见错误，2026 年 2 月最新版教程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u67b6\u6784", "\u591aAgent", "\u5bf9\u6bd4"],
+    url: 'https://www.youtube.com/watch?v=khTA_AfJ01Y',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-132',
+    title: 'YouTube — I Built OpenClaw Cloud in 3 Hours (Magic Patterns + Railway)',
+    desc: '云端 OpenClaw 搭建教程：Magic Patterns + Lovable + Railway 一键云部署',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "10\u5206\u949f", "2026", "VPS", "\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=24kae9iWBlc',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-133',
+    title: 'YouTube — How to Install OpenClaw on Azure VM (Secure Guide 2026)',
+    desc: '13 分钟 Azure 虚拟机安全部署教程，含防火墙配置和安全最佳实践',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5b89\u5168", "\u90e8\u7f72\u6307\u5357", "\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=1Jjt3DojHtw',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-134',
+    title: 'YouTube — The Easiest Way to Install OpenClaw for Beginners',
+    desc: 'Hostinger VPS 新手友好安装教程，逐步演示配置过程',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u4e91\u90e8\u7f72", "Railway", "3\u5c0f\u65f6"],
+    url: 'https://www.youtube.com/watch?v=HFVImm-D1C4',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-135',
+    title: 'WiTechPedia — How to Install OpenClaw: Complete Step-by-Step Guide (2026)',
+    desc: 'Windows/macOS/Linux 全平台安装指南，含 npm 配置、API 设置、消息平台集成和故障排除',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Azure", "\u5b89\u5168", "13\u5206\u949f"],
+    url: 'https://www.witechpedia.com/guide/how-to-install-openclaw/',
+    category: 'video',
+    source: 'WiTechPedia',
+  },
+
+  // video - resource
+  {
+    id: 'res-136',
+    title: 'Betelgeuse.work — OpenClaw Install Guide (Ubuntu SSH)',
+    desc: 'Ubuntu SSH 安装指南，修复 Token 不匹配、端口冲突和 UI 资源错误',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Hostinger", "\u65b0\u624b\u53cb\u597d", "\u9010\u6b65\u6f14\u793a"],
+    url: 'https://betelgeuse.work/openclaw/',
+    category: 'video',
+    source: 'Betelgeuse',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-137',
+    title: 'Open-Claw.org — Ultimate Guide to Deploying OpenClaw (2026 Edition)',
+    desc: 'Docker 和 Node.js 部署指南，含 Telegram 集成和安全最佳实践',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5168\u5e73\u53f0", "npm", "\u6545\u969c\u6392\u9664", "2026"],
+    url: 'https://open-claw.org/posts/openclaw-deploy',
+    category: 'getting-started',
+    source: 'Open-Claw.org',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-138',
+    title: 'Medium — How to Install OpenClaw on Mac (Zilliz)',
+    desc: 'macOS 完整安装教程：从前置条件到首次对话的全流程指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Ubuntu", "SSH", "\u6545\u969c\u6392\u9664", "\u7aef\u53e3\u51b2\u7a81"],
+    url: 'https://medium.com/@zilliz_learn/how-to-install-and-run-openclaw-previously-clawdbot-moltbot-on-mac-9cb6adb64eef',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-139',
+    title: 'Kaspersky — New OpenClaw AI Agent Found Unsafe for Use',
+    desc: '卡巴斯基安全分析：近千个无认证的公开 OpenClaw 实例，漏洞数量超出预期',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Docker", "Telegram", "\u5b89\u5168\u6700\u4f73\u5b9e\u8df5", "2026"],
+    url: 'https://www.kaspersky.com/blog/openclaw-vulnerabilities-exposed/55263/',
+    category: 'getting-started',
+    source: 'Kaspersky',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-140',
+    title: 'xCloud — 7 OpenClaw Security Best Practices in 2026',
+    desc: '2026 年 7 大安全最佳实践：CVE 防护、恶意软件防范、数据泄露防护完整指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["macOS", "Medium", "Mac\u5b89\u88c5", "\u5b8c\u6574\u6d41\u7a0b"],
+    url: 'https://xcloud.host/openclaw-security-best-practices',
+    category: 'getting-started',
+    source: 'xCloud',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-141',
+    title: 'Bitsight — OpenClaw Security: Risks of Exposed AI Agents',
+    desc: 'Bitsight 安全风险分析：暴露的 AI Agent 实例风险评估和缓解策略',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168", "\u6f0f\u6d1e\u5206\u6790", "Kaspersky", "\u65e0\u8ba4\u8bc1\u5b9e\u4f8b"],
+    url: 'https://www.bitsight.com/blog/openclaw-ai-security-risks-exposed-instances',
+    category: 'deep-dive',
+    source: 'Bitsight',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-142',
+    title: 'AIMaker — How to Harden OpenClaw Security (3-Tier Guide)',
+    desc: '三层安全加固指南：基础防护、标准加固、高级纵深防御，适用于自托管 AI Agent',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u6700\u4f73\u5b9e\u8df5", "CVE", "\u6076\u610f\u8f6f\u4ef6", "\u6570\u636e\u4fdd\u62a4"],
+    url: 'https://aimaker.substack.com/p/openclaw-security-hardening-guide',
+    category: 'deep-dive',
+    source: 'AIMaker',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-143',
+    title: 'VPN Central — OpenClaw 2026.2.12 Release Patches 40+ Vulnerabilities',
+    desc: '2026.2.12 版本发布说明：修复 40+ 安全漏洞，SSRF 防护升级，提示注入风险降低',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u98ce\u9669", "\u66b4\u9732\u5b9e\u4f8b", "\u98ce\u9669\u8bc4\u4f30", "Bitsight"],
+    url: 'https://vpncentral.com/openclaw-2026-2-12-release-patches-40-vulnerabilities-in-ai-agents/',
+    category: 'deep-dive',
+    source: 'VPN Central',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-144',
+    title: 'Clawbots.com — Setup Guides & Directory',
+    desc: '社区维护的 OpenClaw 教程目录和设置检查表，实用的集成指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7248\u672c\u66f4\u65b0", "40\u6f0f\u6d1e\u4fee\u590d", "SSRF", "\u63d0\u793a\u6ce8\u5165"],
+    url: 'https://clawbots.com/',
+    category: 'deep-dive',
+    source: 'Clawbots',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-145',
+    title: 'Substack — The Swarm Doctrine: How OpenClaw Shattered the Bandwidth Ceiling',
+    desc: '群体智能理论：OpenClaw 和 Orgo 如何突破主权带宽天花板的深度分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5de5\u4f5c\u6d41", "\u98ce\u9669", "2026", "\u5b89\u5168"],
+    url: 'https://mxtm.substack.com/p/the-swarm-doctrine-how-openclaw-and',
+    category: 'deep-dive',
+    source: 'Substack',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-146',
+    title: 'OpenClaw Skills 审计工具（ClawHub 安全检查）',
+    desc: '社区开发的技能安全审计工具，2026 年 2 月审计认证的 ClawHub 技能推荐',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["WIRED", "\u7528\u6237\u4f53\u9a8c", "\u98ce\u9669\u5206\u6790"],
+    url: 'https://mxtm.substack.com/p/the-swarm-doctrine-how-openclaw-and',
+    category: 'deep-dive',
+    source: 'Community',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-147',
+    title: 'Reddit — Everyone talks about Clawdbot, but not many explain how it works',
+    desc: 'Reddit 社区讨论：OpenClaw 工作原理解析和实际使用经验分享',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7fa4\u4f53\u667a\u80fd", "\u7406\u8bba", "Orgo"],
+    url: 'https://www.reddit.com/r/AI_Agents/comments/1r15ji4/everyone_talks_about_clawdbot_openclaw_but_not/',
+    category: 'deep-dive',
+    source: 'Reddit',
+  },
+
+  // tools - resource
+  {
+    id: 'res-148',
+    title: 'Reddit — OpenClaw Security: Best Thing to Happen to AI Security This Year',
+    desc: 'AI 安全视角分析 OpenClaw：从设置到管理关键安全风险的终极指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u5ba1\u8ba1", "2026\u5ba1\u8ba1", "ClawHub"],
+    url: 'https://www.reddit.com/r/ArtificialInteligence/comments/1r0qhq1/openclaw_or_moltbot_or_clawdbot_whatever_its/',
+    category: 'tools',
+    source: 'Reddit',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-013',
+    title: 'GitHub Issues — Claude Opus 4.6 Support',
+    desc: 'OpenClaw GitHub：Claude Opus 4.6 支持请求和默认上下文令牌更新',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Reddit", "\u5de5\u4f5c\u539f\u7406", "\u793e\u533a\u8ba8\u8bba"],
+    url: 'https://github.com/openclaw/openclaw/issues/12621',
+    category: 'use-cases',
+    source: 'GitHub Issues',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-149',
+    title: 'GitHub Issues — Composable Skills Architecture RFC',
+    desc: 'OpenClaw 技能架构 RFC：技能依赖、接口和组合的向后兼容扩展提案',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Reddit", "AI\u5b89\u5168", "\u98ce\u9669\u7ba1\u7406"],
+    url: 'https://github.com/openclaw/openclaw/issues/11919',
+    category: 'deep-dive',
+    source: 'GitHub Issues',
+  },
+
+  // official - resource
+  {
+    id: 'res-150',
+    title: 'Clawbot/OpenClaw Setup Guides & Directory',
+    desc: '独立 OpenClaw 设置中心，实用教程、更新链接和故障排除资源',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["GitHub", "Opus 4.6", "\u7248\u672c\u66f4\u65b0"],
+    url: 'https://clawbots.com/',
+    category: 'official',
+    source: 'Clawbots',
+  },
+
+  // skill-dev - skill
   {
     id: 'skill-004',
-    title: 'Search & Research',
-    desc: 'Exa Neural Search, DeepWiki, TechMeme',
+    title: 'CyberSecurity News — OpenClaw v2026.2.6 发布：支持 Opus 4.6、GPT-5.3-Codex 和安全扫描器',
+    desc: 'OpenClaw v2026.2.6 版本更新：增强安全性，响应 ClawHub 生态中的恶意技能威胁，内置代码安全扫描器和新模型支持',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['Search', 'Research'],
-    stars: '148 Skills',
-    image: '/static/images/skills/search.png'
+    tags: ["Reddit", "\u6280\u80fd\u63a8\u8350", "Linear", "GraphQL"],
+    url: 'https://cybersecuritynews.com/openclaw-v2026-2-6-released/',
+    category: 'skill-dev',
+    source: 'CyberSecurity News',
+    featured: true,
   },
+
+  // deep-dive - resource
+  {
+    id: 'res-151',
+    title: 'GitHub Issue — 2026.2.14 更新后权限错误：missing scope operator.read',
+    desc: 'OpenClaw 2026.2.14 版本更新后出现权限范围错误的解决方案和讨论',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7248\u672c\u66f4\u65b0", "\u5b89\u5168\u626b\u63cf", "Opus 4.6", "GPT-5.3"],
+    url: 'https://github.com/openclaw/openclaw/issues/16820',
+    category: 'deep-dive',
+    source: 'GitHub',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-152',
+    title: 'GitHub Issue — Copilot 提供商模型列表更新：Claude Opus 4.6-fast、GPT-5.3-codex',
+    desc: '请求更新 Copilot 提供商支持最新模型，保持与 Copilot CLI 和 Proxy 功能同步',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u7814\u7a76", "\u4f9b\u5e94\u94fe\u653b\u51fb", "NPM", "PyPI"],
+    url: 'https://github.com/openclaw/openclaw/issues/15014',
+    category: 'deep-dive',
+    source: 'GitHub',
+  },
+
+  // official - resource
+  {
+    id: 'res-153',
+    title: 'GitHub Issue — Claude Opus 4.6 支持请求',
+    desc: '2026年2月5日发布的 Claude Opus 4.6 模型支持请求，需要 SDK 版本升级到 0.73.0+',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7248\u672c\u95ee\u9898", "\u6743\u9650\u9519\u8bef", "2026.2.14"],
+    url: 'https://github.com/openclaw/openclaw/issues/12621',
+    category: 'official',
+    source: 'GitHub',
+  },
+
+  // official - resource
+  {
+    id: 'res-154',
+    title: 'Latenode — What is OpenClaw? Your Open-Source AI Assistant for 2026',
+    desc: '2026年 OpenClaw 完整介绍：100+ 技能可用，单 CLI 命令安装，支持自然语言生成新技能',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Copilot", "Claude Opus 4.6", "GPT-5.3"],
+    url: 'https://latenode.com/blog/ai/ai-agents/what-is-openclaw',
+    category: 'official',
+    source: 'Latenode',
+  },
+
+  // official - resource
+  {
+    id: 'res-155',
+    title: 'WiTechPedia — OpenClaw AI Wiki: 架构、技能和实现',
+    desc: 'OpenClaw AI 深度解析：ClawHub 市场、MCP 协议、与其他自主 Agent 的对比分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Claude Opus 4.6", "SDK\u5347\u7ea7", "\u6a21\u578b\u652f\u6301"],
+    url: 'https://www.witechpedia.com/wiki/openclaw-ai/',
+    category: 'official',
+    source: 'WiTechPedia',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-156',
+    title: 'Vercel — OpenClaw (Clawdbot) 官方集成指南',
+    desc: 'Vercel AI Gateway 集成 OpenClaw：API 密钥创建、安装向导和使用监控',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["2026\u4ecb\u7ecd", "100+\u6280\u80fd", "CLI\u5b89\u88c5"],
+    url: 'https://vercel.com/docs/ai-gateway/chat-platforms/openclaw',
+    category: 'getting-started',
+    source: 'Vercel',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-157',
+    title: 'Apidog — How to Update OpenClaw to Latest Version',
+    desc: '工程导向的 OpenClaw 更新指南：Docker/systemd/compose 安全更新，备份、模式迁移和回滚设计',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u67b6\u6784\u89e3\u6790", "MCP\u534f\u8bae", "Agent\u5bf9\u6bd4"],
+    url: 'https://apidog.com/blog/update-openclaw/',
+    category: 'deep-dive',
+    source: 'Apidog',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-158',
+    title: 'Substack — OpenClaw/Moltbot/ClawdBot 101: 完整指南',
+    desc: '全面的 OpenClaw 指南：从基础概念到高级用法，涵盖 24/7 运行和消息平台集成',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Vercel", "AI Gateway", "\u5b98\u65b9\u96c6\u6210"],
+    url: 'https://sidsaladi.substack.com/p/openclawmoltbotclawdbot-101-the-complete',
+    category: 'cloud-deploy',
+    source: 'Substack',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-159',
+    title: 'YouTube — Ultimate Clawdbot Tutorial: Beginners Setup & Use (OpenClaw)',
+    desc: 'PAIO by PureVPN 赞助的完整初学者教程，从安装到基本使用全流程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Apidog", "\u66f4\u65b0\u6307\u5357", "\u5907\u4efd\u56de\u6eda"],
+    url: 'https://www.youtube.com/watch?v=NA8C8jIQNeM',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-160',
+    title: 'YouTube — The Easiest Way To Install and Use OpenClaw For Beginners',
+    desc: 'Hostinger VPS 逐步安装教程，专为初学者设计的易懂指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b8c\u6574\u6307\u5357", "24/7", "\u6d88\u606f\u5e73\u53f0"],
+    url: 'https://www.youtube.com/watch?v=HFVImm-D1C4',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-161',
+    title: 'CNBC — OpenClaw 创始人 Peter Steinberger 加入 OpenAI，Sam Altman 确认',
+    desc: 'CNBC 确认报道：Sam Altman 发推确认 OpenClaw 创始人加入 OpenAI，开源项目将由 OpenAI 基金会继续支持',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u91cd\u78c5\u65b0\u95fb", "OpenAI", "\u521b\u59cb\u4eba", "\u91cc\u7a0b\u7891"],
+    url: 'https://www.cnbc.com/2026/02/15/openclaw-creator-peter-steinberger-joining-openai-altman-says.html',
+    category: 'official',
+    source: 'CNBC',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-162',
+    title: 'Archive.is — OpenClaw 2026.2.12 发布：修复 40+ 安全问题',
+    desc: 'OpenClaw 2026.2.12 重大安全更新：修复 40+ 漏洞，加强 AI Agent 平台保护',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CNBC", "Sam Altman", "\u5b98\u65b9\u786e\u8ba4", "\u91cc\u7a0b\u7891"],
+    url: 'https://archive.is/YqEtG',
+    category: 'official',
+    source: 'Archive.is',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-163',
+    title: 'Julian Goldie — OpenClaw 工作流自动化：消除 80% 日常繁琐工作',
+    desc: '实战案例：OpenClaw 2026.2.6 版本新功能深度体验，从晨间简报到 AI 利润社区自动化的完整工作流',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CNBC", "Sam Altman", "\u5b98\u65b9\u786e\u8ba4", "\u91cc\u7a0b\u7891"],
+    url: 'https://juliangoldie.com/openclaw-workflow-automation/',
+    category: 'official',
+    source: 'Julian Goldie',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-014',
+    title: 'Unraid 论坛 — OpenClaw AI 个人助手支持页面',
+    desc: 'Unraid 社区官方支持：自托管 AI 助手，Docker 容器部署，直接在 Unraid 服务器运行',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u7248\u672c\u66f4\u65b0", "\u5b89\u5168\u4fee\u590d", "40\u6f0f\u6d1e", "2026.2.12"],
+    url: 'https://forums.unraid.net/topic/196865-support-openclaw-ai-personal-assistant/',
+    category: 'use-cases',
+    source: 'Unraid Forum',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-164',
+    title: 'Peter Steinberger — OpenClaw, OpenAI and the future（创始人公告）',
+    desc: 'tl;dr: 我加入 OpenAI 负责个人 Agent，OpenClaw 将移交基金会保持开源独立。创始人第一视角全文声明',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Unraid", "Docker", "\u81ea\u6258\u7ba1", "\u793e\u533a\u652f\u6301"],
+    url: 'https://steipete.me/posts/2026/openclaw',
+    category: 'cloud-deploy',
+    source: 'steipete.me',
+  },
+
+  // official - resource
+  {
+    id: 'res-165',
+    title: 'CNET — The Year of the Agent: OpenAI Strikes Deal With OpenClaw Founder',
+    desc: 'Lex Fridman 播客后 Zuckerberg 与 Altman 均抛出 offer，Steinberger 最终选择 OpenAI 全过程报道',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u91cc\u7a0b\u7891", "\u521b\u59cb\u4eba\u58f0\u660e", "OpenAI", "\u57fa\u91d1\u4f1a"],
+    url: 'https://www.cnet.com/tech/services-and-software/openai-strikes-deal-with-openclaw-founder/',
+    category: 'official',
+    source: 'CNET',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-166',
+    title: 'Fast Company — 6 quotes from Peter Steinberger on the future of personal computing',
+    desc: 'Lex Fridman 3 小时播客精华提炼：Steinberger 对个人计算和 AI Agent 未来的洞见',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Reuters", "\u91cc\u7a0b\u7891", "OpenAI", "\u57fa\u91d1\u4f1a"],
+    url: 'https://www.fastcompany.com/91494326/openclaw-peter-steinberger-openai-meta-lex-fridman',
+    category: 'official',
+    source: 'Fast Company',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-167',
+    title: 'Business Insider — OpenAI Hires OpenClaw Creator: Praise, Memes & Rivalry',
+    desc: '科技圈的反应：Steinberger 加入 OpenAI 后的赞誉、梗图和竞争话题报道',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["CNET", "OpenAI", "Meta", "\u91cc\u7a0b\u7891"],
+    url: 'https://www.businessinsider.com/openais-openclaw-hire-sparks-praise-memes-rivalry-chatter-2026-2',
+    category: 'deep-dive',
+    source: 'Business Insider',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-168',
+    title: 'Parameter.io — OpenClaw Developer Picks OpenAI After Rejecting Meta',
+    desc: 'Meta vs OpenAI 争夺战报道，+ Moonshot AI 于同日发布 Kimi Claw（浏览器版 OpenClaw）分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Fast Company", "Lex Fridman", "\u64ad\u5ba2\u7cbe\u534e", "\u672a\u6765\u5c55\u671b"],
+    url: 'https://parameter.io/openclaw-developer-picks-openai-after-rejecting-meta-acquisition-deal/',
+    category: 'official',
+    source: 'Parameter.io',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-169',
+    title: 'Lex Fridman Podcast #491 — OpenClaw: The Viral AI Agent that Broke the Internet',
+    desc: 'GitHub 历史上增长最快的项目创始人 Peter Steinberger 接受 Lex Fridman 3 小时深度专访，必听',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Meta", "OpenAI", "Kimi Claw", "\u884c\u4e1a\u5206\u6790"],
+    url: 'https://www.youtube.com/watch?v=YFjfBk8HI5o',
+    category: 'official',
+    source: 'YouTube',
+  },
+
+  // official - resource
+  {
+    id: 'res-170',
+    title: 'Lex Fridman Podcast — 文字版 + 章节索引（#491）',
+    desc: 'Lex Fridman 官网版：含完整章节列表和时间戳，方便跳读关键话题',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Meta", "OpenAI", "Kimi Claw", "\u884c\u4e1a\u5206\u6790"],
+    url: 'https://lexfridman.com/peter-steinberger/',
+    category: 'official',
+    source: 'Lex Fridman',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-171',
+    title: 'YouTube — Kimi Claw: 浏览器内运行 OpenClaw（教程 + 演示）',
+    desc: 'Moonshot AI 推出 Kimi Claw：无需本地部署或 VPS，在浏览器云端运行 OpenClaw Agent 全教程',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["Lex Fridman", "\u64ad\u5ba2", "\u521b\u59cb\u4eba", "\u5fc5\u542c"],
+    url: 'https://www.youtube.com/watch?v=72voj6uefLY',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-172',
+    title: 'YouTube — Tech With Tim: OpenClaw Full Course (Setup, Skills, Voice, Memory)',
+    desc: 'Tech With Tim 出品：涵盖安装、技能、语音回复、记忆系统的完整系统课程，Hostinger 赞助',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["Lex Fridman", "\u64ad\u5ba2", "\u6587\u5b57\u7248", "\u521b\u59cb\u4eba"],
+    url: 'https://www.youtube.com/watch?v=vte-fDoZczE',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-173',
+    title: 'YouTube — OpenClaw Tutorial for Beginners: Crash Course',
+    desc: 'OpenClaw（前 MoltBot/Clawdbot）速成课程：本地自主运行 + MCP + Zapier 集成演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["Kimi Claw", "Moonshot AI", "\u6d4f\u89c8\u5668\u7248", "\u65e0\u9700\u90e8\u7f72"],
+    url: 'https://www.youtube.com/watch?v=u4ydH-QvPeg',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-174',
+    title: 'YouTube — OpenClaw Tutorial 2026: Everything You Need to Know',
+    desc: '2026 全面入门视频：账户配置、平台导航、主要功能和第一个自动化任务演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["Tech With Tim", "\u5b8c\u6574\u8bfe\u7a0b", "Skills", "Voice", "Memory"],
+    url: 'https://www.youtube.com/watch?v=znaJgKDo-oI',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-175',
+    title: 'YouTube — OpenClaw Use Cases that Actually Work (mberman84)',
+    desc: 'Matt Berman 演示真正实用的 OpenClaw 场景，配 Greptile 集成和完整提示词 Gist',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u901f\u6210\u8bfe", "MCP", "Zapier"],
+    url: 'https://www.youtube.com/watch?v=Q7r--i9lLck',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-176',
+    title: 'YouTube — OpenClaw Use Cases that are Actually Helpful (Skool 社区版)',
+    desc: '结合 Skool 社区平台的 OpenClaw 正确玩法：从安装到真实工作流的完整演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "2026", "\u5168\u9762\u5165\u95e8"],
+    url: 'https://www.youtube.com/watch?v=LV6Juz0xcrY',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-177',
+    title: 'Towards Data Science — Use OpenClaw to Make a Personal AI Assistant',
+    desc: '权威数据科学媒体出品：OpenClaw 个人 AI 助手搭建完整指南，从安装到个性化配置',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u7528\u4f8b\u6f14\u793a", "Greptile", "\u5b9e\u7528"],
+    url: 'https://towardsdatascience.com/use-openclaw-to-make-a-personal-ai-assistant/',
+    category: 'video',
+    source: 'Towards Data Science',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-178',
+    title: 'Medium — OpenClaw Tutorial 2026: Setting Up Your 24/7 AI Employee',
+    desc: 'Travis Nicholson 出品：从 AI 软件到 AI Agent 的认知转变，全流程 24/7 部署配置指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u7528\u4f8b\u6f14\u793a", "Skool", "\u5de5\u4f5c\u6d41"],
+    url: 'https://travisnicholson.medium.com/openclaw-tutorial-2026-setting-up-your-24-7-ai-employee-step-by-step-guide-39f52a81707a',
+    category: 'getting-started',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-179',
+    title: 'The Educationist Hub — How to Install Clawdbot (OpenClaw) on Windows 2026',
+    desc: 'Windows 平台完整安装指南：含自动化 SEO 和消息任务配置，适合 Windows 用户',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["TDS", "\u6743\u5a01", "\u4e2a\u6027\u5316", "\u6570\u636e\u79d1\u5b66"],
+    url: 'https://www.theeducationisthub.com/install-clawdbot-windows/',
+    category: 'getting-started',
+    source: 'The Educationist Hub',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-180',
+    title: 'Fortune — Why OpenClaw Has Security Experts on Edge',
+    desc: 'Fortune 科技版深度报道：OpenClaw 赋予 AI 真实自主权带来的新型安全风险，Eye on AI 专栏',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "24/7", "\u8ba4\u77e5\u8f6c\u53d8", "2026"],
+    url: 'https://fortune.com/2026/02/12/openclaw-ai-agents-security-risks-beware/',
+    category: 'getting-started',
+    source: 'Fortune',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-181',
+    title: 'Sophos — The OpenClaw Experiment Is a Warning Shot for Enterprise AI Security',
+    desc: 'Sophos 研究：3 万+ 暴露实例，威胁者已在讨论如何武器化 Skills，企业必读安全警告',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Windows", "2026", "\u81ea\u52a8\u5316SEO"],
+    url: 'https://www.sophos.com/en-us/blog/the-openclaw-experiment-is-a-warning-shot-for-enterprise-ai-security',
+    category: 'deep-dive',
+    source: 'Sophos',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-182',
+    title: 'Conscia — The OpenClaw Security Crisis: ClawHavoc 824 恶意技能',
+    desc: '2026-02-16 最新统计：ClawHavoc 行动将恶意技能扩展至 824 个，覆盖 10,700+ 技能库的深度分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Fortune", "\u5b89\u5168", "\u4e3b\u6d41\u5a92\u4f53", "\u81ea\u4e3b\u6743\u98ce\u9669"],
+    url: 'https://conscia.com/blog/the-openclaw-security-crisis/',
+    category: 'deep-dive',
+    source: 'Conscia',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-183',
+    title: 'Aikido.dev — Why Trying to Secure OpenClaw Is Ridiculous',
+    desc: 'Aikido 安全团队：ClawHub 恶意软件、暴露实例、加固指南为何治标不治本的犀利分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u5371\u673a", "ClawHavoc", "824\u6076\u610f\u6280\u80fd", "\u6700\u65b0\u7edf\u8ba1"],
+    url: 'https://www.aikido.dev/blog/why-trying-to-secure-openclaw-is-ridiculous',
+    category: 'deep-dive',
+    source: 'Aikido',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-184',
+    title: 'Security Boulevard — Securing OpenClaw Against ClawHavoc',
+    desc: '12% ClawHub 技能被确认恶意，ClawHavoc 供应链攻击完整分析和防护方案',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Zenity Labs", "\u63d0\u793a\u6ce8\u5165", "\u5b89\u5168\u6307\u5357"],
+    url: 'https://securityboulevard.com/2026/02/securing-openclaw-againstclawhavoc/',
+    category: 'deep-dive',
+    source: 'Security Boulevard',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-185',
+    title: 'SitePoint — OpenClaw Production Guide: 4 Weeks of Hard Lessons',
+    desc: '30 天自托管 AI Agent 的真实记录：可扩展性、监控、成本与运营指标综合报告',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Security Boulevard", "ClawHavoc", "\u4f9b\u5e94\u94fe", "\u9632\u62a4"],
+    url: 'https://www.sitepoint.com/openclaw-production-lessons-4-weeks-self-hosted-ai/',
+    category: 'deep-dive',
+    source: 'SitePoint',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-186',
+    title: 'Archive.ph — Run OpenClaw Safely with Docker: Production-Grade Deep Dive',
+    desc: '生产级 Ollama + OpenClaw 安全配置：本地 AI 基础设施作为攻击面的深度剖析，附完整 Docker 方案',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["SitePoint", "\u751f\u4ea7\u73af\u5883", "4\u5468\u5b9e\u6d4b", "\u8fd0\u8425\u6307\u6807"],
+    url: 'https://archive.ph/zv0wm',
+    category: 'deep-dive',
+    source: 'Towards Dev',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-187',
+    title: 'OpenClaw Newsletter — 2026-02-15（v2026.2.14：50+ 安全修复）',
+    desc: '官方周刊：v2026.2.14 情人节发布，50+ 安全修复，Telegram Polls、Slack/Discord DM 策略、Matrix 语音消息改进',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["The Register", "OpenAI", "\u91cc\u7a0b\u7891", "\u57fa\u91d1\u4f1a"],
+    url: 'https://buttondown.com/openclaw-newsletter/archive/openclaw-newsletter-2026-02-15/',
+    category: 'official',
+    source: 'OpenClaw Newsletter',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-188',
+    title: 'gradually.ai — OpenClaw Changelog（2026 年 2 月）',
+    desc: 'v2026.2.14 ~ v2026.2.17 完整更新日志：Telegram Polls、Slack/Discord DM 策略、新权限系统等功能一览',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Tech.eu", "\u6b27\u6d32\u79d1\u6280\u5a92\u4f53", "OpenAI", "\u57fa\u91d1\u4f1a"],
+    url: 'https://www.gradually.ai/en/changelogs/openclaw/',
+    category: 'official',
+    source: 'gradually.ai',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-189',
+    title: 'Reddit — OpenClaw 2026.2.15 更新：重大功能与改进',
+    desc: 'Reddit 社区 r/aicuriosity 精华帖：2026 年 2 月 16 日新版本发布，AI Agent 平台核心功能升级详解',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "\u7248\u672c\u66f4\u65b0", "v2026.2.14", "\u5b89\u5168\u4fee\u590d"],
+    url: 'https://www.reddit.com/r/aicuriosity/comments/1r6536z/openclaw_2026215_update_major_features_and/',
+    category: 'official',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-190',
+    title: 'Hacker News — OpenClaw (ClawdBot) joins OpenAI（讨论帖）',
+    desc: 'HN 社区讨论：OpenClaw 加入 OpenAI 事件，n8n 类比、设置摩擦、小企业自动化的真实用户视角',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u66f4\u65b0\u65e5\u5fd7", "v2026.2.17", "Telegram Polls", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://news.ycombinator.com/item?id=47027907',
+    category: 'official',
+    source: 'Hacker News',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-191',
+    title: 'Medium — OpenClaw Just Dropped a Massive Update: Making Paid AI Look Like a Joke',
+    desc: '2026 年 2 月多版本连续更新深度体验：DevOps 自动化、智能家居控制、跨平台实时任务执行',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Hacker News", "OpenAI", "\u793e\u533a\u8ba8\u8bba", "HN"],
+    url: 'https://medium.com/@krupeshraut/openclaw-just-dropped-a-massive-update-and-its-making-paid-ai-assistants-look-like-a-joke-86e12f931dd8',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-192',
+    title: 'Medium — OpenClaw: 190K GitHub Stars in 14 Days and Changed How We Think About Digital Labor',
+    desc: '从 190K Stars 到 OpenAI 收购：OpenClaw 如何重新定义数字劳动，并改变个人计算范式的深度分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Om Malik", "OpenAI", "\u6df1\u5ea6\u5206\u6790", "\u884c\u4e1a\u5f71\u54cd"],
+    url: 'https://archive.ph/YSnks',
+    category: 'deep-dive',
+    source: 'Medium (archive)',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-193',
+    title: 'Prime Rogue Inc — OpenClaw 安全危机：2026 年 2 月天真部署者须知',
+    desc: 'CVSS 8.8 漏洞披露、Hudson Rock 发现 Vidar 变体窃取 openclaw.json tokens，项目移交基金会期间仍在活跃利用',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "\u7248\u672c\u66f4\u65b0", "DevOps", "\u81ea\u52a8\u5316"],
+    url: 'https://primerogueinc.com/blog/openclaw-security-crisis-structurally-broken-in-february-2026-what-naive-deployers-need-to-know-before-its-too-late/',
+    category: 'deep-dive',
+    source: 'Prime Rogue Inc',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-194',
+    title: 'DataCamp — 9 OpenClaw Projects to Build in 2026',
+    desc: '9 个实战项目：从 Reddit 摘要机器人到自愈服务器，每个项目附配置文件、提示词和社区 Setup 指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u5371\u673a", "CVSS 8.8", "Vidar", "Token\u7a83\u53d6"],
+    url: 'https://www.datacamp.com/blog/openclaw-projects',
+    category: 'deep-dive',
+    source: 'DataCamp',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-195',
+    title: 'YouTube — OpenClaw Full Setup Tutorial: EASIEST Way! (Duncan × Hostinger)',
+    desc: 'Duncan 出品：Hostinger VPS 最简部署指南，从零到运行的完整演示，附 10% 优惠码',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u5371\u673a", "CVSS 8.8", "Vidar", "Token\u7a83\u53d6"],
+    url: 'https://www.youtube.com/watch?v=HCgHJf9YVAw',
+    category: 'deep-dive',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-015',
+    title: 'YouTube — OpenClaw Setup on Coolify with VPS（无需 Mac Mini）',
+    desc: 'Coolify 容器化部署 OpenClaw，适合已有 VPS 用户，无需购买昂贵 Mac Mini 硬件',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["DataCamp", "9\u4e2a\u9879\u76ee", "\u5b9e\u6218", "Reddit Bot"],
+    url: 'https://www.youtube.com/watch?v=48fjZWNjwtU',
+    category: 'use-cases',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-196',
+    title: 'YouTube — Full OpenClaw/ClawdBot Setup Guide for Beginners（Grey Matter AI）',
+    desc: 'Grey Matter AI 社区出品：完整入门课程，从安装到配置，Skool 社区免费加入',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Hostinger", "\u6700\u7b80\u90e8\u7f72", "Duncan"],
+    url: 'https://www.youtube.com/watch?v=lRQk5jabSH4',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-197',
+    title: 'YouTube — One-Click OpenClaw on VPS — No Mac Mini Needed ($4/month)',
+    desc: '一键云端部署 OpenClaw，每月仅需 $4，彻底告别 Mac Mini 依赖，24/7 稳定运行',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Coolify", "VPS", "\u65e0\u9700Mac Mini"],
+    url: 'https://www.youtube.com/watch?v=-xAFJfvg6FI',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-198',
+    title: 'OpenClaw Newsletter — 2026-02-19（安全争议 + v2026.2.17 上游同步）',
+    desc: '官方周刊：HN 252 评论安全分析引发热议，Fork 维护者同步 55 个安全补丁，Telegram/Slack 新功能播报',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u4e00\u952e\u90e8\u7f72", "$4/\u6708", "\u65e0\u9700Mac Mini"],
+    url: 'https://buttondown.com/openclaw-newsletter/archive/openclaw-newsletter-2026-02-19/',
+    category: 'video',
+    source: 'OpenClaw Newsletter',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-199',
+    title: 'GitHub Issue — Claude Sonnet 4.6 支持请求（#19529）',
+    desc: '2026-02-17 Anthropic 发布 Sonnet 4.6，OpenClaw 同日提 Issue 并快速在 v2026.2.17 修复',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.17", "v2026.2.19", "\u5b89\u5168\u4e89\u8bae"],
+    url: 'https://github.com/openclaw/openclaw/issues/19529',
+    category: 'official',
+    source: 'GitHub Issues',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-200',
+    title: 'NewReleases.io — OpenClaw v2026.2.19 发布说明',
+    desc: 'v2026.2.19 新功能：设备配对卫生流程（device.pair.remove）、openclaw devices remove / clear 命令',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.17", "v2026.2.19", "\u5b89\u5168\u4e89\u8bae"],
+    url: 'https://newreleases.io/project/github/openclaw/openclaw/release/v2026.2.19',
+    category: 'official',
+    source: 'NewReleases.io',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-201',
+    title: 'GBHackers — OpenClaw v2026.2.17：Anthropic 模型支持 + 凭证盗窃漏洞披露',
+    desc: 'v2026.2.17 新增 Claude Sonnet 4.6 支持，同时披露正在被利用的凭证盗窃漏洞（openclaw.json token）',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Claude Sonnet 4.6", "\u7248\u672c\u4fee\u590d", "v2026.2.17"],
+    url: 'https://gbhackers.com/openclaw-ai-framework-v2026-2-17/',
+    category: 'official',
+    source: 'GBHackers',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-202',
+    title: 'CyberSecurity News — OpenClaw v2026.2.17 发布：Sonnet 4.6、1M 上下文 Beta 与子 Agent',
+    desc: 'v2026.2.17 全功能报道：Claude Sonnet 4.6、100 万 token 上下文 Beta、子 Agent 生成、iOS 分享扩展、Slack 流式输出',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.19", "\u8bbe\u5907\u7ba1\u7406", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://cybersecuritynews.com/openclaw-ai-framework-v2026-2-17/',
+    category: 'deep-dive',
+    source: 'CyberSecurity News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-203',
+    title: 'Infosecurity Magazine — 研究人员发现 6 个 OpenClaw 新漏洞',
+    desc: 'Endor Labs 披露 6 个已修复漏洞：SSRF、缺失认证、路径遍历，OpenClaw 安全修复进展追踪',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.17", "Sonnet 4.6", "1M\u4e0a\u4e0b\u6587", "\u5b50Agent", "iOS"],
+    url: 'https://www.infosecurity-magazine.com/news/researchers-six-new-openclaw/',
+    category: 'deep-dive',
+    source: 'Infosecurity Magazine',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-204',
+    title: 'ChatBench — OpenClaw Unleashed：2026 年 14 个必知洞见',
+    desc: '深度指南：openclaw doctor 安全诊断、ClawHub 技能筛选原则、Docker 加固和 Token 配额控制',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u6f0f\u6d1e", "SSRF", "\u8def\u5f84\u904d\u5386", "Endor Labs"],
+    url: 'https://www.chatbench.org/openclaw/',
+    category: 'deep-dive',
+    source: 'ChatBench',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-205',
+    title: 'Medium — OpenClaw/MoltBot/ClawdBot 本地系统架构深度解析',
+    desc: '背景服务 + 消息适配器 + 纯文本记忆：OpenClaw 作为新型 AI Trend 的架构本质分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Cloudflare", "Workers", "R2", "\u67b6\u6784"],
+    url: 'https://medium.com/@tahirbalarabe2/clawdbot-moltbot-openclaw-local-system-architecture-52acc37f1213',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-206',
+    title: 'Medium — OpenClaw 记忆架构拆解：BM25 + 向量搜索混合检索',
+    desc: 'Markdown 纯文本记忆 vs 向量数据库，OpenClaw 混合 BM25 + 向量检索底层机制深度解析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["14\u6d1e\u89c1", "\u5b89\u5168\u8bca\u65ad", "Docker\u52a0\u56fa", "2026"],
+    url: 'https://shivamagarwal7.medium.com/agentic-ai-openclaw-moltbot-clawdbots-memory-architecture-explained-61c3b9697488',
+    category: 'deep-dive',
+    source: 'Medium',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-207',
+    title: 'Medium — How OpenClaw Works：从真实架构理解 AI Agent',
+    desc: '100K+ Stars 背后的架构解析：Gateway、Brain、Channel Adapter 三层如何协同工作',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u67b6\u6784", "\u672c\u5730\u7cfb\u7edf", "\u8bb0\u5fc6", "Medium"],
+    url: 'https://bibek-poudel.medium.com/how-openclaw-works-understanding-ai-agents-through-a-real-architecture-5d59cc7a4764',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-208',
+    title: 'Medium — 我测试了 OpenClaw：爆火之后的真实体验',
+    desc: 'Ubuntu Server + OpenRouter Gemini 2.0 Flash 免费运行 OpenClaw 的完整折腾记录，含优缺点评价',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u8bb0\u5fc6\u67b6\u6784", "BM25", "\u5411\u91cf\u641c\u7d22", "Markdown"],
+    url: 'https://medium.com/@ammarcader15/%EF%B8%8F-%EF%B8%8F-testing-clawdbot-openclaw-my-experience-after-the-hype-b897e6f35289',
+    category: 'deep-dive',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-209',
+    title: 'YouTube — OpenClaw BIGGEST Update Yet：v2026.2.17 + v2026.2.19 全解析',
+    desc: '三天内连发两个重大版本，Sonnet 4.6、1M 上下文 Beta、子 Agent 生成、iOS 分享扩展全面解读',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7528\u6237\u4f53\u9a8c", "OpenRouter", "Gemini", "Ubuntu"],
+    url: 'https://www.youtube.com/watch?v=WXzkDDAwW1Y',
+    category: 'getting-started',
+    source: 'YouTube',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-210',
+    title: 'YouTube — My OpenClaw Dashboard Setup：初学者必备配置技巧（2026）',
+    desc: 'OpenClaw Control UI 可视化仪表盘全攻略，新手友好的 Dashboard 配置和常用设置演示',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7528\u6237\u4f53\u9a8c", "OpenRouter", "Gemini", "Ubuntu"],
+    url: 'https://www.youtube.com/watch?v=2pn0zIEa41E',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-211',
+    title: 'YouTube — OpenClaw NEW FREE Upgrades Are INSANE（Zapier 8000+ 应用集成）',
+    desc: '最新免费升级演示：通过 Zapier 免费接入 8000+ 应用，OpenClaw 新版玩法和用例展示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "v2026.2.17", "v2026.2.19", "\u6700\u65b0", "\u5fc5\u770b"],
+    url: 'https://www.youtube.com/watch?v=wDL0zevEwDc',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-212',
+    title: 'YouTube — My Multi Agent Setup on OpenClaw（Mac Mini M4 实测）',
+    desc: '$1000 Mac Mini M4 搭建多 Agent 系统的完整实测，含 Agent 团队架构和任务分发配置',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Zapier", "8000+\u5e94\u7528", "\u514d\u8d39\u5347\u7ea7", "\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=LKjkYbT2M0Y',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-213',
+    title: 'YouTube — OpenClaw Discord Integration：AWS 上完整 Discord Bot 部署',
+    desc: 'Discord Bot 创建 + OpenClaw 接入 AWS EC2 全流程，100% 免费方案演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u521d\u5b66\u8005", "\u5b89\u88c5\u914d\u7f6e", "\u5165\u95e8"],
+    url: 'https://www.youtube.com/watch?v=Z5aoaHQh26Q',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-214',
+    title: 'YouTube — How to Run OpenClaw for Free with Kimi 2.5（完整部署教程）',
+    desc: 'VPS 部署 OpenClaw + 接入 NVIDIA Moonshot 免费 API（Kimi 2.5），零成本运行完整演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Multi-Agent", "Mac Mini M4", "\u591aAgent\u67b6\u6784"],
+    url: 'https://www.youtube.com/watch?v=bQuZgPc6PtQ',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-215',
+    title: 'YouTube — Claude Sonnet 4.6 发布：OpenClaw 最强模型评测',
+    desc: 'Anthropic 发布 Sonnet 4.6，评测其在 OpenClaw 中的表现和 2 个突破性用例演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Discord", "AWS", "Bot\u90e8\u7f72"],
+    url: 'https://www.youtube.com/watch?v=HjQ5ty3_X_0',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-216',
+    title: 'Reddit r/AI_Agents — OpenAI just hired the OpenClaw creator（社区反应）',
+    desc: 'Clawdbot 创始人（以 Claude 命名）被 OpenAI 而非 Anthropic 雇用，Reddit 科技圈热议讨论',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Kimi 2.5", "NVIDIA", "\u514d\u8d39\u65b9\u6848", "VPS"],
+    url: 'https://www.reddit.com/r/AI_Agents/comments/1r6xksq/openai_just_hired_the_openclaw_creator/',
+    category: 'video',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-217',
+    title: 'Reddit r/OpenAI — OpenClaw is about to be ClosedClaw？社区争议',
+    desc: 'Reddit 热门讨论：OpenAI 收购 OpenClaw 是否会关闭开源？基金会模式能否保持独立性的辩论',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["YouTube", "Claude Sonnet 4.6", "\u6a21\u578b\u8bc4\u6d4b", "\u6700\u65b0"],
+    url: 'https://www.reddit.com/r/OpenAI/comments/1r5ptks/openclaw_is_about_to_be_closedclawopenai_in/',
+    category: 'official',
+    source: 'Reddit',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-218',
+    title: 'OpenClaw Newsletter — 2026-02-17（NanoClaw 安全修复 + v2026.2.17 发布）',
+    desc: '官方周刊：NanoClaw 安全修复重磅发布，Adversa AI 推出 SecureClaw，v2026.2.17 完整功能播报',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Reddit", "OpenAI", "\u5f00\u6e90\u4e89\u8bae", "\u57fa\u91d1\u4f1a"],
+    url: 'https://buttondown.com/openclaw-newsletter/archive/openclaw-newsletter-2026-02-17/',
+    category: 'deep-dive',
+    source: 'OpenClaw Newsletter',
+  },
+
+  // official - resource
+  {
+    id: 'res-219',
+    title: 'OpenClawd — 托管 Clawdbot 平台发布（基金会过渡后抢先上线）',
+    desc: 'OpenClawd AI 发布托管部署平台，无需自己运维 VPS，借势 Steinberger 加入 OpenAI 热点推出',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.17", "NanoClaw", "SecureClaw"],
+    url: 'https://finance.yahoo.com/news/openclawd-releases-managed-clawdbot-platform-171500717.html',
+    category: 'official',
+    source: 'Yahoo Finance',
+    featured: true,
+  },
+
+  // cloud-deploy - resource
+  {
+    id: 'res-220',
+    title: 'SecureClaw — OWASP 对齐的 OpenClaw 开源安全插件',
+    desc: 'Adversa AI 发布 SecureClaw：基于 OWASP 规范的开源安全审计插件 + Skill，对 OpenClaw 部署进行行为控制',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.17", "NanoClaw", "SecureClaw"],
+    url: 'https://www.helpnetsecurity.com/2026/02/18/secureclaw-open-source-security-plugin-skill-openclaw/',
+    category: 'cloud-deploy',
+    source: 'Help Net Security',
+    featured: true,
+  },
+
+  // tools - resource
+  {
+    id: 'res-221',
+    title: 'NanoClaw — 最小权限、最大隔离的安全版 OpenClaw 替代品',
+    desc: 'Gavriel Cohen 用一个周末构建 NanoClaw：面向安全意识用户的极简 AI Agent，代码少到可以完整审计',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["SecureClaw", "OWASP", "\u5b89\u5168\u63d2\u4ef6", "Adversa AI"],
+    url: 'https://www.scriptbyai.com/nanoclaw-openclaw-alternative/',
+    category: 'tools',
+    source: 'ScriptByAI',
+    featured: true,
+  },
+
+  // tools - resource
+  {
+    id: 'res-222',
+    title: 'The Claw Wars — 11 个 OpenClaw 生态衍生项目全景图',
+    desc: 'Blocmates 梳理 OpenClaw 生态中 11 个主要分支：NanoClaw、SecureClaw、KimiClaw 等，含代码审计视角',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["SecureClaw", "OWASP", "\u5b89\u5168\u63d2\u4ef6", "Adversa AI"],
+    url: 'https://www.blocmates.com/articles/the-claw-wars',
+    category: 'tools',
+    source: 'Blocmates',
+    featured: true,
+  },
+
+  // tools - resource
+  {
+    id: 'res-223',
+    title: 'Microsoft Security Blog — 安全运行 OpenClaw：身份、隔离与运行时风险',
+    desc: 'Microsoft 安全团队深度分析 OpenClaw 企业部署风险：内置安全控制不足、不受信任文本注入、Skill 执行威胁模型',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["NanoClaw", "\u5b89\u5168\u66ff\u4ee3", "\u6781\u7b80", "\u9694\u79bb"],
+    url: 'https://www.microsoft.com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/',
+    category: 'tools',
+    source: 'Microsoft Security',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-224',
+    title: 'SecurityWeek — SecureClaw 发布：OpenClaw 安全问题持续存在',
+    desc: 'CVE-2026-25593 / 25475 已修复，Adversa AI 开发 SecureClaw 应对更系统性的安全隐患分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Microsoft", "\u5b89\u5168", "\u4f01\u4e1a", "\u5a01\u80c1\u6a21\u578b"],
+    url: 'https://www.securityweek.com/openclaw-security-issues-continue-as-secureclaw-open-source-tool-debuts/',
+    category: 'deep-dive',
+    source: 'SecurityWeek',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-225',
+    title: 'The New Stack — NanoClaw：用极简代码回答 OpenClaw 的安全问题',
+    desc: 'NanoClaw 设计哲学：OpenClaw 35 万行代码 vs NanoClaw 百行内核，最小代码面即最小攻击面',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Microsoft", "\u5b89\u5168", "\u4f01\u4e1a", "\u5a01\u80c1\u6a21\u578b"],
+    url: 'https://thenewstack.io/nanoclaw-minimalist-ai-agents/',
+    category: 'deep-dive',
+    source: 'The New Stack',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-226',
+    title: 'The New Stack — Anthropic：Claude 账号仍可运行 OpenClaw、NanoClaw 等',
+    desc: 'Anthropic 澄清：Steinberger 加入 OpenAI 不影响现有 API 用户，NanoClaw 等分支同样受支持',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["SecurityWeek", "\u5b89\u5168", "CVE", "SecureClaw"],
+    url: 'https://thenewstack.io/anthropic-agent-sdk-confusion/',
+    category: 'deep-dive',
+    source: 'The New Stack',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-227',
+    title: 'OpenClaw：从病毒式原型到 Agentic 基础设施',
+    desc: 'Catalaize 深度解析：OpenClaw 三次品牌重塑（Clawdbot→Moltbot→OpenClaw）背后的战略意图与技术演进',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Anthropic", "Claude", "NanoClaw", "API\u517c\u5bb9"],
+    url: 'https://catalaize.substack.com/p/openclaw-from-viral-prototype-to',
+    category: 'deep-dive',
+    source: 'Substack',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-228',
+    title: 'GoodAI — OpenAI 收购 OpenClaw：工作流基础设施的价值迁移',
+    desc: '分析 OpenAI 这步棋：OpenClaw 不是产品而是基础设施，Steinberger 加入让 OpenAI 获得下一代 Agent 编排能力',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Acqui-hire", "OpenAI", "Substack", "\u884c\u4e1a\u5206\u6790"],
+    url: 'https://goodai.substack.com/p/openai-acquired-openclaw-why-workflow',
+    category: 'deep-dive',
+    source: 'Substack',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-229',
+    title: '36氪 — OpenClaw 的火热与冷思考：重大问题与下一步发展',
+    desc: '36氪深度报道：OpenClaw 的火热背后，国内开发者如何基于它开发职场 AI 助手，以及需要冷静看待的问题',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u54c1\u724c\u6f14\u53d8", "\u6218\u7565\u5206\u6790", "\u6280\u672f\u6f14\u8fdb", "Catalaize"],
+    url: 'https://36kr.com/p/3671941309260675',
+    category: 'deep-dive',
+    source: '36氪',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-230',
+    title: 'Medium — 10 件人们用 OpenClaw 真实构建的疯狂项目',
+    desc: '真实案例集：AI 驱动商业、自动化代码、生活管理到涉及真实资金的自主决策，OpenClaw 实战边界报告',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5de5\u4f5c\u6d41", "\u57fa\u7840\u8bbe\u65bd", "OpenAI\u6218\u7565", "Substack"],
+    url: 'https://medium.com/@alexrozdolskiy/10-wild-things-people-actually-built-with-openclaw-e18f487cb3e0',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-231',
+    title: 'Medium — 4 分钟部署 OpenClaw：$5 服务器帮我打理一切',
+    desc: '用户真实体验：WhatsApp 一条消息清 200+ 封邮件，Telegram 监控所有 GitHub Repo，cron 任务口述即可配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["36\u6c2a", "\u56fd\u5185\u5206\u6790", "\u804c\u573aAI", "\u51b7\u601d\u8003"],
+    url: 'https://medium.com/@rentierdigital/i-deployed-my-own-openclaw-ai-agent-in-4-minutes-it-now-runs-my-life-from-a-5-server-8159e6cb41cc',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-016',
+    title: 'DEV Community — 2026 最佳 OpenClaw Skills：安全可靠高价值精选',
+    desc: '实用指南：如何评估 Skills 的安全性，精选高价值低风险的 2026 年 ClawHub 技能推荐列表',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u771f\u5b9e\u6848\u4f8b", "\u81ea\u4e3b\u51b3\u7b56", "\u5546\u4e1a\u5316", "Medium"],
+    url: 'https://dev.to/curi0us_dev/best-openclaw-skills-for-2026-safe-high-impact-picks-2fjd',
+    category: 'use-cases',
+    source: 'DEV Community',
+    featured: true,
+  },
+
+  // skill-dev - skill
   {
     id: 'skill-005',
-    title: 'Marketing & Sales',
-    desc: 'SEO Audit, Social Content, Email Sequence',
+    title: 'DEV Community — OpenClaw for Developers：构建 Solo-Dev 公司',
+    desc: 'Steinberger 加入 OpenAI 是范式信号：OpenClaw 自动化 90% 重复性工作，助力一个人开公司',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['Marketing', 'SEO'],
-    stars: '94 Skills',
-    image: '/static/images/skills/marketing.png'
+    tags: ["$5\u670d\u52a1\u5668", "\u90ae\u4ef6\u81ea\u52a8\u5316", "\u771f\u5b9e\u4f53\u9a8c", "Medium"],
+    url: 'https://dev.to/shehzan/openclaw-for-developers-building-solo-dev-companies-2o6g',
+    category: 'skill-dev',
+    source: 'DEV Community',
+    featured: true,
   },
+
+  // skill-dev - skill
   {
     id: 'skill-006',
-    title: 'AI & LLMs',
-    desc: 'Kimi Integration, ChatGPT Apps, Vector Memory',
+    title: 'DEV Community — 2026 年 10 大新兴 OpenClaw 项目与 AI Agent 未来',
+    desc: 'OpenClaw 生态新兴项目盘点：NanoClaw、SecureClaw、KimiClaw 等及 Agent 未来趋势分析',
+    image: '/static/images/placeholder/skill.svg',
     type: 'skill',
-    tags: ['AI', 'LLM', 'Memory'],
-    stars: '159 Skills',
-    image: '/static/images/skills/ai.png'
-  }
+    tags: ["\u6280\u80fd\u63a8\u8350", "\u5b89\u5168\u8bc4\u4f30", "2026\u7cbe\u9009", "DEV"],
+    url: 'https://dev.to/chx381/top-10-emerging-openclaw-projects-and-the-future-of-ai-agents-in-2026-3f8d',
+    category: 'skill-dev',
+    source: 'DEV Community',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-232',
+    title: 'YouTube — OpenClaw Full Course：Set Up & Deploy Your Own AI Agent',
+    desc: '最新全课程：从理解 OpenClaw 作为自主 AI 编排层，到完整部署和功能使用的系统化教学',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u751f\u6001\u9879\u76ee", "\u672a\u6765\u8d8b\u52bf", "2026", "DEV"],
+    url: 'https://www.youtube.com/watch?v=sO6NSSOWDO0',
+    category: 'getting-started',
+    source: 'YouTube',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-233',
+    title: 'YouTube — My Multi-Agent Team with OpenClaw（Mac Mini 构建 4 Agent 商业团队）',
+    desc: '订购 Mac Mini 专跑 OpenClaw，搭建 4 个 AI Agent 协作团队运营业务，架构和决策全复盘',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168\u6307\u5357", "\u65b0\u624b", "\u98ce\u9669\u610f\u8bc6", "Substack"],
+    url: 'https://www.youtube.com/watch?v=bzWI3Dil9Ig',
+    category: 'getting-started',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-234',
+    title: 'YouTube — I Built an AI Agent That Hacks for Me：OpenClaw + Kali Linux',
+    desc: '安全研究向：用 OpenClaw 在 Kali Linux 云服务器上构建全自主 AI 黑客 Rig，演示合法渗透测试场景',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5168\u8bfe\u7a0b", "\u7cfb\u7edf\u5316", "\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=C5ir_rQ4L4g',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-235',
+    title: 'B站 — OpenClaw 多 Agent 高级玩法！Token 消耗减半',
+    desc: '不同任务分配不同模型，独立 Session + 独立记忆 + 独立工作空间，解锁正确多 Agent 使用姿势',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Mac Mini", "4 Agent", "\u5546\u4e1a\u56e2\u961f"],
+    url: 'https://www.bilibili.com/video/BV1dqffBMEcg/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-236',
+    title: 'B站 — MiniMax M2.5 接入 OpenClaw 深度实测：10B 激活参数全栈开发',
+    desc: '100TPS 推理速度实测：MiniMax M2.5 接入 OpenClaw，几轮对话搞定全栈项目，性价比分析',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Kali Linux", "\u5b89\u5168\u7814\u7a76", "\u6e17\u900f\u6d4b\u8bd5"],
+    url: 'https://www.bilibili.com/video/BV1SNcqziEwo/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-237',
+    title: 'B站 — Kimi 发布 Kimi Claw，让 AI 在飞书里 7×24 小时替你打工',
+    desc: '零基础上手原生 OpenClaw：Kimi Claw 发布，Moonshot 云端托管，接入飞书实现全天候自动化工作',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "\u591aAgent", "Token\u4f18\u5316", "\u8fdb\u9636"],
+    url: 'https://www.bilibili.com/video/BV119ZtBAEe3/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-238',
+    title: 'B站 — 超简单！5 分钟安装 OpenClaw 中文版',
+    desc: 'OpenClaw 中文版保姆级教程，5 分钟轻松搞定，配合喂饭级操作文档，小白友好',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "MiniMax", "M2.5", "\u6027\u4ef7\u6bd4"],
+    url: 'https://www.bilibili.com/video/BV1SucTzWEiL/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-239',
+    title: 'B站 — 上手 OpenClaw 的硬件/软件成本有多高？三种设备实测对比',
+    desc: '实测对比：服务器/Mac Mini/本地 PC 三种运行方案，AI 订阅成本横评，帮你选最性价比方案',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "Kimi Claw", "\u98de\u4e66", "7\u00d724", "Moonshot"],
+    url: 'https://www.bilibili.com/video/BV1fJZjBdEov/',
+    category: 'video',
+    source: 'Bilibili',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-240',
+    title: 'Reddit r/LocalLLaMA — 有人在真正使用 OpenClaw 吗？',
+    desc: 'r/LocalLLaMA 真实用户讨论：本地 LLM 用户的 OpenClaw 实际使用体验，含 Steinberger 加入 OpenAI 的分析',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["B\u7ad9", "\u4e2d\u6587\u7248", "5\u5206\u949f", "\u5c0f\u767d\u53cb\u597d"],
+    url: 'https://www.reddit.com/r/LocalLLaMA/comments/1r5v1jb/anyone_actually_using_openclaw/',
+    category: 'video',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-017',
+    title: 'Reddit r/SelfHosting — NanoClaw vs OpenClaw：安全意识用户如何选？',
+    desc: 'r/SelfHosting 讨论：从权限处理和安全架构角度对比 NanoClaw 与 OpenClaw，自托管社区真实建议',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["B\u7ad9", "\u6210\u672c\u5bf9\u6bd4", "\u786c\u4ef6\u9009\u578b", "\u6027\u4ef7\u6bd4"],
+    url: 'https://www.reddit.com/r/SelfHosting/comments/1r7x5u6/nanoclaw_vs_openclaw/',
+    category: 'use-cases',
+    source: 'Reddit',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-241',
+    title: 'OpenClaw Newsletter — 2026-02-20（v2026.2.19 Apple Watch + 安全加固）',
+    desc: '官方周刊：v2026.2.19 新增 Apple Watch 伴侣 App（收件箱 UI、通知中继、Gateway 指令）+ 史上最大安全加固补丁，含 openclaw acp --token-file/--password-file 和 exec 沙箱边界修复',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Reddit", "NanoClaw", "\u5bf9\u6bd4\u9009\u578b", "\u81ea\u6258\u7ba1"],
+    url: 'https://buttondown.com/openclaw-newsletter/archive/openclaw-newsletter-2026-02-20/',
+    category: 'deep-dive',
+    source: 'OpenClaw Newsletter',
+  },
+
+  // official - resource
+  {
+    id: 'res-242',
+    title: 'MeetNeura — OpenClaw 2026.2.21: Gemini 3.1 & GLM-5 Integration',
+    desc: 'v2026.2.21 功能全解析：Gemini 3.1 和 GLM-5 正式接入，Token 计数修复、记忆管理改进、嵌套子 Agent 处理优化',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.19", "Apple Watch", "\u5b89\u5168\u52a0\u56fa"],
+    url: 'https://blog.meetneura.ai/openclaw-2026-2-21/',
+    category: 'official',
+    source: 'MeetNeura',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-243',
+    title: 'OpenClaw v2026.2.19 深度解读：Apple Watch 功能 + 大规模安全加固',
+    desc: 'v2026.2.19 深度解读：Apple Watch 伴侣 App 让 AI 自动化延伸到手腕，同时这是项目史上安全补丁最密集的一次发版',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.19", "Apple Watch", "\u5b89\u5168\u52a0\u56fa"],
+    url: 'https://openclawlaunch.com/news/openclaw-v2026-2-19-apple-watch-security',
+    category: 'official',
+    source: 'OpenClaw Launch',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-244',
+    title: 'NewReleases.io — OpenClaw v2026.2.21 发布说明（Gemini 3.1 + Doubao）',
+    desc: 'v2026.2.21 完整 changelog：Gemini 3.1、GLM-5、Doubao（Volcano Engine/BytePlus）提供商接入，每账户/频道 defaultTo 路由回退机制',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.21", "Gemini 3.1", "GLM-5", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://www.gradually.ai/en/changelogs/openclaw/',
+    category: 'official',
+    source: 'gradually.ai',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-245',
+    title: 'Julian Goldie — OpenClaw 2026.2.19 Update: Power, Security & Speed',
+    desc: '全面解读 v2026.2.19：Apple Watch 功能带来 AI 自动化新入口，安全加固细节分析和对日常工作流的实际影响',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.21", "Gemini 3.1", "Doubao", "Volcano Engine", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://juliangoldie.com/openclaw-2026-2-19-update/',
+    category: 'official',
+    source: 'Julian Goldie',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-246',
+    title: 'Atal Upadhyay — OpenClaw 2026.2.19 技术深度剖析与安全分析',
+    desc: 'v2026.2.19 全面技术指南：架构哲学、Apple Watch 集成机制、exec 沙箱边界修复、ACP 令牌文件支持的深度解读',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.21", "Gemini 3.1", "Doubao", "Volcano Engine", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://atalupadhyay.wordpress.com/2026/02/21/openclaw-2026-2-19-technical-deep-dive-security-analysis/',
+    category: 'deep-dive',
+    source: 'Atal Upadhyay',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-247',
+    title: 'VentureBeat — Runlayer 为大型企业提供安全 OpenClaw Agentic 能力',
+    desc: 'Runlayer 发布企业级 OpenClaw 安全封装方案：权限管控、审计日志、合规部署，面向拒绝公开部署 OpenClaw 的大型企业',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["VentureBeat", "OpenAI", "ChatGPT\u65f6\u4ee3", "\u884c\u4e1a\u5206\u6790", "\u91cc\u7a0b\u7891"],
+    url: 'https://venturebeat.com/orchestration/runlayer-is-now-offering-secure-openclaw-agentic-capabilities-for-large',
+    category: 'deep-dive',
+    source: 'VentureBeat',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-248',
+    title: 'The Hacker News — Cline CLI 2.3.0 供应链攻击：自动安装 OpenClaw 到开发者系统',
+    desc: '2026-02-17 凌晨攻击者利用泄露 npm token 发布恶意 cline@2.3.0，在数千开发者系统悄悄安装 OpenClaw，OpenClaw 社区需警惕非官方安装路径',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["VentureBeat", "\u4f01\u4e1a\u5b89\u5168", "Runlayer", "\u5408\u89c4\u90e8\u7f72"],
+    url: 'https://thehackernews.com/2026/02/cline-cli-230-supply-chain-attack.html',
+    category: 'deep-dive',
+    source: 'The Hacker News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-249',
+    title: 'Medium — OpenClaw 安全噩梦：为什么开发者正迁移到 NanoClaw',
+    desc: 'CVE-2026-25253（一键 RCE）+ 数千暴露实例 + 明文凭证泄漏：详述 OpenClaw 安全问题，15 分钟 NanoClaw 迁移完整指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["WIRED", "\u5b89\u5168\u9650\u5236", "Meta", "\u4f01\u4e1a", "\u6700\u65b0"],
+    url: 'https://medium.com/@anilkalm788/openclaw-security-nightmare-nanoclaw-53d6ea843384',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-250',
+    title: 'AlphaTechFinance — OpenClaw 完整 2026 指南：本地 AI Agent、安装、用例与安全风险',
+    desc: '多维度全面指南：本地优先 AI Agent 安装、macOS/Windows 配置、主动式财务监控等用例，以及安全风险评估清单',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "OpenAI", "Agent\u6210\u719f", "\u884c\u4e1a\u5206\u6790", "2026"],
+    url: 'https://alphatechfinance.com/productivity-app/openclaw-ai-agent-2026-guide/',
+    category: 'deep-dive',
+    source: 'AlphaTechFinance',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-251',
+    title: 'The Neuron AI — OpenClaw 设置指南：如何构建你的 AI Agent 团队',
+    desc: 'QMD 记忆后端配置（v2026.2.13+）、多 Agent 团队架构、OpenAI 接管后的最新动态，实用的新手 + 进阶用户指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "OpenAI", "Agent\u6210\u719f", "\u884c\u4e1a\u5206\u6790", "2026"],
+    url: 'https://www.theneuron.ai/explainer-articles/openclaw-personal-ai-agent-setup-guide-an-use-cases-february-2026/',
+    category: 'getting-started',
+    source: 'The Neuron AI',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-252',
+    title: 'Foxes Sell Faster — How I Built My Own AI Agent: Complete 2026 Tutorial',
+    desc: '零命令行基础也能看懂：从 OpenClaw 安装到真实商业场景落地的完整图文教程，含步骤截图和踩坑经验',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b8c\u6574\u6307\u5357", "\u672c\u5730\u4f18\u5148", "\u7528\u4f8b", "\u5b89\u5168", "2026"],
+    url: 'https://www.foxessellfaster.com/blog/openclaw-setup-guide-how-i-built-my-own-ai-agent-complete-2026-tutorial/',
+    category: 'getting-started',
+    source: 'Foxes Sell Faster',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-253',
+    title: 'Medium — I Built an AI Agent That Works While I Sleep（Moltbook + OpenClaw 教程）',
+    desc: 'Moltbook 社交网络 + OpenClaw 组合玩法：让 AI 拥有自己的人设、建立粉丝群体，7×24 小时代劳工作的完整配置教程',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["QMD\u8bb0\u5fc6", "\u591aAgent\u56e2\u961f", "\u57fa\u91d1\u4f1a", "2026\u6700\u65b0"],
+    url: 'https://archive.ph/db36o',
+    category: 'getting-started',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-254',
+    title: 'Genviral 发布 OpenClaw 社交媒体自动化技能（覆盖六大平台）',
+    desc: 'Genviral 发布原生 OpenClaw Skill：支持 X/Twitter、Instagram、LinkedIn、Facebook、TikTok、YouTube 六大平台内容自动化发布，200,000+ Stars 社区首选工具之一',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u96f6\u57fa\u7840", "\u5546\u4e1a\u573a\u666f", "\u56fe\u6587", "2026"],
+    url: 'https://www.manilatimes.net/2026/02/23/tmt-newswire/plentisoft/genviral-releases-openclaw-skill-to-automate-social-media-content-across-six-platforms/2282684',
+    category: 'getting-started',
+    source: 'Manila Times',
+    featured: true,
+  },
+
+  // skill-dev - skill
+  {
+    id: 'skill-007',
+    title: 'Simplified — Top 10 OpenClaw Use Cases in 2026: What People Actually Do With It',
+    desc: '10 个真实使用场景：从个人生产力到业务自动化，涵盖电子邮件处理、日历管理、代码审查、财务监控等，附安全注意事项',
+    image: '/static/images/placeholder/skill.svg',
+    type: 'skill',
+    tags: ["Genviral", "\u793e\u4ea4\u5a92\u4f53", "\u516d\u5e73\u53f0", "\u81ea\u52a8\u53d1\u5e03", "\u65b0\u6280\u80fd"],
+    url: 'https://simplified.com/blog/automation/top-openclaw-use-cases',
+    category: 'skill-dev',
+    source: 'Simplified',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-018',
+    title: 'YouTube — OpenClaw Setup Tutorial With New Use Cases 2026（TheAIGrid）',
+    desc: 'TheAIGrid 出品：最新版 OpenClaw 安装教程 + 全新用例演示，含 Hostinger 一键部署，Skool 社区学习资源',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Genviral", "\u793e\u4ea4\u5a92\u4f53", "\u516d\u5e73\u53f0", "\u81ea\u52a8\u53d1\u5e03", "\u65b0\u6280\u80fd"],
+    url: 'https://www.youtube.com/watch?v=1c_9tuQdkLY',
+    category: 'use-cases',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-019',
+    title: 'YouTube — New FREE OpenClaw Update! What Changed（Feb 2026）',
+    desc: '最新免费更新速览：新功能演示、OpenClaw 基金会过渡后的发展方向，AI 利润社区实战经验分享',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["10\u573a\u666f", "\u751f\u4ea7\u529b", "\u4e1a\u52a1\u81ea\u52a8\u5316", "\u5b89\u5168\u6ce8\u610f"],
+    url: 'https://www.youtube.com/watch?v=mBwDIYd2Tso',
+    category: 'use-cases',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-255',
+    title: 'YouTube — OpenClaw Tutorial for Beginners 2026（Step-By-Step）',
+    desc: '2026 年最新初学者分步教程：从零开始到自信运行 OpenClaw，语速适中、截图清晰、适合完全新手',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "TheAIGrid", "\u7528\u4f8b\u6f14\u793a", "\u6700\u65b0", "2026"],
+    url: 'https://www.youtube.com/watch?v=bUjbtuMlFKg',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-256',
+    title: 'NewReleases.io — OpenClaw v2026.2.22-beta.1 发布说明',
+    desc: 'v2026.2.22-beta.1 细节：Gateway 重启循环边界情况修复，bootstrap 检测显式化，`openclaw.mjs -> dist/entry.js` 引导路径锁收紧，重启回归覆盖率提升',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.23", "Claude Opus 4.6", "SSRF", "\u5b89\u5168\u4fee\u590d", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://newreleases.io/project/github/openclaw/openclaw/release/v2026.2.22-beta.1',
+    category: 'official',
+    source: 'NewReleases.io',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-257',
+    title: 'Bitdoze — OpenClaw 安全指南：CVE-2026-25253、恶意技能与 40+ 修复',
+    desc: '2026.2.22 / 2026.2.23 安全修复全集：执行审批系统多个绕过路径披露，ClawHub 恶意技能防护，含最新版本 CHANGELOG 对照安全加固清单',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.22-beta", "Gateway\u91cd\u542f", "bootstrap", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://www.bitdoze.com/openclaw-security-guide/',
+    category: 'official',
+    source: 'Bitdoze',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-258',
+    title: 'Valletta Software — OpenClaw 2026：架构、部署与技能安全实践者指南',
+    desc: '196K+ GitHub Stars 背景下的实践者指南：本地优先 Gateway 原理、安装命令对照表、ClawHub 供应链风险（341+ 已确认恶意技能）及团队安全部署加固清单',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.22-beta", "Gateway\u91cd\u542f", "bootstrap", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://vallettasoftware.com/blog/post/openclaw-2026-guide',
+    category: 'deep-dive',
+    source: 'Valletta Software',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-259',
+    title: 'Medium — What is OpenClaw: Open-Source AI Agent in 2026（Setup + Features）',
+    desc: '社区成长视角入门：Skills 注册表爆炸式增长、每日新增集成、OpenClaw 如何成为 2026 年真正的个人自主 AI Agent 平台，含安装路径和主要功能速览',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u67b6\u6784", "196K Stars", "\u4f9b\u5e94\u94fe\u98ce\u9669", "\u5b89\u5168\u6e05\u5355", "\u5b9e\u8df5\u8005"],
+    url: 'https://archive.ph/BSrZG',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-260',
+    title: 'Trend Micro — 恶意 OpenClaw Skills 传播 Atomic macOS Stealer',
+    desc: 'Trend Micro 威胁研究：39 个恶意 ClawHub 技能伪装成合法 CLI 工具，实为 Atomic macOS Stealer，受害者 SSH 密钥、浏览器密码和加密钱包遭窃',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["2026\u5165\u95e8", "\u793e\u533a\u751f\u6001", "\u81ea\u4e3bAgent", "\u529f\u80fd\u6982\u89c8"],
+    url: 'https://www.trendmicro.com/en_us/research/26/b/openclaw-skills-used-to-distribute-atomic-macos-stealer.html',
+    category: 'getting-started',
+    source: 'Trend Micro',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-261',
+    title: 'Awesome Agents — ClawHub #1 技能竟是恶意软件：供应链攻击全内幕',
+    desc: '深度调查：1,184 个恶意技能窃取 SSH Key、加密钱包和浏览器密码，单个攻击者上传 677 个恶意包，ClawHub 供应链攻击完整时间线',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Trend Micro", "\u5b89\u5168", "Atomic Stealer", "macOS", "\u6076\u610f\u6280\u80fd"],
+    url: 'https://awesomeagents.ai/news/openclaw-clawhub-malware-supply-chain/',
+    category: 'deep-dive',
+    source: 'Awesome Agents',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-262',
+    title: 'OpenClaw Review 2026: Can This Viral AI Agent Actually Make You Money?',
+    desc: '全面综述评测：从 Clawdbot 到 OpenClaw 的混乱历史、386 个恶意技能事件、Trend Micro/Bitsight 安全报告梳理，以及真实商业变现可行性分析',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Trend Micro", "\u5b89\u5168", "Atomic Stealer", "macOS", "\u6076\u610f\u6280\u80fd"],
+    url: 'https://marksinsights.com/openclaw/',
+    category: 'deep-dive',
+    source: 'Mark',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-263',
+    title: 'DEV Community — AI Agents 终极指南 2026：OpenClaw vs Claude Cowork vs Claude Code',
+    desc: '三大 AI Agent 平台深度横评：持续记忆与主动性、技能扩展、MCP 集成，帮助开发者在不同场景下选择正确的 Agent 框架',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u4f9b\u5e94\u94fe\u653b\u51fb", "1184\u6076\u610f\u5305", "SSH\u5bc6\u94a5", "\u52a0\u5bc6\u94b1\u5305", "\u5fc5\u8bfb"],
+    url: 'https://dev.to/tech_croc_f32fbb6ea8ed4/the-ultimate-guide-to-ai-agents-in-2026-openclaw-vs-claude-cowork-vs-claude-code-395h',
+    category: 'deep-dive',
+    source: 'DEV Community',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-264',
+    title: 'Apiyi — ClawHub.ai 解码：220K Stars 开源 Agent 的 3000+ 技能注册表深度指南',
+    desc: 'ClawHub.ai 生态全景：技能分类体系、安全安装原则、2026 年热门精选技能推荐，以及 Steinberger 加入 OpenAI 后基金会维护路线图',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Agent\u5bf9\u6bd4", "Claude Code", "\u6846\u67b6\u9009\u578b", "2026", "DEV"],
+    url: 'https://help.apiyi.com/en/clawhub-ai-openclaw-skills-registry-guide-en.html',
+    category: 'deep-dive',
+    source: 'Apiyi',
+    featured: true,
+  },
+
+  // skill-dev - skill
+  {
+    id: 'skill-008',
+    title: 'Releasebot — OpenClaw 发版追踪：2026 年 2 月更新日志',
+    desc: 'v2026.2.23/2026.2.24 自动更新追踪：openclaw update --dry-run 预览命令、内置自动更新器（update.auto. 默认关闭）、多语言停止指令扩展（ZH/JP/AR 等）',
+    image: '/static/images/placeholder/skill.svg',
+    type: 'skill',
+    tags: ["ClawHub", "3000+\u6280\u80fd", "\u5b89\u5168\u5b89\u88c5", "\u751f\u6001\u5168\u666f", "220K Stars"],
+    url: 'https://releasebot.io/updates/openclaw',
+    category: 'skill-dev',
+    source: 'Releasebot',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-265',
+    title: 'NRI Globe — How to Use OpenClaw as Your Personal AI Assistant: Ultimate 2026 Guide',
+    desc: '2026 全面使用指南：安装配置、功能介绍、自动化使用技巧和真实用例，面向希望打造 24/7 个人 AI 助手的普通用户',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["ClawHub", "3000+\u6280\u80fd", "\u5b89\u5168\u5b89\u88c5", "\u751f\u6001\u5168\u666f", "220K Stars"],
+    url: 'https://nriglobe.com/tech-news/how-to-use-openclaw-personal-ai-assistant-2026/',
+    category: 'official',
+    source: 'NRI Globe',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-266',
+    title: 'OpenClaw Index — Claude Opus 4.6 大升级：ClawdBot 与 Claude Code 完整指南',
+    desc: 'Claude Opus 4.6 在 ClawdBot 和 Claude Code 中的增强规划能力、Agentic 编码改进，含完整设置指南和进阶 AI 开发工作流',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u7248\u672c\u8ffd\u8e2a", "v2026.2.24", "\u81ea\u52a8\u66f4\u65b0", "\u591a\u8bed\u8a00"],
+    url: 'https://openclawindex.com/learn/claude-opus-46-is-a-massive-upgrade-for-clawdbot-and-claude-code-full-guide',
+    category: 'getting-started',
+    source: 'OpenClaw Index',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-267',
+    title: 'Reddit — Full Tutorial: How to Build an OpenClaw Business That Makes $4,000 a Week',
+    desc: 'Reddit r/ArtificialInteligence 热门帖：Nat Eliason 35 分钟完整教程，从 Agent 设置到构建每周 $4000 收入的 OpenClaw 自动化业务，真实可操作',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Claude Opus 4.6", "Claude Code", "Agentic\u7f16\u7801", "\u8fdb\u9636"],
+    url: 'https://www.reddit.com/r/ArtificialInteligence/comments/1rbp25j/full_tutorial_how_to_build_an_openclaw_business/',
+    category: 'getting-started',
+    source: 'Reddit',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-020',
+    title: 'YouTube — How to Create Multiple Agents in Clawdbot（2026 Tutorial）',
+    desc: '多 Agent 创建全流程：openclaw agents add、openclaw configure 命令详解，附完整 SOP 文档和 GitHub 模板下载',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Reddit", "\u5546\u4e1a\u53d8\u73b0", "$4000/\u5468", "Nat Eliason", "\u5b9e\u6218"],
+    url: 'https://www.youtube.com/watch?v=EMBNyWVsEXc',
+    category: 'use-cases',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-268',
+    title: 'YouTube — SECURE OpenClaw Setup Guide（ClawdBot Tutorial）',
+    desc: 'Hostinger VPS + Docker 安全部署教程：Gateway 安全配置、API 支出限制、权限控制，这是你安装 OpenClaw 前必看的安全版指南',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["Reddit", "\u5546\u4e1a\u53d8\u73b0", "$4000/\u5468", "Nat Eliason", "\u5b9e\u6218"],
+    url: 'https://www.youtube.com/watch?v=YCD2FSvj35I',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-269',
+    title: 'YouTube — How I Setup My ClawdBot as a Professional Developer（Insanely Powerful）',
+    desc: 'Tech With Tim 专业开发者视角：如何把 OpenClaw 打造成极其强大的开发辅助系统，boot.dev 赞助，含完整配置思路',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u591aAgent", "SOP\u6587\u6863", "2026\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=NO-bOryZoTE',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-270',
+    title: 'YouTube — ClawdBot Beginner Guide 2026：完整安装 + Telegram & WhatsApp 集成',
+    desc: '想在自己的笔记本上打造 JARVIS？完整 ClawdBot (OpenClaw) 入门教程：分步安装、Telegram/WhatsApp 双平台接入，适合零基础新手',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5b89\u5168\u90e8\u7f72", "Docker", "Hostinger", "\u5fc5\u770b"],
+    url: 'https://www.youtube.com/watch?v=Glz-QQOOWXw',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-271',
+    title: 'YouTube — OpenClaw Full Tutorial for Beginners: How to Setup Your First AI Agent',
+    desc: '全流程入门视频：从零开始完整安装 OpenClaw，涵盖专属设备部署、Telegram Bot 配置、Open Router 模型接入，适合 Agent 新手',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Tech With Tim", "\u4e13\u4e1a\u5f00\u53d1\u8005", "\u5f00\u53d1\u914d\u7f6e"],
+    url: 'https://www.youtube.com/watch?v=BoC5MY_7aDk',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-272',
+    title: 'OpenClaw Newsletter — 2026-02-25（v2026.2.24：多语言停止指令 + 226K Stars）',
+    desc: '官方周刊：v2026.2.24 扩展自动停止短语（支持 ES/FR/ZH/HI/AR/JP/DE/PT/RU 多语言），新增 `do not do that` 作为停止触发词；Homebrew 30 天内 3,284 次安装，仓库突破 226,887 Stars',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u7b2c\u4e00\u4e2aAgent", "OpenRouter", "Telegram Bot"],
+    url: 'https://buttondown.com/openclaw-newsletter/archive/openclaw-newsletter-2026-02-25/',
+    category: 'video',
+    source: 'OpenClaw Newsletter',
+  },
+
+  // official - resource
+  {
+    id: 'res-273',
+    title: 'DEV Community — What is OpenClaw AI in 2026? A Practical Guide for Developers',
+    desc: 'OpenClaw 自托管 AI Agent 实用开发者指南：执行真实操作（文件、API、Telegram 等），全面覆盖安装、技能开发和安全配置',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b98\u65b9\u5468\u520a", "v2026.2.24", "\u591a\u8bed\u8a00", "226K Stars"],
+    url: 'https://dev.to/laracopilot/what-is-openclaw-ai-in-2026-a-practical-guide-for-developers-25hj',
+    category: 'official',
+    source: 'DEV Community',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-274',
+    title: 'Medium — Understanding OpenClaw: Self-Hosted AI Agents on Cloud Infrastructure',
+    desc: '云基础设施上的 OpenClaw 自托管指南：Ubuntu 22.04 实例部署、Node.js 18+ 安装、API Key 配置，以及安全组和 SSH 密钥管理',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["DEV", "\u5f00\u53d1\u8005", "\u81ea\u6258\u7ba1", "\u5b9e\u7528\u6307\u5357", "2026"],
+    url: 'https://medium.com/@alexrozdolskiy/understanding-openclaw-self-hosted-ai-agents-on-cloud-infrastructure-28d28e4078f3',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-275',
+    title: 'Medium — 33 OpenClaw Automations That Make Money (2026 Guide)',
+    desc: '33 个已测试的 OpenClaw 自动化方案，可在 30 分钟内配置完成并开始创收：收入生成、生产力提升、监控和业务工作流全覆盖',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "Ubuntu", "\u4e91\u90e8\u7f72", "Node.js", "\u5b89\u5168\u7ec4"],
+    url: 'https://medium.com/@rentierdigital/33-openclaw-automations-you-can-set-up-in-30-minutes-that-start-making-you-money-tonight-f8c3b8a402f1',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-021',
+    title: 'Medium — 21 Advanced OpenClaw Automations for Developers (2026)',
+    desc: '进阶自动化方案：基础教程不提的 21 个玩法，n8n + Convex + Supabase 集成，在真实 VPS 上实测的时间节省数据',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Medium", "33\u81ea\u52a8\u5316", "\u521b\u6536", "30\u5206\u949f", "\u5b9e\u6218"],
+    url: 'https://medium.com/@rentierdigital/21-openclaw-automations-nobody-talks-about-because-the-obvious-ones-already-broke-the-internet-3f881b9e0018',
+    category: 'use-cases',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-022',
+    title: 'Medium — OpenClaw with Free LLM: What Actually Works in 2026',
+    desc: '免费/廉价 LLM 接入 OpenClaw 实测：Ollama、Groq、Mistral、OpenRouter，哪个能用、哪个崩掉，附最佳预算方案建议',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Medium", "21\u8fdb\u9636\u81ea\u52a8\u5316", "n8n", "Convex", "Supabase", "VPS"],
+    url: 'https://medium.com/@rentierdigital/i-tried-running-clawdbot-with-a-free-llm-heres-what-happened-2b5d80cbf7f5',
+    category: 'use-cases',
+    source: 'Medium',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-023',
+    title: 'Reddit r/myclaw — OpenClaw v2026.2.25 正式发布',
+    desc: 'v2026.2.25 关键更新：Heartbeat DM 投递恢复、子 Agent 投递全面重构、Slack 线程会话修复、跨频道 Reaction 认证加固',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Medium", "\u514d\u8d39LLM", "Ollama", "Groq", "OpenRouter", "\u9884\u7b97\u65b9\u6848"],
+    url: 'https://www.reddit.com/r/myclaw/comments/1rf4zr0/openclaw_just_launched_v2026225/',
+    category: 'use-cases',
+    source: 'Reddit',
+  },
+
+  // official - resource
+  {
+    id: 'res-276',
+    title: 'PatchBot — OpenClaw 补丁说明（含 v2026.2.26 External Secrets Management）',
+    desc: 'v2026.2.26 重大新功能：External Secrets Management 完整工作流（audit/configure/apply/reload），运行时快照激活、严格 target-path 验证、安全迁移清洗',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.25", "Heartbeat", "\u5b50Agent", "Slack", "Reaction", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://patchbot.io/ai/openclaw',
+    category: 'official',
+    source: 'PatchBot',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-277',
+    title: 'Software Mirrors — OpenClaw 2026.2.26（版本信息与下载）',
+    desc: '第三方软件镜像站收录最新 OpenClaw 2026.2.26，含版本历史和下载链接，便于追踪版本更新',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.25", "Heartbeat", "\u5b50Agent", "Slack", "Reaction", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://www.software-mirrors.com/products/openclaw-formerly-moltbot-clawd-bot',
+    category: 'official',
+    source: 'Software Mirrors',
+    featured: true,
+  },
+
+  // official - resource
+  {
+    id: 'res-278',
+    title: 'Cryptika — OpenClaw 2026.2.23 发布：安全加固与 AI 新特性',
+    desc: 'Cryptika 网络安全媒体报道：215K+ Stars 的 OpenClaw 发布 v2026.2.23，SSRF 防护升级、Claude Opus 4.6 接入，breaking change 详解和升级指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.26", "External Secrets", "\u5b89\u5168", "\u7248\u672c\u8ffd\u8e2a"],
+    url: 'https://www.cryptika.com/openclaw-releases-2026-2-23-released-with-security-updates-and-new-ai-features/',
+    category: 'official',
+    source: 'Cryptika',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-279',
+    title: 'YouTube — OpenClaw / ClawdBot Tutorial for Beginners | Setup in 10 Minutes',
+    desc: 'Hostinger 一键安装器快速上手教程：从申请 Bot Token 到第一次对话，全程 10 分钟完成 OpenClaw 部署',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.23", "\u5b89\u5168", "SSRF", "Cryptika", "Claude Opus 4.6"],
+    url: 'https://www.youtube.com/watch?v=OU63DGuEggg',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-280',
+    title: 'YouTube — Your Clawdbot Broke? Watch This to Fix It（2026 故障排除）',
+    desc: 'Skool 社区出品：OpenClaw 常见故障全解决，含 Claude Code 配置修复，附终端命令速查和 GitHub 模板，是装完跑不起来时的第一选择',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["v2026.2.23", "\u5b89\u5168", "SSRF", "Cryptika", "Claude Opus 4.6"],
+    url: 'https://www.youtube.com/watch?v=pmbftRnW4Yc',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-281',
+    title: 'YouTube — OpenClaw: Complete Beginners Guide! (2026)',
+    desc: '完整初学者指南，含 AI 提示词模板和商业转化实战配置，适合从零开始搭建 24/7 AI 助手',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u6545\u969c\u6392\u9664", "\u4fee\u590d", "Skool", "2026\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=BI034QtdmTo',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-282',
+    title: 'YouTube — The Ultimate Beginners Guide To OpenClaw Setup!',
+    desc: '家庭自动化视角的 OpenClaw 入门：如何用 OpenClaw 实现生活自动化，改变日常生活的完整上手指南',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u6545\u969c\u6392\u9664", "\u4fee\u590d", "Skool", "2026\u6700\u65b0"],
+    url: 'https://www.youtube.com/watch?v=Qtoum-9SJ9g',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-283',
+    title: 'YouTube — Setup OpenClaw with Ollama on Ubuntu (Zero API Cost 2026)',
+    desc: '完全免费方案：Ubuntu Linux 上接入 Ollama 本地模型运行 OpenClaw，零 API 费用，含完整步骤演示',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u521d\u5b66\u8005", "2026", "\u5b8c\u6574\u6559\u7a0b"],
+    url: 'https://www.youtube.com/watch?v=_dzz5sJe-Ug',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-284',
+    title: 'YouTube — The EASIEST & SAFEST Way to Set Up OpenClaw For Beginners (2026)',
+    desc: 'MyClaw.ai 托管方案介绍：史上最简单且安全的 OpenClaw 部署方式，无需 VPS 或技术基础，适合完全新手',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "\u5bb6\u5ead\u81ea\u52a8\u5316", "\u751f\u6d3b\u81ea\u52a8\u5316", "\u5165\u95e8"],
+    url: 'https://www.youtube.com/watch?v=LiyR2C6smjo',
+    category: 'video',
+    source: 'YouTube',
+    featured: true,
+  },
+
+  // video - resource
+  {
+    id: 'res-285',
+    title: 'Vectra AI — From Clawdbot to OpenClaw: When Automation Becomes a Digital Backdoor',
+    desc: 'Vectra AI 安全研究：Clawdbot → Moltbot → OpenClaw 演化轨迹深度分析，AI Agent 自动化如何成为潜在攻击面',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["YouTube", "Ollama", "Ubuntu", "\u514d\u8d39", "\u672c\u5730\u6a21\u578b", "\u6700\u65b0"],
+    url: 'https://www.vectra.ai/blog/clawdbot-to-moltbot-to-openclaw-when-automation-becomes-a-digital-backdoor',
+    category: 'video',
+    source: 'Vectra AI',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-286',
+    title: 'Context Studios — The Complete OpenClaw Guide: Running an AI Agent in Production (2026)',
+    desc: '生产环境实战全记录：从安装配置到多 Agent 工作流、浏览器自动化和 134 个 MCP 工具的完整运营指南',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Vectra AI", "\u5b89\u5168\u5206\u6790", "\u653b\u51fb\u9762", "\u6f14\u5316\u5386\u53f2"],
+    url: 'https://www.contextstudios.ai/blog/the-complete-openclaw-guide-how-we-run-an-ai-agent-in-production-2026',
+    category: 'deep-dive',
+    source: 'Context Studios',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-287',
+    title: 'Medium — From Clawdbot to OpenAI: What the OpenClaw Story Actually Tells Us',
+    desc: '亲历者回顾：Clawdbot 爆火、品牌混乱、Steinberger 加入 OpenAI 的全过程，从社区视角理解 OpenClaw 这段历史的深层意义',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u751f\u4ea7\u73af\u5883", "MCP", "\u591aAgent", "\u6d4f\u89c8\u5668\u81ea\u52a8\u5316", "\u5b9e\u6218"],
+    url: 'https://medium.com/@cdcore/from-clawdbot-to-openai-what-the-openclaw-story-actually-tells-us-79e3d034f227',
+    category: 'deep-dive',
+    source: 'Medium',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-288',
+    title: 'The Hacker News — ClawJacked：恶意网站可通过 WebSocket 劫持本地 OpenClaw Agent',
+    desc: 'ClawJacked 漏洞披露：攻击者利用本地 OpenClaw WebSocket（TCP 18789）实施 DNS 重绑定攻击，可搜索 Slack 历史、读私信、窃取文件并执行任意 Shell 命令；升级到 v2026.2.25+ 修复',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Medium", "\u5386\u53f2\u56de\u987e", "\u54c1\u724c\u6f14\u53d8", "OpenAI", "\u793e\u533a\u89c6\u89d2"],
+    url: 'https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html',
+    category: 'deep-dive',
+    source: 'The Hacker News',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-289',
+    title: 'CyberSecurity News — OpenClaw 0-Click 漏洞：恶意网站可无感劫持开发者本地 AI Agent',
+    desc: '0-Click 漏洞详细分析：不需用户点击，浏览器访问恶意页面即触发本地 OpenClaw 实例被接管；同期披露日志中毒漏洞（公开实例 TCP 18789），立即升级至 v2026.2.25+',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["ClawJacked", "\u5b89\u5168", "WebSocket", "DNS\u91cd\u7ed1\u5b9a", "v2026.2.25", "\u5fc5\u8bfb"],
+    url: 'https://cybersecuritynews.com/openclaw-0-click-vulnerability/',
+    category: 'deep-dive',
+    source: 'CyberSecurity News',
+    featured: true,
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-290',
+    title: 'QuantoSei — OpenClaw AI 自动化：营销提效与商业变现完整指南',
+    desc: '营销场景落地实战：OpenClaw 自动化内容发布、客户沟通和销售漏斗，含具体配置示例和收益测算，适合中小企业主和独立营销人',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Mac Mini\u65ad\u8d27", "\u793e\u4f1a\u73b0\u8c61", "\u9690\u79c1\u4f18\u5148", "OpenAI", "\u6df1\u5ea6\u62a5\u9053"],
+    url: 'https://news.quantosei.com/2026/02/28/how-to-automate-marketing-with-openclaw-and-make-money/',
+    category: 'deep-dive',
+    source: 'QuantoSei',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-024',
+    title: 'TechCrunch — Meta 安全研究员发现 OpenClaw 隐患',
+    desc: 'Meta AI 安全研究员分享其 OpenClaw 邮箱集成意外行为的经历',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["Mac Mini\u65ad\u8d27", "\u793e\u4f1a\u73b0\u8c61", "\u9690\u79c1\u4f18\u5148", "OpenAI", "\u6df1\u5ea6\u62a5\u9053"],
+    url: 'https://techcrunch.com/2026/02/23/a-meta-ai-security-researcher-said-an-openclaw-agent-ran-amok-on-her-inbox/',
+    category: 'use-cases',
+    source: 'TechCrunch',
+  },
+
+  // use-cases - case
+  {
+    id: 'case-025',
+    title: 'Raspberry Pi — 在树莓派上部署 OpenClaw',
+    desc: '官方博客教程：将树莓派变成 AI Agent 硬件',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u8425\u9500\u81ea\u52a8\u5316", "\u5546\u4e1a\u53d8\u73b0", "\u5185\u5bb9\u53d1\u5e03", "\u9500\u552e\u6f0f\u6597"],
+    url: 'https://www.raspberrypi.com/news/turn-your-raspberry-pi-into-an-ai-agent-with-openclaw/',
+    category: 'use-cases',
+    source: 'Raspberry Pi',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-291',
+    title: 'Fast Company — 我让 AI Agent 替我工作',
+    desc: '记者亲身体验 OpenClaw 自动化工作流程，结果既惊喜又有些担忧',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u5b89\u5168", "\u6848\u4f8b"],
+    url: 'https://www.fastcompany.com/91495511/i-built-an-openclaw-ai-agent-to-do-my-job-for-me-results-were-surprising-scary',
+    category: 'deep-dive',
+    source: 'Fast Company',
+    featured: true,
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-292',
+    title: 'Malwarebytes — OpenClaw 安全使用指南',
+    desc: '安全厂商视角：OpenClaw 是什么，如何安全使用',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u6811\u8393\u6d3e", "\u786c\u4ef6", "\u90e8\u7f72"],
+    url: 'https://www.malwarebytes.com/blog/news/2026/02/openclaw-what-is-it-and-can-you-use-it-safely',
+    category: 'getting-started',
+    source: 'Malwarebytes',
+    featured: true,
+  },
+
+  // use-cases - case
+  {
+    id: 'case-026',
+    title: 'MaxClaw — MiniMax 云托管 OpenClaw 教程',
+    desc: '无需本地部署，一键在云端运行 OpenClaw（视频教程）',
+    image: '/static/images/placeholder/case.svg',
+    type: 'case',
+    tags: ["\u4f53\u9a8c", "\u81ea\u52a8\u5316"],
+    url: 'https://www.youtube.com/watch?v=Ka6J6XTHm-c',
+    category: 'use-cases',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-293',
+    title: 'YouTube — OpenClaw Skills Explained in 1 Minute',
+    desc: '1 分钟速懂 OpenClaw Skills：如何在 ClawHub 和 GitHub 找技能、一句话安装、如何避开恶意代码',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["\u4e91\u6258\u7ba1", "MiniMax"],
+    url: 'https://www.youtube.com/watch?v=xFRRo9fo7Ko',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-294',
+    title: 'YouTube — OpenClaw Tutorial for Beginners: How to Use & Set up OpenClaw (ClawdBot)',
+    desc: '零基础入门教程：从注册 Telegram Bot 到完整部署 OpenClaw，配合 Hostinger VPS 一步步完成安装',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["ClawHub", "\u6280\u80fd\u5b89\u88c5", "\u5165\u95e8\u7cfb\u5217"],
+    url: 'https://www.youtube.com/watch?v=Fw4dTGWtE7M',
+    category: 'video',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-295',
+    title: 'Medium — Mastering OpenClaw: Your Ultimate Guide to Setting Up a Personal AI Assistant in 2026',
+    desc: '手把手指南：自定义 Skills、调优速度、安全加固（VM 隔离 + 安全审计 + 禁止公开 Gateway）的最佳实践',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["\u6280\u80fd", "ClawHub", "\u5feb\u901f\u5165\u95e8"],
+    url: 'https://medium.com/@vignarajj/mastering-openclaw-your-ultimate-guide-to-setting-up-a-personal-ai-assistant-in-2026-266d8c8e66fb',
+    category: 'video',
+    source: 'Medium',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-296',
+    title: 'New OpenClaw v2026.2.26: Secrets, Browser Control, Multi-DM & Android',
+    desc: 'Reddit r/LocalLLM 社区对最新版本的详细讨论，涵盖 secrets 改进、浏览器控制优化、多 DM 支持和 Android 适配等核心变化。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["Skills\u5b9a\u5236", "\u5b89\u5168\u52a0\u56fa", "\u6027\u80fd\u4f18\u5316", "\u5b9e\u6218\u6307\u5357"],
+    url: 'https://www.reddit.com/r/LocalLLM/comments/1rimve1/new_openclaw_release_version_2026226_way_less/',
+    category: 'getting-started',
+    source: 'Reddit r/LocalLLM',
+  },
+
+  // official - resource
+  {
+    id: 'res-297',
+    title: 'OpenClaw on Android: Full Phone Setup Guide 2026',
+    desc: '两种方案：通过 Termux 在 Android 本地运行 OpenClaw，或将手机作为远程实例的移动控制端。适合想随身携带 AI Agent 的用户。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.26", "release", "android", "browser"],
+    url: 'https://vpn07.com/en/blog/2026-openclaw-android-phone-full-setup-guide.html',
+    category: 'official',
+    source: 'vpn07.com',
+  },
+
+  // official - resource
+  {
+    id: 'res-298',
+    title: 'How to SetUp OpenClaw in 5 Minutes (Beginners Guide 2026)',
+    desc: '面向初学者的 5 分钟快速上手视频，手把手演示从零开始部署 OpenClaw 的完整流程。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["v2026.2.26", "release", "android", "browser"],
+    url: 'https://www.youtube.com/watch?v=NszZ2Ynbsxk',
+    category: 'official',
+    source: 'YouTube',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-299',
+    title: 'How to Run OpenClaw on Android with Termux',
+    desc: '详细的 Termux 安装步骤，10 分钟内让 OpenClaw 跑在 Android 手机上，突破复杂服务器配置的门槛。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["android", "termux", "mobile", "setup"],
+    url: 'https://medium.com/@monkeyo/how-to-run-openclaw-on-android-with-termux-b25d59402158',
+    category: 'getting-started',
+    source: 'Medium',
+  },
+
+  // video - resource
+  {
+    id: 'res-300',
+    title: 'Adven Boost — OpenClaw Add Agent: 10 Easy Steps to Expand Your AI Workforce',
+    desc: 'Step-by-step guide to adding and configuring multiple agents in OpenClaw, covering multi-agent communication mesh, inter-agent messaging, rate limiting, and performance monitoring with pre-configured blueprints.',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["beginner", "setup", "tutorial"],
+    url: 'https://advenboost.com/en/openclaw-add-agent-tutorial/',
+    category: 'video',
+    source: 'advenboost.com',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-301',
+    title: 'heyuan110.com — OpenClaw 超详细上手教程：小白友好 + 老鸟技巧',
+    desc: '从零到精通的完整中文教程，覆盖入门部署、多智能体协作、Skills 开发，兼顾小白与进阶用户，包含 Moltbot/Clawdbot/OpenClaw 演进历史梳理。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["multi-agent", "agent configuration", "automation", "tutorial"],
+    url: 'https://www.heyuan110.com/posts/ai/2026-02-12-openclaw-usage-tutorial/',
+    category: 'deep-dive',
+    source: 'heyuan110.com',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-302',
+    title: 'CSDN — OpenClaw 从入门到进阶完整实战教程（2026 最新版）',
+    desc: '251,000 字开源中文教程，16 章正文 + 4 个附录 + 66 个实战案例 + 50 余张配图，优先推荐腾讯云等国内部署方案，覆盖基础到进阶全流程。',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["multi-agent", "agent configuration", "automation", "tutorial"],
+    url: 'https://blog.csdn.net/2301_81108348/article/details/158356909',
+    category: 'getting-started',
+    source: 'CSDN',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-303',
+    title: 'OpenClaw Complete Tutorial 2026: Setup, Skills, Memory, and Architecture Explained',
+    desc: 'In-depth guide covering OpenClaw architecture, markdown-based memory system, skills installation, and multi-agent workflows. A must-read for developers looking to understand how OpenClaw works under the hood.',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["\u4e2d\u6587\u6559\u7a0b", "\u5c0f\u767d\u5165\u95e8", "\u591a\u667a\u80fd\u4f53", "\u8fdb\u9636"],
+    url: 'https://pub.towardsai.net/openclaw-complete-guide-setup-tutorial-2026-14dd1ae6d1c2',
+    category: 'getting-started',
+    source: 'Towards AI',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-304',
+    title: 'OpenClaw On Windows | How to Open & Edit openclaw.json file & Restart Gateway',
+    desc: 'Step-by-step tutorial for Windows users: editing openclaw.json config, restarting the gateway, and common troubleshooting tips for ClawdBot/MoltBot setups.',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["architecture", "memory", "skills", "2026"],
+    url: 'https://www.youtube.com/watch?v=xHiTd5ho3BA',
+    category: 'deep-dive',
+    source: 'YouTube',
+  },
+
+  // video - resource
+  {
+    id: 'res-305',
+    title: 'The Ultimate Guide to Setting Up and Using OpenClaw',
+    desc: 'Comprehensive Substack guide covering multi-agent coordination, deterministic monitoring with cron, and cost-efficient token management strategies for OpenClaw deployments.',
+    image: '/static/images/placeholder/video.svg',
+    type: 'resource',
+    tags: ["windows", "config", "gateway", "setup"],
+    url: 'https://techie007.substack.com/p/the-ultimate-guide-to-setting-up',
+    category: 'video',
+    source: 'Substack',
+  },
+
+  // deep-dive - resource
+  {
+    id: 'res-306',
+    title: 'The ULTIMATE OpenClaw Setup Guide (Step-By-Step Install + Full Configuration Tutorial)',
+    desc: 'Reddit community guide with step-by-step install instructions and full configuration walkthrough for OpenClaw, linking to a companion YouTube tutorial.',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["multi-agent", "monitoring", "deployment", "cron"],
+    url: 'https://www.reddit.com/r/clawdbot/comments/1rkcwt4/the_ultimate_openclaw_setup_guide_stepbystep/',
+    category: 'deep-dive',
+    source: 'Reddit r/clawdbot',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-307',
+    title: 'The ULTIMATE OpenClaw Setup Guide 🦞 — r/OpenClawCentral',
+    desc: 'Real-world OpenClaw workflows, VPS deployment, XDR bot configs, multi-agent coordination, and security integration best practices from the OpenClawCentral community.',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["setup", "install", "configuration", "tutorial"],
+    url: 'https://www.reddit.com/r/OpenClawCentral/comments/1rko3mo/the_ultimate_openclaw_setup_guide/',
+    category: 'getting-started',
+    source: 'Reddit r/OpenClawCentral',
+  },
+
+  // getting-started - resource
+  {
+    id: 'res-308',
+    title: 'Best ClawHub Skills: A Complete Guide',
+    desc: 'DataCamp guide covering the best ClawHub skills for OpenClaw (formerly Clawdbot/Moltbot), with self-hosting setup and Claude integration on Mac via WhatsApp.',
+    image: '/static/images/placeholder/article.svg',
+    type: 'resource',
+    tags: ["VPS", "multi-agent", "security", "deployment"],
+    url: 'https://www.datacamp.com/blog/best-clawhub-skills',
+    category: 'getting-started',
+    source: 'DataCamp',
+  },
+
 ];
