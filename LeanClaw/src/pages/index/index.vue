@@ -47,7 +47,7 @@
         </view>
 
         <wd-button type="primary" block custom-class="!bg-orange !border-orange !rounded-xl !h-11 !text-base shadow-orange/20 shadow-lg" @click="handleGoLearn">
-          继续学习 Day {{ progress.currentDay }}
+          {{ buttonText }}
         </wd-button>
       </view>
       
@@ -148,6 +148,15 @@ const nextChapter = computed(() => {
   const completedCount = progress.completedLessons.length
   if (completedCount >= 7) return '全部完成'
   return dayTitles[completedCount + 1] || '开始学习'
+})
+
+// 是否已完成所有课程
+const allCompleted = computed(() => progress.completedLessons.length >= 7)
+
+// 按钮文字
+const buttonText = computed(() => {
+  if (allCompleted.value) return '恭喜完成全部课程 🎉'
+  return `继续学习 Day ${progress.currentDay}`
 })
 
 onMounted(() => {
