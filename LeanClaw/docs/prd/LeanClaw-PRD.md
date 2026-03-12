@@ -25,26 +25,37 @@
 
 **功能描述**：
 - 提供结构化的7天学习路径，从零开始掌握 OpenClaw
-- 每天的学习内容以图文教程为主，支持视频嵌入
+- 每天的学习内容以图文教程为主，支持 Markdown 渲染
 - 内容展示采用 Markdown 渲染，类似 Notion/飞书文档风格
-- 支持学习进度记录和打卡功能（MVP 版本可考虑）
+- 学习进度记录：基于已完成课程数计算进度
 - 学习时长控制在 15-20 分钟/天，适合碎片化学习
-- 不需要解锁机制，用户可自由选择学习顺序
+- **已实现解锁机制**：完成后自动解锁下一课
 
 **激励方案**：
-- 学习徽章（7个每日徽章）
-- 学习进度可视化
+- 学习徽章（7个每日徽章 + 成就徽章）
+- 学习进度可视化：完成1天=14%，全部完成=100%
 - 完成7天学习后获得"龙虾驯养师"电子证书
+
+**实现细节**：
+- 进度计算：`progressPercent = completedLessons.length / 7 * 100`
+- 当前可学课程 = 已完成最大天数 + 1
+- 完成后状态显示"已完成"
 
 ### 2.2 模块2：全网优质资源汇总
 
 **功能描述**：
 - 聚合 OpenClaw 相关的优质资源，通过滚动信息流展示
 - 资源分类：按类型（教程/文档/视频/文章）和难度（入门/进阶/高级）
-- MVP 版本提供 30-50 条精选资源
+- **当前资源数量**：~150+ 条（已同步自 openclaw101）
 - 通过内置 WebView 方式打开第三方网站
-- 支持收藏功能
-- 用户评论或评分功能（MVP 版本暂不考虑）
+- **已实现收藏功能**
+- 卡片展示优化：标题 2-3 行 + 描述 1-2 行，移除底部元信息
+
+**实现细节**：
+- 数据来源：`src/data/mock.ts`
+- 资源类型：resource（资源）、case（案例）、skill（技能）
+- 卡片布局：左图右文，图片 200x200 WebP
+- URL 筛选：已移除中国无法访问的链接
 
 ### 2.3 模块3：应用案例场景展示
 
@@ -52,8 +63,11 @@
 - 展示 OpenClaw 的实际应用案例和使用场景
 - 案例展示形式：图文 + 代码片段 + 配置步骤
 - 案例分类：按使用场景（智能家居、办公自动化、开发辅助、生活助手、数据分析）
-- MVP 版本提供 8-12 个精选案例
-- 不需要"一键复制配置"功能
+- **当前案例数量**：~26 个
+
+**实现细节**：
+- 案例详情页：`pages/case/detail.vue`
+- 使用 WebView 打开案例原文
 
 ### 2.4 模块4：OpenClaw Skills 大全
 
@@ -62,8 +76,11 @@
 - 展示信息：名称、描述、分类、热度、安装命令、作者、GitHub Stars
 - 支持分类筛选和关键词搜索
 - 热度排序基于综合热度（下载量 + 评分 + 更新频率）
-- 数据来源：MVP 版本手动维护，后续可考虑接入 ClawHub
-- "我的收藏"或"最近查看"功能（MVP 版本暂不考虑）
+- **当前 Skills 数量**：~8 个
+
+**实现细节**：
+- 技能详情页：`pages/skill/detail.vue`
+- 支持收藏功能
 
 ---
 
@@ -85,28 +102,57 @@
 ```
 📱 LeanClaw 小程序架构
 
-├── 🏠 首页 (Home)
-│   ├── 学习进度卡片（显示当前学习天数）
+├── 🏠 首页 (Home) - TabBar
+│   ├── 学习进度卡片（显示当前学习天数/进度百分比）
 │   ├── 今日推荐资源
 │   └── 热门 Skills 快捷入口
 │
 ├── 📚 学习 (Learn) - TabBar
 │   ├── 7天学习路径（7个卡片）
-│   ├── 每日详情页（图文+任务）
+│   │   ├── 已完成：✅ 绿色 + "已完成"
+│   │   ├── 进行中：🔄 橙色高亮
+│   │   └── 未开始：⏸️ 灰色
+│   ├── 每日详情页（Markdown + 任务）
 │   └── 学习打卡
 │
 ├── 📖 发现 (Discover) - TabBar
 │   ├── 分类标签（资源/案例/Skills）
-│   ├── 资源信息流（瀑布流/列表）
+│   ├── 资源信息流（卡片列表）
+│   │   ├── 标题 2-3 行
+│   │   ├── 描述 1-2 行
+│   │   └── 缩略图 200x200
 │   ├── 资源详情（WebView）
-│   └── 我的收藏
+│   └── 收藏功能
 │
 └── 👤 我的 (Profile) - TabBar
+    ├── 用户信息 + Logo
     ├── 学习统计
     ├── 我的收藏
-    ├── 证书/成就
+    ├── 我的证书
+    ├── 学习统计详情
+    ├── 消息通知
+    ├── 关于我们
     └── 设置
 ```
+
+### 3.3 页面详情
+
+| 页面 | 路径 | 实现状态 |
+|------|------|----------|
+| 首页 | `/pages/index/index` | ✅ |
+| 发现 | `/pages/discover/index` | ✅ |
+| 学习 | `/pages/learn/index` | ✅ |
+| 我的 | `/pages/profile/index` | ✅ |
+| 学习详情 | `/pages/learn/detail/index` | ✅ |
+| 案例详情 | `/pages/case/detail` | ✅ |
+| 技能详情 | `/pages/skill/detail` | ✅ |
+| WebView | `/pages/webview/index` | ✅ |
+| 我的收藏 | `/pages/profile/favorites/index` | ✅ |
+| 我的证书 | `/pages/profile/certificate/index` | ✅ |
+| 学习统计 | `/pages/profile/stats/index` | ✅ |
+| 消息通知 | `/pages/profile/notifications/index` | ✅ |
+| 关于我们 | `/pages/profile/about/index` | ✅ |
+| 设置 | `/pages/profile/settings/index` | ✅ |
 
 ---
 
@@ -155,27 +201,144 @@
 
 - **框架**：uni-app (Vue 3 + TypeScript)
 - **UI组件库**：wot-design-uni
-- **请求库**：alova
+- **请求库**：alova + @alova/adapter-uniapp
 - **路由**：uni-mini-router + @uni-helper/vite-plugin-uni-pages (文件路由)
 - **状态管理**：pinia
 - **样式**：UnoCSS + @uni-helper/unocss-preset-uni
 - **构建工具**：Vite
 - **代码规范**：ESLint + Prettier + husky
+- **测试**：Vitest (单元测试) + Playwright (E2E测试)
 
-### 5.2 MVP 功能清单
+### 5.2 项目结构
 
-| 模块 | 功能点 | 优先级 |
-|-----|-------|-------|
-| **首页** | 学习进度展示 | P0 |
-| | 快捷入口 | P0 |
-| **学习** | 7天内容展示（Markdown） | P0 |
-| | 学习进度记录 | P1 |
-| **发现** | 资源列表 | P0 |
-| | 案例展示 | P0 |
-| | Skills列表 | P0 |
-| | WebView打开第三方 | P0 |
-| **我的** | 学习统计 | P1 |
-| | 关于页面 | P0 |
+```
+LeanClaw/
+├── src/
+│   ├── api/                 # API 层
+│   │   ├── core/           # 核心配置
+│   │   │   ├── instance.ts    # Alova 实例配置
+│   │   │   ├── handlers.ts    # 请求处理器
+│   │   │   └── middleware.ts  # 中间件
+│   │   └── index.ts        # API 导出
+│   ├── pages/             # 页面组件（文件式路由）
+│   │   ├── index/         # 首页
+│   │   ├── discover/      # 发现页（资源/案例/Skills 3个Tab）
+│   │   ├── learn/         # 学习页（7天学习路径）
+│   │   ├── profile/       # 我的页面
+│   │   │   ├── index.vue       # 主页面
+│   │   │   ├── favorites/      # 收藏列表
+│   │   │   ├── certificate/    # 证书
+│   │   │   ├── stats/          # 学习统计
+│   │   │   ├── notifications/  # 消息通知
+│   │   │   ├── about/          # 关于我们
+│   │   │   └── settings/       # 设置
+│   │   ├── case/detail.vue    # 案例详情
+│   │   ├── skill/detail.vue   # 技能详情
+│   │   └── webview/index.vue   # WebView 页面
+│   ├── composables/       # Vue 组合式函数
+│   │   └── useRecommendations.ts  # 推荐资源
+│   ├── data/              # 静态数据
+│   │   ├── mock.ts           # 资源数据（~150+资源）
+│   │   ├── lessons.ts        # 课程数据（7天）
+│   │   ├── badges.ts         # 徽章数据
+│   │   └── certificate.ts    # 证书生成
+│   ├── store/             # Pinia 状态管理
+│   ├── utils/             # 工具函数
+│   │   ├── learnProgress.ts    # 学习进度管理
+│   │   ├── favorites.ts        # 收藏功能
+│   │   └── markdown.ts        # Markdown 渲染
+│   ├── layouts/           # 布局模板（default/tabbar）
+│   ├── static/            # 静态资源
+│   │   ├── images/
+│   │   │   ├── resources/  # 资源缩略图（200x200 WebP）
+│   │   │   ├── logo.webp   # Logo
+│   │   │   └── placeholder/ # 占位图
+│   │   └── tabbar/        # TabBar 图标
+│   ├── pages.json         # 页面配置
+│   ├── App.vue            # 根组件
+│   └── main.ts            # 入口文件
+├── scripts/               # 脚本工具
+│   └── sync-resources.py  # 资源同步脚本
+├── tests/                # 测试文件
+│   ├── e2e/              # 端到端测试（Playwright）
+│   └── __tests__/        # 单元测试（Vitest）
+├── package.json
+├── vite.config.ts
+├── uno.config.ts
+└── pages.config.ts
+```
+
+### 5.3 核心配置文件
+
+| 文件 | 说明 |
+|------|------|
+| `pages.json` | 页面路由和 TabBar 配置 |
+| `uno.config.ts` | UnoCSS 快捷方式和主题 |
+| `vite.config.ts` | Vite 构建配置 |
+| `alova.config.ts` | Alova API 配置 |
+
+### 5.4 数据存储
+
+| 数据类型 | 存储方式 |
+|----------|----------|
+| 学习进度 | `uni.setStorageSync('learn_progress', {...})` |
+| 收藏列表 | `uni.setStorageSync('favorites', {...})` |
+| 用户信息 | `uni.setStorageSync('user_info', {...})` |
+
+### 5.5 资源同步
+
+- **来源**：`openclaw101/src/data/resources.ts`
+- **同步脚本**：`scripts/sync-resources.py`
+- **处理**：已筛选中国无法访问的 URL（GitHub、Reddit 等）
+- **缩略图**：200x200 WebP，抓取 OG Image，使用 Cover 模式
+
+### 5.6 MVP 功能清单
+
+| 模块 | 功能点 | 状态 |
+|-----|-------|------|
+| **首页** | 学习进度展示 | ✅ |
+| | 快捷入口 | ✅ |
+| | 今日推荐资源 | ✅ |
+| **学习** | 7天内容展示（Markdown） | ✅ |
+| | 学习进度记录 | ✅ |
+| | 完成后解锁下一课 | ✅ |
+| | 徽章系统 | ✅ |
+| | 证书生成 | ✅ |
+| **发现** | 资源列表 | ✅ |
+| | 案例展示 | ✅ |
+| | Skills列表 | ✅ |
+| | WebView打开第三方 | ✅ |
+| | 收藏功能 | ✅ |
+| **我的** | 学习统计 | ✅ |
+| | 我的收藏 | ✅ |
+| | 我的证书 | ✅ |
+| | 消息通知 | ✅ |
+| | 关于页面 | ✅ |
+| | 设置页面 | ✅ |
+
+### 5.7 开发命令
+
+```bash
+# 开发
+npm run dev:h5         # H5 开发服务器
+npm run dev:mp-weixin # 微信小程序开发
+
+# 构建
+npm run build:h5         # 构建 H5
+npm run build:mp-weixin # 构建微信小程序
+
+# 测试
+npm run test           # 单元测试（监听模式）
+npm run test:run       # 单元测试（单次运行）
+npm run test:coverage  # 覆盖率报告
+npm run e2e            # E2E 测试
+npm run e2e:headed    # E2E 测试（有头模式）
+
+# 代码质量
+npm run type-check  # TypeScript 类型检查
+npm run lint        # ESLint 检查
+npm run format      # Prettier 格式化
+```
 
 ### 5.3 数据方案
 
@@ -248,6 +411,14 @@
 
 ---
 
-## 9. 结论
+## 9. 版本历史
+
+| 版本 | 日期 | 说明 |
+|------|------|------|
+| 0.1 | 2026-03-12 | 初始版本，包含核心功能 |
+
+---
+
+## 10. 结论
 
 LeanClaw 是一个专注于 OpenClaw 学习的小程序，通过结构化的学习路径、优质资源聚合和实际案例展示，帮助用户快速掌握 OpenClaw 技能。MVP 版本将聚焦核心功能，确保用户能够通过最简洁的方式学会使用 OpenClaw，为后续的功能扩展和用户增长奠定基础。
