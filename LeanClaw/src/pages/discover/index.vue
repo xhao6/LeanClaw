@@ -48,35 +48,22 @@
       </view>
 
       <view v-else class="space-y-4">
-        <view 
-          v-for="(item, index) in filteredItems" 
-          :key="index" 
-          class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-all active:scale-[0.99]" 
+        <view
+          v-for="(item, index) in filteredItems"
+          :key="index"
+          class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-all active:scale-[0.99]"
           @click="handleItemClick(item)"
         >
           <image :src="item.image || getPlaceholder(item)" class="w-24 h-24 rounded-xl mr-4 object-cover bg-gray-100 shrink-0" />
-          <view class="flex-1 flex flex-col justify-between py-1">
-            <view>
+          <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
+            <view class="flex-1">
               <view class="flex justify-between items-start">
-                 <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1 flex-1">{{ item.title }}</text>
-                 <view class="flex items-center gap-1 ml-2" @click.stop="handleToggleFavorite(item)">
+                 <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1 flex-1">{{ item.title }}</text>
+                 <view class="flex items-center gap-1 ml-2 shrink-0" @click.stop="handleToggleFavorite(item)">
                    <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="18px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
                  </view>
               </view>
               <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
-            </view>
-            <view class="flex justify-between items-center mt-2">
-              <view class="flex items-center space-x-2 flex-wrap gap-y-1">
-                <wd-tag v-for="tag in item.tags" :key="tag" size="small" custom-class="!bg-blue-50 !text-blue-500 !border-none !mr-1 !h-5 !px-1.5">{{ tag }}</wd-tag>
-              </view>
-              <view v-if="item.type === 'skill'" class="text-xs text-orange font-bold flex items-center shrink-0">
-                <wd-icon name="star-filled" size="12px" class="mr-0.5" />
-                {{ item.stars }}
-              </view>
-              <view v-else class="text-xs text-gray-300 flex items-center shrink-0">
-                 <wd-icon name="view" size="14px" class="mr-1" />
-                 1.2k
-              </view>
             </view>
           </view>
         </view>
