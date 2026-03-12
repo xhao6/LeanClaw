@@ -165,16 +165,6 @@ const goToSettings = () => {
     url: '/pages/profile/settings/index'
   })
 }
-
-// 退出登录
-const handleLogout = () => {
-  uni.showModal({
-    title: '退出登录',
-    content: '当前为游客模式，无法退出登录',
-    showCancel: false,
-    confirmText: '知道了'
-  })
-}
 </script>
 
 <style scoped>

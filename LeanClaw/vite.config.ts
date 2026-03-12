@@ -15,9 +15,9 @@ export default defineConfig({
     },
   },
   plugins: [
-    UniPages({
-      dts: 'src/uni-pages.d.ts',
-    }),
+    // UniPages({
+    //   dts: 'src/uni-pages.d.ts',
+    // }),
     UniLayouts(),
     uni(),
     UnoCSS(),
