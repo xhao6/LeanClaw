@@ -94,19 +94,13 @@
         <view class="space-y-3">
           <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
             <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
-            <view class="flex-1 flex flex-col justify-between py-1">
-              <view>
+            <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
+              <view class="flex-1">
                 <view class="flex justify-between items-start">
-                   <text class="font-bold text-sm text-gray-800 line-clamp-1 mb-1">{{ item.title }}</text>
-                   <wd-tag type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px]">NEW</wd-tag>
+                   <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1">{{ item.title }}</text>
+                   <wd-tag v-if="item.tags?.[0]" type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px] shrink-0 ml-2">{{ item.tags[0] }}</wd-tag>
                 </view>
-                <text class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
-              </view>
-              <view class="flex items-center text-xs text-gray-400 mt-2">
-                 <wd-icon name="view" size="14px" class="mr-1" />
-                 <text class="mr-3">{{ item.stars || '0' }}</text>
-                 <wd-icon name="thumb-up" size="14px" class="mr-1" />
-                 <text>{{ item.tags?.[0] || '' }}</text>
+                <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
               </view>
             </view>
           </view>
