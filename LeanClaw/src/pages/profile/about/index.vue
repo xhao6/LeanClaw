@@ -13,8 +13,8 @@
       <view class="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-primary to-ocean-light flex items-center justify-center shadow-lg shadow-primary/20">
         <text class="text-5xl">🦞</text>
       </view>
-      <view class="text-2xl font-bold text-gray-800 mt-6">LeanClaw</view>
-      <view class="text-sm text-gray-400 mt-2">OpenClaw 学习助手</view>
+      <view class="text-2xl font-bold text-gray-800 mt-6">轻学龙虾</view>
+      <view class="text-sm text-gray-400 mt-2">养只龙虾做管家</view>
       <view class="text-xs text-primary font-medium mt-2">v{{ version }}</view>
     </view>
 

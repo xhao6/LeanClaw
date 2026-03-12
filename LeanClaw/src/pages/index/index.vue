@@ -17,8 +17,8 @@
            <wd-icon name="github-filled" size="24px" color="#ffffff" />
         </view>
         <view>
-          <text class="text-xl font-bold text-primary block leading-tight">LeanClaw</text>
-          <text class="text-xs text-gray-400 block mt-0.5">Master Skills Faster</text>
+          <text class="text-xl font-bold text-primary block leading-tight">轻学龙虾</text>
+          <text class="text-xs text-gray-400 block mt-0.5">养只龙虾做管家</text>
         </view>
       </view>
       <wd-icon name="notification" size="24px" class="text-gray-400" />
@@ -97,9 +97,8 @@
             <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
               <view class="flex-1">
                 <view class="flex justify-between items-start">
-                   <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1">{{ item.title }}</text>
-                   <wd-tag v-if="item.tags?.[0]" type="warning" plain size="small" custom-class="!h-5 !px-1.5 !text-[10px] shrink-0 ml-2">{{ item.tags[0] }}</wd-tag>
-                </view>
+                     <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1">{{ item.title }}</text>
+                  </view>
                 <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
               </view>
             </view>
