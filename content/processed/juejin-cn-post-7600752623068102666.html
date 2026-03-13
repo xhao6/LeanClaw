@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>掘金 — OpenClaw 安装教程：从 0 搭建本地 AI 助手完整记录</title>
+  <meta name="description" content="掘金社区原创，从零到跑通的详实记录，含架构理解和踩坑笔记">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>掘金</span>
+    <a href="https://juejin.cn/post/7600752623068102666" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    OpenClaw (Moltbot) 安装教程: 从 0 搭建本地 AI 助手完整记录 OpenClaw (Moltbo - 掘金
+  
+  
+        
+  
+首页 
+                沸点
+                 
+                课程
+                 
+                数据标注
+                HOT 
+                AI Coding
+               更多 
+
+                    直播
+                   
+                    活动
+                   
+                    APP
+                   插件
+ 
+                直播
+               
+                活动
+               
+                APP
+               插件 
+ 
+
+    搜索历史 
+                        清空
+                          
+    创作者中心
+     
+ 写文章 发沸点 写笔记 写代码 草稿箱
+  创作灵感 
+            查看更多
+                 
+    
+                登录
+                
+                  注册
+                 
+
+              
+            OpenClaw (Moltbot) 安装教程: 从 0 搭建本地 AI 助手
+              
+    Bi
+       
+                    2026-01-30
+                    
+                    16,971
+                   
+                    阅读11分钟
+                           前言
+Moltbot (原 Clawdbot) 今天改名为:OpenClaw 可以理解为一个本地运行的 AI 网关工具，它负责在大模型与电脑之间搭桥，让 AI 助手真正能在本地工作。它可以部署在你的个人设备上，例如 Mac、Windows 或 Linux，让 AI 不只是停留在网页聊天，而是真正接入你的本地环境与常用应用。
+它的核心作用是把 AI 模型的能力和你的设备、软件生态连接起来：
+
+一端连接大语言模型（官方推荐使用 Claude，同时也支持 Gemini、OpenAI 等）
+另一端连接你的本地系统以及常见聊天平台，例如：
+
+WhatsApp
+Telegram
+iMessage
+Signal
+…
+
+通过这种方式，Moltbot 可以让 AI 代理直接在你的日常工具中工作，比如自动回复消息、执行系统任务或触发自动化流程。
+
+注意：网关模块通常需要稳定访问模型接口和第三方平台。如果选择在服务器上部署，为避免 DNS、Telegram API、模型访问等网络限制问题，建议使用境外服务器环境运行。
+
+前置条件
+
+一台 Linux 服务器，2 核 2GB 配置（推荐 Ubuntu）
+
+服务器
+我选择的是 AWS 服务器，新账号有 USD $100 的 AWS 抵用金，有效时间半年，基本可以免费用一段时间。
+地区我选择的是新加坡。2 核 2GB 配置可以参考下图的选项配置：
+
+  
+  
+    AWS 服务器实例配置示例（2 核 2GB）
+  
+
+安装
+执行终端命令
+curl -fsSL https://clawd.bot/install.sh | bash
+
+I understand this is powerful and inherently risky. Continue?
+选择 Yes。
+
+Onboarding mode
+选择 QuickStart。
+选择模型和授权
+
+  
+  
+    选择模型与授权提供方
+  
+
+Model/auth provider
+这里我选择的是 OpenAI，因为刚好是 ChatGPT Pro 的用户。如果大家没有 OpenAI 的账号，可以选择 Qwen，免费额度足够使用。
+
+  
+  
+    复制授权链接到浏览器完成授权
+  
+
+选择完模型后会显示授权链接，把链接复制到你本机浏览器打开完成授权。
+
+  
+  
+    授权完成后返回的回调链接
+  
+
+如果选择的是 OpenAI 或 Google 等模型，授权后会返回一个 localhost 链接，把链接复制到终端回车即可。Qwen 模型授权后不需要这一步。
+
+选择模型。
+选择聊天频道
+
+  
+  
+    选择要接入的聊天频道
+  
+
+  
+  
+    输入 Telegram HTTP API Key
+  
+
+这里使用 Telegram，按照提示首先要创建自己的机器人：
+
+打开 Telegram，搜索 @BotFather，关注并输入 /newbot
+给机器人取名字（例如 moltbot）
+再给机器人一个 id（例如 molt123_bot）
+得到 HTTP API 的 KEY 后输入到终端
+别忘了点击刚刚创建的机器人，后续步骤需要接收一条消息
+
+配置 Skill
+
+  
+  
+    是否现在配置 Skills
+  
+
+Configure skills now?
+选 Yes。
+
+  
+  
+    Homebrew 安装命令提示
+  
+
+Show Homebrew install command?
+选 Yes。
+
+  
+  
+    选择 Node 管理器并处理依赖安装
+  
+
+Preferred node manager for skill installs
+选 npm。
+Install missing skill dependencies
+跳过也行，后面也可以再回来安装：
+
+用空格选择 Skip for now，回车即可
+
+我这里选择了 summarize（bird 忽略）。
+
+  
+  
+    第三方 API Key 配置（可暂时跳过）
+  
+
+这些 KEY 暂时可以跳过，选择 No，后面如果需要也可以再填写。
+
+  
+  
+    是否启用 hooks
+  
+
+Enable hooks
+选择 Skip for now。
+
+  
+  
+    选择 hatch 方式（TUI）
+  
+
+How do you want to hatch your bot?
+选择 Hatch in TUI。
+
+  
+  
+    安装完成提示
+  
+
+到这里安装就已经完成了。
+Telegram 机器人配对
+
+  
+  
+    Telegram 机器人配对码
+  
+
+在刚刚创建好的机器人对话框中输入 /start，会出现 Pairing code: XXXXXXX。
+在终端输入命令（将 XXXXXXX 替换成你的 code）：
+clawdbot pairing approve telegram XXXXXXX
+
+如果出现 clawdbot: command not found，退出终端重新进入即可。
+
+  
+  
+    配对完成后在 Telegram 中使用 Moltbot
+  
+
+配对成功后就可以在 Telegram 机器人中正常使用了。
+当然 Moltbot 能做到的远不止这些，还有许多意想不到的玩法等我们发掘，我也会在接下来的文章中持续分享。
+常见问题
+telegram setMyCommands failed: HttpError: Network request for 'setMyCommands'
+此错误表示你的 Clawdbot 实例无法连接到 Telegram 的 API 服务器 api.telegram.org。
+最常见的原因：
+
+防火墙阻止了出站 HTTPS（端口 443）
+VPS/主机提供商屏蔽了 Telegram IP 地址（一些廉价 VPS 提供商会这样做）
+DNS 解析失败
+
+解决方法：在 /etc/hosts 中添加以下内容：
+149.154.166.110 api.telegram.org
+      
+    Bi
+       
+        Java
+         
+        8
+       文章 
+        26k
+       阅读 
+        26
+       粉丝   目录 收起  
+
+      前言
+     
+      前置条件
+     
+      服务器
+     
+      安装
+     
+
+      执行终端命令
+     
+      选择模型和授权
+     
+      选择聊天频道
+     
+      配置 Skill
+     
+      Telegram 机器人配对
+     
+
+      常见问题
+     
+
+      telegram setMyCommands failed: HttpError: Network request for 'setMyCommands'
+  </div>
+</body>
+</html>

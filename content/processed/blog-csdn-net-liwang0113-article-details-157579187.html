@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CSDN — OpenClaw 史上最全保姆级安装配置教程</title>
+  <meta name="description" content="多平台接入、Docker 沙箱安全配置、Ollama 本地模型对接">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>CSDN</span>
+    <a href="https://blog.csdn.net/liwang0113/article/details/157579187" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    OpenClaw 史上最全手把手的保姆级安装配置教程（2026年1月31日最新版）_openclaw安装-CSDN博客
+        
+    
+        
+        
+    
+              
+    
+    
+        
+    
+    
+    
+        
+      
+    
+    
+    
+    
+      
+    
+    
+    
+
+  
+    
+        
+    
+    
+
+    
+    
+    
+    
+    
+        
+          
+          
+          
+
+  
+
+  
+    
+      
+        OpenClaw 史上最全手把手的保姆级安装配置教程（2026年1月31日最新版）
+      
+      
+          
+              
+              原创
+              已于 2026-01-31 10:11:23 修改
+                ·
+                10w+ 阅读
+                
+                  ·
+                  
+                  
+                  
+                      286
+                  
+                
+                ·
+                
+                  
+                  
+                  
+                      1k
+                  
+                
+
+                    ·
+                    
+                      CC 4.0 BY-SA版权
+                      
+                                  版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+                      
+                    
+              
+              
+              
+          
+          
+            
+                      
+                        文章标签：
+                      
+                          #chatgpt
+                          #企业微信
+                          #钉钉
+                          #飞书
+                          #gitlab
+                          #gpt
+                          #AI编程
+                      
+                      
+                
+            
+          
+          于 2026-01-31 10:09:40 首次发布
+      
+    
+  
+    
+        
+              
+                
+                    
+                        
+                            
+                            
+                                
+                                学习
+                                    专栏收录该内容
+                                
+                            
+                        
+                    
+                    
+                        7 篇文章
+                    
+                    
+                            订阅专栏
+                    
+                
+              
+
+        
+    
+      
+        该文章已生成可运行项目，预览并下载项目源码
+      
+    
+    
+        
+        
+        
+                
+                    
+                        
+                    
+                    &#x1f525; OpenClaw 保姆级安装配置教程&#xff08;2026年1月31日最新版&#xff09; 
+ 
+ 重要说明&#xff1a;OpenClaw 是 Moltbot/Clawdbot 的最新正式名称。项目经历了多次更名&#xff1a; 
+ 
+Clawdbot → Moltbot → OpenClaw&#xff08;当前名称&#xff09;
+ 
+ 本教程基于官方中文社区文档 https://www.moltcn.com/start/getting-started.html编写。 
+ 
+&#x1f4cb; 目录 
+
+一、OpenClaw 是什么&#xff1f;二、核心特性三、系统要求四、安装前准备五、安装 OpenClaw六、首次配置向导七、启动 Gateway八、连接即时通讯平台九、DM 安全配对十、常用命令大全十一、日常维护十二、故障排除十三、安全加固十四、从源码安装&#xff08;开发模式&#xff09;十五、常见问题
+ 
+ 
+一、OpenClaw 是什么&#xff1f; 
+OpenClaw 是由 Peter Steinberger&#xff08;PSPDFKit 创始人&#xff09;和 Mario Zechner&#xff08;Pi 创建者&#xff09;开发的开源个人 AI 助手项目。 
+&#x1f99e; 名字由来 
+OpenClaw &#61; CLAW &#43; TARDIS — 因为每只太空龙虾都需要一台时间机器。 
+&#x1f3af; 核心定位 
+ 
+ “Any OS &#43; WhatsApp/Telegram/Discord/iMessage gateway for AI agents (Pi). Send a message, get an agent response — from your pocket.” 
+ 
+OpenClaw 将多个即时通讯平台连接到 AI 编程代理&#xff08;如 Pi&#xff09;&#xff0c;让你通过熟悉的聊天工具直接控制你的电脑。 
+&#x1f4f1; 支持的平台 
+平台类型说明WhatsApp原生集成通过 Baileys 使用 WhatsApp Web 协议TelegramBot APIDMs &#43; 群组 via grammYDiscordBot APIDMs &#43; 频道 via discord.jsiMessage本地集成macOS 本地 imsg CLIMattermost插件Bot Token &#43; WebSocket 事件
+ 
+二、核心特性 
+✨ 主要功能 
+
+&#x1f916; AI 代理桥接 — 连接 Pi 代理&#xff08;RPC 模式&#xff09;&#xff0c;支持工具流式传输&#x1f4ac; 流式响应 — 块流式传输 &#43; Telegram 草稿流式传输&#x1f9e0; 多代理路由 — 将不同提供者/用户路由到隔离的代理&#x1f510; 订阅认证 — Anthropic (Claude Pro/Max) &#43; OpenAI (ChatGPT/Codex) via OAuth&#x1f4ac; 会话管理 — 私聊合并为共享的 main 会话&#xff1b;群聊隔离&#x1f465; 群聊支持 — &#64;提及触发&#xff08;可配置为始终响应&#xff09;&#x1f4ce; 媒体支持 — 发送和接收图片、音频、文档&#x1f3a4; 语音笔记 — 可选的转录钩子&#x1f5a5;️ WebChat &#43; macOS 应用 — 本地 UI &#43; 菜单栏辅助&#x1f4f1; iOS/Android 节点 — 配对后暴露 Canvas &#43; 聊天 &#43; 摄像头
+ 
+&#x1f3d7;️ 架构图 
+WhatsApp / Telegram / Discord / iMessage (&#43; plugins)
+        │
+        ▼
+  ┌───────────────────────────┐
+  │          Gateway          │  ws://127.0.0.1:18789 (loopback-only)
+  │     (single source)       │
+  │                           │  http://<gateway-host>:18793
+  │                           │    /__openclaw__/canvas/ (Canvas host)
+  └───────────┬───────────────┘
+              │
+              ├─ Pi agent (RPC)
+              ├─ CLI (openclaw …)
+              ├─ Chat UI (SwiftUI)
+              ├─ macOS app (OpenClaw.app)
+              ├─ iOS node via Gateway WS &#43; pairing
+              └─ Android node via Gateway WS &#43; pairing
+ 
+ 
+三、系统要求 
+基础要求 
+项目要求说明Node.js≥ 22.x必需&#xff0c;运行时要求pnpm可选但推荐从源码构建时推荐内存最低 2GB&#xff0c;推荐 4GB&#43;磁盘空间最低 1GB&#xff0c;推荐 5GB&#43;
+各平台要求 
+macOS 
+
+如果要构建应用&#xff1a;安装 Xcode / Command Line Tools仅 CLI &#43; Gateway&#xff1a;Node.js 足够
+ 
+Windows 
+
+强烈推荐使用 WSL2&#xff08;推荐 Ubuntu&#xff09;原生 Windows 未测试&#xff0c;问题更多&#xff0c;工具兼容性较差必须先安装 WSL2&#xff0c;然后在 WSL 内运行 Linux 步骤
+ 
+Linux 
+
+无额外要求
+ 
+&#x1f310; 网络要求 
+
+需要访问互联网&#xff08;API 调用&#xff09;国内用户&#xff1a;必须使用代理&#xff0c;否则 Gateway 无法启动
+ 
+ 
+四、安装前准备 
+4.1 获取 API Key 
+OpenClaw 需要连接 AI 模型服务。选择以下其一&#xff1a; 
+Anthropic Claude&#xff08;推荐&#xff09; 
+
+访问 Anthropic Console注册账号并获取 API Key或使用 claude setup-token 复用 Claude Code 凭证
+ 
+OpenAI&#xff08;ChatGPT/Codex&#xff09; 
+
+访问 OpenAI Platform创建 API Key
+ 
+其他选项 
+
+MiniMax&#xff08;国内推荐&#xff09;GLM&#xff08;智谱AI&#xff09;本地 Ollama 模型
+ 
+活动福利1&#xff1a; 
+&#x1f381; MiniMax 跨年福利来袭&#xff01;邀好友享 Coding Plan 双重好礼&#xff0c;助力开发体验&#xff01; 
+好友立享 9折 专属优惠 &#43; Builder 权益&#xff0c;你赢返利 &#43; 社区特权&#xff01; 
+&#x1f449; 立即参与&#xff1a;MiniMax-与用户共创智能 
+可以使用这个链接https://platform.minimaxi.com/subscribe/coding-plan?code&#61;KTtgSMiAnw&source&#61;link 
+活动福利2&#xff1a; 
+&#x1f680; 速来拼好模&#xff0c;智谱 GLM Coding 超值订阅&#xff0c;邀你一起薅羊毛&#xff01;Claude Code、Cline 等 20&#43; 大编程工具无缝支持&#xff0c;“码力”全开&#xff0c;越拼越爽&#xff01;立即开拼&#xff0c;享限时惊喜价 
+链接&#xff1a;https://www.bigmodel.cn/glm-coding?ic&#61;N0UXBDM2TD 
+4.2 安装 Node.js 
+使用 nvm 安装&#xff08;推荐&#xff09; 
+# 安装 nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# 重新加载
+source ~/.bashrc  # 或 source ~/.zshrc
+
+# 安装 Node.js 22
+nvm install 22
+nvm use 22
+
+# 验证
+node --version  # 应显示 v22.x.x
+npm --version
+ 
+直接安装&#xff08;macOS&#xff09; 
+# 使用 Homebrew
+brew install node&#64;22
+echo &#39;export PATH&#61;&#34;/usr/local/opt/node&#64;22/bin:$PATH&#34;&#39; >> ~/.zshrc
+source ~/.zshrc
+ 
+4.3 可选&#xff1a;安装 pnpm&#xff08;推荐用于源码构建&#xff09; 
+npm install -g pnpm
+ 
+ 
+五、安装 OpenClaw 
+5.1 一键安装&#xff08;推荐&#xff09; 
+macOS / Linux 
+curl -fsSL https://openclaw.ai/install.sh | bash
+ 
+Windows (PowerShell) 
+iwr -useb https://openclaw.ai/install.ps1 | iex
+ 
+5.2 NPM 安装&#xff08;备选&#xff09; 
+# 使用 npm
+npm install -g openclaw&#64;latest
+
+# 或使用 pnpm
+pnpm add -g openclaw&#64;latest
+ 
+5.3 验证安装 
+# 查看版本
+openclaw --version
+
+# 查看帮助
+openclaw --help
+ 
+5.4 Windows WSL2 安装 
+如果使用 Windows&#xff0c;必须通过 WSL2&#xff1a; 
+# 以管理员身份打开 PowerShell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+# 重启电脑
+
+# 安装 WSL2 内核更新
+wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+# 设置 WSL2 为默认
+wsl --set-default-version 2
+
+# 在 Microsoft Store 安装 Ubuntu 22.04
+ 
+然后在 WSL2 终端中&#xff1a; 
+# 安装 Node.js 22
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# 安装 OpenClaw
+curl -fsSL https://openclaw.ai/install.sh | bash
+ 
+ 
+六、首次配置向导 
+6.1 启动向导 
+运行向导并安装后台服务&#xff1a; 
+openclaw onboard --install-daemon
+ 
+6.2 向导步骤说明 
+步骤 1&#xff1a;Gateway 模式 
+? Gateway mode: (Use arrow keys)
+❯ Local    # 本地运行&#xff08;推荐&#xff09;
+  Remote   # 连接到远程 Gateway
+ 
+步骤 2&#xff1a;认证方式 
+? Auth provider: (Use arrow keys)
+❯ Anthropic (API key)          # 推荐
+  Anthropic (OAuth)            # Claude Code 凭证复用
+  OpenAI (API key)             # ChatGPT/Codex
+  OpenAI (OAuth)
+  ...更多选项
+ 
+推荐 Anthropic API key&#xff1a;claude setup-token 也支持用于复用 Claude Code 凭证。 
+步骤 3&#xff1a;选择模型 
+? Default model: (Use arrow keys)
+❯ claude-sonnet-4-0           # 推荐&#xff0c;速度和智能平衡
+  claude-opus-4-5             # 更强智能&#xff0c;但更慢
+  claude-haiku-3-5            # 快速响应
+ 
+步骤 4&#xff1a;频道配置 
+? Channels: (Select channels to configure)
+❯⬡ WhatsApp                   # 需要 QR 登录
+  ◉ Telegram                  # 需要 bot token
+  ◯ Discord                   # 需要 bot token
+  ◯ Mattermost                # 需要 plugin token
+  ◯ iMessage                  # macOS 本地
+ 
+步骤 5&#xff1a;配对安全设置 
+默认&#xff1a;未知私聊会收到简短代码&#xff0c;需要批准后才能处理消息。 
+步骤 6&#xff1a;工作区设置 
+? Workspace directory: (Use arrow keys)
+❯ ~/.openclaw/workspace       # 默认工作区
+  自定义路径
+ 
+步骤 7&#xff1a;技能选择 
+? Install recommended skills: (y/N)
+y  # 安装推荐技能
+ 
+步骤 8&#xff1a;后台服务安装 
+? Install daemon: (y/N)
+y  # 安装后台服务&#xff08;推荐&#xff09;
+ 
+运行时&#xff1a;Node&#xff08;推荐&#xff1b;WhatsApp/Telegram 必须&#xff09;。Bun 不推荐。 
+步骤 9&#xff1a;Gateway Token 
+向导会生成一个 Gateway token&#xff08;即使对于 loopback&#xff09;&#xff0c;并存储在 gateway.auth.token 中。 
+6.3 认证文件位置&#xff08;重要&#xff09; 
+
+OAuth 凭证&#xff08;传统导入&#xff09;&#xff1a;~/.openclaw/credentials/oauth.json认证配置文件&#xff1a;~/.openclaw/agents/<agentId>/agent/auth-profiles.json
+ 
+ 
+ &#x1f4a1; 无头服务器提示&#xff1a;先在普通机器上完成 OAuth&#xff0c;然后复制 oauth.json 到网关主机。 
+ 
+ 
+七、启动 Gateway 
+7.1 检查服务状态 
+如果向导中安装了服务&#xff0c;Gateway 应该已经在运行&#xff1a; 
+openclaw gateway status
+ 
+7.2 手动启动 
+前台运行&#xff08;调试&#xff09;&#xff1a; 
+openclaw gateway --port 18789 --verbose
+ 
+7.3 访问控制 UI 
+本地访问&#xff08;Gateway 主机上&#xff09;&#xff1a; 
+
+Dashboard: http://127.0.0.1:18789/Control UI: http://127.0.0.1:18789/openclaw/
+ 
+如果配置了 token&#xff0c;需要在 Control UI 设置中粘贴 token&#xff08;存储为 connect.params.auth.token&#xff09;。 
+7.4 停止/重启 
+# 停止
+openclaw gateway stop
+
+# 重启
+openclaw gateway restart
+ 
+7.5 快速验证&#xff08;2分钟&#xff09; 
+openclaw status
+openclaw health
+openclaw security audit --deep
+ 
+ 
+ &#x1f4a1; openclaw status --all 是最佳的可粘贴、只读调试报告。 
+ 
+ 
+八、连接即时通讯平台 
+8.1 WhatsApp&#xff08;QR 登录&#xff09; 
+# 启动配对登录
+openclaw channels login
+ 
+扫描说明&#xff1a; 
+
+打开手机 WhatsApp进入 设置 → 已关联设备扫描屏幕上的二维码
+ 
+8.2 Telegram 
+方式一&#xff1a;向导配置 
+向导可以直接配置 Telegram Bot Token。 
+方式二&#xff1a;手动配置 
+
+ 创建 Telegram Bot&#xff1a; 
+  
+访问 &#64;BotFather发送 /newbot获取 Bot Token
+  配置&#xff1a; 
+ 
+openclaw configure --section channels.telegram
+# 或手动编辑 ~/.openclaw/openclaw.json
+ 
+Telegram DM 提示 
+你的第一条 DM 会返回配对代码。批准后&#xff08;见下一节&#xff09;机器人才能回复。 
+8.3 Discord 
+方式一&#xff1a;向导配置 
+向导可以直接配置 Discord Bot Token。 
+方式二&#xff1a;手动配置 
+
+ 创建 Discord 应用&#xff1a; 
+  
+访问 Discord Developer Portal创建应用&#xff0c;添加 Bot获取 Bot Token邀请 Bot 到服务器
+  配置&#xff1a; 
+ 
+openclaw configure --section channels.discord
+ 
+8.4 iMessage&#xff08;仅 macOS&#xff09; 
+需要本地安装 imsg CLI&#xff1a; 
+# 安装 imsg
+brew install keith/formulae/imsg
+
+# 配置
+openclaw configure --section channels.imessage
+ 
+8.5 Mattermost&#xff08;插件&#xff09; 
+需要 Mattermost 插件 Token&#xff1a; 
+openclaw configure --section channels.mattermost
+ 
+8.6 查看所有频道状态 
+# 查看所有频道状态
+openclaw channels status
+
+# 探测连通性
+openclaw channels status --probe
+ 
+ 
+九、DM 安全配对 
+9.1 默认安全策略 
+默认情况下&#xff1a;未知私聊会收到一个简短代码&#xff0c;消息不会被处理直到你批准。 
+9.2 批准配对 
+如果你的第一条 DM 没有回复&#xff0c;批准配对&#xff1a; 
+# 查看待处理配对
+openclaw pairing list whatsapp
+openclaw pairing list telegram
+
+# 批准配对
+openclaw pairing approve whatsapp <CODE>
+openclaw pairing approve telegram <CODE>
+
+# 拒绝配对
+openclaw pairing deny whatsapp <CODE>
+ 
+9.3 配置配对策略 
+{
+  &#34;channels&#34;: {
+    &#34;whatsapp&#34;: {
+      &#34;dmPolicy&#34;: &#34;pairing&#34;,  // 配对策略
+      &#34;allowFrom&#34;: [&#34;&#43;15555550123&#34;]  // 允许的白名单
+    },
+    &#34;telegram&#34;: {
+      &#34;dmPolicy&#34;: &#34;pairing&#34;,
+      &#34;allowFrom&#34;: [123456789]  // 用户 ID
+    }
+  }
+}
+ 
+ 
+十、常用命令大全 
+10.1 基础命令 
+# 查看版本
+openclaw --version
+
+# 查看帮助
+openclaw --help
+
+# 查看状态概览
+openclaw status
+
+# 完整诊断
+openclaw status --all
+
+# 健康检查
+openclaw health
+openclaw status --deep  # 深度健康检查
+ 
+10.2 Gateway 管理 
+# 启动 Gateway
+openclaw gateway start
+
+# 停止 Gateway
+openclaw gateway stop
+
+# 重启 Gateway
+openclaw gateway restart
+
+# 查看状态
+openclaw gateway status
+
+# 手动前台运行&#xff08;调试&#xff09;
+openclaw gateway --port 18789 --verbose
+
+# 绑定模式
+openclaw gateway --bind loopback    # 本地回环&#xff08;默认&#xff09;
+openclaw gateway --bind lan         # 局域网
+openclaw gateway --bind tailnet     # Tailscale 网络
+ 
+10.3 配置管理 
+# 交互式配置
+openclaw configure
+
+# 查看完整配置
+openclaw config get
+
+# 查看特定配置
+openclaw config get agents.defaults
+openclaw config get models
+openclaw config get channels.telegram
+
+# 设置单个值
+openclaw config set gateway.port 18789
+openclaw config set agents.defaults.workspace ~/.openclaw/workspace
+
+# 删除配置项
+openclaw config unset gateway.port
+
+# 配置文件位置
+# ~/.openclaw/openclaw.json
+ 
+10.4 模型管理 
+# 查看可用模型
+openclaw models list
+
+# 查看模型状态
+openclaw models status
+
+# 扫描可用模型
+openclaw models scan
+
+# 设置默认模型
+openclaw models set anthropic/claude-sonnet-4-0
+
+# 测试模型连接
+openclaw models probe <model-name>
+ 
+10.5 频道管理 
+# WhatsApp 登录&#xff08;QR 扫描&#xff09;
+openclaw channels login
+
+# 退出登录
+openclaw channels logout
+
+# 查看频道状态
+openclaw channels status
+
+# 探测频道
+openclaw channels status --probe
+ 
+10.6 配对管理 
+# 查看待处理配对
+openclaw pairing list whatsapp
+openclaw pairing list telegram
+
+# 批准配对
+openclaw pairing approve whatsapp <CODE>
+
+# 拒绝配对
+openclaw pairing deny whatsapp <CODE>
+ 
+10.7 消息发送 
+# 发送文本消息
+openclaw message send --target &#43;15555550123 --message &#34;Hello from OpenClaw&#34;
+
+# 发送文件
+openclaw message send --target &#43;15555550123 --file /path/to/file.txt
+ 
+10.8 代理 (Agents) 
+# 查看代理列表
+openclaw agents list
+
+# 添加新代理
+openclaw agents add work --workspace ~/.openclaw/work
+
+# 查看代理状态
+openclaw agents status work
+ 
+10.9 会话管理 
+# 查看活跃会话
+openclaw sessions list
+
+# 查看会话历史
+openclaw sessions history <session-key>
+
+# 重置会话
+openclaw sessions reset <session-key>
+ 
+10.10 技能管理 
+# 列出已安装技能
+openclaw skills list
+
+# 安装技能
+openclaw skills install skill-name
+
+# 查看技能配置
+openclaw skills config skill-name
+
+# 更新技能
+openclaw skills update skill-name
+ 
+10.11 日志和诊断 
+# 实时查看日志
+openclaw logs --follow
+
+# 查看最近 N 行
+openclaw logs --limit 100
+
+# 健康检查
+openclaw health
+
+# 诊断和修复
+openclaw doctor
+openclaw doctor --fix  # 自动修复
+ 
+10.12 目录和工作区 
+# 查看工作区目录
+openclaw directory
+
+# 查看文件
+ls -la ~/.openclaw/workspace/
+ 
+10.13 更新和升级 
+# 检查更新
+openclaw --version
+
+# 更新 CLI&#xff08;安装脚本&#xff09;
+curl -fsSL https://openclaw.ai/install.sh | bash
+
+# 从源码更新
+git pull origin main
+pnpm install
+pnpm build
+openclaw doctor
+openclaw gateway restart
+ 
+10.14 安全相关 
+# 安全审计
+openclaw security audit
+
+# 深度审计
+openclaw security audit --deep
+ 
+ 
+十一、日常维护 
+11.1 定期检查 
+# 每日检查
+openclaw status
+openclaw health
+
+# 每周检查
+openclaw status --all
+openclaw logs --limit 500 | grep -i error
+openclaw doctor
+ 
+11.2 日志管理 
+# 查看实时日志
+openclaw logs --follow
+
+# 查找错误
+openclaw logs --limit 1000 | grep -i &#34;error\|failed&#34;
+
+# 按日期查看
+ls -lt /tmp/openclaw/openclaw-*.log | head -5
+tail -f /tmp/openclaw/openclaw-$(date &#43;%Y-%m-%d).log
+
+# 清理旧日志&#xff08;保留最近7天&#xff09;
+find /tmp/openclaw -name &#34;openclaw-*.log&#34; -mtime &#43;7 -delete
+ 
+11.3 备份配置 
+# 备份配置文件
+cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup.$(date &#43;%Y%m%d)
+
+# 备份认证文件
+cp ~/.openclaw/agents/main/agent/auth-profiles.json ~/backups/auth-profiles.json.$(date &#43;%Y%m%d)
+
+# 备份工作区
+tar -czvf ~/backups/openclaw-workspace-backup.$(date &#43;%Y%m%d).tar.gz ~/.openclaw/workspace/
+ 
+11.4 更新流程 
+# 1. 检查当前版本
+openclaw --version
+
+# 2. 停止 Gateway
+openclaw gateway stop
+
+# 3. 更新 CLI
+curl -fsSL https://openclaw.ai/install.sh | bash
+
+# 4. 运行健康检查
+openclaw doctor
+
+# 5. 重新启动
+openclaw gateway start
+
+# 6. 验证状态
+openclaw status
+ 
+11.5 监控告警&#xff08;可选&#xff09; 
+创建监控脚本&#xff1a; 
+cat > ~/.openclaw/monitor.sh << &#39;EOF&#39;
+#!/bin/bash
+echo &#34;&#61;&#61;&#61; $(date) &#61;&#61;&#61;&#34;
+openclaw status
+openclaw health
+
+# 检查 Gateway 是否运行
+if ! openclaw gateway status | grep -q &#34;running&#34;; then
+    echo &#34;⚠️ Gateway 未运行&#xff0c;尝试重启...&#34;
+    openclaw gateway restart
+fi
+EOF
+
+chmod &#43;x ~/.openclaw/monitor.sh
+ 
+添加 cron 任务&#xff1a; 
+# 每小时运行监控
+crontab -e
+
+# 添加&#xff1a;
+0 * * * * ~/.openclaw/monitor.sh >> ~/.openclaw/monitor.log 2>&1
+ 
+11.6 清理和维护 
+# 清理旧日志
+find /tmp/openclaw -name &#34;openclaw-*.log&#34; -mtime &#43;7 -delete
+
+# 清理临时文件
+rm -rf ~/.openclaw/tmp/*
+
+# 清理会话缓存
+openclaw sessions list | awk &#39;{print $1}&#39; | xargs -I {} openclaw sessions reset {}
+ 
+ 
+十二、故障排除 
+12.1 快速诊断流程 
+# 1. 运行完整诊断
+openclaw status --all
+
+# 2. 查看实时日志
+openclaw logs --follow
+
+# 3. 运行医生检查
+openclaw doctor
+openclaw doctor --fix
+ 
+12.2 常见问题 
+问题 1&#xff1a;命令找不到 
+# 检查是否安装
+npm list -g --depth&#61;0 | grep openclaw
+
+# 查找安装位置
+find /usr -name openclaw -type f 2>/dev/null
+find ~/.npm -name openclaw -type f 2>/dev/null
+
+# 手动添加 PATH
+echo &#39;export PATH&#61;&#34;$PATH:/usr/local/bin&#34;&#39; >> ~/.zshrc
+source ~/.zshrc
+ 
+问题 2&#xff1a;Gateway 无法启动 
+# 查看详细错误
+openclaw gateway --verbose
+
+# 检查端口占用
+lsof -i :18789
+
+# 检查配置
+openclaw doctor
+
+# 查看日志
+openclaw logs --follow | tail -50
+ 
+问题 3&#xff1a;无 API Key 
+# 重新配置
+openclaw configure
+
+# 或手动设置
+export ANTHROPIC_API_KEY&#61;&#34;sk-ant-api03-...&#34;
+echo &#39;export ANTHROPIC_API_KEY&#61;&#34;sk-ant-api03-...&#34;&#39; >> ~/.openclaw/.env
+
+# 验证
+openclaw models status
+ 
+问题 4&#xff1a;频道无响应 
+# 1. 检查频道状态
+openclaw channels status --probe
+
+# 2. 检查配对状态
+openclaw pairing list <channel>
+
+# 3. 查看日志
+openclaw logs --follow | grep -i &#34;channel\|pairing&#34;
+
+# 4. 如果是 WhatsApp&#xff0c;尝试重新登录
+openclaw channels logout
+openclaw channels login
+ 
+问题 5&#xff1a;OAuth 失败 
+# 切换到 API key
+openclaw configure
+# 选择 Anthropic API key
+
+# 或使用 setup-token
+openclaw models auth setup-token --provider anthropic
+
+# 手动复制 OAuth 凭证
+# 从其他机器复制 ~/.openclaw/credentials/oauth.json
+ 
+问题 6&#xff1a;模型不可用 
+# 查看可用模型
+openclaw models list
+
+# 设置已知模型
+openclaw models set anthropic/claude-sonnet-4-0
+
+# 扫描新模型
+openclaw models scan
+ 
+问题 7&#xff1a;内存不足 
+# 检查内存使用
+top -o memory
+
+# 限制历史记录
+openclaw config set &#39;session.historyLimit&#39; 50
+
+# 重启 Gateway 释放内存
+openclaw gateway restart
+ 
+问题 8&#xff1a;国内网络问题 
+# 设置代理
+export HTTPS_PROXY&#61;&#34;http://127.0.0.1:7890&#34;
+export HTTP_PROXY&#61;&#34;http://127.0.0.1:7890&#34;
+
+# 或在配置中设置
+openclaw config set gateway.proxy.url &#34;http://127.0.0.1:7890&#34;
+ 
+12.3 Bun 警告 
+⚠️ Bun &#43; WhatsApp/Telegram&#xff1a;Bun 与这些频道存在已知问题。如果使用 WhatsApp 或 Telegram&#xff0c;请使用 Node 运行 Gateway。 
+# 确保使用 Node
+which node
+node --version
+
+# 重启 Gateway
+openclaw gateway restart
+ 
+12.4 紧急恢复 
+# 1. 停止 Gateway
+openclaw gateway stop
+
+# 2. 备份当前配置
+cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.emergency
+
+# 3. 重置配置&#xff08;保留工作区&#xff09;
+openclaw setup --reset config
+
+# 4. 重新配置
+openclaw onboard
+
+# 5. 如果仍有问题&#xff0c;恢复配置
+cp ~/.openclaw/openclaw.json.emergency ~/.openclaw/openclaw.json
+openclaw gateway start
+ 
+ 
+十三、安全加固 
+ 
+ ⚠️ 重要警告&#xff1a;OpenClaw Gateway 默认配置为本地使用&#xff0c;从未考虑过暴露在公网场景。错误配置可能导致&#xff1a; 
+ 
+API Key 泄露跨平台聊天记录泄露主机系统完整访问权限泄露
+ 
+ 
+13.1 安全检查 
+# 安全审计
+openclaw security audit
+
+# 深度审计
+openclaw security audit --deep
+ 
+13.2 必要的安全措施 
+1. 绑定本地回环地址 
+# 确保 Gateway 只监听本地
+openclaw config set gateway.bind loopback
+openclaw gateway restart
+ 
+2. 启用认证 
+# 使用 Token 认证
+openclaw config set gateway.auth.mode token
+openclaw config set gateway.auth.token &#34;your-strong-random-token&#34;
+ 
+3. 文件权限加固 
+# 限制配置文件权限
+chmod 600 ~/.openclaw/openclaw.json
+
+# 限制工作区权限
+chmod 700 ~/.openclaw/workspace/
+ 
+4. 防火墙配置 
+# 只允许本地访问
+sudo ufw allow from 127.0.0.1 to any port 18789
+sudo ufw deny 18789
+ 
+13.3 沙箱配置 
+OpenClaw 支持沙箱隔离&#xff0c;限制代理的访问范围&#xff1a; 
+{
+  &#34;agents&#34;: {
+    &#34;defaults&#34;: {
+      &#34;sandbox&#34;: {
+        &#34;mode&#34;: &#34;non-main&#34;,  // 主会话在主机&#xff0c;其他在沙箱
+        &#34;scope&#34;: &#34;agent&#34;,
+        &#34;workspaceAccess&#34;: &#34;rw&#34;
+      }
+    }
+  }
+}
+ 
+如果想让主代理始终在主机运行&#xff1a; 
+{
+  &#34;routing&#34;: {
+    &#34;agents&#34;: {
+      &#34;main&#34;: {
+        &#34;workspace&#34;: &#34;~/.openclaw/workspace&#34;,
+        &#34;sandbox&#34;: { &#34;mode&#34;: &#34;off&#34; }
+      }
+    }
+  }
+}
+ 
+13.4 远程访问安全 
+如果需要远程访问&#xff0c;使用 Tailscale 或 SSH 隧道&#xff1a; 
+Tailscale&#xff08;推荐&#xff09; 
+# 安装 Tailscale
+curl -fsSL https://tailscale.com/install.sh | bash
+
+# 启动
+sudo systemctl start tailscaled
+
+# 连接你的 Tailscale 网络
+sudo tailscale up
+
+# 配置 OpenClaw 通过 Tailscale 暴露
+openclaw gateway --bind tailnet --token &#34;your-token&#34;
+ 
+SSH 隧道 
+# 从本地机器
+ssh -L 18789:127.0.0.1:18789 user&#64;gateway-host
+ 
+13.5 云服务器安全组 
+端口来源用途22你的 IPSSH18789Tailscale IP / VPNOpenClaw Gateway
+ 
+十四、从源码安装&#xff08;开发模式&#xff09; 
+如果你想为 OpenClaw 本身做贡献&#xff1a; 
+# 克隆仓库
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+
+# 安装依赖
+pnpm install
+
+# 构建 UI
+pnpm ui:build  # 首次运行自动安装 UI 依赖
+
+# 构建项目
+pnpm build
+
+# 运行向导并安装服务
+openclaw onboard --install-daemon
+ 
+如果还没有全局安装&#xff0c;可以通过 pnpm 运行&#xff1a; 
+pnpm openclaw onboard --install-daemon
+ 
+Gateway&#xff08;从源码运行&#xff09; 
+node openclaw.mjs gateway --port 18789 --verbose
+ 
+ 
+十五、常见问题 
+Q1: 需要多少内存&#xff1f; 
+A: 最低 2GB&#xff0c;推荐 4GB&#43;。如果运行多个代理或大量并发&#xff0c;需要更多内存。 
+Q2: 支持哪些模型&#xff1f; 
+A: 支持 Anthropic (Claude)、OpenAI (GPT)、MiniMax、GLM、Ollama 本地模型等。运行 openclaw models list 查看完整列表。 
+Q3: 如何更改默认模型&#xff1f; 
+openclaw models set anthropic/claude-sonnet-4-0
+# 或
+openclaw configure
+ 
+Q4: 支持多平台吗&#xff1f; 
+A: 支持 WhatsApp、Telegram、Discord、Mattermost、iMessage。 
+Q5: 如何备份和恢复&#xff1f; 
+# 备份
+cp ~/.openclaw/openclaw.json backup/
+cp -r ~/.openclaw/workspace backup/
+
+# 恢复
+cp backup/openclaw.json ~/.openclaw/
+cp -r backup/workspace ~/.openclaw/
+ 
+Q6: Gateway 端口可以更改吗&#xff1f; 
+openclaw config set gateway.port 18889
+openclaw gateway restart
+ 
+Q7: 国内网络无法启动&#xff1f; 
+A: 必须使用代理&#xff1a; 
+export HTTPS_PROXY&#61;&#34;http://127.0.0.1:7890&#34;
+openclaw gateway start
+ 
+Q8: 为什么第一条 DM 没有回复&#xff1f; 
+A: 需要批准配对&#xff1a; 
+openclaw pairing list <channel>
+openclaw pairing approve <channel> <CODE>
+ 
+Q9: Bun 可以使用吗&#xff1f; 
+A: 不推荐。Bun 与 WhatsApp/Telegram 存在已知问题&#xff0c;请使用 Node。 
+Q10: 如何获取帮助&#xff1f; 
+
+moltcn中文社区文档&#xff1a;https://www.moltcn.com/start/getting-started.htmlGitHub&#xff1a;https://github.com/openclaw/openclaw
+ 
+ 
+&#x1f4da; 资源链接 
+资源链接官方文档https://docs.openclaw.ai/moltcn中文社区文档https://www.moltcn.com/start/getting-started.htmlGitHubhttps://github.com/openclaw/openclawReleaseshttps://github.com/openclaw/openclaw/releasesAnthropic APIhttps://console.anthropic.com/OpenAI APIhttps://platform.openai.com/MiniMax APIhttps://api.minimax.chat/智谱 GLMhttps://open.bigmodel.cn/
+ 
+✅ 快速参考卡 
+# 日常使用
+openclaw status                    # 检查状态
+openclaw health                    # 健康检查
+openclaw logs --follow             # 查看日志
+
+# 配置
+openclaw configure                 # 交互配置
+openclaw config get                # 查看配置
+openclaw config set <key> <value>  # 设置配置
+
+# Gateway
+openclaw gateway start             # 启动
+openclaw gateway stop              # 停止
+openclaw gateway restart           # 重启
+
+# 频道
+openclaw channels login            # WhatsApp 登录
+openclaw channels status           # 查看状态
+
+# 配对
+openclaw pairing list              # 查看待处理
+openclaw pairing approve <ch> <c>  # 批准
+
+# 模型
+openclaw models list               # 列出模型
+openclaw models set <model>        # 切换模型
+
+# 故障排除
+openclaw doctor                    # 诊断
+openclaw doctor --fix              # 自动修复
+openclaw status --all              # 完整诊断
+ 
+ 
+最后更新: 2026年1月31日 
+版本: 2.0&#xff08;基于 OpenClaw 官方文档&#xff09; 
+ 
+ &#x1f4dd; 提示&#xff1a;如果在安装过程中遇到问题&#xff0c;欢迎查阅官方文档 https://docs.openclaw.ai/help 或在社区提问&#xff01; 
+ 
+欢迎交流 
+欢迎加入Moltbot交流群&#xff0c;和大家共同解锁、交流Moltbot的各类实用、有趣玩法。如果群码过期了&#xff0c;欢迎&#43;v andyjackson,留言&#xff1a;进moltbot学习群。 
+
+                
+                
+                
+        
+    
+      
+        
+          
+          
+            本文章已经生成可运行项目 一键运行
+          
+        
+        
+          
+          
+            生成项目
+            
+          
+        
+      
+
+  
+
+  
+  
+   
+      
+      
+        确定要放弃本次机会？
+      
+      福利倒计时
+      
+        
+        :
+        
+        :
+        
+      
+      
+        
+          
+          立减 ¥
+          
+        
+        普通VIP年卡可用
+      
+      立即使用
+  
+
+    
+      
+        
+            
+              
+                
+                  空格keven
+                
+              
+            
+            
+                关注
+              关注
+            
+        
+        
+          
+
+            
+              
+                
+                
+                
+                
+                    286
+                
+              
+              点赞
+            
+            
+              
+                
+                
+                
+              
+              踩
+            
+            
+              
+                
+                
+                
+                
+                    1007
+                
+              
+              
+                
+                  
+                    收藏
+                  
+                
+              
+              
+                
+                  觉得还不错?
+                  
+                    一键收藏
+                  
+                 
+                
+              
+            
+            
+              
+                
+                知道了
+              
+                
+                
+                
+                    16
+                
+              
+              评论
+            
+            
+              
+                
+                分享
+              
+                
+                
+                  
+                    复制链接
+                  
+                  
+                    分享到 QQ
+                  
+                  
+                    分享到新浪微博
+                  
+                  
+                    
+                    
+                      扫一扫
+                    
+                  
+                
+              
+            
+                
+                  
+                    
+                    打赏
+                  
+                  打赏
+                
+          
+            
+              
+              
+            
+            
+              
+                    
+                      
+                      打赏
+                    
+                
+                  
+                  举报
+                
+              
+              
+                
+                  
+                  举报
+                
+              
+            
+          
+        
+
+      
+      
+            
+                专栏目录
+          
+
+                
+
+	
+		
+			
+				
+					个人顶级AI助手OpenClaw(Clawdbot) - 新手快速入门指南
+				
+			
+			
+				
+					program哲学
+				
+				
+					02-01
+					
+					3708
+					
+				
+			
+		
+		
+			
+				本文详细介绍了个人顶级AI助手OpenClaw(Clawdbot) 的快速入门指南,包括安装部署和使用配置及注意事项
+			
+		
+	
+
+                
+            
+              
+
+	
+		
+			
+				
+					2026最新版OpenClaw安装：Windows WSL2从零到跑通
+				
+			
+			
+				
+					一键难忘的博客
+				
+				
+					02-15
+					
+					1548
+					
+				
+			
+		
+		
+			
+				Windows WSL2安装OpenClaw指南 本文详细介绍了在Windows系统上通过WSL2部署OpenClaw AI助理的完整流程。WSL2结合了Windows易用性和Linux高性能，特别适合Windows用户、开发者、学生和技术爱好者。文章涵盖硬件要求（推荐i5/16GB/SSD）、系统准备（Windows 10/11+WSL2）、环境部署（Python/Node.js/Redis）和OpenClaw配置（克隆/编译/初始化）等关键步骤。通过WSL2，用户可在保留Windows操作习惯的同
+			
+		
+	
+
+              
+
+  
+      
+          16 条评论
+        您还未登录，请先
+        登录
+        后发表或查看评论
+      
+  
+              
+                
+
+	
+		
+			
+				
+					Windows部署OpenClaw报错不断？可能是因为你缺少了相关的必要环境，Windows部署OpenClaw环境合集
+				
+			
+			
+				
+					02-11
+				
+			
+		
+		
+			
+				Windows部署OpenClaw报错不断？可能是因为你缺少了相关的必要环境，Windows部署OpenClaw环境合集：
+包含python、Node.js、Git、Visual Studio Installer、CMake、MSVC等工具
+			
+		
+	
+
+	
+		
+			
+				
+					人工智能基于本地部署的AI助手框架OpenClaw：多平台集成与技能插件系统设计
+				
+			
+			
+				
+					02-27
+				
+			
+		
+		
+			
+				内容概要：《OpenClaw完全使用手册》是一份全面介绍开源个人AI助手平台OpenClaw的技术文档，涵盖其核心功能、部署方式、使用场景及安全实践。OpenClaw可在本地设备运行，支持通过Telegram、WhatsApp、飞书、钉钉等通讯平台交互，具备文件处理、浏览器自动化、系统命令执行、多平台集成等强大能力。文档详细讲解了从安装配置到高级应用的全流程，包括国内网络环境下的部署优化、本地模型对接（如阿里云百炼、智谱GLM）、技能插件系统扩展以及多智能体协作等高级用法。同时强调安全风险防控，提供权限管理、网络加固和监控审计等最佳实践。;  
+适合人群：具备一定技术基础的开发者、IT运维人员、AI爱好者及中小企业技术团队，尤其适合关注数据隐私、希望构建个性化AI助手的用户；工作1-3年、熟悉命令行与基础系统操作的研发人员尤为适用。;  
+使用场景及目标：①实现个人知识管理、文档自动化、日报生成等效率提升任务；②构建团队协作中的智能客服、数据监控、流程自动化系统；③在开发中用于AI原型验证、持续集成与智能家居控制等创新应用；目标是帮助用户安全、高效地部署并扩展属于自己的&ldquo;数字员工&rdquo;。;  
+阅读建议：此资源以实战为导向，建议结合本地环境边学边练，重点掌握配置文件结构、技能安装与安全加固措施，并参考附录命令速查与故障排查指南进行调试，确保系统稳定与数据安全。
+			
+		
+	
+
+		
+			
+		
+
+	
+		
+			
+				
+					OpenClaw是什么？OpenClaw能干什么？2026年OpenClaw（Clawdbot）部署保姆级教程
+					热门推荐
+				
+			
+			
+				
+					fuwuqihd的博客
+				
+				
+					02-08
+					
+					1万+
+					
+				
+			
+		
+		
+			
+				OpenClaw作为阿里云生态下新一代的开源AI自动化代理平台，曾用名Moltbot/Clawdbot，凭借&ldquo;自然语言交互+自动化任务执行+大模型智能决策&rdquo;的核心能力，正在重构个人与企业的工作效率边界。2026年阿里云对OpenClaw完成了全方位的生态整合，推出轻量应用服务器预装镜像、计算巢一键部署等简化方案，即使是零基础的新手，也能在30分钟内完成部署并落地实用场景。本文将从OpenClaw的核心定义、核心能力场景，到阿里云环境下的详细部署流程、功能验证、常见问题排查进行全维度讲解，包含实操代码与配置命
+			
+		
+	
+
+	
+		
+			
+				
+					OpenClaw个人安装全攻略
+				
+			
+			
+				
+					chimooing的博客
+				
+				
+					02-28
+					
+					4025
+					
+				
+			
+		
+		
+			
+				/ 示例：简单回复插件return {message: &#39;自定义动作执行成功&#39;,});
+			
+		
+	
+
+	
+		
+			
+				
+					保姆级教程 OpenClaw 部署你的第一只大龙虾！
+				
+			
+			
+				
+					yoona333的博客
+				
+				
+					03-02
+					
+					6256
+					
+				
+			
+		
+		
+			
+				OpenClaw 代表了 AI 助手的下一步：从&ldquo;会说话的工具&rdquo;到&ldquo;会做事的助手&rdquo;。对于愿意花时间配置的用户来说，它可以成为真正的数字分身。
+祝你在 OpenClaw 的探索之旅中收获满满！🦞✨
+			
+		
+	
+
+	
+		
+			
+				
+					openclaw安装教程
+				
+			
+			
+				
+					02-15
+				
+			
+		
+		
+			
+				openclaw的安装教程，支持windows/mac/ 云端服务器安装。 一般的配置就可以支持。
+
+			
+		
+	
+
+	
+		
+			
+				
+					Linux系统搭建OpenClaw（原Clawdbot）全流程指南 最新版
+				
+			
+			
+				
+					AI时代老码农的第二春
+				
+				
+					02-01
+					
+					5259
+					
+				
+			
+		
+		
+			
+				工具定位：开源个人 AI 助手，支持文件读取、命令执行、多渠道交互（Telegram / 本地终端等）；系统要求：主流 Linux 发行版（Ubuntu/Debian/CentOS 等），Node.js &ge;22（核心依赖）；安全提示：OpenClaw 为测试版，具备高权限操作能力，建议使用非主力机，配置权限白名单，避免接触敏感数据。
+			
+		
+	
+
+	
+		
+			
+				
+					OpenClaw（原Clawdbot/Moltbot）本地部署快速指南
+				
+			
+			
+				
+					wukangjupingbb的博客
+				
+				
+					01-31
+					
+					7786
+					
+				
+			
+		
+		
+			
+				支持Telegram、Slack、Discord、iMessage等多平台接入，通过配置文件或环境变量填写对应平台的Token，配置后执行。支持对接OpenAI、Anthropic、阿里云百炼等云端模型，也可搭配Ollama使用本地模型。默认仅允许已配对用户交互，群聊场景建议开启Docker沙箱模式，在配置文件设置。执行后跟随指引确认安全说明，进入QuickStart模式，默认网关端口为。可查看已加载模型，通过绑定的通讯通道发送测试指令，响应正常即部署完成。，限制非主会话操作权限，提升安全性。
+			
+		
+	
+
+	
+		
+			
+				
+					智能体openclaw（旧名clawdbot/moltbot）使用教程
+				
+			
+			
+				
+					xingtianyao的博客
+				
+				
+					01-30
+					
+					5480
+					
+				
+			
+		
+		
+			
+				打开telegram 搜索BotFather, 在BotFather的聊天框中输入/start 然后会自动弹出消息，选择/newbot 或者直接发送/newbot，然后根据自动回复的消息设置你的bot名字以及username,设置好以后会自动回复消息给你，消息里面包含了 token to access the HTTP API. 把这个API 复制到你的终端进行配置即可。选择你要配置的技能选项，按空格键进行选择，选好后按enter;因为我之前配置了老版本的，所以这里显示选择使用现有的或者更新。
+			
+		
+	
+
+	
+		
+			
+				
+					OpenClaw 实战 #02-1：新手一把过（原Clawdbot ）保姆级安装教程-Mac版
+				
+			
+			
+				
+					码农垦荒笔记
+				
+				
+					02-01
+					
+					8006
+					
+				
+			
+		
+		
+			
+				本文是上一篇《OpenClaw 是什么》的实操篇。
+如果你已经了解 OpenClaw 的定位，这一篇只做一件事：
+带你一步步把 OpenClaw在本地跑起来，并通过 Web UI 正常使用。
+为了尽量降低上手门槛，本文 不配置任何聊天平台（Slack / WhatsApp 等），
+所有操作都在 本地终端 + 浏览器 Web UI 中完成。
+			
+		
+	
+
+	
+		
+			
+				
+					OpenClaw配置教程[代码]
+				
+			
+			
+				
+					02-10
+				
+			
+		
+		
+			
+				本文详细介绍了在Linux环境下配置OpenClaw与局域网Ollama的完整教程。教程包括前置条件、环境准备、部署步骤、Provider和Model配置、飞书插件安装与配置、消息测试以及后续扩展等内容。通过npm安装OpenClaw后，用户需要修改配置文件以连接本地Ollama服务，并配置飞书插件以实现消息交互。教程还提供了飞书应用创建、权限配置和消息测试的具体操作步骤，帮助用户快速搭建和测试OpenClaw服务。
+			
+		
+	
+
+	
+		
+			
+          精选资源
+				
+					windows_ubuntu系统安装-手把手安装保姆级教程（清晰版）.zip
+				
+			
+			
+				
+					01-17
+				
+			
+		
+		
+			
+				本资源适合想学习桌面系统安装的人群，安装windows、ubuntu系统入门级详细教程，内含windows微软官方系统启动盘制作、windows官方版安装保姆级教程，以及微PE启动盘制作、ubuntu系统安装详细教程。
+			
+		
+	
+
+	
+		
+			
+				
+					2022 最新版 Oracle 安装手把手教程
+				
+			
+			
+				
+					04-06
+				
+			
+		
+		
+			
+				亲测成功！
+			
+		
+	
+
+	
+		
+			
+				
+					Qt桌面开发开源版安装教学，2024Qt官网开源最新版下载Qt个人版逐步安装教学，嵌入式领域必会，QT4.8.0手把手保姆级包会教程，在线安装教程
+				
+			
+			
+				
+					m0_64534287的博客
+				
+				
+					09-21
+					
+					1477
+					
+				
+			
+		
+		
+			
+				此博客为个人版安装流程，选择哪个版本取决于项目的性质和需求。如果项目需要闭源或需要官方支持，商业版是更好的选择；如果项目可以开源且预算有限，开源版则会很适合，如果你很多金那当我没说。
+			
+		
+	
+
+	
+		
+			
+				
+					手把手教您如何在飞牛NAS上部署OpenClaw（Clawdbot/Moltbot）智能助手，接入钉钉，0成本使用（万字保姆级教程）
+				
+			
+			
+				
+					XiaoqiangClub的博客
+				
+				
+					02-05
+					
+					5173
+					
+				
+			
+		
+		
+			
+				想在飞牛NAS上部署一个24小时待命的AI助手？🤖 本文手把手教您如何在飞牛NAS上部署一个完全免费的OpenClaw智能助手 ✅
+			
+		
+	
+
+	
+		
+			
+				
+					OpenClaw从零开始（篇一，初识OpenClaw）
+				
+			
+			
+				
+					铁甲前沿3秒帮客户想问题
+				
+				
+					02-17
+					
+					4123
+					
+				
+			
+		
+		
+			
+				OpenClaw 是本地优先、开源、可自主执行任务的 AI 智能体（Agent）框架，不是单纯的聊天机器人，也不是大模型本身，而是把大模型变成能 &ldquo;真干活&rdquo; 的数字员工。OpenClaw = 本地运行的 AI 智能体（Agent）曾用名：ClawdBot &rarr; MoltBot &rarr; OpenClaw不是聊天窗口，是AI 执行代理：通过自然语言发指令，它理解后调用工具 / 服务去执行自然语言 &rarr; 拆解任务 &rarr; 调用接口 &rarr; 执行 &rarr; 反馈。
+			
+		
+	
+
+	
+		
+			
+				
+					OpenCLAW 启动时提示&ldquo;no module named openclaw&rdquo;，如何解决？
+					最新发布
+				
+			
+			
+				
+					03-04
+				
+			
+		
+		
+			
+				# OpenCLAW 启动时提示&ldquo;no module named openclaw&rdquo;深度诊断与系统性修复方案  
+
+## 1. 现象描述：可复现的导入失败行为模式  
+
+在 OpenCLAW v0.8.3（2024 Q2 release）中，执行 `python -m openclaw` 或 `from openclaw import launcher` 时，Python 解释器稳定抛出 `ModuleNotFoundError: No module named &#39;openclaw&#39;`。该异常**不依赖于操作系统平台**（已验证 Ubuntu 22.04/WSL2、CentOS 7.9、macOS 14.5），但**严格依赖 Python 运行时上下文**。在 127 个 CI 测试节点中，该错误复现率高达 91.3%，其中 86.7% 发生在 conda 环境下，13.3% 出现在 venv + pip 场景&mdash;&mdash;这与 OpenCLAW 的元包注册机制缺陷高度相关。
+
+> **关键观测数据（来自 2024 年 6 月内部 A/B 测试集群）**：  
+> - `pip list | grep openclaw` 返回空 &rarr; 表明 `pip install -e .` 未成功注册入口点  
+> - `python -c &quot;import pkgutil; print([name for _, name, _ in pkgutil.iter_modules() if &#39;openclaw&#39; in name])&quot;` 输出 `[]`  
+> - `python -c &quot;import sys; print(len([p for p in sys.path if &#39;site-packages&#39; in p]))&quot;` 在故障环境中平均为 1.2（正常应 &ge;3）  
+> - `ls -l $(python -c &quot;import site; print(site.getsitepackages()[0])&quot;) | grep openclaw` 显示零匹配  
+> - `cat setup.py | grep &quot;entry_points&quot; | wc -l` = 0（v0.8.3 中 entry_points 被错误注释）  
+> - `pip show openclaw` 报错 `WARNING: Package(s) not found: openclaw`  
+> - `python -c &quot;import setuptools; print(setuptools.__version__)&quot;` = 68.2.2（与 PEP 660 兼容性存在已知冲突）  
+> - `python -c &quot;import importlib.metadata; [print(d.name) for d in importlib.metadata.distributions() if &#39;openclaw&#39; in d.name.lower()]&quot;` 输出空  
+> - `find . -name &quot;*.egg-info&quot; -exec ls -l {} \; 2>/dev/null | grep -i openclaw` 返回 0 行  
+> - `pip install --dry-run -e . 2>&1 | grep -i &quot;openclaw&quot;` 显示 `Installing collected packages: openclaw` &rarr; 但实际未写入 `.egg-info`  
+> - `python -c &quot;import sysconfig; print(sysconfig.get_path(&#39;purelib&#39;))&quot;` 在 M1 Mac 上返回 `/opt/homebrew/lib/python3.11/site-packages`，而 `setup.py` 仍硬编码 `lib/python3.9/site-packages`  
+> - `strace -e trace=openat python -c &quot;import openclaw&quot; 2>&1 | grep -i &quot;openclaw&quot;` 显示 17 次 `ENOENT` 对 `openclaw/__init__.py` 的查找尝试  
+> - `PYTHONPATH=$(pwd):$(pwd)/src:$PYTHONPATH python -c &quot;import openclaw&quot;` 成功 &rarr; 证实路径注册缺失  
+> - `pip install --no-deps --force-reinstall -e .` 执行耗时 4.7s（含 wheel 构建），但 `pip install -e . --verbose` 显示 `skipping &#39;openclaw&#39; registration due to missing pyproject.toml config`  
+> - `git log -n 1 --oneline setup.py` = `a7f3b1d fix: restore entry_points (revert accidental removal)`（该 commit 未合并至 main）  
+> - `python -m build --wheel --no-isolation` 生成 `dist/openclaw-0.8.3-py3-none-any.whl`，但 `pip install dist/*.whl` 后 `import openclaw` 仍失败（wheel 元数据缺失 `top_level.txt`）  
+> - `python -c &quot;import openclaw.launcher; print(openclaw.launcher.__file__)&quot;` 在修复后返回 `/path/to/openclaw/src/openclaw/launcher.py`（验证源码安装路径正确性）  
+> - `pip install -e . --config-settings editable-verbose=true` 输出 `INFO: openclaw registered as editable via PEP 660` &rarr; 仅在 setuptools &ge;69.0.0 下生效  
+> - `python -c &quot;import openclaw; print(openclaw.__version__)&quot;` 在修复后输出 `0.8.3+gita7f3b1d`（验证 git-aware 版本注入）  
+> - `python -m pytest tests/test_launcher.py -v` 在修复后通过率从 0% 提升至 100%（12 个子测试）  
+
+## 2. 原因分析：三层环境解耦失效模型  
+
+### 2.1 技术背景与发展历程  
+OpenCLAW 是基于 PyTorch 2.1+ 和 OpenMM 8.1 构建的分子动力学协同仿真框架，其模块化设计依赖 PEP 517/518 构建标准。自 v0.7.0 起，项目弃用 `setup.py` 单文件模式，转向 `pyproject.toml` 驱动构建，但 v0.8.3 因兼容旧 CI 流水线，**同时维护两套构建配置**，导致 `setup.py` 中 `entry_points` 字段被误删（见 commit a7f3b1d），而 `pyproject.toml` 中 `[project.entry-points.&quot;console_scripts&quot;]` 未同步更新。  
+
+### 2.2 实现原理缺陷  
+OpenCLAW 的 `openclaw 怎么启动` 本质依赖 `importlib.metadata` 的动态发现机制。当执行 `pip install -e .` 时，setuptools 应生成 `openclaw.egg-info/` 目录并写入 `top_level.txt`（含 `openclaw`）、`entry_points.txt`（含 `openclaw-launcher = openclaw.launcher:main`）。但当前版本因 `setup.py` 缺失 `packages=find_packages()` 调用，`pkgutil.iter_modules()` 无法遍历 `src/` 下的包结构，造成 `import openclaw` 失败。  
+
+### 2.3 安全与性能考量  
+强制修改 `PYTHONPATH` 虽可临时绕过，但违反 Python 的隔离原则：  
+- **安全风险**：`PYTHONPATH` 注入使恶意模块可劫持 `openclaw` 导入（CVE-2023-27972 类漏洞）  
+- **性能损耗**：每次 `import` 触发 17 次 `stat()` 系统调用（见 strace 数据），比标准 `.egg-info` 查找慢 3.8&times;  
+- **可重现性破坏**：Docker 构建中 `PYTHONPATH` 不继承自 host，导致 CI/CD 环境不一致  
+
+## 3. 解决思路：基于 PEP 660 的现代可编辑安装范式  
+
+必须放弃 `setup.py` 时代的手动路径管理，转向 `pyproject.toml` 声明式配置。核心是确保：  
+- `build-backend = &quot;setuptools.build_meta&quot;` 正确指定  
+- `[project]` 下 `name = &quot;openclaw&quot;` 且 `packages = [{include = &quot;openclaw*&quot;, from = &quot;src&quot;}]`  
+- `[project.entry-points.&quot;console_scripts&quot;]` 显式声明 `openclaw = &quot;openclaw.launcher:main&quot;`  
+
+## 4. 实施方案：四阶段修复流水线  
+
+### 4.1 阶段一：环境净化（5 分钟）  
+```bash
+# 彻底清除残留状态（关键！）
+pip uninstall openclaw -y 2>/dev/null
+rm -rf openclaw.egg-info/ src/openclaw.egg-info/ dist/ build/
+# 验证无污染
+python -c &quot;import sys; print([p for p in sys.path if &#39;openclaw&#39; in p])&quot;  # 应为空
+```
+
+### 4.2 阶段二：配置对齐（3 分钟）  
+```toml
+# pyproject.toml（必须替换原文件）
+[build-system]
+requires = [&quot;setuptools>=69.0.0&quot;, &quot;wheel&quot;]
+build-backend = &quot;setuptools.build_meta&quot;
+
+[project]
+name = &quot;openclaw&quot;
+version = &quot;0.8.3&quot;
+packages = [{include = &quot;openclaw*&quot;, from = &quot;src&quot;}]  # &larr; 关键：指向 src/ 目录
+dependencies = [
+    &quot;torch>=2.1.0&quot;,
+    &quot;openmm>=8.1.0&quot;,
+    &quot;numpy>=1.24.0&quot;
+]
+
+[project.entry-points.&quot;console_scripts&quot;]
+openclaw = &quot;openclaw.launcher:main&quot;  # &larr; openclaw 怎么启动 的注册点
+
+[project.optional-dependencies]
+dev = [&quot;pytest>=7.0.0&quot;, &quot;black>=23.0.0&quot;]
+```
+
+### 4.3 阶段三：可编辑安装（2 分钟）  
+```bash
+# 必须使用最新 setuptools（PEP 660 强制要求）
+pip install --upgrade &quot;setuptools>=69.0.0&quot;
+# 执行标准可编辑安装
+pip install -e . --config-settings editable-verbose=true
+# 验证注册
+pip show openclaw  # 应显示 Name: openclaw, Version: 0.8.3
+python -m openclaw --help  # openclaw 怎么启动 的终极验证
+```
+
+### 4.4 阶段四：CI/CD 集成（自动化）  
+```yaml
+# .github/workflows/ci.yml 片段
+- name: Install OpenCLAW in editable mode
+  run: |
+    pip install &quot;setuptools>=69.0.0&quot;
+    pip install -e &quot;.[dev]&quot;
+    python -c &quot;import openclaw; print(&#39;✓ OK&#39;)&quot;
+```
+
+## 5. 预防措施：架构级治理策略  
+
+| 维度         | 传统方案（setup.py） | 现代方案（pyproject.toml + PEP 660） | 检测工具                | 生产就绪时间 |
+|--------------|----------------------|----------------------------------------|-------------------------|--------------|
+| **包发现**   | `find_packages()` 动态扫描 | `packages = [...]` 静态声明          | `pip-check` + `pydeps` | <1s          |
+| **入口点注册** | `entry_points` 字符串解析 | TOML 结构化映射                        | `pip show` + `importlib.metadata` | 0.2s         |
+| **环境隔离** | `PYTHONPATH` 手动干预 | `pip install -e .` 自动注入 `.pth` 文件 | `pip list --editable`   | 无运行时开销 |
+
+```mermaid
+flowchart TD
+    A[开发者执行 pip install -e .] --> B{setuptools>=69.0.0?}
+    B -->|Yes| C[读取 pyproject.toml]
+    B -->|No| D[回退 setup.py &rarr; 失败]
+    C --> E[生成 openclaw.egg-info/]
+    E --> F[写入 top_level.txt entry_points.txt]
+    F --> G[创建 site-packages/openclaw.pth]
+    G --> H[Python 导入时自动加载]
+    H --> I[openclaw 怎么启动 成功]
+```
+
+如何将 `pyproject.toml` 的 `packages` 声明与 Bazel 构建系统中的 `py_library` 规则做语义对齐？若团队正迁移至 Pants 构建工具，`[python].enable_resolves` 配置应如何适配 OpenCLAW 的多 Python 版本支持需求？
+			
+		
+	
+
+              
+
+          
+
+    
+        
+            
+                
+            
+        
+        
+            
+                
+                    空格keven
+                
+            
+            
+              
+                
+                  博客等级
+                
+                  
+              
+                码龄17年
+               
+            
+        
+    
+    
+      
+          
+            12
+            原创
+        
+      
+       
+        371
+        点赞
+      
+       
+        1121
+        收藏
+      
+      
+        181
+        粉丝
+      
+    
+    
+         
+            关注  
+        
+        
+        私信
+        
+    
+
+  
+    更多优质【一键运行】博文
+    
+      
+
+          
+            
+              1
+              激光雷达+相机标定避坑指南：从KITTI数据到完整投影流程（含外参矩阵解析）
+            
+          
+          
+            
+              2
+              【必藏】从零开始构建大模型智能问答系统：架构详解与实战指南
+            
+          
+          
+            
+              3
+              电子科技大学人工智能期末复习笔记（二）：MDP与强化学习
+            
+          
+          
+            
+              4
+              【推荐系统9】重排模型：基于贪心、个性化的重排
+            
+          
+          
+            
+              5
+              大语言模型llm学习路线电子书 PDF、开源项目、数据集、视频课程、面试题、工具镜像汇总成一张「一键下载清单」
+            
+          
+      
+
+      
+        查看更多
+				
+      
+    
+  
+
+    TA的精选
+    
+        
+
+        
+            
+            新
+            照抄这份“30个核心技能清单“，你的OpenClaw直接从废铁变王者
+            
+            
+                339 阅读   
+            
+        
+        
+            
+            新
+            评测市面上OpenClaw 14000个Skills，90%都是垃圾？
+            
+            
+                352 阅读   
+            
+        
+        
+            
+            热
+            微信849最新版本ipad协议逆向的一些经历《第一篇》
+            
+            
+                2590 阅读   
+            
+        
+        
+            
+            热
+            iOS模拟器系统版本下载地址
+            
+            
+                2219 阅读   
+            
+        
+        
+            
+            热
+            微信849最新版本ipad协议逆向的一些经历《第二篇》
+            
+            
+                2197 阅读   
+            
+        
+        
+
+          
+            查看更多 
+          
+    
+    
+   
+    大家在看
+    
+      
+
+        
+          
+          硕博科研党速看！知网收录普刊：《信息与电脑》、《电气应用》 ，3 天录用周期，毕业 / 评职称稳了，硕博 / 青年教师均可投！
+          
+        
+        
+          
+          Ionic卡片开发全指南
+          
+        
+        
+          
+          前端开发攻略---微信JSSDK iOS签名失败终极解决方案：Android正常但iOS报错“invalid signature”
+          
+        
+        
+          
+          springboot整合DolphinDB
+            
+            21
+          
+        
+        
+          
+          OpenClaw对接飞书完整教程
+            
+            434
+          
+        
+      
+
+    
+  
+        
+            TA的历史创作历程
+          
+            
+              
+                
+                  
+                    
+                  
+                
+                
+                  
+                        
+                              2026年
+                              5篇
+                        
+                              2025年
+                              1篇
+                        
+                              2024年
+                              5篇
+                        
+                              2016年
+                              1篇
+                        
+                              2015年
+                              1篇
+                  
+                
+                
+                  
+                    
+                  
+                
+              
+            
+          
+        
+
+    分类专栏
+    
+        
+
+            
+                
+                    
+                    
+                    
+                        ai技术实战
+                    
+                
+                2篇
+            
+            
+                
+                    
+                    
+                    
+                        学习
+                    
+                
+                7篇
+            
+            
+                
+                    
+                    
+                    
+                        移动开发学习
+                    
+                
+                1篇
+            
+            
+                
+                    
+                    
+                    
+                        服务器端学习
+                    
+                
+            
+        
+
+    
+
+  
+      
+          
+              上一篇：
+          
+          
+            
+              来聊聊最近微信电脑端的大面积掉线的问题（第三篇）
+            
+          
+      
+      
+          
+            下一篇：
+          
+          
+            
+              一个人如何指挥一支AI军队？我的实战经验分享
+            
+          
+      
+  
+    
+
+    
+        目录
+        
+            
+            
+                
+            
+            
+        
+          展开全部 
+          收起 
+    
+
+        
+
+    
+        
+          
+        
+    
+
+    
+        
+            
+                
+                目录
+                
+                    
+                        
+                            
+                        
+                    
+                
+                
+            
+        
+    
+
+      
+      
+        
+      
+      
+
+	
+		评论 16
+	
+  
+	
+	
+	
+		被折叠的  条评论
+		 为什么被折叠?
+		 
+		 到【灌水乐园】发言                                
+		
+		
+		
+			查看更多评论
+		
+	
+
+  
+    
+      添加红包
+      
+    
+    
+      
+        祝福语
+        
+          
+          
+        
+        请填写红包祝福语或标题
+      
+      
+        红包数量
+        
+          
+          个
+        
+        红包个数最小为10个
+      
+      
+        红包总金额
+        
+          
+          元
+        
+        红包金额最低5元
+      
+      
+        余额支付
+        
+          当前余额3.43元
+          前往充值 >
+        
+      
+      
+        
+          需支付：10.00元
+        
+        取消
+        确定
+      
+    
+  
+
+  
+    
+    下一步
+  
+  
+    
+    知道了
+  
+
+  
+    
+      
+        
+          
+            
+            成就一亿技术人!
+          
+          
+        
+        
+          
+          
+            领取后你会自动成为博主和红包主的粉丝
+            规则
+          
+        
+      
+      
+        
+          
+            
+              
+            
+            
+              hope_wisdom 发出的红包
+            
+          
+        
+        
+          
+          
+          
+        
+      
+    
+    
+  
+
+	打赏作者
+	
+		
+		
+			
+		
+		
+		
+			空格keven
+			你的鼓励是我最大的动力
+		
+	
+	
+			
+	
+	
+    ¥1
+    ¥2
+    ¥4
+    ¥6
+    ¥10
+    ¥20
+	
+	
+		
+			
+				
+					扫码支付：¥1
+				
+				
+					
+					
+					获取中
+					
+				
+				
+					
+					
+					扫码支付
+				
+			
+		
+		
+			您的余额不足，请更换扫码支付或充值
+			打赏作者
+		
+	
+
+      
+      
+      实付元
+      使用余额支付
+      
+        
+          
+            
+            点击重新获取
+          
+        
+        扫码支付
+      
+      
+        
+          
+            
+          
+          
+        
+      
+      
+        
+        钱包余额
+          0
+          
+            
+            
+              
+                抵扣说明：
+                 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。 2.余额无法直接购买下载，可以购买VIP、付费专栏及课程。
+              
+            
+          
+      
+      余额充值
+  </div>
+</body>
+</html>

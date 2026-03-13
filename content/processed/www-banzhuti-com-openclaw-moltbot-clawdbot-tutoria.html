@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>搬主题 — 一键安装部署超详细图文教程</title>
+  <meta name="description" content="含钉钉/飞书/微信/Web 四种集成方法，国内用户首选参考">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>搬主题</span>
+    <a href="https://www.banzhuti.com/openclaw-moltbot-clawdbot-tutorial.html" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法-搬主题
+
+  
+
+ 资讯 WordPress主题
+ WordPress专业主题 WordPress中文主题 WordPress免费主题
+ WordPress插件
+ WordPress专业插件 WordPress中文插件 WordPress免费插件
+ 教程分享
+ WordPress教程 网站教程 其他教程
+ 主机源码
+ 活动促销 其他源码
+其他
+答疑解惑付费支持
+
+开通会员 尊享会员权益登录注册找回密码快速登录QQ登录微信登录
+
+ 资讯 WordPress主题
+ WordPress专业主题 WordPress中文主题 WordPress免费主题
+ WordPress插件
+ WordPress专业插件 WordPress中文插件 WordPress免费插件
+ 教程分享
+ WordPress教程 网站教程 其他教程
+ 主机源码
+ 活动促销 其他源码
+其他
+答疑解惑付费支持
+
+开通会员 尊享会员权益登录注册找回密码快速登录QQ登录微信登录
+ 首页
+教程分享 网站教程 正文
+ 一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法搬主题12天前更新关注私信066288AI 摘要如果你最近在GitHub或者X（原Twitter）上冲浪，一定刷到过OpenClaw（曾用名Moltbot、Clawdbot）这个名字。这东西火到什么程度？它直接颠覆了开发者对“个人AI助手”的固有认知。今天主题铺就来扒一扒这个项目，并且手把手教你如何一键部署，顺便把它接入到你的钉钉、飞书或者微信里，让你拥有一个随叫随到的“数字员工”。这里主题铺分享一下一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程，包含含对接钉钉/飞书/微信/Web集成方法。2026年1月的AI圈子被一个项目彻底引爆了。如果你最近在GitHub或者X（原Twitter）上冲浪，一定刷到过OpenClaw（曾用名Moltbot、Clawdbot）这个名字。这东西火到什么程度？它直接颠覆了开发者对“个人AI助手”的固有认知。今天主题铺就来扒一扒这个项目，并且手把手教你如何一键部署，顺便把它接入到你的钉钉、飞书或者微信里，让你拥有一个随叫随到的“数字员工”。这里主题铺分享一下一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程，包含含对接钉钉/飞书/微信/Web集成方法。OpenClaw(原Moltbot)是什么？简单来说，OpenClaw(原Moltbot)是一个把“本地算力 + 大模型 Agent 自动化”玩到极致的开源效率工具。它由PSPDFKit的创始人Peter Steinberger开发。这里有个小插曲，因为原名Clawdbot起得太像Anthropic家的Claude，1月27日项目组收到了律师函，于是连夜改名叫Moltbot。Molt是“蜕皮”的意思，吉祥物也换成了一只可爱的小龙虾（Molty 🦞）。但这名字改得只是皮囊，里子完全没变，旧的clawdbot命令现在依然兼容。最新消息：最终因念起来不顺口，最终改为OpenClaw，官方说做了充分的准备：商标检索结果清晰无误，域名已购买，迁移代码也已编写完成。据主题铺查证，这个项目的GitHub数据简直可以用吓人来形容。短短20天时间，Star数从几百暴涨到了40多K，光是昨天一天就猛涨了30K。这种增长速度，绝对称得上是现象级的开源神作。为什么它能让开发者疯狂？以前我们用ChatGPT或者Claude，逻辑是：我有问题 -> 打开网页/App -> 提问 -> AI回答，这是“人找AI”。但Moltbot的逻辑完全反过来了，它是“AI找人”。它是一个本地优先（Local-First）的AI代理平台。你可以把它理解为一个7×24小时运行在你服务器或闲置电脑上的“活程序”。它不仅连接了大语言模型的大脑，更关键的是它长了“手”——它可以直接操作Shell、读写文件系统、修改代码。倒是挺有意思的，据说因为这个项目太火，连带着Mac Mini的销量都跟着涨了一波。很多朋友觉得既然是跑本地AI，那肯定得要几万块的高性能电脑才行。其实吧，这是个巨大的误区。Moltbot对配置的要求极低。你完全不需要去买昂贵的Mac Mini，一个几十块钱一个月的云服务器，甚至你家里吃灰的旧笔记本，都能跑得飞起。大家之所以对它如此上头，核心优势主要在三点：
+它是“活的”它有持久记忆。你昨天告诉它你不吃香菜，下周让它订餐时它还会记得。不像Siri或者某些对话机器人，永远像个失忆症患者，每次对话都得从头调教。它很主动它不会傻等着你提问。如果你授权了，它会主动分析环境并发起对话。比如它会突然告诉你：“老板，明天就要下雨了，你的航班可能会延误，建议改签。”这非常关键，市面上绝大多数AI都是被动响应的，能做到主动服务的凤毛麟角。它是你的数据都在你自己的服务器上。不像某些云端AI，你的隐私数据有被拿去训练模型的风险。在Moltbot这里，数据主权完全归你所有。
+真正的“数字员工”这就解释了为什么会有那个经典的案例：举个特别绝的真实案例：有个哥们在X上分享，他把Moltbot连接到了GitHub、Google Drive和社交媒体API上。睡觉前他发了一条语音指令：“分析我的网站流量数据，写一篇复盘博客，更新网站元数据，然后去领英上发个帖子。”说完他就睡了。第二天早上醒来，Moltbot已经把这套流程全跑通了，甚至还给他发了一份日报汇报工作进度。还有一个更实用的场景，有用户让Moltbot盯着某只股票，设定好策略。结果那天他在开车，Moltbot直接通过Telegram给他发消息：“老板，监测到跌破关键价位，建议补仓。”说白了，传统的Agent大多是“建议者”，而Moltbot是真正的“执行者”。它具备任务自动规划、本地执行以及失败反思与自修复的能力。代码跑报错了？它自己看日志，自己改，改完再跑，直到成功。这也就是为什么主题铺一直强调它的可玩性——因为它是开源的。你可以随意定制属于你自己的专属AI助手，无论是作为办公助理对接钉钉，还是作为私人管家对接微信，完全取决于你的想象力。不过也要提醒一句，因为它具有执行命令和读写文件的权限，Moltbot实际上接管了你的一部分系统控制权。在使用前，务必充分评估其安全性，并严格遵循许可协议。搞清楚了它是什么，接下来咱们就进入正题：如何用最简单的方式，把这个强大的“数字员工”请回家。很多朋友一听“本地部署AI”，脑子里立马浮现出那种满屏报错、需要改几十个配置文件的噩梦场景。其实吧，Moltbot 的安装设计得简直“友好到离谱”。哪怕你完全不懂代码，只要会复制粘贴，跟着主题铺的教程走，基本都能一次过。OpenClaw(原Moltbot)一键安装部署教程大家有个误区，觉得跑AI必须得有昂贵的GPU服务器。据主题铺了解，Moltbot 对硬件的要求低得令人发指：它只需要 512MB 到 1GB 的内存就能跑起来。这意味着，不管是你那台吃灰多年的旧笔记本，还是几十块钱一个月的入门级云服务器，都能成为它的家。1. 准备工作在开始之前，确认一下你的环境：
+操作系统：macOS、Linux 或 Windows 都可以。环境依赖：虽然它依赖 Node.js (≥22)，但只要你用我们下面提供的“一键脚本”，它会自动帮你搞定环境配置，不需要你手动去装 Node.js。网络环境：安装过程中需要下载依赖包，建议保持网络通畅（懂得都懂）。
+2. 极速安装（推荐小白使用）这是最省心的方法，全自动一条龙服务。方案 A：macOS 或 Linux 系统（含服务器）如果你是用 Mac 电脑，或者通过 SSH 连接到了 Linux 服务器，直接复制下面这行命令到终端里，按下回车：curl -fsSL https://molt.bot/install.sh | bash(注：由于项目刚刚更名，原本的 https://clawd.bot/install.sh 依然可用，两者效果一致)这里主题铺强烈建议使用第三方的云服务器来使用，毕竟几十块钱就能使用，不用破坏自己电脑的配置。这里主题铺推荐阿里云平台，性能强劲、价格便宜、开箱即用。现在的各大平台都已经支持这个智能体，如果你不想在本地折腾终端命令，阿里云的一键部署方案绝对是你的救星。
+阿里云Moltbot专属页：https://www.aliyun.com/activity/ecs/clawdbot
+点击购买阿里云后就可以实现使用了，几块钱一个月即可。因为使用阿里云服务非常简单，就两个步骤：1）租用服务器2）配置Moltbot1）租用服务器租服务器的话，我建议用阿里云，既稳定又安全，新用户最低68元就能租一年，只要68元就能使用1年24小时帮你做事的助理，还是超级划算的。而且，它有全套的云服务和生态，包括服务器、模型和钉钉。服务器租用地址是：https://swasnext.console.aliyun.com/buy#/内存，选2Gib以上。地区，选美国弗吉尼亚。然后付款，1个月56元（新用户优惠很大）。付完款后，你就有了自己的云服务器，依次点“远程连接”-“登录”。这时，你已经可以连上这台服务器了，你可以把它理解为是你的云电脑，已经开机，并预装了各种环境和Moltbot安装包。但这时还没有配AI模型，所以还不能跑任务。2）配置Moltbot接下来，就是给Moltbot配一个AI模型。Moltbot支持的模型非常多，基本上兼容OpenAI和Anthropic的模型它都支持，比如GPT、Claude、Gemini、Qwen、GLM、Kimi、Minimax等。我们以阿里云百炼平台为例，点“密钥管理”，创建一个新的API Key（千万不要告诉他人）。地址：https://www.aliyun.com/product/bailian新人免费领取超7000万tokens，完全够用了！！！然后，再回到前面的服务器页面，点“实例ID”。进入“应用行情”详情页，配置Moltbot。先给端口放通，点“1端口放通”的“一键放通”即可。然后配置API，点“2配置Moltbot”的“执行命令”，输入百炼的API Key。完成API Key配置后，你会看到这样的页面提示。最后配置Moltbot，点“3访问控制页面”的“执行命令”，生成访问Moltbot的Token。然后，复制这个Moltbot的Token链接，在浏览器里打开。这时候，你已经可以与Moltbot对话。但我们不可能每次都在这个网页链接里，与Moltbot对话。我们需要把Moltbot封装成ResponseAPI，这样就能以API的形式使用Moltbot了。回到Moltbot页面，依次点Setting > Config > Gateway，切换至Http页签，在Responses区域把Enabled开启，然后点Save保存就可以了。1. 部署前的核心准备与避坑指南在动手之前，主题铺提醒大家注意以下几点，避免数据丢失或功能受限：
+现有服务器用户：如果你手里已经有阿里云轻量应用服务器，不需要重新买。通过“重置系统”就能部署。但千万注意，重置系统会清空盘里所有数据，一定要提前备份！硬件门槛：Moltbot 运行至少需要 2GiB 内存。虽然官方说512MB能跑，但在实际处理复杂模型调用时，2GiB才够稳。地域选择玄学：阿里云默认部署地域为美国（弗吉尼亚）。据主题铺观察，如果你需要Moltbot具备强大的联网搜索能力，建议维持默认或选择海外节点。国内地域（除香港外）可能会导致联网搜索功能受限，这一点选购时要看清楚。
+2. 购买与镜像选择操作非常简单，甚至不需要你懂Linux命令：
+访问页面：点击上面的专属链接，进入轻量应用服务器购买界面。选对镜像：在“镜像”选项里切换到“应用镜像”，你会直接看到 “Moltbot” 的图标（版本通常为 v2026.1.25+）。选中它，意味着环境都给你配好了。确认配置：默认的 2vCPU、2GiB 内存 套餐就足够个人使用了。确认没问题后提交订单，喝口水的功夫（1-3分钟），服务器就从“创建中”变成了“运行中”。
+3. 核心配置（给AI装上大脑）服务器跑起来了，接下来要给它接上“大脑”（API）和打通“耳朵”（端口）。第一步：获取阿里云百炼 API KeyOpenClaw(原Moltbot)需要调用大模型才能思考。
+登录阿里云百炼大模型服务平台，找到“密钥管理”。点击“创建 API Key”，复制这串字符。这就是你AI助手的“智商来源”，千万别泄露给别人。
+第二步：服务器端一键配置回到阿里云轻量应用服务器控制台，点进你刚买的实例，进入“应用详情”页面：
+一键放通端口：Moltbot 默认用 18789 端口。点击页面上的“一键放通”按钮，防火墙规则自动搞定。绑定 API Key：点击“一键配置”，把刚才复制的百炼 API Key 粘贴进去，点“执行命令”。系统会自动把密钥写入配置文件。获取登录 Token：为了防止别人偷用你的AI，你需要一个Token来登录。点击“执行命令”生成Token，并复制保存好。开始使用：点击“打开网站页面”，输入Token，你就能看到Moltbot的对话界面了！开启ResponseAPI访问，后续AppFlow会通过API访问Moltbot。在Clawdbot页面左侧导航栏，单击Setting > Config。在Config页面左侧导航栏单击Gateway，切换至Http页签，在Responses区域将Enabled切换至开启，单击Save。
+这种方式的最大优势是持久运行。阿里云的基础设施支持7×24小时稳定运行，无需你自己配置什么开机自启。只要服务器不欠费，你的AI员工就永远在线待命。方案 B：Windows 系统如果你是用 Windows 电脑，请右键点击开始菜单，选择“Windows PowerShell (管理员)”，然后复制粘贴下面这行命令：iwr -useb https://molt.bot/install.ps1 | iex如果 PowerShell 报错，你也可以用 CMD 命令行试试这个：curl -fsSL https://molt.bot/install.cmd -o install.cmd && install.cmd && del install.cmd输入完命令后，脚本就开始自动跑代码了。这时候你可以去泡杯咖啡，脚本会自动检测你的系统环境，下载 Node.js ≥22，并安装所有必要的依赖包。3. 傻瓜式配置向导 (Onboarding)安装脚本跑完后，为了让这个“空壳”AI 活起来，我们需要对它进行初始化配置。通常安装脚本结束后会自动进入配置流程。如果没有自动进入，或者你想重新配置，可以在终端输入以下命令：moltbot onboard --install-daemon(注：如果你的版本较旧，使用 clawdbot onboard --flow quickstart 也是一样的)接下来，屏幕上会弹出几个交互式的问题，我们一步步来填：第一步：风险确认系统会提示你，作为一个 Agent，它拥有读写文件和执行命令的权限。
+操作：直接输入 Yes 或者按回车确认。忽略风险，毕竟我们要的就是它能干活。
+第二步：端口设置 (Gateway Port)系统会问你运行在哪个端口。
+操作：默认是 18789。直接按回车，保持默认即可。
+第三步：选择“大脑” (配置模型供应商)这是最关键的一步。Moltbot 需要一个大模型 API 来作为它的思考中枢。
+如果你有海外资源：可以选择 OpenAI (GPT-4) 或 Anthropic (Claude 3.5)。Claude 3.5 Sonnet 是目前公认写代码和逻辑规划最强的模型，强烈推荐。如果你只有国内资源：别担心，Moltbot 完美支持国内大模型。你可以选择 OpenAI Compatible (兼容模式)，然后填入国内厂商的 API。
+推荐厂商：智谱 GLM-4（Coding Plan Max 版本写代码很强）、MiniMax、或者阿里的 Qwen（通义千问）。操作：在 Model Provider 列表中选择对应的厂商，然后把你的 API Key 粘贴进去（输入时可能不显示，粘贴完回车就行）。
+
+第四步：选择聊天渠道 (Client)系统会问你想通过什么方式跟它聊天。
+Web 界面：最简单的方式。配置完成后直接浏览器访问本地地址。WhatsApp/Telegram：
+WhatsApp：选择后终端会生成一个二维码，用手机 WhatsApp 扫码就能连上。这可以说是最丝滑的移动端体验了，联系人格式通常是 电话号码+(你)。Telegram：选择后填入你的 Bot Token（在 BotFather 那里申请），这个非常稳定，适合国内网络环境复杂的场景。Discord：配置相对繁琐，小白不推荐。
+
+第五步：安装技能包 (Skills & Hooks)系统会询问是否安装默认的 Skills（比如文件读写、网页搜索等）。
+操作：一路输入 Yes 或者回车。把这些“小程序”都装上，它的能力才完整。
+4. 验证是否安装成功当终端显示 Setup completed! 或者类似成功的提示后，恭喜你，你的专属 AI 员工已经入职了！如何开始第一次对话？打开你的浏览器，访问：http://127.0.0.1:18789/chat你会看到一个简洁的聊天界面。咱们先来测试一下它的联网能力，在输入框里发个指令：“搜索一下 2026 年最新的科技新闻，并总结给我。”如果它能正常联网搜索并输出内容，说明安装完美成功！5. 写给爱折腾的高手：手动/源码安装如果你是开发者，想自己魔改代码，也可以选择源码安装：# 克隆仓库
+git clone https://github.com/moltbot/moltbot.git
+cd moltbot
+
+# 安装依赖
+pnpm install
+
+# 编译 UI 和后端
+pnpm ui:build   
+pnpm build
+
+# 启动服务
+moltbot onboard --install-daemon总结一下到这里，Moltbot 就已经在你的机器上安家了。通过刚才的配置，它有了大脑（API），有了耳朵（端口），也有了嘴巴（Web 或聊天软件）。但这只是第一步。现在的它只是一个跑在本地的机器人，如果出门在外想随时随地用它，或者想把它集成到钉钉、飞书、微信这些我们更常用的软件里，该怎么办呢？基于OpenClaw(原Moltbot、Clawdbot）集成钉钉AI员工这里当然还是以阿里云云主机的作为演示说明。阿里云Moltbot专属页：https://www.aliyun.com/activity/ecs/clawdbot步骤二、配置Moltbot
+在阿里云百炼大模型服务平台前往密钥管理页面，单击创建API-Key。警告请妥善保管百炼 API-Key。若发生泄露，第三方将有机会冒用您的身份进行恶意使用，产生超出预期的token费用。在服务器页面，单击服务器卡片中的实例ID，进入服务器概览页面。单击应用详情页签，配置Moltbot。
+端口放通：需要放通对应端口的防火墙，单击一键放通即可。配置Moltbot：单击执行命令，输入百炼的API-Key，单击下一步。访问控制页面：单击执行命令可获取Clawdbot对话的地址。
+查看Token。在帮助 > Token配置中单击执行命令，获取Token。警告请勿泄露包含 Token 的完整 URL。该链接包含您的身份验证凭据，任何持有此链接的人都能直接绕过登录验证，获得您 Moltbot 控制台的管理员权限。开启ResponseAPI访问，后续AppFlow会通过API访问Moltbot。
+在Clawdbot页面左侧导航栏，单击Setting > Config。在Config页面左侧导航栏单击Gateway，切换至Http页签，在Responses区域将Enabled切换至开启，单击Save。
+
+步骤三、集成钉钉1. 创建钉钉应用创建钉钉应用需要您的钉钉账号有开发者权限。您可以联系您的组织管理员获取钉钉开放平台的开发权限。1.1 创建应用
+访问钉钉开放平台，点击创建。如果创建过应用但未展示应用开发指引，点击立即开始进入钉钉应用页面。在应用开发的左侧导航栏中，点击钉钉应用，在钉钉应用页面右上角点击创建应用。在创建应用面板，填写应用名称和应用描述，在应用图标上传图标，完成后点击保存。
+1.2 查看应用 Client ID 和 Client Secret在左侧菜单选择凭证与基础信息，复制Client ID和Client Secret，用于下一步创建连接流。1.3 创建消息卡片钉钉机器人通过卡片消息支持流式返回结果，您需要创建卡片模板供消息发送使用。
+访问卡片平台，点击新建模板。在创建模板输入框，填入模板信息，单击创建。
+卡片类型：选择消息卡片。卡片模板场景：选择AI 卡片。关联应用：填入应用创建步骤中的应用名称。
+在模拟编辑页面，不要使用预设模板，不需要进行任何额外操作，直接保存并发布模板。然后点击返回模板列表页面。复制模板ID，用于创建钉钉连接流使用。
+1.4 授予应用发送卡片消息权限创建卡片后，您需要给应用授予发送卡片消息的权限。
+访问钉钉应用列表。找到刚刚创建的应用，点击应用名称进入详情页面。在左侧菜单选择开发配置 > 权限管理，在左侧搜索框分别输入Card.Streaming.Write和Card.Instance.Write，并在操作列点击申请权限。
+2. 创建AppFlow连接流
+使用AppFlow模板创建连接流，单击立即使用进入创建流程。在连接流的账户授权配置向导页，点击添加新凭证。输入在配置Moltbot时获取的Token。在连接流的账户授权配置向导页，点击添加新凭证。在创建凭证对话框中，填入创建的应用的Client ID 和 Client Secret，并设置一个自定义凭证名称。在执行动作配置向导页，填写模型名称、公网地址以及获取卡片模板时获取的模板ID，完成后点击下一步。模型名称：参考百炼支持的模型填写。在基本信息配置向导页，填写连接流名称和连接流描述（建议保持默认），完成后点击下一步。界面提示流程配置成功，复制WebhookUrl，点击发布。
+3. 配置钉钉机器人有了Webhook地址后，接下来您可以在钉钉应用中配置机器人来回答用户问题了。3.1 配置钉钉机器人
+访问钉钉应用列表。找到刚刚创建的应用，点击应用名称进入详情页面。在添加应用能力页面，找到机器人卡片，点击添加。在机器人配置页面，打开机器人配置开关，您可以参考下图完成配置。消息接收模式请选择HTTP模式，消息接收地址为创建的流式调用的WebhookUrl。然后点击发布。消息接收模式选择HTTP模式，目前AppFlow仅支持HTTP模式，选择Stream模式会导致无法返回消息。
+3.2 发布应用版本应用创建完成后，如果需要将应用供企业内其他用户使用，需要发布一个版本。
+单击应用开发，在钉钉应用页面，点击目标应用。在目标应用开发导航栏，单击版本管理与发布，在版本管理与发布页面，点击创建新版本。进入版本详情页面，输入应用版本号和版本描述信息，选择合适的应用可见范围，完成后点击保存。并在弹窗中点击直接发布。
+3.3 测试机器人你可以创建群聊或在已有群聊中添加机器人，并与机器人对话，查看效果。
+在钉钉群管理中添加机器人。进入钉钉群群设置页面，点击机器人卡片区域，在机器人管理页面，点击添加机器人。在添加机器人的搜索文本框中输入目标机器人名称，并选中要添加的机器人。点击添加，完成后再点击完成添加。在钉钉群中或私聊时@机器人，进行交流互动。
+相关文档您可以通过 Tailscale 构建安全隧道互联 Mac，实现通过Moltbot管理Mac上的iMessage。常见问题如何更改钉钉机器人调用的模型？
+在服务器页面，单击服务器卡片中的实例ID，进入服务器概览页面。单击应用详情页签，在访问控制页面单击快速查看可进入Clawdbot对话页面。单击Config > Agents，搜索Primary Model，更改为你想用的模型。
+基于OpenClaw(原Moltbot、Clawdbot）集成IMessage基于 Linux 部署 Moltbot 网关，通过 Tailscale 构建安全隧道互联 Mac，实现通过Moltbot管理Mac上的iMessage。架构┌──────────────────────────────┐          SSH (imsg rpc)          ┌──────────────────────────┐
+│ Gateway host (Linux/VM)      │──────────────────────────────────▶│ Mac with Messages + imsg │
+│ - clawdbot gateway           │          SCP (attachments)        │ - Messages signed in     │
+│ - channels.imessage.cliPath  │◀──────────────────────────────────│ - Remote Login enabled   │
+└──────────────────────────────┘                                   └──────────────────────────┘
+              ▲
+              │ Tailscale tailnet (hostname or 100.x.y.z)
+              ▼
+        user@gateway-host操作步骤Tailscale配置
+Mac和服务器需要配置Tailscale，进行网络的打通。首先需要在Tailscale进行注册。在Mac下载安装Tailscale，下载地址。安装后，通过命令行启动： /Applications/Tailscale.app/Contents/MacOS/Tailscale up在Linux服务器上安装Tailscale，进入地址，获得脚本并在Linux操作系统中执行。执行完成后，Mac和Linux位于一个局域网里，可以互相通信。发现Linux中的DNS会被Tailscale覆盖导致网络不通，所以需要配置DNS，需要配置NameServer，这里用1.1.1.1或者8.8.8.8。
+Mac配置
+需要打开Mac的远程连接权限：基础设置 > 通用 > 共享 > 远程连接。为sshd-keygen-wrapper赋予权限：系统设置 > 隐私与安全性 > 完全磁盘访问权限。需要确保Mac上的IMessage处于登录状态。
+Clawdbot配置需要关注的配置文件/root/.clawdbot/clawdbot.json，在其中加入channel的配置。{
+  "channels": {
+    "imessage": {
+      "enabled": true,
+      "cliPath": "/root/.clawdbot/scripts/imsg-ssh",
+      "dbPath": "/Users/{{YOUR_USER_NAME}}/Library/Messages/chat.db",
+      "remoteHost": "{{YOUR_USER_NAME}}@{{YOUR_MAC_MAGIC_DNS}}",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "includeAttachments": true
+    }
+  }
+}其中需要重点关注以下参数：
+YOUR_USER_NAME：替换为Mac的用户名。YOUR_MAC_MAGIC_DNS：替换为Mac在Tailscale中的Magic DNS。
+Magic DNS获取方式如下：新增/root/.clawdbot/scripts/imsg-ssh，负责通过ssh将命令转发到Mac。{{YOUR_USER_NAME}}@{{YOUR_MAC_MAGIC_DNS}}要替换为上一步获取的。另外，需要给这个文件加执行权限。#!/usr/bin/env bash
+exec ssh -T {{YOUR_USER_NAME}}@{{YOUR_MAC_MAGIC_DNS}} /usr/local/bin/imsg "$@"目前可通过ssh {{YOUR_USER_NAME}}@{{YOUR_MAC_MAGIC_DNS}}通过密码远程连接到Mac了，可以配置从Linux服务器免密登录到Mac的SSH密钥认证。启动并初始化gateway： cd /home/clawdbot/
+pnpm clawdbot onboard --install-daemon结果展示
+通过TUI连接Chat。输入：通过IMessage给+86188xxxxxxxx发送一首诗，可以看到Mac向指定账号发送了一首诗。
+基于OpenClaw(原Moltbot、Clawdbot）集成飞书
+登录飞书开发者后台，点击创建企业自建应用，填写应用信息后单击创建。在左侧导航栏中单击添加应用能力， 选择按能力添加页签，找到机器人卡片，点击添加。在左侧导航栏中单击权限管理，单击开通权限，搜索并添加以下 API 权限
+权限代码用途说明注意事项im:message:send_as_bot允许机器人以应用身份发送消息。必需权限。contact:user.employee_id:readonly获取用户 user ID。必需权限。im:message.group_at_msg:readonly允许机器人接收群聊中@它的消息。核心交互权限。im:message.p2p_msg:readonly允许机器人读取用户私聊发给它的消息。单聊场景下必需。im:message.group_msg允许机器人获取所在群组的所有消息。敏感权限。
+收集集成所需的凭证。后续配置 AppFlow 连接时需要使用这些信息。
+在左侧导航栏进入凭证与基础信息页面，查看并复制 App ID 和 App Secret。在左侧导航栏进入事件与回调页面，找到加密策略页签。复制 Encrypt Key 和 Verification Token。若当前Encrypt Key 为空，可点击重置生成一个新Encrypt Key。
+
+创建飞书连接流
+访问AppFlow模版中心飞书-Moltbot模版，单击立即使用。点击添加飞书鉴权凭证，填写凭证名称，及参考下图填入步骤三获取的信息。填写完成后单击确定并在下拉框中选中创建好的凭证。创建Moltbot鉴权凭证。填入步骤二获取的凭证，填写完成后单击确定并在下拉框中选中创建好的凭证。点击下一步，前往服务器详情页获取服务器公网地址并按页面提示填入您的公网IP：端口号，端口号默认为18789。配置完成后点击发布，复制并保存您的WebhookUrl。
+配置飞书机器人
+返回飞书开发者后台，在左侧导航栏单击事件与回调，在事件配置页签，单击按钮配置订阅方式。选择将事件发送至开发者服务器，并填写上一步复制的WebhookUrl，单击保存。在事件配置页签的已添加事件区域，单击添加事件，搜索并添加接收消息事件。填写完成后，在左侧导航栏点击版本管理与发布，创建版本或点击最新编辑的版本，填写完成相关信息后保存并提交审批。
+方案验证配置完成后，用户可以把机器人添加到某个群里，从而实现机器人和群内成员的互动。目前仅支持在飞书电脑端添加机器人。若需在外部群中使用机器人，可参考配置文档机器人支持外部群和外部用户单聊。
+按照添加路径添加机器人：··· > 设置 > 群机器人 > 添加机器人 。@机器人发送消息即可实现对话。
+通过OpenClaw(原Moltbot、Clawdbot）集成企业微信创建AppFlow连接流
+单击Appflow-企业微信智能机器人使用Moltbot(Clawdbot)，选择立即使用。添加一个新的企业微信智能机器人凭证，填写完成后点击确定
+凭证名称：AppFlow凭证展示名称，可任意填写机器人名称：智能机器人展示名称，后续微信需配置一致名称。Token：可点击右侧刷新按钮随机获取，复制保存，后续微信配置使用EncodingAESKey：可点击右侧刷新按钮随机获取，复制保存，后续微信配置使用
+填入步骤二获取的Token信息，填写完成后单击确定并在下拉框中选中创建好的凭证。单击下一步，按页面提示填入模型名称、轻量应用服务器公网IP及服务端口。填写连接流名称和描述，配置完成后单击下一步完成创建。点击发布后，复制并保存WebhookUrl。
+创建企业微信智能机器人
+访问企业微信管理后台，在左侧导航栏单击管理工具 > 智能机器人。选择API模式创建。按照页面提示填写名称、简介以及可见范围，完成后单击保存。填写过程中需注意以下事项：
+机器人名称需保证与步骤三配置的AppFlow凭证中填写的机器人名称一致。URL填写步骤三中在AppFlow保存的WebhookUrl。Token和Encoding-AESKey填写在AppFlow步骤三中复制保存的对应值。
+
+方案验证
+在群聊中点击添加群成员，搜索创建完成的机器人名称，加入群聊在已添加机器人的群中@机器人即可实现流式对话，效果如下：
+常见问题域名主体校验未通过怎么办？您在创建保存智能机器人的过程中，可能会遇到“域名主体校验未通过，需配置备案主体与当前企业主体相同或有关联关系的域名”的报错。该问题通常由企业微信的相关限制所引起，您需要配置一个企业自有域名解决此问题。
+如果您的域名已在阿里云备案，可以参考如下步骤创建一个二级域名作为企业自有域名。
+访问AppFlow域名管理页面，单击添加域名按钮，进入添加域名页面，填入可用的二级域名，如airobot.example.com。
+
+参考CNAME 记录，将该二级域名解析到上一步的记录值。解析配置完成后，返回创建域名页面，点击提交。使用该二级域名替换配置API接收消息的URL（即已经填写的WebhookUrl）中的主机名。例如：
+在AppFlow获取的WebhookUrl：https://123123123.appflow.aliyunnest.com/webhook/a479a8f17企业域名：airobot.example.com则您最终需要填写的域名为http://airobot.example.com/webhook/a479a8f17
+
+基于OpenClaw(原Moltbot、Clawdbot）集成Web页面创建AI助手
+访问AppFlow工作台，点击创建AI助手。选择对话流ChatFlow，输入您的AI助手名称，此处示例为MoltBot。点击添加对话流，选择MoltBot（Clawdbot）基础模版。单击ClawdBot节点，连接器和执行动作保持默认配置，点击下一步。单击选择链接凭证下拉框，添加新凭证。配置步骤二中获取的Token保存后，选择创建的鉴权凭证，并单击下一步。根据页面提示填写模型名称、轻量应用服务器的公网IP和端口。配置完成后，单击保存。
+创建Web页面集成
+单击集成Tab，选择web页面集成，点击创建集成。创建完成后单击操作列的配置，根据页面各项设置个性化调整网页配置。在部署信息部分，可访问部署地址链接预览集成样式及测试交互。AppFlow提供的访问地址仅供测试使用，有效期为1个月，若需要在生产环境使用，需绑定自定义域名。进入预览链接，预览样式如下：
+最后总结折腾了一大圈，相信大家对OpenClaw(原Moltbot、Clawdbot）这个新晋网红已经有了底。说白了，它压根就不是那种只会陪聊的吉祥物，而是一个真正能住在你服务器里、帮你干脏活累活的“数字打工人”。回过头来看，OpenClaw(原Moltbot、Clawdbot）最迷人的地方其实在于它的执行力。以前我们用 AI，大多数时候是把它当高级搜索引擎用，问个问题等个答案；现在用 Moltbot，是把它当实习生用。你给个模糊的目标，它自己拆解任务、写代码、运行测试、甚至自己看报错日志改 Bug。这种从“给建议”到“给结果”的转变，才是它在 GitHub 上 Star 数暴涨的根本原因。而且门槛真的被降到了地板上。不管你是技术大牛还是小白，通过一条脚本或者阿里云的镜像，几分钟就能拉起一个 7×24 小时在线的私人助理。硬件要求低到令人发指，这就意味着每个人都能低成本拥有一套属于自己的 AI 系统，数据还都在自己手里，这在隐私泄露泛滥的今天显得尤为珍贵。据主题铺观察，随着开源社区的疯狂迭代，未来会有更多像钉钉、微信、飞书这样的插件冒出来，它的能力边界还在不断扩张。想象一下，以后你在工作群里 @ 一下它，它就能自动帮你整理会议纪要、去 GitHub 上审查代码，甚至去服务器上跑个脚本部署项目，这画面确实挺带感的。最后主题铺想提醒一句，工具虽好，安全意识不能丢。既然给了它执行命令和读写文件的权限，就要管好它的访问边界，别让它把不该删的文件给删了。技术永远是服务于人的，OpenClaw(原Moltbot、Clawdbot）只是个开始，真正的 AI Agent 时代，或许才刚刚拉开序幕。趁着现在热度正高，赶紧动手部署一个试试吧，毕竟亲手调教出来的 AI，用起来才是最顺手的。原文链接：一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法© 版权声明版权声明
+① 本站文章均为原创，除非另有说明，否则本站内容依据CC BY-NC-SA 4.0许可证进行授权，转载请附上出处链接，谢谢。 
+② 本站提供的资源(插件或主题)均为网上搜集，如有涉及或侵害到您的版权请立即通知我们。
+③ 本站所有下载文件，仅用作学习研究使用，请下载后24小时内删除，支持正版，勿用作商业用途。
+④ 因代码可变性，不保证兼容所有浏览器、不保证兼容所有版本的WP、不保证兼容您安装的其他插件。
+⑤ 本站保证所提供资源(插件或主题)的完整性，但不含授权许可、帮助文档、XML文件、PSD、后续升级等。
+⑥ 使用该资源(插件或主题)需要用户有一定代码基础知识！另本站提供汉化使用安装教程，仅供参考。由本站提供的资源对您的网站或计算机造成严重后果的本站概不负责。
+⑦ 有时可能会遇到部分字段无法汉化，同时请保留作者汉化宣传信息，谢谢！
+⑧ 本站资源售价只是赞助和汉化辛苦费，收取费用仅维持本站的日常运营所需。
+⑨ 如果喜欢本站资源，欢迎捐助本站开通会员享受优惠折扣，谢谢支持！
+⑩ 如果网盘地址失效，请在相应资源页面下留言，我们会尽快修复下载地址。THE END网站教程# 主机教程# SSH教程# ChatGPT# 阿里云# 阿里云活动# 阿里云优惠# GitHub# Moltbot# OpenClaw# Clawdbot喜欢就支持一下吧点赞8
+分享QQ空间微博QQ好友海报分享复制链接收藏
+上一篇
+网站缓慢之优化WordPress数据库慢查询的简单教程
+
+下一篇
+新手零基础配置OpenClaw 配合阿里云Coding Plan特惠套餐超级省钱教程
+相关推荐Ubuntu系统云主机网络深度优化教程 开启BBR与内核参数极限调优Ubuntu系统云主机网络深度优化教程 开启BBR与内核参数极限调优23小时前 47Aiomatic 2.7.4完美汉化中文版|文章AI自动智能编写编辑WordPress插件Aiomatic 2.7.4完美汉化中文版|文章AI自动智能编写编辑WordPress插件18天前 55AI Engine Pro 3.4.1汉化中文版|ChatGPT聊天机器人/内容生成器/人工智能WordPress插件AI Engine Pro 3.4.1汉化中文版|ChatGPT聊天机器人/内容生成器/人工智能WordPress插件7个月前 2182026大模型API免费额度汇总：阿里云百炼/腾讯云混元白嫖指南（附千万Token领取攻略）2026大模型API免费额度汇总：阿里云百炼/腾讯云混元白嫖指南（附千万Token领取攻略）2天前 236新手零基础配置OpenClaw 配合阿里云Coding Plan特惠套餐超级省钱教程新手零基础配置OpenClaw 配合阿里云Coding Plan特惠套餐超级省钱教程11天前 614一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法1个月前 6628评论			抢沙发请登录后发表评论
+登录
+注册社交账号登录QQ登录微信登录
+暂无评论内容
+热门文章15人点赞腾讯云边缘安全加速平台EdgeOne安全设置详细图文教程TOP1手动删除卸载华为云服务器自带监控探针教程11个月前14人点赞TOP2新手零基础配置OpenClaw 配合阿里云Coding Plan特惠套餐超级省钱教程11天前13人点赞TOP3Wise大陆内地身份证申请开通港币账户及激活验证最新详细图文教程3个月前9人点赞TOP4ClouDNS免费域名申请设置图文教程 支持CloudFlare托管8个月前8人点赞TOP5一键安装部署OpenClaw/Moltbot/Clawdbot超详细图文教程 含对接钉钉/飞书/微信/Web集成方法1个月前8人点赞TOP6本站推荐主机热门推荐
+
+搬主题提供WordPress网站模板汉化及定制、建站教程等，为站长/企业建站互联网+提供助力！致力于打造一个优秀的WordPress建站资源共享学习平台。网站地图
+版权申明
+DMCA
+关于我们Copyright © 2020-2026 · 搬主题 | 桂ICP备2021005739号-1
+
+扫码加QQ群
+   
+
+                    登录没有账号？立即注册邮箱验证码发送验证码记住登录账号密码登录 登录用户名或邮箱登录密码记住登录找回密码 | 免密登录 登录社交账号登录QQ登录微信登录使用社交账号登录即表示同意用户协议注册已有账号，立即登录设置用户名邮箱验证码发送验证码设置密码注册已阅读并同意用户协议扫码登录使用其它方式登录或注册扫码登录扫码登录即表示同意用户协议
+  </div>
+</body>
+</html>

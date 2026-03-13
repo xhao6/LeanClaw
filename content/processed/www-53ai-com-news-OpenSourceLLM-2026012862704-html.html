@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ClawdBot 火爆全网 — 手把手部署 + 钉钉操作</title>
+  <meta name="description" content="国内用户部署指南，包含踩坑经验和钉钉接入">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>53AI</span>
+    <a href="https://www.53ai.com/news/OpenSourceLLM/2026012862704.html" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    ClawdBot 火爆全网，手把手教你如何部署，还能直接用钉钉操作！ - 53AI-AI知识库|企业AI知识库|大模型知识库|AIHub
+        
+    
+
+    
+    
+    
+
+        
+
+    
+
+        
+    
+        
+
+        
+        
+    
+
+    
+    
+
+    
+
+    
+        
+            
+                
+                    
+                        
+                                            
+                    
+                            
+                                
+                                                            
+                        
+                                                        免费POC，
+                                                        零成本试错
+                                                    
+                    
+                
+                
+                    
+                                                
+                            
+                                                                首页
+                                                            
+                                                    
+                                                  
+                            
+                                                                产品服务
+                                                            
+                                                        
+                                
+                                    
+
+                                        
+                                            
+                                                热门场景
+                                            
+                                            
+                                                                                                
+                                                    
+                                                        
+                                                            
+                                                        
+                                                        
+                                                            
+                                                                工作+AI
+                                                                
+                                                                大模型提升全员工作效率
+                                                            
+                                                            
+                                                                                                                                
+                                                                    
+                                                                        工作对话
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        内容创作
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        方案撰写
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        魔法菜单
+                                                                    
+                                                                
+                                                                                                                            
+                                                        
+                                                    
+                                                
+                                                                                                
+                                                    
+                                                        
+                                                            
+                                                        
+                                                        
+                                                            
+                                                                业务+AI
+                                                                
+                                                                大模型掌握企业知识与流程
+                                                            
+                                                            
+                                                                                                                                
+                                                                    
+                                                                        微信分身
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        海外客服
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        官网客服
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        抖音客服
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        数字老师
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        数字督导
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        智能服务台
+                                                                    
+                                                                
+                                                                                                                            
+                                                        
+                                                    
+                                                
+                                                                                                
+                                                    
+                                                        
+                                                            
+                                                        
+                                                        
+                                                            
+                                                                AIx业务
+                                                                
+                                                                大模型驱动产品智能化改造
+                                                            
+                                                            
+                                                                                                                                
+                                                                    
+                                                                        智能问数
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        智能审核
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        智能工单
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        企微跟进助手
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        智能报价
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        企微销售助手
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        应用智改
+                                                                    
+                                                                
+                                                                                                                                
+                                                                    
+                                                                        企微客服助手
+                                                                    
+                                                                
+                                                                                                                            
+                                                        
+                                                    
+                                                
+                                                                                            
+                                        
+                                    
+
+                                    
+
+                                                                                
+                                            
+                                                落地咨询
+                                            
+                                            
+                                                
+                                                    
+                                                        
+                                                        
+                                                            Consulting
+                                                            AI生产力教练
+                                                        
+                                                        了解更多 >
+                                                    
+
+                                                
+                                            
+                                        
+                                                                                
+                                            
+                                                场景共创
+                                            
+                                            
+                                                
+                                                    
+                                                        
+                                                        
+                                                            Co-creation
+                                                            AI场景共创
+                                                        
+                                                        了解更多 >
+                                                    
+
+                                                
+                                            
+                                        
+                                                                            
+
+                                
+                                                                
+                                    热门产品
+                                    
+                                                                                
+                                            
+                                                
+                                            
+                                            
+                                                53AI Brain                                                
+                                                让知识在人与AI之间高效流动
+                                                                                            
+                                        
+                                                                                
+                                            
+                                                
+                                            
+                                            
+                                                53AI Studio                                                
+                                                高准确率的企业级智能体开发平台
+                                                                                            
+                                        
+                                                                                
+                                            
+                                                
+                                            
+                                            
+                                                53AI Hub开源                                                
+                                                三分钟搭建出独立的企业AI门户
+                                                                                            
+                                        
+                                                                                
+                                            
+                                                
+                                            
+                                            
+                                                53AI Browser                                                
+                                                “AI专家”效率倍增的秘密武器
+                                                敬请期待...                                            
+                                        
+                                                                            
+                                
+                                
+                            
+                                                    
+                                                  
+                            
+                                                                客户案例
+                                                            
+                                                        
+                                                                
+                                    
+
+                                        
+                                            
+                                                行业案例
+                                            
+                                            
+                                                                                                    
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    政府央国企
+                                                                    
+                                                                    政府央国企大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    能源矿业
+                                                                    
+                                                                    新能源与矿业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    电子科技
+                                                                    
+                                                                    电子科技行业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    贸易流通
+                                                                    
+                                                                    贸易流通大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    制造行业
+                                                                    
+                                                                    高端制造行业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    企科数服
+                                                                    
+                                                                    企科数服行业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    生物医药
+                                                                    
+                                                                    生物医药行业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    地产与消费品
+                                                                    
+                                                                    地产与消费品行业大模型落地应用案例
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                
+                                        
+                                    
+
+                                
+                                                                
+                                    
+
+                                        
+                                            
+                                                场景案例
+                                            
+                                            
+                                                                                                    
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    【智能问答】场景案例
+                                                                    
+                                                                    让大模型掌握企业的知识和流程
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    【应用智改】场景案例
+                                                                    
+                                                                    让大模型融入企业的产品和业务
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    【智能工单】场景案例
+                                                                    
+                                                                    让大模型创建和受理业务工单
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                        
+                                                        
+                                                            
+                                                                
+                                                            
+                                                            
+                                                                
+                                                                    【智能问数】场景案例
+                                                                    
+                                                                    与业务系统数据对话式互动
+                                                                
+                                                            
+                                                        
+                                                    
+                                                                                                
+                                        
+                                    
+
+                                
+                                                            
+
+                            
+                                                    
+                                                  
+                            
+                                                                AI知识库
+                                                            
+                                                        
+                                
+                                    
+                                        
+                                            企业AI落地知识库
+                                        
+                                        
+                                                                                        
+                                                前沿技术
+                                                
+                                                                                                        大模型技术
+                                                                                                        多模态技术
+                                                                                                        RAG技术
+                                                                                                        知识图谱
+                                                                                                        模型微调
+                                                                                                        Skill
+                                                                                                        提示词技巧
+                                                                                                        开源大模型
+                                                                                                        智能硬件
+                                                                                                        Palantir
+                                                                                                    
+                                            
+                                                                                        
+                                                Agent框架
+                                                
+                                                                                                        langchain
+                                                                                                        llamaindex
+                                                                                                        RAGFlow
+                                                                                                        coze
+                                                                                                        Dify
+                                                                                                        Fastgpt
+                                                                                                        Bisheng
+                                                                                                        Qanything
+                                                                                                        MaxKB
+                                                                                                        Openclaw
+                                                                                                    
+                                            
+                                                                                        
+                                                行业应用
+                                                
+                                                                                                        AI+汽车
+                                                                                                        AI+金融
+                                                                                                        AI+工业
+                                                                                                        AI+培训
+                                                                                                        AI+SaaS
+                                                                                                        AI+电商
+                                                                                                        AI+医疗
+                                                                                                    
+                                            
+                                                                                        
+                                                企业落地
+                                                
+                                                                                                        内容创作
+                                                                                                        个人提效
+                                                                                                        智能客服
+                                                                                                        AI面试
+                                                                                                        数字员工
+                                                                                                        ChatBI
+                                                                                                        AI知识库
+                                                                                                        智能营销
+                                                                                                        智能化改造
+                                                                                                        Glean
+                                                                                                    
+                                            
+                                                                                        
+                                                行业报告
+                                                
+                                                                                                        研究报告
+                                                                                                        行业报告
+                                                                                                        技术分享
+                                                                                                        专题报告
+                                                                                                        课件讲义
+                                                                                                    
+                                            
+                                            
+                                        
+                                    
+                                
+                            
+                                                    
+                                                  
+                            
+                                                                关于我们
+                                                            
+                                                        
+                                
+                                                                        公司介绍 
+                                                                        渠道合作
+                                                                    
+                            
+                                                    
+                                              
+                    
+                        GitHub Star 8.9K+
+                        
+                        预约演示
+                        
+                        
+                    
+                    
+                        
+                            
+                                
+                            
+                            
+                                
+                            
+                        
+                    
+                
+            
+        
+    
+
+    
+
+    
+    
+        
+            
+                
+
+                    
+                        首页
+                    
+                                        
+                        产品服务
+                    
+                                        
+                        客户案例
+                    
+                                        
+                        AI知识库
+                    
+                                        
+                        关于我们
+                    
+                                    
+
+            
+            
+                
+                                        
+                        
+                            热门场景
+                                                        
+                                
+                                    
+                                    工作+AI
+                                
+                                
+                                                                        
+                                        
+                                        工作对话
+                                    
+                                                                        
+                                        
+                                        内容创作
+                                    
+                                                                        
+                                        
+                                        方案撰写
+                                    
+                                                                        
+                                        
+                                        魔法菜单
+                                    
+                                                                    
+                            
+                                                        
+                                
+                                    
+                                    业务+AI
+                                
+                                
+                                                                        
+                                        
+                                        微信分身
+                                    
+                                                                        
+                                        
+                                        海外客服
+                                    
+                                                                        
+                                        
+                                        官网客服
+                                    
+                                                                        
+                                        
+                                        抖音客服
+                                    
+                                                                        
+                                        
+                                        数字老师
+                                    
+                                                                        
+                                        
+                                        数字督导
+                                    
+                                                                        
+                                        
+                                        智能服务台
+                                    
+                                                                    
+                            
+                                                        
+                                
+                                    
+                                    AIx业务
+                                
+                                
+                                                                        
+                                        
+                                        智能问数
+                                    
+                                                                        
+                                        
+                                        智能审核
+                                    
+                                                                        
+                                        
+                                        智能工单
+                                    
+                                                                        
+                                        
+                                        企微跟进助手
+                                    
+                                                                        
+                                        
+                                        智能报价
+                                    
+                                                                        
+                                        
+                                        企微销售助手
+                                    
+                                                                        
+                                        
+                                        应用智改
+                                    
+                                                                        
+                                        
+                                        企微客服助手
+                                    
+                                                                    
+                            
+                                                    
+
+                        
+                                                        
+                                
+                                    落地咨询                                
+                            
+                                                        
+                                
+                                    场景共创                                
+                            
+                                                    
+                      
+                                                        
+                                热门产品
+                                                                
+                                    
+                                        
+                                    
+                                    
+                                        53AI Brain                                        
+                                        让知识在人与AI之间高效流动
+                                                                            
+                                
+                                                                
+                                    
+                                        
+                                    
+                                    
+                                        53AI Studio                                        
+                                        高准确率的企业级智能体开发平台
+                                                                            
+                                
+                                                                
+                                    
+                                        
+                                    
+                                    
+                                        53AI Hub开源                                        
+                                        三分钟搭建出独立的企业AI门户
+                                                                            
+                                
+                                                                
+                                    
+                                        
+                                    
+                                    
+                                        53AI Browser                                        
+                                        “AI专家”效率倍增的秘密武器
+                                        敬请期待...                                    
+                                
+                                                            
+                            
+                        
+                    
+                                        
+                                                
+                            行业案例
+                            
+                                
+                            
+                        
+                                                
+                            场景案例
+                            
+                                
+                            
+                        
+                                            
+                                        
+                                                
+                            前沿技术
+                            
+                                
+                            
+                        
+                                                
+                            Agent框架
+                            
+                                
+                            
+                        
+                                                
+                            行业应用
+                            
+                                
+                            
+                        
+                                                
+                            企业落地
+                            
+                                
+                            
+                        
+                                            
+                                        
+                                                
+                            公司介绍 
+                            
+                                
+                            
+                        
+                                                
+                            渠道合作
+                            
+                                
+                            
+                        
+                                            
+                                    
+            
+        
+
+    
+
+
+    
+        
+            
+            
+            
+            
+        
+    
+    
+        
+            53AI知识库学习大模型的前沿技术与行业应用场景            
+        立即咨询
+        预约演示
+    
+                    
+    
+
+
+
+    
+    
+        
+            
+            首页
+        
+                
+            AI知识库
+        
+                
+            前沿技术
+        
+                
+            开源大模型
+        
+            
+
+    
+        
+            
+                
+                    
+                        
+                        我要投稿
+                        
+                    
+                
+                
+                    
+                        ClawdBot 火爆全网，手把手教你如何部署，还能直接用钉钉操作！                    
+                    
+                        
+                            发布日期：2026-01-28 23:22:12
+                            浏览次数： 4840
+                            
+                        
+                                                
+                            作者：甲木未来派
+                            
+                                
+                                    
+                                        
+                                    
+                                    微信搜一搜，关注“甲木未来派”
+                                
+                            
+                        
+                        
+                    
+                    
+                                                                        
+                            推荐语
+                            
+                                
+                                    ClawdBot火爆全网，手把手教你如何部署，还能直接用钉钉操作！这个AI私人助理能帮你处理各种任务，从写周报到炒股，简直是个数字员工。核心内容：  1. ClawdBot的爆红原因及其核心功能  2. 国内用户如何部署和使用ClawdBot  3. 安全注意事项及云端隔离方案                                
+                            
+                            
+                                
+                                    
+                                
+                                
+                                    杨芳贤
+                                    53AI创始人/腾讯云(TVP)最具价值专家
+                                
+                            
+                        
+                        
+                        这几天 Clawdbot 太火了，有人拿它炒股，有人拿它交易数字货币，还有人直接把它当成 7×24 的“数字员工”，丢一句话，然后去睡觉。还有人让它直接当公司CEO，为了它甚至买了几十块Mac mini...更夸张的是，它的 GitHub Star 暴涨到 64k，增长只用了几天。当然，由于命名争议，它已经从 Clawdbot 改名 Moltbot。就是下边这个，那么它到底为什么火？我们在国内如何才能体验上呢？今天这篇就给大家聊聊
+Moltbot 为什么这么火？国内如何才能用得上？从0到1，手把手教你怎么整合国内生态
+先一句话总结，Moltbot符合每个人对钢铁侠Jarvis 的想象好，那我们就开始！硅谷为之狂欢的 Moltbot？一夜之间，从海外到国内，从 X、Reddit到中文技术圈，Moltbot 的爆红成了 AI 时代又一个现象级的产品。简单来说，这是一个 AI 开源项目，主打的是 AI 私人助理，他能自行处理你电脑里面的任何需求，能为你回复消息，能帮你写周报，写文章，甚至还能帮你炒炒股..为什么这么火，它主要解决了两个问题：
+它把交互入口搬到了“消息”里。你像发微信一样发指令，助手就开始干活。它长期在线，跑在服务器或你自己的设备上。它把能力闭环做成了“执行型”。它能连接工具与账户，甚至能串起 GitHub、网盘、邮箱、日历这类生产力入口。
+能记得住。能主动点。能持续跑。而 Moltbot，它是一个完全开源、可自托管的本地 Agent，运行在你的设备或服务器上。最主要的是，它满足了一个被压抑很久的诉求：我想拥有一个真正属于自己的 AI 助手！如何才能拥有一个Moltbot？开源、可自建，这件事听着挺诱人。但很多小伙伴打算入手的时候，就会遇到一堆问题。比如，你要一台长期在线、不轻易断电、最好还“专用隔离”的机器。最基础的 Mac mini 也要几千块，很多人纠结就在这里。即使一般硬件能满足，也会涉及依赖、版本、网络、消息通道配置，坑就开始出现。最主要的问题是：高权限带来的安全边界Moltbot 的电脑操控权限非常高。体验时更稳妥的做法，是用闲置设备或便宜的云服务器单独跑。原因很简单。你把它装在主力机上，等于给了一个“能动你文件系统、能调用工具链”的执行体。误删文件、误操作、误触发费用，这些都不是段子。所以，云端隔离几乎成了天然答案。而且它支持的那些软件，很多都是国外的，我们需要做国内软件的兼容和适配，正在GitHub上找解法的时候，看到阿里云发布了上线了全套云服务。看了看介绍，新用户最低68元就能租一年的服务器、而且又稳定在线、安全可控，又预装了运行环境，还集成了百炼平台，直接选模型调用就行。这不明摆着瞌睡就有人送枕头。。最牛逼的是，它能直接跟钉钉的生态打通！这意味着什么？你不需要从海外插件市场一点点拼积木。就能直接把“模型、部署、通道、协同入口”放进同一个生态里做闭环。那么接下来，我就开始从0到1带你在钉钉上搭建自己的 AI 助手！手把手教你搭建自己的Javis要想部署自己的ClawdBot，先打开「阿里云服务」，登录账号。第一步、购买Moltbot套餐既然决定云端部署，你肯定得先有个服务器，直接访问https://swasnext.console.aliyun.com/buy?spm=a2c4g.11186623.0.0.44b74febS5Oq2Y&regionId=us-east-1&planId=swas.s.c2m2s40b1.linux&imageId=bd45493af84846deb5dcd3fca6c1a1d9&amount=1&duration=12&autoRenew=false#/快速进入到 Moltbot 专属服务器购买界面。这里一定要确定好配置，如果你直接点击上方链接进来，都是默认配置。 如下：
+选择实例规格族：通用型选择套餐：vCPU选择 2vCPU，内存选择2GiB镜像：应用镜像 - Moltbot地域：美国（弗吉尼亚）
+好，接下来就是「购买配置页」
+数量：1（如果有土豪，请随意...）时长：1个月或者1年（按需选择）下边是否开启「自动续费」大家按需选择，可以先试用。
+这里因为演示是用新账号原因，有一个新用户折上折的优惠。。一年该配置主机，只需要 ￥68 ...（赶紧来薅.）之后直接点击「立即购买」，就进入到付款界面。这步，就不用教了吧？..支付成功之后，直接点击进入「管理控制台」，你会见到一个这样的页面，我们准备待用。第二步、配置Moltbot自己部署 AI 助手，肯定需要模型驱动，所以直接选择阿里云旗下的百炼大模型服务平台，下边有海量的模型可以挑选。“注意，用百炼大模型产生的Token费用是需要自己承担的，刚才第一步只是买服务器的费用哈。
+打开百炼大模型平台(https://bailian.console.aliyun.com/?spm=a2c4g.11186623.0.0.44b74febS5Oq2Y&tab=model#/model-market)
+
+点击「密钥管理」页面(https://bailian.console.aliyun.com/?tab=model#/api-key)，单击创建API-Key。
+复制API KEY，拿好待用！“这里一定要注意，请妥善保管百炼 API-Key。若发生泄露，第三方将有机会冒用您的身份进行恶意使用，产生超出预期的token费用（跟钱挂钩的啊喂）
+在「服务器页面」就是刚才打开的那个，如果没有直接输入(https://swasnext.console.aliyun.com/servers)，单击服务器卡片中的实例ID，进入服务器概览页面。
+
+单击应用详情页签，配置Moltbot。
+
+端口放通：需要放通对应端口的防火墙，单击一键放通即可。配置百炼API Key，单击一键配置，输入刚才的百炼的API-Key。单击执行命令，写入API Key。配置Moltbot：单击执行命令，生成访问Moltbot的Token（这个红框里面的key一定要保存！！）。“再次注意，千万别泄露包含 Token 的完整 URL。该链接包含您的身份验证凭据，任何持有此链接的人都能直接绕过登录验证，获得您 Moltbot 控制台的管理员权限。访问控制页面：单击打开网站页面可进入Moltbot对话页面。你也可以跟它对话几句找找感觉哈哈哈
+
+开启ResponseAPI访问，这步是为了之后我们调用各种APP留的一个口。
+后续AppFlow会通过API访问Moltbot。
+在Clawdbot页面左侧导航栏，单击Setting > Config。在Config页面左侧导航栏单击Gateway，切换至Http页签，在Responses区域将Enabled切换至开启，单击Save。
+到这里，大家可能就会疑惑了，部署出来这玩意不还是网页端么，我咋手机遥控它给我干活？在clawdbot默认场景下，支持的都是海外的那些软件，对于我们大多数人来说使用门槛有点高。但是，阿里的生态，我们有钉钉啊！接下来，我们就来完成打通「钉钉」的这步。第三步、集成到钉钉！“这步可能流程有点长，但是相信我，亲手打造Javis的感觉还是很爽的...1. 创建钉钉应用创建钉钉应用需要你的钉钉账号有开发者权限。这块大家可以联系组织管理员获取钉钉开放平台的开发权限，具体操作可以看获取开发者权限(https://open.dingtalk.com/document/orgapp/obtain-developer-permissions)1.1 创建应用
+访问钉钉开放平台 (https://open-dev.dingtalk.com/)，点击创建。
+如果创建过应用但未展示应用开发指引，点击立即开始进入钉钉应用页面。
+在应用开发的左侧导航栏中，点击钉钉应用，在钉钉应用页面右上角点击创建应用。
+
+在创建应用面板，填写应用名称和应用描述，上传应用图标，完成后点击保存。
+1.2 查看应用 Client ID 和 Client Secret在左侧菜单选择凭证与基础信息，复制 Client ID 和 Client Secret，用于下一步创建连接流。1.3 创建消息卡片像我们在钉钉上，看到一些好看的推送，其实都有卡片样式，所以我们通过设置卡片消息来支持流式返回结果，接下来创建一下卡片模板供。
+访问「卡片平台」(https://open-dev.dingtalk.com/fe/card)，点击新建模板。
+
+在创建模板输入框，填入模板信息，单击创建。
+
+卡片类型：消息卡片。卡片模板场景：AI 卡片。关联应用：Clawdbot。
+
+在模拟编辑页面，不要使用预设模板，不需要进行任何额外操作，直接保存并发布模板。然后点击返回模板列表页面。
+
+复制模板ID，用于创建钉钉连接流使用。
+1.4 授予应用发送卡片消息权限创建卡片后，我们需要给应用授予发送卡片消息的权限。
+访问钉钉应用列表(https://open-dev.dingtalk.com/fe/app)。找到刚刚创建的应用，点击应用名称进入详情页面。
+
+在左侧菜单选择开发配置 > 权限管理，在左侧搜索框分别输入Card.Streaming.Write和Card.Instance.Write，并在操作列点击申请权限。
+注意，两个权限都需要申请！！批量好像有bug，没法选中..所以我单独申请的。好了，我们再坚持一下，胜利的曙光就在前方...2. 创建AppFlow连接流
+使用AppFlow模板(https://appflow.console.aliyun.com/vendor/cn-hangzhou/flow/fastTemplate/tl-81856c0550684f50929b)创建连接流，单击立即使用进入创建流程。
+
+在连接流的账户授权配置向导页，点击添加新凭证。输入在【步骤：配置Moltbot】获取到的Token。
+还记得吗？可以往上翻翻...
+在连接流的账户授权配置向导页，点击添加新凭证。在创建凭证对话框中，填入步骤：查看应用信息中获取到的 Client ID 和 Client Secret，并设置一个自定义凭证名称。
+然后直接点击下一步
+在执行动作配置向导页，填写模型名称、公网地址以及步骤：获取卡片模板ID获取到的模板ID，完成后点击下一步。
+
+在基本信息配置向导页，填写连接流名称和连接流描述（建议保持默认），完成后点击下一步。
+
+界面提示流程配置成功，复制 WebhookUrl，点击发布
+相信我。最后一步了，配置完就能爽用了！3. 配置钉钉机器人有了Webhook地址后，接下来就可以在钉钉应用中配置机器人来回答用户问题了。3.1 配置钉钉机器人
+访问钉钉应用列表(https://open-dev.dingtalk.com/fe/app)。找到刚刚创建的应用，点击应用名称进入详情页面。
+
+在添加应用能力页面，找到机器人卡片，点击添加。
+在机器人配置页面，打开机器人配置开关，然后关于机器人简介、描述的可以随意填什么之类的都随意填吧。消息接收模式请选择HTTP模式，消息接收地址为刚刚的 WebhookUrl。然后点击发布。
+消息接收模式请选择HTTP模式，目前AppFlow仅支持HTTP模式，选择Stream模式会导致无法返回消息。
+3.2 发布应用版本应用创建完成后，如果需要将应用供企业内其他用户使用，需要发布一个版本。
+点击应用开发，在钉钉应用页面，点击目标应用。
+
+在目标应用开发导航栏，点击版本管理与发布，在版本管理与发布页面，点击创建新版本。
+进入版本详情页面，输入应用版本号和版本描述信息，选择合适的应用可见范围，完成后点击保存。并在弹窗中点击直接发布。3.3 测试机器人你可以创建群聊或在已有群聊中添加机器人，并与机器人对话，查看效果。
+在钉钉群管理中添加机器人。进入钉钉群群设置页面，点击机器人卡片区域，在机器人管理页面，
+点击添加机器人。在添加机器人的搜索文本框中输入目标机器人名称，并选中要添加的机器人。点击添加，完成后再点击完成添加。
+在钉钉群中或私聊时@机器人，进行交流互动。
+至此，大功告成！！我们终于完成了bot的创建。我们可以打开刚才登录的界面，查看它的聊天日志，而且在下边也支持原来clawdBoT的大部分功能。包括后续我们有需求，还可以直接用Moltbot调用IMessage给指定人发消息，这里由于篇幅，暂且按下不表。等下次给大家再详细分享一下 Moltbot 的各种玩法！结语之前在《智能体设计指南》里提到，Agent (智能体) 的核心不是对话，而是执行Moltbot让“个人 AI 助理”第一次像个产品。而且开源意味着它会被无数人继续加速。虽然它目前还有些稚嫩，偶尔会像个倔强的“小龙虾”，但这种拥有专属、私密、强大权限 AI 的感觉，真的很刺激 。再往未来看，真正的空间在“生态打通”。当它能更顺滑地接入国内协同、国内消息通道、国内模型与计费体系，它就会从极客玩具走向大众生产力。阿里云这次把“云端隔离 + 百炼千问 + 钉钉/iMessage”先搭了一个骨架。我期待它继续往前走。打通更多应用工具，给更多人一个能放心托付的 Jarvis。以上。
+                    
+
+                                        
+                                                
+                                                        开源大模型本地部署
+                                                        开源大模型
+                                                        什么叫开源模型
+                                                    
+                                                
+
+                        分享：
+                        
+                            
+                                
+                            
+                            
+                                
+                            
+                            
+                                
+                            
+                            
+                                
+                            
+                        
+                    
+                    
+                    
+                        53AI，企业落地大模型首选服务商产品：场景落地咨询+大模型应用平台+行业解决方案承诺：免费POC验证，效果达标后再合作。零风险落地应用大模型，已交付160+中大型企业                    
+                    
+                    
+                                            
+
+                
+                
+                    
+                                                上一篇：Clawdbot 深度拆解： 7 个问题看懂它。
+                        
+                                                下一篇：一夜爆火，Clawdbot是否才是真正的AI入口产品？
+                        
+                    
+                    
+                        
+                        返回列表
+                        
+                    
+                
+                
+                    相关资讯
+                    
+                    
+                                                
+                            2026-03-13
+                            
+                                你的 AI Agent 真的在受控运行吗？
+                                
+                            
+                        
+                                                
+                            2026-03-12
+                            
+                                Harness Engineering 的防御视角：从 Codex Security 看 AI 生成代码的治理
+                                
+                            
+                        
+                                                
+                            2026-03-12
+                            
+                                阿里开源龙虾组合来了：HiClaw + CoPaw，内存占用大幅降低，还能直接操作本地环境
+                                
+                            
+                        
+                                                
+                            2026-03-12
+                            
+                                大厂抢的不是“龙虾”，是人与AI的新型关系
+                                
+                            
+                        
+                                                
+                            2026-03-11
+                            
+                                Google Workspace 团队开源了一个工具，叫 gws，直接搬进终端里了。
+                                
+                            
+                        
+                                                
+                            2026-03-11
+                            
+                                OpenClaw爆火背后，我们所见的时代情绪 | Linear View
+                                
+                            
+                        
+                                                
+                            2026-03-11
+                            
+                                开源 AI 收藏夹：全平台同步、自动摘要、智能对话，太强了！
+                                
+                            
+                        
+                                                
+                            2026-03-11
+                            
+                                OpenAI 开源 Symphony！四天狂揽 8.7K Star，AI 编程自主管理神器！
+                                
+                            
+                        
+                                            
+                
+            
+            
+    
+        
+            
+                
+                                        
+                        
+                        
+                        联系获取
+                    
+                                        
+                        
+                        
+                        联系获取
+                    
+                                    
+            
+            
+        
+        
+            160+中大型企业正在使用53AI
+            
+                                立即咨询
+                                预约演示
+                            
+        
+        
+                        
+                把握AI发展的机遇，共同探索、共同进步
+                2025-01-22
+            
+                        
+                如何打造基于GenAI的员工服务机器人
+                2025-01-22
+            
+                    
+    
+    
+            
+            
+                
+                
+                
+                
+            
+        
+            
+        热点资讯
+        
+                        
+                
+                    
+                
+                
+                    
+                        Clawdbot 完整安装教学：2026 年最火的开源AI 个人助理                    
+                    2026-01-27
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        重磅开源！Kimi K2.5 本地部署全攻略：手把手教你跑通 1T MoE 巨兽                    
+                    2026-01-30
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        SkillsMP：一个聚合了 5 万+ AI Agent 技能的开源社区                    
+                    2026-01-12
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        Clawdbot 深度拆解： 7 个问题看懂它。                    
+                    2026-01-29
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        实测Kimi K2.5，这是一款厌丑的开源模型                    
+                    2026-01-27
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        ClawdBot 火爆全网，手把手教你如何部署，还能直接用钉钉操作！                    
+                    2026-01-28
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        一文彻底看懂 Google 最新开源 A2UI 协议：如何让 AI Agent “说出UI” ？                    
+                    2025-12-22
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        OpenWork：Claude Cowork 的开源替代品                    
+                    2026-01-21
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        我把Claude Code换成GLM-4.7用了6小时，我竟然没发现明显区别                    
+                    2025-12-23
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        Claude Code最强开源对手！GitHub 50.2k Star了，作者为它烧掉2.4w美元。                    
+                    2026-01-06
+                
+            
+                    
+    
+    
+        大家都在问
+        
+                        
+                
+                    
+                
+                
+                    
+                        你的 AI Agent 真的在受控运行吗？                    
+                    2026-03-13
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        137K 行代码、零 clippy 警告：这个开源项目凭什么让 AI Agent 领域炸锅？                    
+                    2026-03-02
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        Clawdbot 如何实现像人一样的长期记忆？                    
+                    2026-02-05
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        一夜爆火，Clawdbot是否才是真正的AI入口产品？                    
+                    2026-01-28
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        Clawdbot爆火：Karpathy点赞的开源AI助理，到底是什么？                    
+                    2026-01-26
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        速递 | DeepSeek突然扔出MODEL1，这到底是V4还是R2？                    
+                    2026-01-21
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        DeepSeek-R2要来了？                    
+                    2026-01-21
+                
+            
+                        
+                
+                    
+                
+                
+                    
+                        TranslateGemma-27B谷歌开源翻译模型有多强？                    
+                    2026-01-20
+                
+            
+                    
+    
+    
+    
+        热门标签
+        
+                        
+                内容创作            
+                        
+                大模型技术            
+                        
+                个人提效            
+                        
+                langchain            
+                        
+                llamaindex            
+                        
+                多模态技术            
+                        
+                RAG技术            
+                        
+                智能客服            
+                        
+                知识图谱            
+                        
+                模型微调            
+                        
+                RAGFlow            
+                        
+                coze            
+                        
+                Dify            
+                        
+                Fastgpt            
+                        
+                Bisheng            
+                        
+                Qanything            
+                        
+                AI+汽车            
+                        
+                AI+金融            
+                        
+                AI+工业            
+                        
+                AI+培训            
+                        
+                AI+SaaS            
+                        
+                Skill            
+                        
+                提示词技巧            
+                        
+                AI+电商            
+                        
+                AI面试            
+                        
+                数字员工            
+                        
+                ChatBI            
+                        
+                AI知识库            
+                        
+                开源大模型            
+                        
+                智能营销            
+                        
+                智能硬件            
+                        
+                智能化改造            
+                        
+                AI+医疗            
+                        
+                MaxKB            
+                        
+                Palantir            
+                        
+                Glean            
+                        
+                Openclaw            
+                    
+    
+
+        
+    
+
+
+
+    
+        
+            
+                
+
+                
+                
+            
+            
+                
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+
+                        
+                    
+                
+            
+                        
+                应聘简历请发送至： ceo@53ai.com
+            
+                    
+    
+
+
+    
+    
+        
+            
+        
+        
+    
+
+    
+        
+            
+                
+                    
+                                                
+                            产品服务
+                            
+
+                                                                
+                                    工作+AI
+                                                                        工作对话
+                                                                        内容创作
+                                                                        方案撰写
+                                                                        魔法菜单
+                                                                    
+                                                                
+                                    业务+AI
+                                                                        微信分身
+                                                                        海外客服
+                                                                        官网客服
+                                                                        抖音客服
+                                                                        数字老师
+                                                                        数字督导
+                                                                        智能服务台
+                                                                    
+                                                                
+                                    AIx业务
+                                                                        智能问数
+                                                                        智能审核
+                                                                        智能工单
+                                                                        企微跟进助手
+                                                                        智能报价
+                                                                        企微销售助手
+                                                                        应用智改
+                                                                        企微客服助手
+                                                                    
+                                
+                                
+                                                                        落地咨询
+                                                                        场景共创
+                                                                    
+
+                            
+                        
+                        
+                        
+                            客户案例
+                                                        
+                                                                行业案例
+                                                                场景案例
+                                                            
+                                                    
+
+                        
+                        
+                            AI知识库
+                                                        
+                                                                前沿技术
+                                                                Agent框架
+                                                                行业应用
+                                                                企业落地
+                                                                结构化提示词
+                                
+                                                            
+                                                    
+
+                        
+                        
+                            关于我们
+                                                        
+                                                                公司介绍 
+                                                                渠道合作
+                                                            
+                                                    
+
+                                            
+                
+            
+            
+                
+    
+        
+            友情链接：
+            
+                                通往AGI之路
+                                云璨信息
+                                企微SCRM
+                                小名片
+                                优网科技
+                            
+        
+        
+            CopyRight © 2012-2024  深圳市博思协创网络科技有限公司  版权所有
+            
+                粤ICP备14082021号
+            
+        
+        
+            广州：广州市华景路37号(华景软件园)暨南大学科技大厦6楼（整层） 深圳：深圳市福田区泰然四路29号天安创新科技广场一期A座1204    上海：上海市浦东新区金新路58号1602室            
+    
+    
+        
+            
+
+            
+            
+                微信扫码和创始人交个朋友            
+        
+    
+
+            
+        
+    
+
+    
+        
+            
+        
+        联系我们
+        
+            
+            售前咨询186 6662 7370预约演示185 8882 0121微信扫码添加专属顾问            
+        
+    
+    
+        
+            
+        
+        回到顶部
+    
+
+    
+
+    
+        
+        
+            
+                
+                加载中...
+            
+        
+        
+            
+                扫码咨询
+                
+                    
+                        
+                    
+                    
+                        
+                            
+                            
+                        
+                        
+                    
+                
+            
+            
+                
+                
+                    
+                
+            
+        
+    
+
+    
+        
+            
+            预约演示
+        
+        
+            
+            微信咨询
+        
+        
+            
+            电话咨询
+  </div>
+</body>
+</html>

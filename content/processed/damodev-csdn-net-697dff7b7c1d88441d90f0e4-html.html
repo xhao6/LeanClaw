@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DAMO 开发者矩阵 — Mac mini 接入国产大模型与飞书</title>
+  <meta name="description" content="命令行安装 + DeepSeek 配置 + 飞书插件全流程">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>CSDN DAMO</span>
+    <a href="https://damodev.csdn.net/697dff7b7c1d88441d90f0e4.html" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    OpenClaw部署与配置教程：在Mac mini上接入国产大模型与飞书_陈希瑞-DAMO开发者矩阵                              DAMO开发者矩阵                 DAMO开发者矩阵   博客活动直播论文具身工坊     去全站搜索看看？                     登录      登录社区云 登录社区云，与社区用户共同成长 
+  CSDN账号登录 
+     DAMO开发者矩阵 邀请您加入社区   立即加入     欢迎加入社区     取消   确定        欢迎加入社区     取消   确定    
+      DAMO开发者矩阵
+      OpenClaw部署与配置教程：在Mac mini上接入国产大模型与飞书   OpenClaw部署与配置教程：在Mac mini上接入国产大模型与飞书 
+      本文介绍了在Mac mini上部署OpenClaw智能助手并接入国产大模型和飞书机器人的完整流程。主要内容包括：1）通过命令行快速安装OpenClaw；2）配置国际/国产大模型（如DeepSeek）；3）安装飞书插件并配置应用凭证；4）设置飞书机器人权限与事件。部署完成后，用户可通过飞书与AI助手交互，支持多轮对话和上下文记忆功能。文章提供了详细的操作步骤和截图说明，特别针对国产模型接入给出了具体
+         陈希瑞      
+          41391人浏览 · 2026-01-31 21:11:18
+              陈希瑞  ·  2026-01-31 21:11:18 发布  一、准备工作
+
+ 
+  
+   项目
+   说明
+  
+ 
+ 
+  
+   一台Mac mini
+   云服务器、旧电脑、树莓派也可以
+  
+  
+   飞书账号
+   用来创建机器人
+  
+  
+   国产模型的api
+   openclaw的在配置时仅显示国际的大模型，国产模型需要单独配置
+  
+ 
+
+二、部署OpenClaw到mac mini
+2.1 快速部署
+
+ 稳定版安装：在终端输入以下命令
+
+curl -fsSL https://openclaw.ai/install.sh | bash
+
+ 测试版安装（可能包含Bug）
+
+curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta
+
+2.2 同意免责声明
+
+ 安装好后，将会出现一个问题：是否知晓风险，选择Yes就行。
+
+2.3 配置模式选择
+
+ 选择“QuickStart”快速入门模式
+
+2.4 模型配置
+
+ 国际模型支持：OpenClaw默认支持多平台国际大模型
+ 国产模型注意：该配置页面的Kimi、MiniMax、GLM需使用国际版接口
+ 配置选择：如需接入国内大模型，请选择跳过此步骤
+
+2.5 聊天软件（Channel）配置
+
+ OpenClaw已支持支持很多软件，但是引导流程中显示多为国外应用
+   ⚠️ 这里请大家先跳过！后续我们通过增加channel的方式添加！（详见下文）
+
+2.6 技能包（Skill）配置
+新手暂时无需添加额外技能包，选中 “No” 跳过，按回车键确认；
+2.7 Hooks 配置
+选中 “Memory”（启用记忆功能，支持多轮对话上下文关联，避免每次聊天都需要重复说明需求），按回车键确认；
+2.8 等待部署完成
+
+ 配置确认后，系统将自动完成部署，耗时约 30 秒 - 1 分钟，无需操作。
+ 部署完成后，通过命令 openclaw --version 验证版本：
+
+2. 9 汉化版安装（可选）
+
+ 如英文界面不友好，可安装汉化版：
+
+curl -fsSL -o install.sh https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/install.sh && bash install.sh
+
+ 配置方法与英文版相同
+
+三、接入国产大模型
+说实话openclaw是比较消耗token的，使用国产大模型是性价比是比较高的。接下来，就演示如何接入国内主流AI提供商。
+3.1 深度求索（DeepSeek）
+获取APIkey：https://platform.deepseek.com/api_keys
+  在apiKey处输入你的apikey即可
+openclaw config set 'models.providers.deepseek' --json '{
+  "baseUrl": "https://api.deepseek.com/v1",
+  "apiKey": "",
+  "api": "openai-completions",
+  "models": [
+    { "id": "deepseek-chat", "name": "DeepSeek Chat" },
+    { "id": "deepseek-reasoner", "name": "DeepSeek Reasoner" }
+  ]
+}'
+
+设置 models.mode 为 merge
+openclaw config set models.mode merge
+
+设置默认模型（以deepseek-chat为例）
+openclaw models set deepseek/deepseek-chat
+
+  我这里演示的话使用的是美团的龙猫大模型。
+3.2 通用配置模板
+如果想要使用其他模型，可以使用以下通用模板接入任何兼容OpenAI协议的模型：
+openclaw config set 'models.providers.{provider_name}' --json '{
+  "baseUrl": "https://{baseurl}",
+  "apiKey": "",
+  "api": "openai-completions",
+  "models": [
+    { "id": "{model_id}", "name": "{model_name}" }
+  ]
+}'
+
+设置 models.mode 为 merge
+openclaw config set models.mode merge
+
+设置默认模型
+openclaw models set {provider_name}/{model_id}
+
+四、接入飞书
+4.1 创建飞书企业自建应用
+
+ 访问飞书开发者平台（https://open.feishu.cn/app?lang=zh-CN）；
+ 登录后，点击 “创建企业自建应用”；
+ 填写应用基础信息：应用名称（如 “傻妞”），选择应用图标，点击 “创建” 按钮，进入应用管理页面。
+ 添加机器人能力：在应用管理页左侧导航栏，找到并点击 “添加应用能力”，在弹出的列表中选择 “机器人”，点击 “添加”。
+ 点击上方的创建版本并发布。
+
+4.2 获取飞书应用凭证
+
+ 在飞书应用管理页，左侧导航栏找到 “凭据与基础信息” 栏目，点击进入；
+ 在页面中找到 “App ID” 和 “App Secret” 两个参数，分别点击右侧 “复制” 按钮，将其保存到记事本或备忘录中；
+ 保存完成后，不要关闭飞书开发者平台页面，后续配置权限还需使用。
+
+4.3 添加飞书channel配置
+返回终端运行下方命令
+openclaw plugins install @m1heng-clawd/feishu
+
+  再输入以下命令：
+openclaw channels add
+
+选择"Yes"以及“飞书”；
+4.4 输入APP id 与 APP Secret
+
+ 输入上一步获取到的id与secret，回车确认；
+ 选择国内的飞书以及不要再群内响应。
+
+4.5 完成添加流程
+
+ 完成ID与Secret配置后，选择Finish即可；
+ 在终端启动网关，运行下方命令：
+
+openclaw gateway --port 18789 --verbose
+
+4.6 飞书机器人配置
+飞书应用权限与事件配置
+  此步骤分为「事件配置」「权限配置」「应用发布」三部分，全程在飞书开发者平台操作，按顺序执行：
+4.6.1 事件配置
+
+ 在飞书应用管理页，左侧导航栏找到 “事件与回调” 栏目，点击进入；
+ 事件配置：在页面中选择 “长连接”，点击 “保存”；
+   ⚠️ 如果这一步提示“未建立长连接”，请检查自己的APP ID和APP Secret是否已正确配置。
+ 添加事件：点击页面中的 “添加事件”，在弹出的事件列表中，选择 “消息与群组” 分类，勾选 “接收消息”，点击 “确定”，完成事件订阅。
+ 回调配置：订阅方式选择 “使用长连接”，无需填写其他地址，配置自动生效。
+
+4.6.2 权限配置
+
+ 在飞书应用管理页，左侧导航栏找到 “权限管理” 栏目，点击进入；
+ 点击页面中的 “批量导入权限” 按钮，弹出权限导入窗口；
+ 粘贴以下JSON代码并导入，等待权限导入完成：
+
+{
+  "scopes": {
+    "tenant": [
+      "contact:user.base:readonly",
+      "im:chat",
+      "im:chat:read",
+      "im:chat:update",
+      "im:message",
+      "im:message.group_at_msg:readonly",
+      "im:message.p2p_msg:readonly",
+      "im:message:send_as_bot",
+      "im:resource"
+    ],
+    "user": []
+  }
+}
+
+ 导入验证：页面显示 “导入成功”，且权限列表中出现上述导入的权限，即为配置完成。
+
+4.6.3 发布应用
+
+ 在飞书应用管理页，点击进入 “版本管理与发布”
+ 点击“新建版本”
+ 填写版本号与描述后，保存并发布；
+
+4.6.4 验证飞书接入
+
+ 启动 OpenClaw 网关
+
+openclaw gateway
+
+ 打开飞书APP，进入工作台
+ 找到已发布的OpenClaw应用（如 “傻妞”），
+ 发送消息测试，如收到回复则接入成功
+
+五、实用操作命令与技巧
+完成基础部署后，掌握以下常用命令将显著提升您的使用效率：
+5.1 核心管理命令
+
+ 
+  
+   命令
+   功能说明
+   示例
+  
+ 
+ 
+  
+   openclaw tui
+   启动OpenClaw文本用户界面（终端交互模式）
+   直接输入即可进入交互界面
+  
+  
+   openclaw gateway restart
+   重启网关服务（配置生效/故障恢复）
+   修改配置后常用此命令
+  
+  
+   /new
+   在对话中开启新会话线程
+   在TUI或飞书对话中输入
+  
+ 
+
+5.2 模型管理命令
+# 添加备用模型（主模型不可用时自动切换）
+openclaw models fallbacks add [提供商代号/模型名称]
+# 示例：添加OpenAI Codex作为备用
+openclaw models fallbacks add openai-codex/gpt-5.2-codex
+
+# 设置默认模型
+openclaw models set [提供商代号/模型名称]
+# 示例：将Kimi设为默认编程模型
+openclaw models set kimi-code/kimi-for-coding
+
+六、总结
+本教程详细介绍了在Mac mini上部署OpenClaw的全过程，包括基础安装、国产大模型接入以及飞书机器人集成。通过本教程，您可以搭建一个性价比较高的AI助手解决方案，结合国产大模型的经济性和飞书的便捷性，满足日常自动化需求。
+说明：所有配置步骤均经过实测，请按照顺序操作。如遇问题，请检查网络连接、API密钥有效性及各步骤的配置准确性。        DAMO开发者矩阵 DAMO开发者矩阵，由阿里巴巴达摩院和中国互联网协会联合发起，致力于探讨最前沿的技术趋势与应用成果，搭建高质量的交流与分享平台，推动技术创新与产业应用链接，围绕“人工智能与新型计算”构建开放共享的开发者生态。   
+            加入社区
+             更多推荐 
+
+          ·
+          
+            “十五五”具身智能新基建：虚实融合训练场与Agent协同控制平台深度解析（WORD）
+          
+          ·
+          
+            ZEROTH元点智能亮相AWE，N1等重磅首发新品成为全场焦点
+          
+          ·
+          
+            【路径规划】RRT和RPM两种算法二维连杆机器人路径规划【含Matlab源码 15150期】
+          
+  “十五五”具身智能新基建：虚实融合训练场与Agent协同控制平台深度解析（WORD）   DAMO开发者矩阵  ZEROTH元点智能亮相AWE，N1等重磅首发新品成为全场焦点   DAMO开发者矩阵  【路径规划】RRT和RPM两种算法二维连杆机器人路径规划【含Matlab源码 15150期】   DAMO开发者矩阵  
+ 4.1w  29  0  0     扫一扫分享内容    点击复制链接  分享 
+ 所有评论(0) 
+      您需要登录才能发言
+      
+				查看更多评论        欢迎加入社区     取消   确定      陈希瑞      
+          @qq_45473330
+              关注   
+          已为社区贡献2条内容
+              回到顶部          欢迎加入社区     取消   确定     提供社区服务与技术支持   提供社区服务与技术支持   ©1999-2023北京创新乐知网络技术有限公司 京ICP备19004658号
+  </div>
+</body>
+</html>

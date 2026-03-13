@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>B站 — OpenClaw 是什么？Skills/MCP/RAG/Memory/AI Agent 全解析</title>
+  <meta name="description" content="架构科普视频：拆解 OpenClaw 与技能系统、MCP 协议、RAG、记忆系统的关系">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>Bilibili</span>
+    <a href="https://www.bilibili.com/video/BV1Bm6bB5EJ3/" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    OpenClaw(clawdbot)是什么？跟Skills/MCP/RAG/Memory/AI Agent有什么关系?_哔哩哔哩_bilibili   
+ 首页  番剧 直播 游戏中心 会员购 漫画 赛事
+  
+   投稿
+ OpenClaw(clawdbot)是什么？跟Skills/MCP/RAG/Memory/AI Agent有什么关系?       25.9万  233 2026-02-01 20:28:14   未经作者授权，禁止转载             1.4万   8491    1.5万    3100        推理服务是什么？
+大模型是什么
+Memory是什么
+短期记忆和长期记忆是什么，有什么区别
+RAG是什么
+MCP是什么
+Skills是什么
+MCP和Skills有什么区别
+AI Agent是什么？   科技人工智能AI教程编程RAGMCPPython大模型Skills            
+      小白debug
+       
+      发消息
+     AI极客·科技美学家 | 前字节 | 大厂AI算法工程 | 畅销书《趣味网络图解》作者 专注科技美学·硬核技术科普商务vx: Rserlin     
+      关注 28.2万
+               比起官号整活，我更喜~欢~你    
+                微粒贷
+                     没有什么是加一层中间层不能解决的 （28/29）  自动连播  594.7万播放 
+            简介
+           
+          订阅合集
+           RabbitMQ是什么？架构是怎么样的？ 
+        06:38
+       Mysql是什么？架构是怎么样的？ 
+        10:15
+       redis是什么?架构是怎么样的？怎么设计redis？ 
+        06:30
+       MySQL查询慢,除了索引还能因为什么？ 
+        05:51
+       kafka为什么这么快？RocketMQ哪里不如Kafka? 
+        05:19
+       Elastic Search是什么？Lucene是什么？架构是怎么样的？ 
+        10:43
+       消息队列RocketMQ是什么？和Kafka有什么区别？架构是怎么样的？7分钟快速入门 
+        07:27
+       消息队列Kafka是什么？架构是怎么样的？5分钟快速入门 
+        05:13
+       docker是什么？和kubernetes(k8s)是什么关系？ 
+        07:57
+       docker容器和传统虚拟机有什么区别？ 
+        05:04
+       k8s是什么？Kubernetes是什么？架构是怎么样的？6分钟快速入门 
+        06:30
+       mysql索引为什么选择B+树而不是跳表？ 
+        08:09
+       为什么说mysql数据库单表最大两千万？依据是啥？ 
+        06:34
+       玩原神学编程-数据库分库分表是啥？读扩散又是啥？ 
+        09:03
+       海量数据怎么存？HDFS 是什么？架构是怎么样的？ 
+        07:50
+       凌晨3点Redis叒炸了！这套哨兵模式让我在老板面前装到了 
+        04:19
+       Nginx是什么？Nginx高并发架构拆解指南 
+        08:21
+       神经网络是什么？大模型性能怎么优化？ 
+        07:38
+       大数据怎么处理？Hadoop是什么？跟HDFS, Spark, Flink, Hive, Hbase是什么关系？ 
+        08:20
+       有限内存Redis，怎么支持无限数据？Redis集群模式是什么？架构是怎么样的？ 
+        06:17
+       GPU算力瓶颈在哪？怎么榨干GPU算力？怎么让万卡GPU协同工作？ 
+        09:13
+       8年程序员看完都哭了？ MongoDB是什么？架构是怎么样的? 
+        13:19
+       为什么说PostgreSQL是数据库天花板？它为何这么全能？ 
+        08:59
+       「小白debug」如何用开关造出一台计算机 
+        05:10
+       养活国内大半自研数据库团队？PostgreSQL是什么？架构是怎么样的？ 
+        11:21
+       Transformer是什么？2017年那篇“无人问津”的论文，为何成了今天AI爆炸的起点？10分钟速通AI论文天花板《Attention is all you 
+        11:16
+       4分钟速通DeepSeek新论文mhc是什么？残差网络又是什么？ 
+        04:28
+       OpenClaw(clawdbot)是什么？跟Skills/MCP/RAG/Memory/AI Agent有什么关系? 
+        06:37
+       7分钟速通Agent Skills是什么？跟MCP|Workflow|Command|Prompt有什么关系？ 
+        07:32
+              【闪客】一口气拆穿Skill/MCP/RAG/Agent/OpenClaw底层逻辑  飞天闪客 
+        54.6万
+
+        
+        1847
+          7分钟速通Agent Skills是什么？跟MCP|Workflow|Command|Prompt有什么关系？  小白debug 
+        16.4万
+
+        
+        409
+          10分钟讲清楚 Prompt, Agent, MCP 是什么  隔壁的程序员老王 
+        73.9万
+
+        
+        657
+          【吴恩达】2026年公认最好的【Agent智能体】教程！大模型入门到进阶，一套全解决！Agentic AI—附带课件代码  吴恩达Agent 
+        51.7万
+
+        
+        1708
+          OpenClaw安装+3大超实用玩法，炒股，搞情报，盘收藏夹...  Xuan_酱 
+        34.9万
+
+        
+        346
+          【2026年AI大模型】10小时学：Prompt、RAG、Agent、MCP、大模型微调从入门到项目实战（完整版）学会可做LLM项目  吴恩达langchain 
+        6.1万
+
+        
+        169
+          Agent Skill 从使用到原理，一次讲清  马克的技术工作坊 
+        32.6万
+
+        
+        514
+          Claude Code 从 0 到 1 全攻略：MCP / SubAgent / Agent Skill / Hook / 图片 / 上下文处理/ 后台任务  马克的技术工作坊 
+        52.5万
+
+        
+        633
+          🦞OpenClaw养虾指南：从入门到精通（赠98页pdf资料）  AI进化论-花生 
+        15.4万
+
+        
+        157
+          OpenClaw(Clawdbot) 海量全玩法攻略，国内网络使用，本地部署  技术爬爬虾 
+        64.7万
+
+        
+        300
+          （比刷剧爽！）2026公认最好的《Claude Code》教程，附课件代码—Claude Code探索-测试-重构-调试代码库  吴恩达Agentic 
+        23.1万
+
+        
+        117
+          2026 Agent开发必学，OpenClaw原理精讲与从零手搓！详解Agent Skill、无限上下文记忆、自主迭代功能设计思路与从零开发实战！  九天Hector 
+        8.2万
+
+        
+        126
+          黑马程序员大模型RAG与Agent智能体项目实战教程，基于主流的LangChain技术从大模型提示词到实战项目  黑马程序员 
+        80.2万
+
+        
+        2536
+          【OpenClaw保姆级教程】2026全网最新最详细的OpenClaw教学，一个视频搞懂OpenClaw本地部署/接入微信/飞书/钉钉（附完整操作文档）  AI视频生成课程 
+        49.2万
+
+        
+        847
+          【吴恩达】2026年公认最好的【Agent Skills】教程！大模型入门到进阶，一套全解决！Agent Skills with Anthropic—附课件代码  吴恩达深度学习 
+        15.6万
+
+        
+        479
+          OpenClaw从入门到进阶  AI全文总结 
+        8.5万
+
+        
+        0
+          从0开始“做”一个Agent！【n8n草履虫教程】  秋芝2046 
+        55.2万
+
+        
+        862
+          精通OpenClaw变高手，OpenClaw从中级到高级完整教程  技术爬爬虾 
+        11.6万
+
+        
+        91
+          手把手彻底学会 Agent Skills！【小白教程】  秋芝2046 
+        40.3万
+
+        
+        646
+          我让OpenClaw自动炒股， 最后赚钱了吗？| 摩尔线程 AIBOOK  是花子呀_ 
+        108.9万
+
+        
+        562
+       
+    展开
+     查看实时赛况，投稿赢取赏金！   
+    小窗
+   
+      客服
+     
+      顶部
+      赛事库 课堂 2021拜年纪
+  </div>
+</body>
+</html>
