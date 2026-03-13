@@ -73,6 +73,8 @@
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
           <wd-cell title="消息通知" is-link icon="notification" size="large" @click="goToNotifications" />
+          <wd-cell title="用户协议" is-link icon="document" size="large" @click="goToAgreement" />
+          <wd-cell title="隐私政策" is-link icon="shield" size="large" @click="goToPrivacy" />
           <wd-cell title="关于 LeanClaw" is-link icon="info-circle" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
@@ -149,6 +151,20 @@ const goToStats = () => {
 const goToNotifications = () => {
   uni.navigateTo({
     url: '/pages/profile/notifications/index'
+  })
+}
+
+// 跳转用户协议
+const goToAgreement = () => {
+  uni.navigateTo({
+    url: '/pages/profile/agreement/index'
+  })
+}
+
+// 跳转隐私政策
+const goToPrivacy = () => {
+  uni.navigateTo({
+    url: '/pages/profile/agreement/index'
   })
 }
 
