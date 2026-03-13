@@ -32,6 +32,23 @@ onShow(() => {
 onHide(() => {
   console.log('App Hide')
 })
+
+// 分享给好友
+onShareAppMessage(() => {
+  return {
+    title: '轻学龙虾 - 7天入门 OpenClaw',
+    path: '/pages/index/index',
+    imageUrl: '/static/images/share-cover.png'
+  }
+})
+
+// 分享到朋友圈
+onShareTimeline(() => {
+  return {
+    title: '轻学龙虾 - 7天入门 OpenClaw',
+    query: ''
+  }
+})
 </script>
 
 <style>
