@@ -3,7 +3,7 @@ import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 
 onLaunch(() => {
   console.log('App Launch')
-  
+
   // Initialize CloudBase
   if (wx.cloud) {
     wx.cloud.init({
