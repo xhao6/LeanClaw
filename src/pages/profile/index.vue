@@ -164,7 +164,7 @@ const goToAgreement = () => {
 // 跳转隐私政策
 const goToPrivacy = () => {
   uni.navigateTo({
-    url: '/pages/profile/agreement/index'
+    url: '/pages/profile/privacy/index'
   })
 }
 
