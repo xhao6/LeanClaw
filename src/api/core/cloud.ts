@@ -63,5 +63,11 @@ export const getDb = () => {
  */
 export const getFileId = (url: string) => {
   if (url.startsWith('cloud://')) return url
-  return '' 
+  // 从云存储 URL 中提取 fileID
+  // 例如: https://xxx.tcb.qcloud.cn/xxx/cloudbase/xxx.png -> cloudbase://xxx.png
+  const match = url.match(/cloudbase\/([^?]+)/)
+  if (match) {
+    return `cloudbase://${match[1]}`
+  }
+  return ''
 }
