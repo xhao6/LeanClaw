@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+import { config } from '@/config'
 
 onLaunch(() => {
   console.log('App Launch')
@@ -7,7 +8,7 @@ onLaunch(() => {
   // Initialize CloudBase
   if (wx.cloud) {
     wx.cloud.init({
-      env: 'leanmind-1gjtoa502716c21d', // Env ID
+      env: config.cloud.envId,
       traceUser: true
     })
     console.log('CloudBase initialized')
