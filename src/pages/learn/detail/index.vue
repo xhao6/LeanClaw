@@ -82,13 +82,12 @@ import { markLessonComplete } from '@/utils/learnProgress'
 import { updateProgress } from '@/api/modules/user'
 
 // 使用 Vite import.meta.glob 导入所有 md 文件内容
+// #ifdef MP-WEIXIN
 const mdModules = import.meta.glob('/src/static/content/days/*.md', {
   query: '?raw',
   import: 'default',
   eager: true
 })
-
-// 提取 day ID 和内容
 const dayContents: Record<string, string> = {}
 for (const path in mdModules) {
   const match = path.match(/day(\d+)\.md$/)
@@ -96,6 +95,12 @@ for (const path in mdModules) {
     dayContents[match[1]] = mdModules[path] as string
   }
 }
+// #endif
+
+// #ifndef MP-WEIXIN
+// H5 使用动态加载
+const dayContents: Record<string, string> = {}
+// #endif
 
 const md = new MarkdownIt({
   html: true,
@@ -123,8 +128,22 @@ const loadContent = async () => {
   error.value = ''
 
   try {
-    // 直接从预加载的内容中获取
+    // #ifdef MP-WEIXIN
     const res = dayContents[dayId.value]
+    // #endif
+
+    // #ifndef MP-WEIXIN
+    const res = await new Promise((resolve, reject) => {
+      uni.request({
+        url: `/static/content/days/day${dayId.value}.md`,
+        success: (res) => {
+          if (res.statusCode === 200) resolve(res.data)
+          else reject(new Error(`File not found: day${dayId.value}.md`))
+        },
+        fail: (err) => reject(err)
+      })
+    })
+    // #endif
 
     if (!res) {
       throw new Error(`课程 ${dayId.value} 不存在`)
