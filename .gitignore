@@ -1,37 +1,10 @@
-# node_modules
-node_modules/
+node_modules/*
+.agents/*
+.trae/*
 
-# build outputs
-dist/
-unpackage/
+# Worktrees
+.worktrees/
+worktrees/
 
-# IDE files
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# system files
-.DS_Store
-Thumbs.db
-
-# test coverage
-coverage/
-test-results/
-playwright-report/
-
-# docs/plans
+# Design docs
 docs/plans/
-
-# local env
-.env.local
-.env.*.local
