@@ -1,48 +1,35 @@
-import { callFunction, getDb } from '../core/cloud'
+import { callFunctionWeb } from '../core/tcbWeb'
 
 /**
  * Get Resources (Articles, Videos, etc.)
  * @param params { type?: string, tag?: string, page?: number, limit?: number }
  */
 export const getResources = async (params: any = {}) => {
-  const db = getDb()
-  const _ = db.command
-
   const { type, tag, page = 1, limit = 10 } = params
-  const skip = (page - 1) * limit
 
-  // Build query conditions - type and tag should be combined with AND
-  const queryConditions: Record<string, any> = {}
+  // 参数边界校验
+  const safePage = Math.max(1, parseInt(String(page)) || 1)
+  const safeLimit = Math.min(50, Math.max(1, parseInt(String(limit)) || 10))
 
-  if (type) {
-    queryConditions.type = _.eq(type)
-  }
-
-  if (tag) {
-    queryConditions.tags = tag
-  }
-
-  let query = db.collection('resources')
-
-  // Apply query conditions if any
-  if (Object.keys(queryConditions).length > 0) {
-    query = query.where(queryConditions)
-  }
-
+  // 尝试使用云函数获取真实数据
   try {
-    const res = await query
-      .skip(skip)
-      .limit(limit)
-      .orderBy('heat', 'desc')
-      .get()
-
-    return {
-      list: res.data,
-      total: 0
+    const cloudRes = await callFunctionWeb('getResources', { type, tag, page: safePage, limit: safeLimit })
+    if (cloudRes && cloudRes.success && cloudRes.list) {
+      console.log('[Resources] Using cloud function data')
+      return {
+        list: cloudRes.list,
+        total: cloudRes.total
+      }
     }
-  } catch (err) {
-    console.error('Get resources failed', err)
-    return { list: [], total: 0 }
+  } catch (e) {
+    console.error('[Resources] Cloud function failed:', e)
+  }
+
+  // 无兜底数据，直接返回空结果
+  console.warn('[Resources] No data available')
+  return {
+    list: [],
+    total: 0
   }
 }
 

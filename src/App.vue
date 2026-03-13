@@ -1,29 +1,39 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 import { config } from '@/config'
+import { initTcbWeb } from '@/api/core/tcbWeb'
 
 onLaunch(() => {
   console.log('App Launch')
 
-  // Initialize CloudBase
-  if (wx.cloud) {
+  // 环境检测优先级：微信小程序 > Web SDK
+  if (typeof wx !== 'undefined' && wx.cloud) {
+    // 微信小程序环境
     wx.cloud.init({
       env: config.cloud.envId,
       traceUser: true
     })
-    console.log('CloudBase initialized')
+    console.log('CloudBase initialized (WeChat)')
   } else {
-    console.error('wx.cloud not available')
+    // H5/Web 环境：使用 Web SDK 或 HTTP 触发器
+    try {
+      initTcbWeb()
+      console.log('CloudBase Web SDK initialized')
+    } catch (e) {
+      console.warn('CloudBase Web SDK init failed:', e)
+    }
   }
 })
 
 onShow(() => {
   console.log('App Show')
 })
+
 onHide(() => {
   console.log('App Hide')
 })
 </script>
+
 <style>
 /* Global styles */
 body {
