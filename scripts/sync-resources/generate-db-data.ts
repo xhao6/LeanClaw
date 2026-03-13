@@ -21,7 +21,7 @@ const dbData = Object.values(manifest.resources)
       .replace(/[^a-zA-Z0-9]/g, '-')
       .slice(0, 50)
 
-    // Extract category
+    // Extract type from URL and category
     let category = 'resource'
     const urlLower = url.toLowerCase()
     if (urlLower.includes('bilibili.com') || urlLower.includes('youtube.com')) {
@@ -29,7 +29,8 @@ const dbData = Object.values(manifest.resources)
     } else if (urlLower.includes('github.com')) {
       category = 'tool'
     } else if (r.category === 'cloud-deploy' || urlLower.includes('aliyun.com') || urlLower.includes('tencent.com') || urlLower.includes('aws.amazon.com')) {
-      category = 'case'
+      // 云部署服务商的文章仍是教程，归类为 resource
+      category = 'resource'
     } else if (r.category === 'getting-started') {
       category = 'resource'
     }
