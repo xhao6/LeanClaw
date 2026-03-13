@@ -63,13 +63,15 @@ function copyResources() {
         require('fs').writeFileSync(mockJsPath, '// mock placeholder\n', 'utf-8')
       }
 
-      // 恢复 wot-design-uni 的 wd-icon.wxss（包含字体）
-      // 尝试从 node_modules 原始文件恢复
-      const srcWdIconWxss = resolve(__dirname, 'node_modules/wot-design-uni/components/wd-icon/wd-icon.wxss')
+      // 恢复 wot-design-uni 的 wd-icon.wxss，但删除 CDN 字体链接（已用 base64 替代）
       const destWdIconWxss = resolve(__dirname, 'dist/build/mp-weixin/node-modules/wot-design-uni/components/wd-icon/wd-icon.wxss')
-      if (existsSync(srcWdIconWxss)) {
-        copyFileSync(srcWdIconWxss, destWdIconWxss)
-        console.log('[copy-resources] Restored wd-icon.wxss')
+      if (existsSync(destWdIconWxss)) {
+        let content = require('fs').readFileSync(destWdIconWxss, 'utf-8')
+        // 删除 @font-face 块（包括压缩后的单行格式）
+        // 匹配 @font-face{...}，其中 {...} 可能包含 url(...) 和其他内容
+        content = content.replace(/@font-face\{[^}]+\}/g, '')
+        require('fs').writeFileSync(destWdIconWxss, content, 'utf-8')
+        console.log('[copy-resources] Cleaned wd-icon.wxss (CDN font-face removed)')
       }
 
       console.log('[copy-resources] Done!')
