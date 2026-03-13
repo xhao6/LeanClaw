@@ -32,6 +32,27 @@ function copyResources() {
         console.log(`[copy-resources] Copied ${files.length} resources`)
       }
 
+      // 复制 content/processed 目录（WebView 静态托管资源）
+      const processedSrc = resolve(__dirname, 'content/processed')
+      const processedDest = resolve(__dirname, 'dist/build/mp-weixin/static/content/processed')
+
+      if (existsSync(processedSrc)) {
+        if (!existsSync(processedDest)) {
+          mkdirSync(processedDest, { recursive: true })
+        }
+        const files = readdirSync(processedSrc)
+        let copiedCount = 0
+        for (const file of files) {
+          const srcFile = join(processedSrc, file)
+          const destFile = join(processedDest, file)
+          if (statSync(srcFile).isFile()) {
+            copyFileSync(srcFile, destFile)
+            copiedCount++
+          }
+        }
+        console.log(`[copy-resources] Copied ${copiedCount} processed HTML files`)
+      }
+
       // 创建空的 mock.js 占位符（避免微信开发者工具报错）
       const dataDir = resolve(__dirname, 'dist/build/mp-weixin/data')
       if (!existsSync(dataDir)) {
