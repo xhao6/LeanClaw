@@ -24,6 +24,9 @@
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 
+// CloudBase 静态托管域名
+const STATIC_HOST = 'https://leanmind-1gjtoa502716c21d-1410913126.tcloudbaseapp.com'
+
 const url = ref('')
 const errorMsg = ref('')
 
@@ -35,27 +38,27 @@ function generateResourceId(originalUrl: string): string {
     .slice(0, 50)
 }
 
-// 计算实际显示的 URL - 本地模式
+// 计算实际显示的 URL - 云端模式
 const displayUrl = computed(() => {
   if (!url.value) return ''
 
-  // 如果已经是本地 static 路径，直接使用
-  if (url.value.includes('/static/content/')) {
+  // 如果已经是静态托管域名，直接使用
+  if (url.value.includes('tcloudbaseapp.com')) {
     return url.value
   }
 
   // 生成资源 ID
   const resourceId = generateResourceId(url.value)
 
-  // 本地路径：/static/content/processed/{id}.html
-  const localPath = `/static/content/processed/${resourceId}.html`
+  // 转换为 CloudBase 静态托管 URL
+  const cloudPath = `${STATIC_HOST}/content/processed/${resourceId}.html`
 
   // 设置导航栏标题
   uni.setNavigationBarTitle({
     title: '资源详情'
   })
 
-  return localPath
+  return cloudPath
 })
 
 onLoad((options: any) => {
