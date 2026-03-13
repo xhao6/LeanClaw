@@ -16,10 +16,13 @@
     "test:coverage": "vitest run --coverage",
     "test:mp": "jest --config jest.config.js",
     "e2e": "playwright test",
-    "e2e:headed": "playwright test --headed"
+    "e2e:headed": "playwright test --headed",
+    "e2e:demo": "cross-env DEMO=true playwright test --headed",
+    "e2e:demo-single": "cross-env DEMO=true playwright test --headed --grep \"首页可访问\""
   },
   "dependencies": {
     "@alova/adapter-uniapp": "^2.0.16",
+    "@cloudbase/js-sdk": "^2.26.3",
     "@dcloudio/uni-app": "3.0.0-4040520250103001",
     "@dcloudio/uni-app-plus": "3.0.0-4040520250103001",
     "@dcloudio/uni-components": "3.0.0-4040520250103001",
