@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>痴者工良 — 手把手教你部署 OpenClaw</title>
+  <meta name="description" content="博客园原创，openclaw configure 配置飞书全流程">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>博客园</span>
+    <a href="https://www.cnblogs.com/whuanle/p/19558535" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    手把手教你部署 OpenClaw - 痴者工良 - 博客园
+    
+    
+    
+    
+    
+
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+        
+    
+    
+        
+    
+
+    
+    
+        
+            
+
+                
+                    
+                        
+                    
+                
+                会员
+                周边
+                新闻
+                博问
+                闪存
+                众包
+                赞助商
+                Chat2DB
+            
+
+            
+
+                
+                    
+                        
+                        
+                            
+                            
+                        
+                        
+
+                            
+                                
+                                    
+                                    
+                                
+                                所有博客
+                            
+                                    
+                                        
+                                            
+                                            
+                                        
+                                        当前博客
+                                    
+                        
+
+                    
+                
+                
+                    
+                        
+                    
+                    
+                        
+                    
+                    
+                        
+                        
+                    
+                    
+                        
+                    
+                    
+                        
+                            
+                        
+                        
+                            我的博客
+                            我的园子
+                            账号设置
+                            会员中心
+                            
+    简洁模式 ...
+
+                            退出登录
+                        
+                    
+                    注册
+                    登录
+                
+            
+
+        
+    
+
+    
+        
+    
+
+    
+
+	
+        		
+		
+
+痴者工良
+
+逗逗的博主，小小程序员，主要研究微服务架构、kubernetes、istio、Devops 等，主要语言是 C#、Go。日常喜欢看书、写博客、摄影、运动、看风景。
+
+		
+	
+	
+		
+
+博客园
+
+首页
+
+新随笔
+
+联系
+
+订阅
+-->
+
+管理
+
+		
+			
+		
+	
+
+	
+	
+		
+    
+    
+        
+            
+                
+    手把手教你部署 OpenClaw
+    
+
+            
+            
+            
+                
+快速配置 OpenClaw
+购买服务器后，环境配置是使用 OpenClaw 的首要步骤。由于 OpenClaw 依赖 NodeJS、Swift、Kotlin 等多语言及相关依赖库，手动配置过程繁琐且易出现版本兼容问题，因此建议优先使用腾讯云应用模板——该模板已预置全套运行环境及 OpenClaw 核心程序，可直接跳过依赖安装环节，大幅提升配置效率。
+需要注意的是，即便通过应用模板完成系统安装，也是无法直接使用 OpenClaw 的，所有后续配置需通过终端命令行完成，配置好了之后才能用上 OpenClaw。
+所以请务必按照以下步骤逐步操作，避免因操作遗漏导致配置失败。
+
+使用模板重装时，请使用 OpenClaw，Moltbot 不支持飞书。
+
+服务器管理界面，找到登录按钮，进入命令终端，或者开放 22 端口后自行使用 shell 登录操作。
+
+接下来，执行命令启动配置向导，跟着提示一步一步配置。
+openclaw onboard
+
+提示：若配置过程中未保存设置，或需修改已配置项，可执行 openclaw configure 命令重新进入配置界面。
+
+◆  I understand this is powerful and inherently risky. Continue?
+
+操作说明：通过左右方向键切换 Yes/No 选项，选择 Yes 即表示已了解 OpenClaw 权限相关风险，同意继续配置。
+
+◆ Onboarding mode
+
+进入 Onboarding mode 选择界面时，对于首次配置的用户，建议优先选择 QuickStart 模式——该模式以「最小配置+最快部署」为目标，可跳过非必要配置项，快速完成 OpenClaw 基础部署。
+
+◆Config handling
+
+第一次配置使用 Use existing values、Update、Reset 都行。
+
+◆Model/auth provide
+
+配置要使用的模型，可以在这里直接配置，也可以后续通过配置文件处理。
+因为笔者使用 moonshot 国内模型，但是 OpenClaw 的配置是国际的会导致接口地址错误，所以笔者先选择 Skip for now 跳过大模型配置，后面再单独设置要使用的模型即可。
+
+◆Default model
+
+进入 Default model 选择界面时，可任意选择一个模型临时占位——该配置后续将通过修改配置文件覆盖，不影响最终使用效果。
+
+◆Select channel (QuickStart)
+
+配置要使用的对话应用，如果用飞书，按要求填参数即可。这里可选 Skip for now ，先跳过选择，后面笔者会单独用一节内容讲解怎么配置。
+
+◇  Skills status
+
+配置技能，可以选 Yes，根据提示安装一些常用的工具。
+
+到了  Install missing skill dependencies 环节，按下空格键选择要默认安装的 skill，可以多选。
+
+其它的配置用不到，先不管了。
+
+确认重启服务。
+
+◆  How do you want to hatch your bot?
+
+选择  Hatch in TUI，通过终端使用，后面也可以通过配置 Web UI 以便我们可以通过网页访问 OpenClaw。
+
+最后查看界面输出的信息，将这些信息保存下来。
+
+使用公网访问 OpenClaw
+不用暴露访问到外网也可以，如果不需要接入 Telegram、WebUI 公开访问，可以跳过这一节内容。
+如果有域名，建议使用域名绑定，而不是使用暴露端口的方式映射 OpenClaw 到公网。
+WebSocket
+WebSocket 方案需直接暴露 Gateway 端口，安全性较低，仅建议用于临时测试。
+假如我们需要将社交 App 接入到服务器，就需要这样弄，如果只是配置飞书，不需要走这一步。
+如果有域名可以做反向代理，也不建议使用端口暴露的方式公开 WebSocket。
+
+其架构逻辑如下：
+消息渠道 (WhatsApp/Telegram/Discord/iMessage)  
+        │  
+        ▼  
+┌───────────────────────────┐  
+│          Gateway          │  ws://127.0.0.1:18789  
+│     (单一控制平面)        │  
+└───────────┬───────────────┘  
+              │  
+              ├─ Pi agent (RPC)  
+              ├─ CLI (clawdbot …)  
+              ├─ Chat UI (SwiftUI)  
+              └─ 其他客户端  
+
+执行命令继续配置 OpenClaw。
+openclaw configure
+
+◆  Where will the Gateway run?
+
+选择 ◆  Where will the Gateway run? 以便能够在外部访问服务器中你的 OpenClaw。
+
+接着要注意 Gateway WebSocket URL 下面提示的地址是可以修改的，找到你的腾讯云服务器公网 IP，替换里面的 127.0.0.1。
+
+◆  Gateway auth
+
+选择  Token，也就是要有凭证才能访问 OpenClaw。
+
+◆  Gateway token
+
+相当于输入密码，后续访问 OpenClaw 需要提供此密码，
+
+停止并使用 --allow-unconfigured 启动不安全的模式。
+openclaw gateway stop
+
+openclaw gateway --allow-unconfigured
+
+Web UI
+将 ~/.openclaw/openclaw.json 里面的 mode 改成 remote，bind 改成 lan，然后重启 OpenClaw。
+查看 token：
+cat ~/.openclaw/openclaw.json
+
+使用公网访问时在地址后面附加 &token=xxx
+
+访问公网会出现 pairing required 错误，说明需要给设备授权，执行命令查询授权终端列表：
+openclaw devices list
+
+找到 Pending 列表，把 Request 复制出来，配置授权。
+openclaw devices approve b8eb70dd...
+
+界面已正常访问。
+
+配置模型
+这里以 moonshot 的模型为示例，跳过使用 CLI 的方式，怎么跳过配置文件配置自定义模型到 OpenClaw。
+到 https://platform.moonshot.cn/console/api-keys 新建一个 key，到 https://platform.moonshot.cn/playground 查看支持的模型。
+
+Kimi Code 模型也很强大，可以搞一个，以便挂后台写代码，到这里 https://www.kimi.com/code 购买编程模型。
+
+新建 key：https://www.kimi.com/code/console?from=kfc_overview_topbar
+
+打开 ~/.openclaw/openclaw.json，替换或添加以下模型配置：
+
+请替换 ${MOONSHOT_API_KEY} 、${KIMICODE_API_KEY}为你的 key。
+
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "workspace": "/root/.openclaw/workspace"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "moonshot": {
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "apiKey": "${MOONSHOT_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5"
+          }
+        ]
+      },
+      "kimi-code": {
+        "baseUrl": "https://api.kimi.com/coding/v1",
+        "apiKey": "${KIMICODE_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-for-coding",
+            "name": "Kimi For Coding"
+          }
+        ]
+      }
+    }
+  }
+}
+
+接入其它兼容 OpenAI 接口的模型，方式差不多。
+
+重启：
+openclaw gateway stop
+openclaw gateway start
+
+配置连接飞书
+打开飞书应用管理后台，添加应用能力，选择机器人。
+
+配置权限管理，把消息与群组的权限都开通。
+
+配置事件和回调，使用长连接，并且添加消息相关的事件。
+
+执行配置命令 OpenClaw：
+openclaw configure
+
+选择 Channels。
+
+按要求填入飞书的应用 id 和密钥，在飞书里面可以给机器人发送消息。
+
+    痴者工良(https://whuanle.cn)
+
+    
+    
+    
+
+            
+            posted @ 
+2026-01-31 16:46 
+痴者工良 
+阅读(30910) 
+评论(2) 
+ 
+收藏 
+举报
+
+        
+	    
+	    
+    
+
+    
+    
+    
+        
+            刷新页面返回顶部
+        
+    
+    
+    
+        
+    
+        
+            
+                
+                
+            
+        
+    
+    
+    
+    
+    
+
+	
+	
+	
+		
+			
+    公告
+
+    
+    
+
+						
+			
+				
+					
+						
+		
+	
+	
+	
+	
+	
+		博客园
+  &copy;  2004-2026
+
+    浙公网安备 33010602011771号
+    浙ICP备2021040463号-3
+  </div>
+</body>
+</html>

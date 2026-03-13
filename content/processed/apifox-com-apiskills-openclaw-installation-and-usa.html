@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OpenClaw 下载安装使用 — 详细图文教程</title>
+  <meta name="description" content="系统要求、多种安装方式对比、常见问题排查、Web/终端两种界面入门">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>Apifox</span>
+    <a href="https://apifox.com/apiskills/openclaw-installation-and-usage-guide/" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    OpenClaw(旧称ClawdBot/Moltbot)下载安装使用，详细的图文教程
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+        
+  
+    
+      
+        
+
+      
+      
+        
+      
+
+      
+        
+
+      
+
+      免费使用 Apifox
+    
+  
+
+        
+  OpenClaw(旧称ClawdBot/Moltbot)下载安装使用，详细的图文教程
+  从零开始，一步步教你如何下载、安装并配置开源个人 AI 助理 OpenClaw。本教程包含详细的系统要求、多种安装方式对比、常见问题排查以及 Web 和终端两种使用界面的入门指南，让你轻松拥有一个部署在自己电脑上的强大 AI 伙伴。
+
+  
+    用 Apifox，节省研发团队的每一分钟
+  
+        
+            
+                
+                    OpenClaw(旧称ClawdBot/Moltbot)下载安装使用，详细的图文教程
+
+                    免费使用 Apifox
+                
+            
+
+            
+                
+                    
+                        
+                            
+
+相关推荐
+
+                            
+                        
+
+                        
+                            
+
+最新文章
+
+                            
+                        
+
+                        
+                            
+                                API
+                                一体化协作平台
+                                
+                                    
+
+ API 设计
+                                    
+
+ API 文档
+                                    
+
+ API 调试
+                                    
+
+ 自动化测试
+                                    
+
+ API Mock
+                                    
+
+ API Hub
+                                
+
+                                
+                                    立即体验 Apifox
+                                
+                            
+
+                            
+                                目录
+                                
+                            
+                        
+                        
+                    
+
+                    
+                        
+                            
+                                OpenClaw，曾用名 ClawdBot 或 Moltbot，是一个开源的个人 AI 助理项目。它并非运行在云端的 SaaS 服务，而是部署在你自己的计算机上，让你能够完全掌控自己的数据与工作流。通过 WhatsApp、Telegram、飞书、钉钉等日常聊天工具，你就可以与它交互，让它处理邮件、管理日历、编写代码，甚至控制你的智能家居。               这个项目的核心理念在于，它不仅仅是一个能对话的聊天机器人，更是一个能实际执行任务的“行动者”。它拥有持久的记忆，可以访问你的文件系统和网络，并通过不断学习和扩展“技能”（Skills）来变得更强大。    由于其开源和可本地部署的特性，OpenClaw 吸引了大量开发者和技术爱好者，社区中涌现出许多富有创造力的用法，从自动化公司运营到管理个人生活，展现了个人 AI 助理的巨大潜力。    本篇教程将从零开始，详细介绍如何下载、安装并开始使用 OpenClaw，帮助你搭建属于自己的第一个 AI 助理。
+
+OpenClaw 交流群
+
+如果你也在折腾 OpenClaw，或者对 AI Agent、自动化工具感兴趣，欢迎加入以下交流群。一起交流使用经验、分享自动化玩法、讨论最新进展。
+
+    安装前的准备在开始安装之前，需要确保你的系统满足以下基本要求。OpenClaw 主要为类 Unix 环境设计，但在 Windows 上可以通过 WSL2 (Windows Subsystem for Linux 2) 完美运行。     系统要求:
+Node.js: 版本需要大于或等于 22。Node.js 是 OpenClaw 的运行环境。操作系统: macOS, Linux, 或 Windows (通过 WSL2)。包管理器: 如果选择从源码编译，需要安装 pnpm。对于大多数用户，推荐使用 npm，它会随 Node.js 一起安装。
+    确认环境最简单的方式是打开你的终端（Terminal）并输入以下命令检查 Node.js 版本：node -v
+如果版本低于 v22.0.0，或提示命令未找到，请先访问 Node.js 官网进行安装或升级。        开始安装 OpenClawOpenClaw 提供了多种安装方式，以适应不同用户的需求。对于初学者，官方推荐使用一键安装脚本，它能自动处理大部分环境配置。     快速安装 (推荐)这是最简单、最快捷的安装方式。它会自动检测你的操作系统，安装必要的依赖，并将 openclaw 命令部署到全局。   对于 macOS 或 Linux 系统，请在终端中执行以下命令：curl -fsSL https://openclaw.bot/install.sh | bash
+   对于使用 PowerShell 的 Windows 用户，请执行以下命令：iwr -useb https://openclaw.ai/install.ps1 | iex
+    安装脚本执行完成后，会自动进入一个名为 onboard 的交互式设置向导，引导你完成初始配置。如果因为某些原因中断了向导，可以随时通过以下命令重新启动：openclaw onboard --install-daemon
+        安装方式概览（可选）除了推荐的快速安装脚本，OpenClaw 还支持其他几种安装方式。了解它们的区别可以帮助你根据自己的技术背景和使用场景做出更合适的选择。
+
+安装方式
+描述
+适用场景
+
+安装脚本
+官方推荐的一键式脚本，通过 npm 全局安装，并运行设置向导。
+绝大多数初学者和普通用户。
+
+手动全局安装
+如果已安装 Node.js，可直接使用 npm 或 pnpm 命令手动安装。
+熟悉 Node.js 生态，希望对安装过程有更多控制的用户。
+
+从源码安装
+从 GitHub 克隆项目仓库，然后手动编译和构建。
+开发者、贡献者，或希望修改、调试 OpenClaw 核心代码的用户。
+
+Docker
+使用官方提供的 Docker 镜像来运行 OpenClaw。
+熟悉容器化技术，希望在隔离环境中运行服务的用户。
+
+    手动安装与故障排查（可选）如果你更倾向于手动控制安装过程，或者在安装时遇到了问题，可以参考以下步骤。    首先，确保你的 Node.js 和 npm 环境已就绪。然后执行全局安装命令：npm install -g openclaw@latest
+   在某些系统环境下，尤其是在 macOS 上通过 Homebrew 安装了 libvips 库时，可能会遇到 sharp 模块的安装错误。sharp 是一个用于图像处理的库。此时，可以尝试使用以下命令强制安装预编译的二进制文件，绕过本地编译：SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest
+   安装完成后，一个常见的问题是终端提示 openclaw: command not found。这通常是因为 npm 全局安装目录没有被添加到系统的 PATH 环境变量中。   可以通过以下命令找到 npm 的全局路径：npm prefix -g
+   假设输出的路径是 /usr/local，那么二进制文件的路径就是 /usr/local/bin。需要将这个路径添加到你的 Shell 配置文件中（如 ~/.zshrc 或 ~/.bashrc）：export PATH="$(npm prefix -g)/bin:$PATH"
+    修改配置文件后，需要重启终端，或者执行 source ~/.zshrc (或对应的文件名) 使其生效。之后，openclaw 命令应该就可以正常使用了。    初始化与配置安装完成后，下一步是进行初始化配置，让 OpenClaw 连接到大语言模型 (LLM) 并设置好通信渠道。    运行 Onboarding 向导onboard 向导是完成初始配置最简单的方式。它会一步步引导你设置所有必需的选项。openclaw onboard --install-daemon
+    这个向导会询问你以下关键信息：
+AI 模型配置: 你需要提供一个大语言模型服务的 API Key，例如 Anthropic Claude、OpenAI GPT 或其他兼容的服务。OpenClaw 依靠这些模型来理解指令和生成回应（笔者这里用的是 Google Gemini CLI 授权，选择 Google 然后登录后选模型就行）。
+
+通信渠道: 设置你希望通过哪个聊天软件与 OpenClaw 交流，比如 Telegram 或 WhatsApp。向导会引导你完成配对。目前都是一些国外软件，我们先跳过，后面你可以看看其他集成到飞书、钉钉等软件的教程。
+后面会问你要不要 skills，无脑选 Yes 就行（先按空格键再按 Enter 回车键），或者直接跳过。Hooks 的话推荐安装。   完成后，应该就会启动一个 UI 界面，访问它试试，然后在里面开始对话。   Gateway 核心服务在配置过程中，你坑可能频繁遇到一个概念：Gateway。Gateway 是 OpenClaw 的心脏，一个始终在后台运行的核心进程。它负责管理与大语言模型的连接、维护与 WhatsApp 或 Telegram 等聊天工具的会话，并处理所有的事件和指令。    简单来说，你通过聊天工具发送的每一条消息，都会先到达 Gateway，Gateway 再调用 AI 模型进行思考，并将结果返回给你或执行相应的操作。将 Gateway 安装为系统服务，就相当于拥有了一个永不离线的数字助理。    检查运行状态完成 onboard 向导后，检验安装和配置是否成功的最好方法是使用 doctor 和 status 命令。    openclaw doctor 命令会对你的系统环境和配置文件进行一次全面的健康检查，并给出修复建议。当你遇到问题时，这应该是你首先想到的命令。openclaw doctor
+   openclaw status 命令则用于检查 Gateway 服务的实时运行状态，包括它是否在线、连接了哪些聊天会话等。openclaw status
+   如果一切正常，它会显示 Gateway 正在运行，并且相关的服务状态良好。  可以使用以下命令来控制 Gateway 服务：
+安装 Gateway: openclaw gateway install启动 Gateway: openclaw gateway start（这个若用不了用 openclaw gateway ）停止 Gateway: openclaw gateway stop重启 Gateway: openclaw gateway restart卸载 Gateway: openclaw gateway uninstall查看 Gateway 状态: openclaw gateway status
+   访问与使用 OpenClaw配置完成后，你有多种方式可以与你的 AI 助理进行交互。最常用的两种是 Web 控制台和终端界面。   使用 Web 控制台 (Dashboard)OpenClaw 自带一个功能强大的 Web 控制台，官方称之为 Dashboard 或 Control UI。这是管理和使用 OpenClaw 最直观的方式。    通过以下命令可以一键在浏览器中打开 Dashboard（前提是已启动 Gateway）：openclaw dashboard
+     该命令会自动生成一个包含临时登录令牌的 URL，并尝试用默认浏览器打开它。URL 通常是 http://127.0.0.1:18789/，后面的端口号可能会因你的配置而异。  在 Dashboard 中，你可以：
+直接与 AI 助理聊天。管理和配置各种“技能”（Skills）。设置定时任务（Cron Jobs），让助理在特定时间自动执行操作。查看实时日志，方便排查问题。编辑 OpenClaw 的所有配置文件。安装和更新 OpenClaw 自身。
+    使用终端界面 (TUI)对于更喜欢在终端中工作的用户，OpenClaw 提供了一个纯文本的终端用户界面（TUI）。      首先确保 Gateway 服务正在运行，然后执行：openclaw tui
+        这会启动一个全屏的终端应用，界面清晰地分为聊天记录区、状态栏和输入框。    在 TUI 中，你可以像在普通聊天软件中一样发送消息。此外，它还支持一系列便捷的“斜杠命令”，例如：
+/status: 查看当前状态。/session <key>: 切换到不同的聊天会话。/model <name>: 临时为当前会话切换使用的大语言模型。/help: 查看所有可用的命令。
+TUI 提供了一种专注、无干扰的交互体验，非常适合开发者和命令行爱好者。   常用 CLI 命令除了图形化界面，openclaw 的命令行工具本身也极其强大，是自动化和高级配置的关键。    以下是一些在日常使用中非常实用的命令：openclaw models status 用于检查已配置的 AI 模型及其 API Key 的状态，包括是否有效或即将过期。确保模型可用是助理正常工作的前提。openclaw models status
+    openclaw channels list 可以列出所有已配置的通信渠道及其当前状态。openclaw channels list
+   openclaw memory search 是一个非常强大的功能，它允许你对 AI 助理的长期记忆进行语义搜索。你之前告诉它的所有信息，都可以通过这个命令快速找回。openclaw memory search "我上次提到的那个项目叫什么名字"
+   最后，如果想深入了解某个命令或功能的更多用法，openclaw docs 命令可以帮助你快速搜索官方文档。openclaw docs "how to create a new skill"
+    通过这篇教程，你应该已经成功安装并运行了你的第一个 OpenClaw 实例。这只是一个开始。OpenClaw 的真正魅力在于其高度的可扩展性。你可以教它新的技能，将它接入更多服务，甚至让它自己编写代码来改进自己。欢迎来到个人 AI 助理的新时代。
+
+OpenClaw 交流群
+
+如果你也在折腾 OpenClaw，或者对 AI Agent、自动化工具感兴趣，欢迎加入以下交流群。一起交流使用经验、分享自动化玩法、讨论最新进展。
+
+      开发必备：API 全流程管理神器 Apifox介绍完上文的内容，我想额外介绍一个对开发者同样重要的效率工具 —— Apifox。作为一个集 API 文档、API 调试、API 设计、API 测试、API Mock、自动化测试等功能于一体的 API 管理工具，Apifox 可以说是开发者提升效率的必备工具之一。  如果你正在开发项目需要进行接口调试，不妨试试 Apifox。注册过程非常简单，你可以直接在这里注册使用。立即体验 Apifox注册成功后可以先看看官方提供的示例项目，这些案例都是经过精心设计的，能帮助你快速了解 Apifox 的主要功能。   使用 Apifox 的一大优势是它完全兼容 Postman 和 Swagger 数据格式，如果你之前使用过这些工具，数据导入会非常方便。而且它的界面设计非常友好，即使是第一次接触的新手也能很快上手，快去试试吧！免费使用 Apifox
+                            
+
+                            
+                                    AI
+                                    开源
+                                    个人助理
+                            
+                            
+                                
+                                    相关推荐
+                                
+
+                                
+                            
+                        
+                    
+                
+            
+        
+        
+        
+    
+        
+            
+
+            节省研发团队的每一分钟
+        
+
+        
+            产品
+            产品更新日志
+            IDEA 插件
+            帮助中心
+            快速上手
+            私有化部署
+            Blog
+        
+
+        
+            关于
+            FAQ
+            联系我们
+            加入我们
+            成为合作伙伴
+        
+
+        
+            资源
+            接口 (API) 文档工具
+            接口 (API) 文档管理工具
+            接口 (API) 自动化测试工具
+            接口 (API) Mock 工具
+        
+    
+
+    
+        ©2024 Apifox All Rights Reserved 广州睿狐科技有限公司 粤 ICP 备 2021010720 号
+  </div>
+</body>
+</html>

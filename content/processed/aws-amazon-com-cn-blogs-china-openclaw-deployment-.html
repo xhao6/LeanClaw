@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AWS 中国博客 — 基于 Mac 实例部署 OpenClaw</title>
+  <meta name="description" content="亚马逊云科技 Mac 实例部署指南，深度苹果生态自动化的最佳选择">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-size: 16px; line-height: 1.7; color: #333;
+      background: #f8f8f8; padding: 16px;
+    }
+    .source-note {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .source-note a { color: #fff; text-decoration: underline; word-break: break-all; }
+    .content {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .content h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+    .content p { margin-bottom: 12px; }
+    .content a { color: #667eea; }
+    .content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .content pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .content code { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="source-note">
+    <span><strong>转载出处：</strong>AWS</span>
+    <a href="https://aws.amazon.com/cn/blogs/china/openclaw-deployment-aws-mac/" target="_blank">原文链接</a>
+  </div>
+  <div class="content">
+    基于亚马逊云科技 Mac 实例部署 OpenClaw，深度苹果生态自动化的最佳选择 | 亚马逊AWS官方博客
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+ 
+ 
+   Skip to Main Content
+  
+   
+   
+    想了解专为中国区域提供的云产品？请访问 www.amazonaws.cn。申请中国区域免费套餐请访问 www.amazonaws.cn/free。
+   
+   
+    
+     
+      
+       
+       
+       
+        
+        
+         
+          
+           
+            
+              
+               
+                
+               
+              
+             
+               
+                
+                      
+                
+               
+             
+             
+
+              
+               
+                
+                  
+                   
+                    
+                   
+                  
+                
+                
+                 
+                  
+                   
+                     
+                      
+                       
+                      
+                     
+                    
+                     
+                      
+                        
+                        
+                         
+                        
+                       
+                      
+                     
+                     
+                      
+                       
+                        
+                         
+                           
+                            
+                             
+                            
+                           
+                         
+                        
+                       
+                       
+                        
+                         
+                          
+                           
+                             
+                             
+                               
+                              
+                              
+                              
+                              Filter: 全部
+                             
+                             
+                           
+                          
+                         
+                        
+                       
+                      
+                     
+                    
+                    
+                     
+                    
+                   
+                  
+                 
+                
+               
+              
+              
+               
+                
+               
+              
+             
+
+            
+            
+           
+           
+            
+             
+              
+               
+
+                
+                 
+                
+                
+                 
+                   
+                     
+                      
+                     
+                    English 
+                     
+                      
+                     
+                    
+                 
+                
+                
+                 
+                  联系我们
+                 
+                
+                
+                 
+                  AWS Marketplace
+                 
+                
+                
+                 
+                  支持   
+                     
+                      
+                     
+                    
+                 
+                
+                
+                 
+                  我的账户   
+                     
+                      
+                     
+                    
+                 
+                
+                
+                 
+                
+               
+
+              
+              
+               
+                
+               
+              
+             
+            
+            
+             
+              
+
+                
+                  
+                        
+                  
+                 
+              
+
+              
+
+               
+                
+                 
+                   
+                    
+                     
+                    
+                   搜索
+                 
+                 
+                  
+                   
+                    
+                      
+                       
+                        
+                       
+                      
+                     
+                      
+                       
+                         
+                         
+                          
+                         
+                        
+                       
+                      
+                      
+                       
+                        
+                         
+                          
+                            
+                             
+                              
+                             
+                            
+                          
+                         
+                        
+                        
+                         
+                          
+                           
+                            
+                              
+                              
+                               
+                              
+                              
+                              
+                              Filter: 全部
+                              
+                              
+                            
+                           
+                          
+                         
+                        
+                       
+                      
+                     
+                     
+                      
+                     
+                    
+                   
+                  
+                 
+                
+               
+                
+                 登录控制台
+                
+               创建账户
+              
+
+             
+            
+           
+           
+            
+              
+               
+                
+               
+              
+            
+           
+          
+         
+        
+       
+      
+     
+    
+   
+   
+    
+     
+      
+       
+       
+       
+        
+        
+         
+          
+           
+            
+             
+              AWS Blog
+              
+               
+
+                
+                 
+                  首页
+                 
+                
+                
+                 
+                  版本
+                   
+                   
+                    
+                   
+                  
+                 
+                
+               
+
+              
+             
+            
+           
+          
+         
+        
+       
+      
+     
+    
+   
+  
+  
+   
+    
+     亚马逊AWS官方博客
+     
+      
+      基于亚马逊云科技 Mac 实例部署 OpenClaw，深度苹果生态自动化的最佳选择
+      
+       by awschina on 01 2月 2026 in Amazon EC2 Mac Instances, Amazon Machine Learning, Artificial Intelligence, AWS CloudFormation, DevOps Permalink  Share
+       
+        
+
+         
+         
+         
+         
+         
+        
+
+       
+      
+      
+       
+        
+        摘要：文章介绍了部署OpenClaw到亚马逊云科技Mac实例并连接iMessage的步骤，并介绍了本方案相较于本地部署Mac的大致优势
+        
+        
+         目录
+         
+          
+           01 引言
+          
+          
+           02 Part 1: 为什么亚马逊云科技 Mac 实例部署 OpenClaw 特别适合深度苹果生态用户？
+          
+          
+           03 Part 2: 亚马逊云科技 Mac 实例的独有优势
+          
+          
+           04 Part 3: 如何在亚马逊云科技 Mac 实例上一键部署 OpenClaw？
+          
+          
+           05 Part 4: 把 OpenClaw 接入企业协作工具
+          
+          
+           06 Part 5: FAQ
+          
+          
+           07 结语
+          
+         
+        
+        
+        
+        
+        
+        
+        引言
+        团队真正需要的，不是一个“会聊天的 AI 玩具”，而是一个能在云端持续工作、每个操作都留痕可查、无缝融入现有沟通工具的生产力助手。
+        OpenClaw（原名 Clawdbot、Moltbot）火了之后，大家发现：部署方式直接决定它能“干多少活”。尤其当你希望它不只是聊天，而是像真人一样操作 Mac、发消息、读屏幕、帮你处理苹果自家 App 时，亚马逊云科技 Mac 云服务器（远程真 macOS + Apple Silicon 硬件）就特别好用。更重要的是，云端部署让你可以按需付费、弹性扩展 — 不需要一次性投入昂贵的 Mac 硬件，用多少付多少，随时调整配置。
+        本文将详细解析亚马逊云科技 Mac 实例部署 OpenClaw 的核心优势，并提供一键部署指南，帮你快速启动属于团队的云端 macOS AI 助手。
+        
+        Part 1: 为什么亚马逊云科技 Mac 实例部署 OpenClaw 特别适合深度苹果生态用户？
+        亚马逊云科技 Mac 实例最适合以下团队和场景：
+        
+
+         iOS/macOS 开发团队：需要 CI/CD、自动化测试、App 构建，亚马逊云科技提供多实例并行构建能力，大幅缩短交付周期
+         深度 Apple 生态用户：重度使用 iMessage、app、Keynote、Final Cut Pro，云端 Mac 24/7 在线，不占用本地机器资源
+         需要 Mac 专属功能：AppleScript 自动化、Shortcuts、Safari 测试，亚马逊云科技 Mac 提供完整的 macOS 环境，无任何功能阉割
+         企业合规要求：需要 macOS 原生安全特性（SIP、FileVault 等），同时享受亚马逊云科技企业级安全、IAM 权限管理和审计日志
+        
+
+        
+        云端 Mac vs 本地 Mac：核心差异
+        1、可用性：本地 Mac 是单点，硬件故障、断电、断网就停摆。云端 EC2 Mac 有 AWS SLA 99.99% 可用性保障，故障时可快速切换备用实例，不用担心家里网络不稳或硬件坏了没人修。
+        2、成本模型：本地 Mac 需要一次性采购，折旧、维护、电费自理。云端 Mac 按小时计费，用完即停（24 小时后），无需承担硬件折旧和维护成本。对于尝鲜用户或短期项目，云端更划算。
+        3、集成能力：本地 Mac 需要自己搭建 CI/CD、日志收集、监控告警。云端 Mac 原生打通 S3（构建产物存储）、Lambda（触发工作流）、CloudWatch（实时监控）、CodePipeline（CI/CD 编排），开箱即用。
+        4、全球可达：本地 Mac 只能在局域网或 VPN 内访问。云端 Mac 通过 SSM Session Manager 全球安全访问（无需开放公网端口），团队成员无论在哪都能连接。
+        OpenClaw 在云端 Mac 上能真正像“坐在 Mac 前面的秘书”一样 24/7 工作，处理 iMessage、执行自动化、管理文件，而你的本地 MacBook 可以专注于日常使用，不被占用。云端的弹性、稳定性和集成能力，是本地单机无法比拟的。
+        
+        Part 2: 亚马逊云科技 Mac 实例的独有优势
+        优势 1：完整的 GUI 和桌面环境 ，真实可见的自动化
+        完整的图形界面体验：
+        
+
+         通过 Screen Sharing 或 VNC 远程访问完整的 macOS 桌面
+         原生运行所有 GUI 应用：Safari、Chrome、Keynote等
+         浏览器自动化可视化、可调试，所见即所得
+        
+
+        场景举例：OpenClaw 需要看到真实界面来读弹窗、拖拽文件、调整 Keynote 布局时，macOS 云直接像本地操作一样顺手。
+        
+        优势 2：iMessage 原生支持，配置简单快捷
+        无需桥接，开箱即用：
+        
+
+         直接运行 Messages.app，发送和接收原生 iMessage
+         完整支持所有功能：表情反应、消息效果、贴纸、群聊、已读回执
+         OpenClaw 像真人一样操作 Messages，体验无缝
+        
+
+        场景举例：早上自动从日历拉出今天行程 + 天气，用蓝泡泡 iMessage 发给自己或家人提醒——macOS 云一键搞定，体验最接近真人秘书。
+        
+        优势 3：深度融入Apple 生态系统
+        独占的自动化能力：
+        
+
+         AppleScript：自动化控制 Mail、Notes、Finder、Calendar 等原生 App
+         Shortcuts：创建和执行复杂的工作流自动化
+         iCloud 同步：访问云端的 Messages、照片、提醒事项、通讯录
+         专业工具：原生运行 Xcode、Final Cut Pro、Logic Pro
+        
+
+        场景举例：收到重要邮件后，OpenClaw 直接在 Mail.app 里标星、分类、起草回复草稿存好，等你打开邮箱就看到秘书已经处理了一半。
+        
+        优势 4：完整的 iOS/macOS 开发能力
+        云端开发工作站：
+        
+
+         运行完整的 Xcode IDE，支持 iOS、iPadOS、watchOS、macOS 开发
+         iOS/watchOS 模拟器测试和调试
+         代码签名和应用构建
+         自动化 CI/CD 流水线
+        
+
+        场景举例：在云端 Mac 上搭建 iOS CI/CD 环境：每次代码提交自动触发构建、运行测试。构建失败时，OpenClaw 通过 iMessage 立即通知团队，并附上失败日志摘要。
+        
+         ⚠️ 注意：
+          物理 Continuity 功能（如 Apple Watch 解锁 Mac、iPhone Mirroring）需本地设备配合，云端无法实现。但开发和测试场景完全满足。
+        
+        
+        优势 5：系统级界面识别
+        强大的读屏和交互能力：
+        
+
+         直接截屏和 OCR 识别弹窗文字
+         准确识别验证码和表单
+         模拟真实的鼠标键盘操作
+         高准确率和稳定性
+        
+
+        场景举例：登录公司内网或者银行系统时，时遇到验证码或风控弹窗，OpenClaw 自动识别并填写，几秒完成；或者监控某些应用的弹出通知，自动响应并记录到日志。
+        
+        优势 6：Apple Silicon 性能，丝滑的执行体验
+        M 系列芯片的独特优势：
+        
+
+         统一内存架构，CPU/GPU 数据共享零延迟
+         专用神经引擎加速 AI 任务
+         高能效比，复杂任务流畅执行
+         多任务并行能力强
+        
+
+        场景举例：多步流程比如“搜网页提取数据 → 填表单 → 生成 Keynote 幻灯片 → 导出 PDF → 通过 iMessage 发给你”，全程连贯不卡顿，成功率高；或者批量处理文件、拖拽整理文件夹，像真人 Finder 操作一样自然。
+        
+        优势 7：远程可视化调试方便，开发体验友好
+        远程开发和调试：
+        
+
+         Screen Sharing 实时查看界面状态
+         可视化观察 OpenClaw 的操作流程
+         快速定位和修复问题
+         边看边改，迭代效率高
+        
+
+        场景举例：想让 bot 监控 Mac 版微信/企业微信自动回复？直接Screen Sharing看窗口、调坐标，改几下就稳；或者临时加新技能，边看边改，效率高很多。
+        
+        优势 8：企业级安全性与合规
+        多层安全防护：
+        
+         
+          
+           安全层
+           MacOS原生能力
+           云端增强
+          
+          
+           系统隔离
+           SIP (System Integrity Protection) 防篡改
+           Nitro System 硬件级虚拟化隔离
+          
+          
+           应用验证
+           Gatekeeper / XProtect 恶意软件扫描
+           IAM 最小权限原则 + 角色控制
+          
+          
+           数据加密
+           FileVault 全盘加密
+           EBS 卷加密（默认推荐）
+          
+          
+           凭证管理
+           Keychain 安全存储密码和证书
+           Secrets Manager / Systems Manager Parameter Store
+          
+          
+           网络隔离
+           –
+           VPC 私有网络隔离
+          
+          
+           远程访问
+           SSH / Screen Sharing
+           SSM Session Manager（无需开放端口）
+          
+          
+           审计日志
+           系统日志
+           CloudTrail 完整审计 + CloudWatch 实时监控
+          
+         
+        
+        场景举例：OpenClaw 处理公司敏感邮件、iMessage 通讯、Keychain 密码时，多层安全机制确保数据不泄露。所有操作都有 CloudTrail 日志记录，满足企业合规要求。远程访问通过 SSM，不暴露任何公网端口，审计追溯完整。
+        
+        Part 3: 如何在亚马逊云科技 Mac 实例上一键部署 OpenClaw？
+        Step 1: 一键部署（CloudFormation），参考 OpenClaw 亚马逊云科技 Bedrock 部署方案。
+        点击 亚马逊云科技 Mac 实例部署链接，进入 CloudFormation 页面。你只需要在表单里：
+        
+
+         选择一个 EC2 Key Pair
+         设置想要开启 Mac 的可用区（Availability Zone）
+         其余交给模板自动创建
+         
+        
+
+        
+         
+          
+           
+          
+         
+        
+        重要提示：
+        
+
+         亚马逊云科技 Mac 实例有 24 小时最小租用期限
+         一旦启动，必须运行至少 24 小时才能释放
+         建议用于长期运行场景或充分测试
+        
+
+        
+        Step 2: 等待约 15-20 分钟，查看 Outputs
+        Mac 实例启动通常需要 15-20 分钟。
+        等待栈创建完成后，打开 CloudFormation 的 Outputs 标签，你会看到：
+        
+
+         下一步配置指引
+        
+
+        
+         
+          
+           
+          
+         
+        
+        
+        Step 3: 打开 Web UI 或 Screen Sharing
+        方式 A：Web UI（推荐新手）
+        
+
+         按 Outputs 指引在本地安装 SSM Manager 插件做端口转发
+         在本地浏览器中打开 URL
+         进入 Web UI 开始配置与使用
+         
+        
+
+        
+         
+          
+           
+          
+         
+        
+        方式 B：Screen Sharing（完整 macOS 体验）
+        
+
+         使用 macOS 的 Screen Sharing 或 VNC 客户端
+         连接到 Mac 实例的桌面环境
+         直接操作 macOS 界面
+        
+
+        到这里为止，你已经拥有一个跑在您自己 亚马逊云科技 账号里的 OpenClaw on Mac 工作站。
+        
+        Part 4: 把 OpenClaw 接入企业协作工具
+        部署完成后，下一步就是“选一个入口接入”。下面以 macOS 云特别适合接入原生的 iMessage 为例：
+        如果您不确定如何启动远程 Mac 的桌面，以下是基本步骤
+        
+        步骤 1：在远程 Mac 上启用 Screen Sharing 并设置密码
+        通过亚马逊云科技 SSM Session Manager 或者连接到实例：
+        
+         
+          aws ssm start-session \
+  --target <your-instance-id> \
+  --region <your-region>
+         
+         
+        
+        步骤 2：启用 Screen Sharing + 设置用户密码
+        
+         # 启动 Screen Sharing 服务
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+
+# 为当前用户设置密码（用于 Screen Sharing 登录）
+sudo dscl . -passwd /Users/$(whoami) "your_password"
+        
+        
+         步骤 3：在本地 Mac 建立端口转发
+        
+        在你的本地 Mac 上打开终端，运行：
+        
+         
+          aws ssm start-session \
+  --target <your-instance-id> \
+  --region <your-region> \
+  --document-name AWS-StartPortForwardingSession \
+  --parameters '{"portNumber":["5900"],"localPortNumber":["15900"]}'
+         
+         保持这个窗口运行（不要关闭），它会持续转发端口。
+        
+        
+        步骤 4：连接 Screen Sharing
+        在你的本地 Mac 上使用 Screen Sharing 应用并输入用户名和密码
+        
+         
+          open -a "Screen Sharing" vnc://localhost:15900
+         
+        
+        
+         
+          
+           
+          
+         
+        
+        连接成功后，你会看到远程 Mac 的桌面，可以像操作本地 Mac 一样进行所有 GUI 操作。
+        
+        启动远程 Mac 桌面之后，可以正式开始配置 iMessage
+        1、在 Mac 实例上登录 iMessage
+        通过 AWS SSM Session Manager 或 SSH 连接到 Mac 实例, 打开 Messages 应用并登录你的 Apple ID之后等待 iMessage 激活完成（通常需要几分钟）。
+        
+         
+          
+           
+          
+         
+        
+        
+        2、安装 imsg CLI 工具
+        
+         
+          brew install steipete/tap/imsg
+         
+         
+         3、配置 OpenClaw
+        
+        配置 Node.js 环境 (nvm)
+        
+         
+          
+           # 检查 clawdbot 是否可用
+which clawdbot
+
+# 如果提示 "not found"，配置 nvm
+echo '
+# NVM configuration
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+' >> ~/.zshrc
+
+# 重新加载配置
+source ~/.zshrc
+
+# 验证
+which clawdbot
+          
+          查看 imsg 路径
+         
+        
+        
+         
+          which imsg
+         
+         通常返回 /opt/homebrew/bin/imsg (Apple Silicon)
+        
+        编辑配置文件
+        
+         
+          nano ~/.clawdbot/clawdbot.json
+         
+         在 JSON 配置中添加 channels 部分：
+        
+        
+         
+          {
+  "gateway": { ... },
+  "models": { ... },
+  "agents": { ... },
+  "channels": {
+    "imessage": {
+      "enabled": true,
+      "cliPath": "/opt/homebrew/bin/imsg",
+      "dbPath": "/Users/<your-username>/Library/Messages/chat.db",
+      "dmPolicy": "pairing"
+    }
+  }
+}
+         
+        
+        
+         
+          
+           
+          
+         
+        
+        提示：
+        
+
+         将 cliPath 替换为 which imsg 返回的实际路径
+         <your-username>为您的用户名，通常为 ec2-user
+        
+
+        
+        4、授权权限
+        需要授予 Full Disk Access 权限给以下 3 个对象：
+        
+
+         打开系统设置：System Settings → Privacy & Security → Full Disk Access
+         添加以下项目（点击 + 按钮，使用 ctrl + shift + G 直接输入路径）：
+        
+
+        
+
+         
+          
+
+           Terminal.app
+          
+
+         
+        
+
+        
+         
+          /System/Applications/Utilities/Terminal.app
+         
+        
+        
+
+         
+          
+
+           imsg 命令行工具
+          
+
+         
+        
+
+        
+         /opt/homebrew/bin/imsg（或 which imsg 返回的路径）
+        
+        
+
+         
+          
+
+           Node (默认一般已经添加，打开即可)
+          
+
+         
+        
+
+        
+         /Users/ec2-user/.nvm/versions/node/v22.22.0/bin/node
+        
+        
+         
+          
+           
+          
+         
+        
+        
+        5、重启生效
+        
+         
+          # 完全退出 Terminal
+# 重新打开 Terminal，然后：
+clawdbot gateway restart
+         
+         
+         6、测试接入
+        
+        从另一台设备（iPhone、iPad 或其他 Mac）向配置的 Apple ID 发送任意 iMessage 消息，OpenClaw 会自动回复。
+        
+         
+          
+           
+          
+         
+        
+        在云端 mac 的控制台输入 clawdbot pairing approve imessage <code> 即可成功配对
+        <code>为上图 Moltcode 返回的配对码
+        
+         
+          
+           
+          
+         
+        
+        输入配对码后即可开始使用
+        如果您遇到了问题，流程具体详见 OpenClaw 官方文档
+        如果您需要接入其他通讯工具（Slack / Telegram / Discord / 飞书 / WhatsApp 等），请参考 OpenClaw 官方文档
+        
+        Part 5: FAQ
+        Q1：Mac 实例比 Linux 贵这么多，值得吗？
+        A：看你的需求。 如果你需要 iOS/macOS 应用开发 (CI/CD)、原生 iMessage（无需桥接）、Mac 专属软件（Xcode、Final Cut Pro）、Safari 测试，或者深度 Apple 生态自动化，那就值得。
+        如果想体验 macOS 环境下的完整能力，AWS Mac 实例按小时计费，无需一次性投入上万元购买硬件。跑几天测试 OpenClaw 在 macOS 上的表现，觉得有价值再决定长期使用或自建。
+        Q2：可以随时启动和停止吗？
+        A：不行。 Mac 实例有 24 小时最小租用期，启动后必须运行至少 24 小时才能释放。
+        Q3：怎么远程访问 Mac 桌面？
+        A：三种方式。 Screen Sharing（macOS 原生，推荐）、VNC 客户端、SSH + 端口转发都可以。
+        Q4：需要开放公网端口吗？
+        A：不需要。 推荐用 SSM Session Manager 安全访问（不暴露公网端口）。
+        
+        结语
+        亚马逊云科技 Mac 实例：云端运行的 macOS 自动化环境
+        选择亚马逊云科技 Mac 云端部署的核心优势：
+        
+         
+          
+           优势
+           说明
+          
+          
+           弹性资源
+           按需扩展，多任务并行（如多 Xcode 构建同时进行）
+          
+          
+           弹性计费
+           用多少付多少，无需一次性硬件投入
+          
+          
+           Bedrock 开箱即用
+           原生集成亚马逊云科技 AI 服务，无需额外配置
+          
+          
+           托管稳定性
+           24/7 可达，不担心断电、网络或硬件故障
+          
+          
+           云服务深度集成
+           S3 存储、Lambda 触发、CloudWatch 监控无缝协作
+          
+          
+           低门槛尝鲜
+           按小时付费测试，无需购买上万元硬件
+          
+         
+        
+        如果你的核心需求是 iOS/macOS 开发、深度 Apple 生态自动化、iMessage 原生支持、Mac 专属应用和工作流，并且希望享受云端的弹性、稳定性和亚马逊云科技生态能力，那么亚马逊云科技 Mac 实例是最佳选择。
+        ➡️ 下一步行动：
+        
+         立即咨询 → 对 OpenClaw 有疑问？联系我们的 AI 专家，获取一对一专业解答。
+        
+        相关产品：
+        
+
+         Amazon EC2 Mac 实例 — 在 Amazon EC2 上开发、构建、测试和登录 Apple 应用程序
+         Amazon S3 — 专为从任意位置检索任意数量的数据而构建的对象存储
+         AWS Lambda — 无需考虑服务器或集群即可运行代码
+         Amazon CloudWatch — 观察并监控 AWS 上、本地和其他云中的资源和应用程序
+         AWS CodePipeline — 自动化持续交付管道，可实现快速、可靠的更新
+        
+
+        相关文章：
+        
+
+         把龙虾部署到云上：一个值得认真考虑的选择
+         快时尚电商行业智能体设计思路与应用实践（一）借助超长上下文窗口分钟级构建智能客服系统
+         快时尚电商行业智能体设计思路与应用实践（二）借助 LangChain/LangGraph 和 MCP 重塑行业的智能化生态系统
+         Amazon Bedrock 上的模型擂台赛：DeepSeek、Nova、Claude，谁是最强文本审核大模型？
+        
+
+        *前述特定亚马逊云科技生成式人工智能相关的服务目前在亚马逊云科技海外区域可用。亚马逊云科技中国区域相关云服务由西云数据和光环新网运营，具体信息以中国区域官网为准。
+        
+        本篇作者
+        
+        
+         
+          
+           
+          
+          刘品哲
+          亚马逊云科技解决方案架构师，负责基于亚马逊云科技的云计算方案的设计与咨询
+         
+        
+        
+        
+        
+         
+          
+           
+            AWS 架构师中心：云端创新的引领者
+            探索 AWS 架构师中心，获取经实战验证的最佳实践与架构指南，助您高效构建安全、可靠的云上应用
+            
+           
+           
+          
+         
+        
+       
+       
+      
+      
+      
+     
+    
+   
+  
+  
+   
+    
+     
+      
+       
+       
+       
+        
+        
+         
+          
+           
+            
+             
+              
+               
+                
+                 创建 AWS 账户
+                
+                
+                 了解
+                 
+
+                  什么是 AWS？
+                  什么是云计算？
+                  什么是生成式人工智能？
+                  云计算概念中心
+                  AWS 云安全性
+                  最新资讯
+                  博客
+                  新闻稿
+                 
+
+                
+                
+                 资源
+                 
+
+                  入门
+                  培训
+                  AWS 解决方案库
+                  架构中心
+                  产品和技术常见问题
+                  分析报告
+                  AWS 合作伙伴
+                  AWS 包容性、多样性和公平性
+                 
+
+                
+                
+                 开发人员
+                 
+
+                  开发人员中心
+                  软件开发工具包与工具
+                  运行于 AWS 上的 .NET
+                  运行于 AWS 上的 Python
+                  运行于 AWS 上的 Java
+                  运行于 AWS 上的 PHP
+                  运行于 AWS 上的 JavaScript
+                 
+
+                
+                
+                 帮助
+                 
+
+                  联系我们
+                  提交支持工单
+                  AWS re:Post
+                  Knowledge Center
+                  AWS Support 概述
+                  获取专家帮助
+                  AWS 可访问性
+                  法律
+                 
+
+                
+                
+                  
+                    
+                     
+                    
+                   English 
+                    
+                     
+                    
+                   
+                
+                
+                 回到顶部 
+                   
+                    
+                   
+                  
+                
+                
+                 Amazon 是一个倡导机会均等的雇主：反对少数族裔、妇女、残疾人士、退伍军人、性别认同、性取向和年龄歧视。
+                
+                
+                 
+                    
+                    
+                      facebook
+                    
+                     
+                    
+                      linkedin
+                    
+                     
+                    
+                      instagram
+                    
+                     
+                    
+                      twitch
+                    
+                     
+                    
+                      youtube
+                    
+                     
+                    
+                      podcasts
+                    
+                     
+                    
+                      email
+                    
+                   
+                 
+                
+                
+                 
+
+                  隐私
+                  网站条款
+                  Cookie 首选项
+                 
+
+                 
+                  
+                   © 2025, Amazon Web Services, Inc. 或其联属公司。保留所有权利。
+  </div>
+</body>
+</html>
