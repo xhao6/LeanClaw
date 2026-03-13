@@ -1,6 +1,7 @@
 node_modules/*
 .agents/*
 .trae/*
+.claude/*
 
 # Worktrees
 .worktrees/
@@ -8,3 +9,11 @@ worktrees/
 
 # Design docs
 docs/plans/
+
+# Build output
+dist/
+coverage/
+test-results/
+
+# E2E test reports
+playwright-report/
