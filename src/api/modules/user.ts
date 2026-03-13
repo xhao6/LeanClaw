@@ -24,13 +24,13 @@ export const getProfile = async () => {
 
 /**
  * Update Learning Progress
- * @param courseId Course/Day ID (e.g., 'day-1')
+ * @param lessonId Lesson ID (e.g., 'day-1')
  * @param status 'completed' | 'in-progress'
  */
-export const updateProgress = async (courseId: string, status: string = 'completed') => {
+export const updateProgress = async (lessonId: string, status: string = 'completed') => {
   return callFunction('userFunctions', {
     type: 'updateProgress',
-    courseId,
+    lessonId,
     status
   })
 }

@@ -12,7 +12,6 @@
     <view class="sticky top-0 z-10 bg-white/95 backdrop-blur px-4 py-3 border-b border-gray-100 shadow-sm">
       <view class="flex justify-between items-center mb-2">
         <text class="text-sm font-bold text-primary">Day {{ dayId }}: {{ title }}</text>
-        <text class="text-xs text-gray-400">{{ scrollPercentage }}%</text>
       </view>
       <wd-progress :percentage="scrollPercentage" color="#FF6B35" :show-pivot="false" custom-class="!h-1" />
     </view>
@@ -58,11 +57,18 @@
     </view>
 
     <!-- Bottom Action Bar -->
-    <view class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur border-t border-gray-100 flex space-x-4 shadow-lg z-50">
-      <wd-button v-if="hasPrev" type="info" plain block class="flex-1 !border-gray-200 !text-gray-600 !bg-gray-50" @click="handlePrev">上一节</wd-button>
-      <wd-button type="primary" block class="flex-[2] !bg-orange !border-orange shadow-lg shadow-orange/30 !rounded-xl !text-base" :disabled="!allTasksCompleted" @click="handleComplete">
-        {{ allTasksCompleted ? '完成并打卡' : '请先完成任务' }}
-      </wd-button>
+    <view class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur border-t border-gray-100 flex shadow-lg z-50" :class="hasPrev ? 'justify-between space-x-4' : 'justify-center'">
+      <template v-if="hasPrev">
+        <wd-button type="info" plain block class="flex-1 !border-gray-200 !text-gray-600 !bg-gray-50" @click="handlePrev">上一节</wd-button>
+        <wd-button type="primary" block class="flex-[2] !bg-orange !border-orange shadow-lg shadow-orange/30 !rounded-xl !text-base" :disabled="!allTasksCompleted" @click="handleComplete">
+          {{ allTasksCompleted ? '完成并打卡 ✅' : '完成两项任务后再打卡 ✌️' }}
+        </wd-button>
+      </template>
+      <template v-else>
+        <wd-button type="primary" block class="!bg-orange !border-orange shadow-lg shadow-orange/30 !rounded-xl !text-base w-[70%]" :disabled="!allTasksCompleted" @click="handleComplete">
+          {{ allTasksCompleted ? '完成并打卡 ✅' : '完成两项任务后再打卡 ✌️' }}
+        </wd-button>
+      </template>
     </view>
   </view>
 </template>
@@ -73,6 +79,23 @@ import { onPageScroll } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
 import { markLessonComplete } from '@/utils/learnProgress'
+import { updateProgress } from '@/api/modules/user'
+
+// 使用 Vite import.meta.glob 导入所有 md 文件内容
+const mdModules = import.meta.glob('/src/static/content/days/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+})
+
+// 提取 day ID 和内容
+const dayContents: Record<string, string> = {}
+for (const path in mdModules) {
+  const match = path.match(/day(\d+)\.md$/)
+  if (match) {
+    dayContents[match[1]] = mdModules[path] as string
+  }
+}
 
 const md = new MarkdownIt({
   html: true,
@@ -98,26 +121,19 @@ const allTasksCompleted = computed(() => tasks.value.every(t => t.checked))
 const loadContent = async () => {
   loading.value = true
   error.value = ''
-  
+
   try {
-    const fileName = `day${dayId.value}.md`
-    // In dev mode, we request from static folder. In production, this might need adjustment if not using static hosting.
-    // Note: uni.request path relative to root
-    const res = await new Promise((resolve, reject) => {
-      uni.request({
-        url: `/static/content/days/${fileName}`,
-        success: (res) => {
-          if (res.statusCode === 200) resolve(res.data)
-          else reject(new Error(`File not found: ${fileName}`))
-        },
-        fail: (err) => reject(err)
-      })
-    })
+    // 直接从预加载的内容中获取
+    const res = dayContents[dayId.value]
+
+    if (!res) {
+      throw new Error(`课程 ${dayId.value} 不存在`)
+    }
 
     if (typeof res === 'string') {
       const content = fm(res)
       title.value = (content.attributes as any).title || `Day ${dayId.value}`
-      
+
       // Process markdown
       let rendered = md.render(content.body)
       
@@ -178,7 +194,7 @@ onPageScroll((e) => {
     if (data && !Array.isArray(data) && data.height) {
       const height = data.height
       const scrollTop = e.scrollTop
-      const windowHeight = uni.getSystemInfoSync().windowHeight
+      const windowHeight = uni.getWindowInfo().windowHeight
 
       let percentage = Math.round(((scrollTop + windowHeight) / (height + 200)) * 100)
       if (percentage > 100) percentage = 100
@@ -209,10 +225,17 @@ const handlePrev = () => {
   }
 }
 
-const handleComplete = () => {
+const handleComplete = async () => {
   const lessonId = `day-${dayId.value}`
 
-  // 标记课程完成
+  // 同步到云端
+  try {
+    await updateProgress(lessonId, 'completed')
+  } catch (e) {
+    console.error('更新进度失败', e)
+  }
+
+  // 标记本地课程完成
   markLessonComplete(lessonId)
 
   uni.showToast({ title: '课程已完成', icon: 'success' })
