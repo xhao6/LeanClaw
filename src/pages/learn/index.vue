@@ -26,9 +26,9 @@
              class="w-6 h-6 rounded-full flex-center mr-4 shrink-0 border-2 border-white shadow-sm z-20"
              :class="getStatusColor(day.status)"
            >
-             <AppIcon v-if="day.status === 'completed'" name="check" size="14px" color="white" />
+             <wd-icon v-if="day.status === 'completed'" name="check" size="14px" color="white" />
              <text v-else-if="day.status === 'in-progress'" class="text-xs font-bold text-white">{{ index + 1 }}</text>
-             <AppIcon v-else name="lock-on" size="14px" class="text-gray-400" />
+             <wd-icon v-else name="lock-on" size="14px" class="text-gray-400" />
            </view>
 
            <!-- Card -->
@@ -53,7 +53,7 @@
 
     <!-- Summary / Badge -->
     <view v-if="allCompleted" class="mt-8 flex-col-center p-6 bg-white rounded-2xl shadow-sm border-2 border-dashed border-orange mb-8">
-      <AppIcon name="medal" size="48px" class="text-orange mb-3" />
+      <wd-icon name="medal" size="48px" class="text-orange mb-3" />
       <view class="font-bold text-lg text-primary mb-1">恭喜获得“龙虾驯养师”勋章！</view>
       <view class="text-xs text-gray-400">你已经完成了所有课程，开启你的 AI 管家之旅吧</view>
     </view>

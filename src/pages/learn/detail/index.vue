@@ -23,7 +23,7 @@
 
     <!-- Error State -->
     <view v-else-if="error" class="flex-col-center py-20 px-8 text-center">
-      <AppIcon name="close-circle" size="48px" class="text-red-400 mb-4" />
+      <wd-icon name="close-circle" size="48px" class="text-red-400 mb-4" />
       <text class="text-gray-500 mb-6">{{ error }}</text>
       <wd-button size="small" @click="loadContent">重试</wd-button>
     </view>
@@ -38,7 +38,7 @@
       <!-- Task Checklist -->
       <view class="mt-12 p-5 bg-orange/5 rounded-2xl border border-orange/20">
         <view class="font-bold text-orange text-lg mb-4 flex items-center">
-          <AppIcon name="check-circle-filled" size="20px" class="mr-2" />
+          <wd-icon name="check-circle-filled" size="20px" class="mr-2" />
           今日任务清单
         </view>
         <view class="space-y-4">
@@ -46,7 +46,7 @@
             <view class="w-5 h-5 rounded-full border-2 flex-center mr-3 shrink-0 mt-0.5 transition-colors"
               :class="task.checked ? 'bg-orange border-orange' : 'border-gray-300 bg-white'"
             >
-              <AppIcon v-if="task.checked" name="check" size="12px" color="white" />
+              <wd-icon v-if="task.checked" name="check" size="12px" color="white" />
             </view>
             <text class="text-sm leading-relaxed transition-all" :class="task.checked ? 'text-gray-400 line-through' : 'text-gray-800'">
               {{ task.text }}

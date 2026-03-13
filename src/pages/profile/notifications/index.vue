@@ -20,7 +20,7 @@
           class="w-10 h-10 rounded-full flex items-center justify-center mr-3 shrink-0"
           :class="getIconBg(item.type)"
         >
-          <AppIcon :name="getIcon(item.type)" size="20px" :color="getIconColor(item.type)" />
+          <wd-icon :name="getIcon(item.type)" size="20px" :color="getIconColor(item.type)" />
         </view>
         <view class="flex-1 min-w-0">
           <view class="flex justify-between items-start">
@@ -35,7 +35,7 @@
 
     <!-- 空状态 -->
     <view v-else class="flex-col-center py-20 text-gray-400">
-      <AppIcon name="notification" size="48px" class="mb-3 text-gray-300" />
+      <wd-icon name="notification" size="48px" class="mb-3 text-gray-300" />
       <text>暂无通知</text>
       <text class="text-xs mt-2">学习打卡后会收到通知提醒</text>
     </view>

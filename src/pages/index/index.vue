@@ -19,7 +19,7 @@
           <text class="text-xs text-gray-400 block mt-0.5">养只龙虾做管家</text>
         </view>
       </view>
-      <AppIcon name="notification" size="24px" class="text-gray-400" />
+      <wd-icon name="notification" size="24px" class="text-gray-400" />
     </view>
 
     <!-- Learning Progress Card -->
@@ -84,14 +84,14 @@
            <text class="font-bold text-lg text-primary">今日推荐</text>
         </view>
         <text class="text-xs text-gray-400 flex items-center" @click="handleGoDiscover">
-          查看全部 <AppIcon name="arrow-right" size="12px" class="ml-0.5" />
+          查看全部 <wd-icon name="arrow-right" size="12px" class="ml-0.5" />
         </text>
       </view>
 
       <scroll-view scroll-y class="h-[400px]" @scrolltolower="handleLoadMore">
         <!-- 空状态 / 错误状态 -->
         <view v-if="error" class="flex flex-col items-center justify-center py-12 text-gray-400">
-          <AppIcon name="warning" size="32px" class="mb-2" />
+          <wd-icon name="warning" size="32px" class="mb-2" />
           <text class="text-sm">{{ error }}</text>
         </view>
 

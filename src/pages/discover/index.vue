@@ -43,7 +43,7 @@
       </view>
 
       <view v-else-if="items.length === 0" class="flex-col-center py-20 text-gray-400">
-        <AppIcon name="warning" size="48px" class="mb-3 text-gray-300" />
+        <wd-icon name="warning" size="48px" class="mb-3 text-gray-300" />
         <text>未找到相关内容</text>
       </view>
 
@@ -60,7 +60,7 @@
               <view class="flex justify-between items-start mb-2">
                  <text class="text-h2 line-clamp-2 flex-1 leading-snug">{{ item.title }}</text>
                  <view class="flex items-center gap-1 ml-2 shrink-0 pt-0.5" @click.stop="handleToggleFavorite(item)">
-                   <AppIcon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
+                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
                  </view>
               </view>
               <text class="text-body line-clamp-2">{{ item.desc }}</text>
