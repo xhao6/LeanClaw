@@ -59,7 +59,7 @@ exports.main = async (event, context) => {
       case 'getProfile': {
         const { data: users } = await usersCollection.where({ _openid: openid }).get();
         if (users.length > 0) {
-          return { success: true, data: users[0] };
+          return { success: true, data: { user: users[0] } };
         }
         return { success: false, message: 'User not found' };
       }
@@ -94,7 +94,7 @@ exports.main = async (event, context) => {
 
       case 'getProgress': {
         const { data: list } = await progressCollection.where({ _openid: openid }).get();
-        return { success: true, data: list };
+        return { success: true, data: { list } };
       }
 
       // ---------------- Favorites System ----------------
