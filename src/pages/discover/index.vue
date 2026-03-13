@@ -76,7 +76,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
-import type { ResourceItem } from '@/data/mock'
+import type { ResourceItem } from '@/types/resource'
 
 const searchValue = ref('')
 const activeTab = ref<string>('resource')

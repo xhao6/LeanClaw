@@ -1,7 +1,7 @@
 // 收藏模块
 // 使用 uni.setStorageSync / uni.getStorageSync 进行数据持久化
 
-import type { ResourceItem } from '@/data/mock'
+import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite as apiToggleFavorite } from '@/api/modules/user'
 
 // 收藏项接口

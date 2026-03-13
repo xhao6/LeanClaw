@@ -89,7 +89,14 @@
       </view>
 
       <scroll-view scroll-y class="h-[400px]" @scrolltolower="handleLoadMore">
-        <view class="space-y-3">
+        <!-- 空状态 / 错误状态 -->
+        <view v-if="error" class="flex flex-col items-center justify-center py-12 text-gray-400">
+          <wd-icon name="warning" size="32px" class="mb-2" />
+          <text class="text-sm">{{ error }}</text>
+        </view>
+
+        <!-- 推荐列表 -->
+        <view v-else class="space-y-3">
           <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
             <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
             <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
@@ -109,7 +116,7 @@
             <wd-loading type="spinner" size="16px" />
             <text class="ml-2 text-xs">加载中...</text>
           </view>
-          <text v-else-if="!hasMore" class="text-xs text-gray-400">没有更多了</text>
+          <text v-else-if="!hasMore && recommendations.length > 0" class="text-xs text-gray-400">没有更多了</text>
         </view>
       </scroll-view>
     </view>
@@ -120,13 +127,13 @@
 import { computed, onMounted } from 'vue'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
-import type { ResourceItem } from '@/data/mock'
+import type { ResourceItem } from '@/types/resource'
 
 // 获取学习进度
 const progress = getProgress()
 
 // 今日推荐
-const { recommendations, loading, hasMore, loadRecommendations, loadMore, addToViewed } = useRecommendations()
+const { recommendations, loading, hasMore, error, loadRecommendations, loadMore, addToViewed } = useRecommendations()
 
 // 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
