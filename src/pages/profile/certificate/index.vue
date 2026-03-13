@@ -77,7 +77,7 @@
               class="w-full h-12 bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-xl text-white font-medium flex items-center justify-center"
               @click="saveToAlbum"
             >
-              <wd-icon name="photo" size="18px" class="mr-2" />
+              <AppIcon name="photo" size="18px" class="mr-2" />
               保存到相册
             </button>
           </view>

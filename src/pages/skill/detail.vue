@@ -15,13 +15,13 @@
       <view class="text-sm text-gray-500 mb-4">{{ skill.desc }}</view>
       <view class="flex justify-center space-x-4 text-xs text-gray-400">
         <view class="flex items-center">
-          <wd-icon name="user" class="mr-1" /> {{ skill.author }}
+          <AppIcon name="user" class="mr-1" /> {{ skill.author }}
         </view>
         <view class="flex items-center">
-          <wd-icon name="star-filled" class="mr-1 text-orange" /> {{ skill.stars }}
+          <AppIcon name="star-filled" class="mr-1 text-orange" /> {{ skill.stars }}
         </view>
         <view class="flex items-center">
-          <wd-icon name="download" class="mr-1" /> {{ skill.downloads }}
+          <AppIcon name="download" class="mr-1" /> {{ skill.downloads }}
         </view>
       </view>
     </view>
@@ -29,13 +29,13 @@
     <!-- Installation -->
     <view class="bg-white rounded-2xl p-5 shadow-sm mb-4">
       <view class="font-bold text-base mb-3 flex items-center">
-        <wd-icon name="cloud-download" class="mr-2 text-primary" />
+        <AppIcon name="cloud-download" class="mr-2 text-primary" />
         安装命令
       </view>
       <view class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-sm break-all relative">
         <text selectable>{{ installCmd }}</text>
         <view class="absolute top-2 right-2" @click="handleCopy">
-          <wd-icon name="copy" size="20px" class="text-white/50 active:text-white" />
+          <AppIcon name="copy" size="20px" class="text-white/50 active:text-white" />
         </view>
       </view>
       <wd-button type="primary" block custom-class="mt-4 !bg-orange !border-orange" @click="handleCopy">

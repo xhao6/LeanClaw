@@ -43,7 +43,7 @@
       </view>
 
       <view v-else-if="items.length === 0" class="flex-col-center py-20 text-gray-400">
-        <wd-icon name="warning" size="48px" class="mb-3 text-gray-300" />
+        <AppIcon name="warning" size="48px" class="mb-3 text-gray-300" />
         <text>未找到相关内容</text>
       </view>
 
@@ -60,12 +60,21 @@
               <view class="flex justify-between items-start mb-2">
                  <text class="text-h2 line-clamp-2 flex-1 leading-snug">{{ item.title }}</text>
                  <view class="flex items-center gap-1 ml-2 shrink-0 pt-0.5" @click.stop="handleToggleFavorite(item)">
-                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
+                   <AppIcon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
                  </view>
               </view>
               <text class="text-body line-clamp-2">{{ item.desc }}</text>
             </view>
           </view>
+        </view>
+
+        <!-- Load more button -->
+        <view v-if="hasMore && items.length > 0" class="py-4 text-center" @click="loadMore">
+          <text v-if="loadingMore" class="text-gray-400">加载中...</text>
+          <text v-else class="text-orange-500 font-medium">点击加载更多</text>
+        </view>
+        <view v-else-if="items.length > 0" class="py-4 text-center text-gray-400">
+          <text>没有更多了</text>
         </view>
       </view>
     </view>
@@ -81,7 +90,11 @@ import type { ResourceItem } from '@/types/resource'
 const searchValue = ref('')
 const activeTab = ref<string>('resource')
 const loading = ref(false)
+const loadingMore = ref(false)
 const items = ref<ResourceItem[]>([])
+const currentPage = ref(1)
+const hasMore = ref(true)
+const PAGE_SIZE = 20
 
 const tabs = [
   { label: '优质资源', name: 'resource' },
@@ -89,46 +102,66 @@ const tabs = [
   { label: 'Skills', name: 'skill' }
 ]
 
-const fetchData = async () => {
-  loading.value = true
+const fetchData = async (reset = true) => {
+  if (reset) {
+    loading.value = true
+    currentPage.value = 1
+    items.value = []
+  } else {
+    loadingMore.value = true
+  }
+
   try {
     const params: any = {
-      limit: 20 // Fetch more items
+      page: reset ? 1 : currentPage.value,
+      limit: PAGE_SIZE
     }
-    
-    // Filter by type
-    // If activeTab is 'resource', we might want to show all resources (default)
-    // or specific logic. The API supports 'type' param.
-    // In original logic: 'resource' tab showed items with type 'resource' or 'case'.
-    // But API getResources expects single type or none.
-    // Let's stick to simple mapping:
+
     if (activeTab.value !== 'resource') {
-        params.type = activeTab.value
+      params.type = activeTab.value
     } else {
-        params.type = 'resource'
+      params.type = 'resource'
     }
 
     const res = await getResources(params)
     let fetchedItems = (res.list || []) as ResourceItem[]
 
-    // Client-side search filtering (since API might not support fuzzy search yet, or we use cloud DB regex)
-    // CloudBase API I wrote supports 'tag' but not generic search yet.
-    // So we filter locally for now if search is present
+    // Client-side search filtering
     if (searchValue.value) {
       const query = searchValue.value.toLowerCase()
-      fetchedItems = fetchedItems.filter(item => 
-        item.title.toLowerCase().includes(query) || 
+      fetchedItems = fetchedItems.filter(item =>
+        item.title.toLowerCase().includes(query) ||
         item.desc.toLowerCase().includes(query) ||
         item.tags.some(tag => tag.toLowerCase().includes(query))
       )
     }
-    
-    items.value = fetchedItems
+
+    if (reset) {
+      items.value = fetchedItems
+    } else {
+      items.value = [...items.value, ...fetchedItems]
+    }
+
+    // Check if there are more items
+    hasMore.value = fetchedItems.length === PAGE_SIZE
+    if (!reset) {
+      currentPage.value++
+    }
   } catch (error) {
     console.error('Fetch resources failed', error)
-    items.value = []
+    if (reset) {
+      items.value = []
+    }
   } finally {
     loading.value = false
+    loadingMore.value = false
+  }
+}
+
+const loadMore = () => {
+  if (!loadingMore.value && hasMore.value) {
+    currentPage.value++
+    fetchData(false)
   }
 }
 
@@ -144,11 +177,17 @@ const getPlaceholder = (item: ResourceItem) => {
 }
 
 const handleSearch = () => {
-  fetchData()
+  fetchData(true)
 }
 
 const handleTabChange = (e: any) => {
-  fetchData()
+  // wd-tabs 的 change 事件返回 {index, name}，需要手动更新 activeTab
+  if (e && typeof e === 'object' && 'name' in e) {
+    activeTab.value = e.name
+  } else if (typeof e === 'string') {
+    activeTab.value = e
+  }
+  fetchData(true)
 }
 
 const handleItemClick = (item: ResourceItem) => {

@@ -16,7 +16,7 @@
         <view class="flex items-center justify-between">
           <view class="flex items-center">
             <view class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-              <wd-icon name="calendar" size="20px" color="#1E3A5F" />
+              <AppIcon name="calendar" size="20px" color="#1E3A5F" />
             </view>
             <view>
               <view class="text-sm text-gray-500">已学天数</view>
@@ -31,7 +31,7 @@
         <view class="flex items-center justify-between">
           <view class="flex items-center">
             <view class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center mr-3">
-              <wd-icon name="check" size="20px" color="#FF6B35" />
+              <AppIcon name="check" size="20px" color="#FF6B35" />
             </view>
             <view>
               <view class="text-sm text-gray-500">完成课程</view>
@@ -46,7 +46,7 @@
         <view class="flex items-center justify-between">
           <view class="flex items-center">
             <view class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center mr-3">
-              <wd-icon name="time" size="20px" color="#22C55E" />
+              <AppIcon name="time" size="20px" color="#22C55E" />
             </view>
             <view>
               <view class="text-sm text-gray-500">学习时长</view>
@@ -61,7 +61,7 @@
         <view class="flex items-center justify-between">
           <view class="flex items-center">
             <view class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mr-3">
-              <wd-icon name="fire" size="20px" color="#EAB308" />
+              <AppIcon name="fire" size="20px" color="#EAB308" />
             </view>
             <view>
               <view class="text-sm text-gray-500">连续打卡</view>
@@ -87,8 +87,8 @@
               ></view>
             </view>
             <view class="w-10 text-right">
-              <wd-icon v-if="day.completed" name="check-circle-fill" size="16px" color="#22C55E" />
-              <wd-icon v-else name="clock" size="16px" color="#CBD5E1" />
+              <AppIcon v-if="day.completed" name="check-circle-fill" size="16px" color="#22C55E" />
+              <AppIcon v-else name="clock" size="16px" color="#CBD5E1" />
             </view>
           </view>
         </view>

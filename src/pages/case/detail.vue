@@ -23,7 +23,7 @@
     <view class="p-4">
       <view class="mb-6">
         <view class="text-lg font-bold mb-2 flex items-center">
-          <wd-icon name="info-circle" class="mr-2 text-primary" />
+          <AppIcon name="info-circle" class="mr-2 text-primary" />
           场景描述
         </view>
         <view class="text-gray-600 leading-relaxed text-sm">
@@ -33,7 +33,7 @@
 
       <view class="mb-6">
         <view class="text-lg font-bold mb-3 flex items-center">
-          <wd-icon name="list" class="mr-2 text-primary" />
+          <AppIcon name="list" class="mr-2 text-primary" />
           配置步骤
         </view>
         <view class="space-y-4">
@@ -46,7 +46,7 @@
 
       <view class="mb-6">
         <view class="text-lg font-bold mb-3 flex items-center">
-          <wd-icon name="code" class="mr-2 text-primary" />
+          <AppIcon name="code" class="mr-2 text-primary" />
           核心代码
         </view>
         <view class="bg-gray-800 text-gray-200 p-4 rounded-xl font-mono text-xs overflow-x-auto relative group">

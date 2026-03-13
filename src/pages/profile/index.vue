@@ -23,7 +23,7 @@
         <template v-if="isLoggedIn">
           <view class="text-xl font-bold flex items-center">
             {{ userInfo.name || '龙虾驯养员' }}
-            <wd-icon name="edit" size="16px" class="ml-2 opacity-70" />
+            <AppIcon name="edit" size="16px" class="ml-2 opacity-70" />
           </view>
           <view class="text-xs text-white/70 mt-1 bg-white/10 px-2 py-0.5 rounded-full inline-block">ID: {{ userInfo.id ? userInfo.id.substring(0, 8) : '...' }}</view>
         </template>
@@ -36,7 +36,7 @@
       </view>
 
       <view class="absolute right-6 top-14 text-white/80" @click="goToSettings">
-        <wd-icon name="setting" size="24px" />
+        <AppIcon name="setting" size="24px" />
       </view>
     </view>
 

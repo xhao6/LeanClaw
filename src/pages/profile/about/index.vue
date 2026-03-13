@@ -71,14 +71,14 @@
         <view class="space-y-3">
           <view class="flex items-center justify-between py-2 border-b border-gray-50">
             <view class="flex items-center space-x-2">
-              <wd-icon name="github" size="18px" />
+              <AppIcon name="github" size="18px" />
               <text class="text-sm text-gray-600">GitHub</text>
             </view>
             <text class="text-xs text-gray-400">OpenClaw</text>
           </view>
           <view class="flex items-center justify-between py-2">
             <view class="flex items-center space-x-2">
-              <wd-icon name="mail" size="18px" />
+              <AppIcon name="mail" size="18px" />
               <text class="text-sm text-gray-600">邮箱</text>
             </view>
             <text class="text-xs text-gray-400">hello@openclaw.com</text>

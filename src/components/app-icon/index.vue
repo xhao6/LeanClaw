@@ -1,6 +1,6 @@
 <template>
   <text class="icon" :class="[sizeClass, colorClass]" :style="customStyle">
-    {{ iconMap[name] || '●' }}
+    {{ iconMap[name] || '?' }}
   </text>
 </template>
 
@@ -13,40 +13,41 @@ const props = defineProps<{
   color?: string
 }>()
 
+// 基础 ASCII 字符映射 - 确保小程序兼容
 const iconMap: Record<string, string> = {
   // 常用图标
-  'check': '✓',
-  'check-circle-filled': '✓',
-  'star': '☆',
-  'star-filled': '★',
-  'warning': '⚠',
-  'close-circle': '✕',
-  'info-circle': 'ℹ',
-  'notification': '🔔',
-  'arrow-right': '→',
-  'arrow-left': '←',
-  'lock-on': '🔒',
-  'medal': '🏅',
-  'edit': '✎',
-  'setting': '⚙',
-  'calendar': '📅',
-  'time': '⏱',
-  'fire': '🔥',
-  'clock': '🕐',
-  'download': '⬇',
-  'copy': '📋',
-  'cloud-download': '☁',
-  'list': '☰',
-  'code': '⟨/⟩',
-  'user': '👤',
-  'mail': '✉',
-  'github': '⌘',
-  'photo': '🖼',
-  'check-circle-fill': '✓',
-  'phone': '📞',
-  'search': '🔍',
-  'home': '🏠',
-  'menu': '☰',
+  'check': '[OK]',
+  'check-circle-filled': '[OK]',
+  'check-circle-fill': '[OK]',
+  'star': '*',
+  'star-filled': '*',
+  'warning': '[!]',
+  'close-circle': '[X]',
+  'info-circle': '[i]',
+  'notification': '[N]',
+  'arrow-right': '>',
+  'arrow-left': '<',
+  'lock-on': '[L]',
+  'medal': '[M]',
+  'edit': '[E]',
+  'setting': '[S]',
+  'calendar': '[C]',
+  'time': '[T]',
+  'fire': '[F]',
+  'clock': '[K]',
+  'download': '[D]',
+  'copy': '[cp]',
+  'cloud-download': '[cloud]',
+  'list': '[=]',
+  'code': '</>',
+  'user': '[U]',
+  'mail': '[@]',
+  'github': '[G]',
+  'photo': '[P]',
+  'phone': '[Ph]',
+  'search': '[?]',
+  'home': '[H]',
+  'menu': '[=]',
   'plus': '+',
   'minus': '-',
 }

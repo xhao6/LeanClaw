@@ -22,7 +22,7 @@
     <!-- Content List -->
     <view class="p-4 pt-2">
       <view v-if="filteredFavorites.length === 0" class="flex-col-center py-20 text-gray-400">
-        <wd-icon name="star" size="48px" class="mb-3 text-gray-300" />
+        <AppIcon name="star" size="48px" class="mb-3 text-gray-300" />
         <text>暂无收藏内容</text>
         <text class="text-xs mt-2">快去发现页收藏感兴趣的内容吧</text>
       </view>
@@ -39,7 +39,7 @@
               <view class="flex justify-between items-start">
                 <text class="font-bold text-sm text-gray-800 line-clamp-1 flex-1">{{ item.title }}</text>
                 <view class="ml-2" @click.stop="handleRemoveFavorite(item.id)">
-                  <wd-icon name="star-filled" size="18px" class="text-orange" />
+                  <AppIcon name="star-filled" size="18px" class="text-orange" />
                 </view>
               </view>
               <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed mt-1">{{ item.desc }}</text>
