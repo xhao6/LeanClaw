@@ -110,10 +110,10 @@
     <!-- 底部版权 -->
     <view class="p-8 text-center">
       <view class="text-xs text-gray-300">
-        © 2024 LeanClaw. All rights reserved.
+        © 2026 LeanClaw. All rights reserved.
       </view>
       <view class="text-xs text-gray-300 mt-1">
-        最后更新: 2024年1月1日
+        最后更新: 2026年3月14日
       </view>
     </view>
   </view>
