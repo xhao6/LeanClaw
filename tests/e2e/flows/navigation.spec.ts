@@ -24,7 +24,8 @@ test.describe('导航流程测试', () => {
 
   test('我的页面可访问', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/profile/index')
-    await expect(page.locator('text=龙虾驯养员').first()).toBeVisible()
+    // 未登录状态显示"点击登录"
+    await expect(page.locator('text=点击登录').first()).toBeVisible()
   })
 
   test('学习详情页可访问', async ({ page }) => {
