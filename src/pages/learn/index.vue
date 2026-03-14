@@ -130,7 +130,7 @@ const handleDayClick = (day: any) => {
   // Extract day number from id "day-1" -> "1"
   const dayNum = day.id.replace('day-', '')
   uni.navigateTo({
-    url: `/pages/learn/detail/index?id=${dayNum}`
+    url: `/pages_learn/detail/index?id=${dayNum}`
   })
 }
 </script>

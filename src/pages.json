@@ -98,14 +98,7 @@
         "navigationBarTitleText": "资源详情"
       }
     },
-    {
-      "path": "pages/learn/detail/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "课程详情"
-      }
-    },
-    {
+        {
       "path": "pages/profile/about/index",
       "type": "page",
       "style": {
@@ -164,7 +157,20 @@
       }
     }
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pages_learn",
+      "name": "learn",
+      "pages": [
+        {
+          "path": "detail/index",
+          "style": {
+            "navigationBarTitleText": "课程详情"
+          }
+        }
+      ]
+    }
+  ],
   "tabBar": {
     "color": "#999",
     "selectedColor": "#1E3A5F",
