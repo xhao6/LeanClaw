@@ -63,31 +63,64 @@ npm run sync:content
 3. 调用 AI 将 HTML 转换为 Markdown
    - 在标题后自动添加**导读区块**（约100字，介绍背景和主要观点）
    - 在文章末尾自动添加**转载出处**（原文链接 + 来源网站）
-4. 上传到 CloudBase 静态托管
+4. 保存 Markdown 文件到本地 `output/` 目录
 
 ---
 
-### 第四步：更新数据库记录
+### 第四步：上传到 CloudBase
 
-脚本执行完成后，会输出类似：
+脚本执行完成后，会在 `output/` 目录生成 Markdown 文件。
+
+使用 CloudBase MCP 工具上传：
+
+**1. 上传 Markdown 文件**
+
+在 Claude Code 中使用 `uploadFiles` 工具：
 
 ```json
 {
-  "id": "resource-xxx",
-  "markdownUrl": "https://xxx.tcb.qcloud.com/content/xxx.md"
+  "files": [
+    {
+      "cloudPath": "content/markdown/xxx.md",
+      "localPath": "scripts/sync-content/output/xxx.md"
+    }
+  ]
 }
 ```
 
-将返回的 `markdownUrl` 复制。
+**2. 上传图片文件（可选）**
+
+如果需要将图片也上传到云存储：
+
+```json
+{
+  "files": [
+    {
+      "cloudPath": "content/images/图片名.webp",
+      "localPath": "本地图片路径"
+    }
+  ]
+}
+```
+
+上传成功后，获取访问 URL：
+- 静态托管：`https://{envId}-1410913126.tcloudbaseapp.com/`
+- 云存储：`https://{envId}.tcb.qcloud.com/`
+
+---
+
+### 第五步：更新数据库记录
+
+将上传后的 Markdown URL 复制。
 
 1. 打开 CloudBase 控制台 → 文档数据库 → resources 集合
 2. 找到对应资源记录
-3. 添加/更新 `markdownUrl` 字段，值为上一步复制的 URL
+3. 添加/更新 `markdownUrl` 字段，值为上传后的 URL
 4. 保存
 
 ---
 
-### 第五步：验证
+### 第六步：验证
 
 重新打开小程序，发现页点击该资源，应该能流畅加载 Markdown 内容。
 
@@ -101,8 +134,9 @@ npm run sync:content
 - 检查网络是否能访问目标网站
 
 ### Q: 图片显示不全怎么办？
-- 检查图片 URL 是否正确
-- 确认图片已上传到云存储
+- 图片使用原始 URL 可以正常显示
+- 如需上传到云存储，使用 MCP `uploadFiles` 工具上传图片
+- 上传后替换 Markdown 中的图片 URL 为云存储 URL
 
 ### Q: 转换质量不好怎么办？
 - 可以调整 `aiConverter.js` 中的 prompt
