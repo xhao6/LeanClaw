@@ -65,7 +65,8 @@ async function aiOptimize(html) {
         { role: 'user', content: `请将以下HTML内容转换为Markdown：\n\n${html.substring(0, 15000)}` }
       ],
       temperature: 0.3,
-      max_tokens: 8000
+      max_tokens: 8000,
+      enable_thinking: config.modelscope.enableThinking || false
     })
 
     const markdown = response.choices[0]?.message?.content?.trim()

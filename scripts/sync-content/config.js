@@ -1,19 +1,14 @@
-import dotenv from 'dotenv'
-import path from 'path'
-import { fileURLToPath } from 'url'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-dotenv.config({ path: path.resolve(__dirname, '.env') })
-
+// 直接从环境变量读取配置
 export const config = {
-  // 魔搭 API
+  // 魔搭 API（通过 MODELSCOPE_API_KEY 环境变量设置）
   modelscope: {
     apiKey: process.env.MODELSCOPE_API_KEY,
     baseURL: 'https://api-inference.modelscope.cn/v1/',
-    model: 'Qwen/Qwen2.5-72B-Instruct'
+    model: 'Qwen/Qwen3-8B',
+    enableThinking: false
   },
 
-  // CloudBase
+  // CloudBase（通过 MCP 工具处理）
   cloudbase: {
     envId: process.env.CLOUDBASE_ENV_ID,
     secretId: process.env.CLOUDBASE_SECRET_ID,
@@ -32,4 +27,9 @@ export const config = {
     markdownDir: '/content/markdown/',
     imageDir: '/content/images/'
   }
+}
+
+// 检查 API Key 是否配置
+if (!config.modelscope.apiKey) {
+  console.warn('[Config] 警告: 未设置 MODELSCOPE_API_KEY 环境变量，AI 转换功能将不可用')
 }
