@@ -1,3 +1,6 @@
+// 加载 .env 文件
+import 'dotenv/config'
+
 // 直接从环境变量读取配置
 export const config = {
   // 魔搭 API（通过 MODELSCOPE_API_KEY 环境变量设置）

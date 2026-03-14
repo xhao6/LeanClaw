@@ -3,10 +3,14 @@ import sharp from 'sharp'
 import cloudbase from '@cloudbase/node-sdk'
 import { config } from './config.js'
 import crypto from 'crypto'
+import fs from 'fs'
+import path from 'path'
+import os from 'os'
+import { createReadStream } from 'fs'
 
 // 初始化 CloudBase
 const app = cloudbase.init({
-  env: config.cloudbase.envId,
+  env: config.cloudbase.envId || 'leanmind-1gjtoa502716c21d',
   secretId: config.cloudbase.secretId,
   secretKey: config.cloudbase.secretKey
 })
@@ -36,27 +40,14 @@ async function downloadAndCompress(url) {
 }
 
 /**
- * 上传到 CloudBase 云存储
+ * 上传到 CloudBase 云存储（暂时跳过，使用原始 URL）
+ * TODO: 后续使用 MCP uploadFiles 工具上传
  */
 async function uploadToCloudStorage(buffer, filename) {
-  const cloudPath = config.hosting.imageDir + filename
-
-  try {
-    const result = await app.uploadFile({
-      cloudPath,
-      filePath: buffer
-    })
-
-    // 获取临时访问链接
-    const tempUrl = await app.getTempFileURL({
-      fileList: [result.fileID]
-    })
-
-    return tempUrl.fileList[0].tempFileURL
-  } catch (error) {
-    console.error('[ImageHandler] 上传失败:', error.message)
-    throw error
-  }
+  // 暂时返回 null，表示跳过图片上传
+  // 图片将使用原始 URL
+  console.log('[ImageHandler] 跳过图片上传，使用原始 URL')
+  return null
 }
 
 /**

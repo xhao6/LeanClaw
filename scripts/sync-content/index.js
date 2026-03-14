@@ -9,9 +9,19 @@ async function getResourceList() {
   // 暂时硬编码示例
   return [
     {
-      id: 'resource-001',
-      url: 'https://example.com/article-1',
-      title: '示例文章'
+      id: 'b96a304769b3d62a00022e030045edd8',
+      url: 'https://cloud.tencent.com/developer/article/2625073',
+      title: '腾讯云 — OpenClaw 接入飞书保姆级教程'
+    },
+    {
+      id: 'b96a304769b3d62a00022e026c54a629',
+      url: 'https://help.aliyun.com/zh/simple-application-server/use-cases/openclaw-faq',
+      title: '阿里云 — OpenClaw 常见问题文档'
+    },
+    {
+      id: 'b96a304769b3d62a00022e052495a563',
+      url: 'https://apifox.com/apiskills/openclaw-installation-and-usage-guide/',
+      title: 'OpenClaw 下载安装使用 — 详细图文教程'
     }
   ]
 }
@@ -45,7 +55,7 @@ async function processResource(resource) {
 
   // 4. AI 转换
   console.log('[Main] 步骤4: AI 转换...')
-  const markdown = await convertHtmlToMarkdown(processedHtml)
+  const markdown = await convertHtmlToMarkdown(processedHtml, resource.url)
 
   // 5. 上传
   console.log('[Main] 步骤5: 上传到静态托管...')
