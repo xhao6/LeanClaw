@@ -197,18 +197,11 @@ const handleItemClick = (item: ResourceItem) => {
       url: `/pages/skill/detail?name=${encodeURIComponent(item.title)}`
     })
   } else if (item.url) {
-    // Handle external link
     // #ifdef H5
     window.open(item.url, '_blank')
     // #endif
-
     // #ifndef H5
-    uni.setClipboardData({
-      data: item.url,
-      success: () => {
-        uni.showToast({ title: '链接已复制，请在浏览器打开', icon: 'none' })
-      }
-    })
+    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(item.url)}` })
     // #endif
   }
 }
