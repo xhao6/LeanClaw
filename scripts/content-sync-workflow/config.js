@@ -7,7 +7,7 @@ export const config = {
   modelscope: {
     apiKey: process.env.MODELSCOPE_API_KEY,
     baseURL: 'https://api-inference.modelscope.cn/v1/',
-    model: 'Qwen/Qwen3-8B',
+    model: 'Qwen/Qwen3.5-397B-A17B',
     enableThinking: false
   },
 
