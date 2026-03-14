@@ -148,6 +148,20 @@
       "style": {
         "navigationBarTitleText": "学习统计"
       }
+    },
+    {
+      "path": "pages/profile/agreement/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "用户协议"
+      }
+    },
+    {
+      "path": "pages/profile/privacy/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "隐私政策"
+      }
     }
   ],
   "subPackages": [],
