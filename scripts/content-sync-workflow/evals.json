@@ -1,0 +1,23 @@
+{
+  "skill_name": "content-sync-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "同步这篇文章到小程序：https://cloud.tencent.com/developer/article/2625147",
+      "expected_output": "1. 运行同步脚本\n2. 爬取网页内容\n3. AI 转换 Markdown\n4. 上传到静态托管\n5. 插入数据库记录",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "将这个URL的内容导入到发现页：https://zhuanlan.zhihu.com/p/123456789",
+      "expected_output": "运行同步脚本处理 URL，生成 Markdown 并添加到数据库",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我需要把公众号的文章同步到小程序，怎么做？",
+      "expected_output": "说明需要使用内容同步工作流，提供 URL 后运行脚本",
+      "files": []
+    }
+  ]
+}

@@ -16,27 +16,27 @@
 
 ### 第一步：环境准备
 
-1. **进入脚本目录**
+1. **进入项目根目录**（不是 scripts/sync-content 目录）
    ```bash
-   cd scripts/sync-content
+   cd D:/MyWork/LeanMind/LeanClaw
    ```
 
-2. **确保依赖已安装**
+2. **确保依赖已安装**（固定使用项目根目录的 node_modules）
    ```bash
-   npm install
+   npm install --prefix . openai axios cheerio puppeteer sharp dotenv turndown @cloudbase/node-sdk
    ```
+
+   > **注意**：必须使用 `--prefix .` 参数，将依赖安装到项目根目录的 node_modules，而非 scripts/sync-content/node_modules。
 
 3. **配置环境变量**
 
-   复制 `.env.example` 为 `.env`，填写以下内容：
+   项目根目录已有 `.env` 文件，确保配置正确：
 
    | 变量名 | 说明 | 获取方式 |
    |--------|------|----------|
-   | `MODELSCOPE_API_KEY` | AI 转换 API | [ModelScope 官网](https://www.modelscope.cn/) → 个人中心 → API 密钥 |
-   | `CLOUDBASE_ENV_ID` | 云开发环境 ID | CloudBase 控制台 → 环境概览 |
-   | `CLOUDBASE_SECRET_ID` | Secret ID | CloudBase 控制台 → 环境设置 → API 密钥 |
-   | `CLOUDBASE_SECRET_KEY` | Secret Key | 同上 |
-   | `CRAWLER_COOKIE` | 爬虫 Cookie（可选） | 登录目标网站后，从开发者工具 Network 面板复制 |
+   | `MODELSCOPE_API_KEY` | AI 转换 API（必需） | [ModelScope 官网](https://www.modelscope.cn/) → 个人中心 → API 密钥 |
+
+   > **注意**：爬取或 AI 转换失败时，脚本会自动中断流程并退出。
 
 ---
 
@@ -54,58 +54,30 @@ https://zhuanlan.zhihu.com/p/xxxxxxxx
 ### 第三步：运行同步脚本
 
 ```bash
-npm run sync:content
+cd D:/MyWork/LeanMind/LeanClaw
+node scripts/sync-content/index.js
 ```
 
 脚本会依次执行：
 1. 爬取网页内容
-2. 下载并处理图片（压缩为 WebP）
-3. 调用 AI 将 HTML 转换为 Markdown
-   - 在标题后自动添加**导读区块**（约100字，介绍背景和主要观点）
-   - 在文章末尾自动添加**转载出处**（原文链接 + 来源网站）
-4. 保存 Markdown 文件到本地 `output/` 目录
+2. 提取图片 URL → **暂停并提示手动上传**
+3. 调用 AI 将 HTML 转换为 Markdown（失败则中断）
+4. 上传 Markdown 到静态托管
+
+**图片上传流程**：
+- 脚本发现图片后，会显示需要上传的图片列表和目标路径
+- 使用 MCP `uploadFiles` 工具手动上传图片到 `content/images/` 目录
+- 上传完成后按回车继续
+
+> **注意**：如果跳过图片上传，将使用原始图片 URL（小程序中可能无法显示外部图片）。
 
 ---
 
-### 第四步：上传到 CloudBase
+### 第四步：上传 Markdown 到 CloudBase
 
-脚本执行完成后，会在 `output/` 目录生成 Markdown 文件。
+脚本会自动上传 Markdown 文件到静态托管。
 
-使用 CloudBase MCP 工具上传：
-
-**1. 上传 Markdown 文件**
-
-在 Claude Code 中使用 `uploadFiles` 工具：
-
-```json
-{
-  "files": [
-    {
-      "cloudPath": "content/markdown/xxx.md",
-      "localPath": "scripts/sync-content/output/xxx.md"
-    }
-  ]
-}
-```
-
-**2. 上传图片文件（可选）**
-
-如果需要将图片也上传到云存储：
-
-```json
-{
-  "files": [
-    {
-      "cloudPath": "content/images/图片名.webp",
-      "localPath": "本地图片路径"
-    }
-  ]
-}
-```
-
-上传成功后，获取访问 URL：
-- 静态托管：`https://{envId}-1410913126.tcloudbaseapp.com/`
-- 云存储：`https://{envId}.tcb.qcloud.com/`
+> 脚本默认使用 MCP `uploadFiles` 工具上传，如果失败会保存到本地 `output/` 目录，需要手动上传。
 
 ---
 

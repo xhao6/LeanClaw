@@ -20,3 +20,6 @@ playwright-report/
 scripts/sync-content/output/
 scripts/sync-content/.env
 node_modules
+output/
+temp/
+url-to-markdown/*
