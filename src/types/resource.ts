@@ -10,6 +10,8 @@ export interface ResourceItem {
   tags: string[];
   type: 'resource' | 'case' | 'skill';
   url?: string;
+  /** 转换后的 Markdown 文件 URL（静态托管） */
+  markdownUrl?: string;
   stars?: string;
   category?: string;
   source?: string;
