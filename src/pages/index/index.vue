@@ -141,6 +141,7 @@ import { computed, onMounted } from 'vue'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
 import type { ResourceItem } from '@/types/resource'
+import { toggleFavorite, isFavorited } from '@/utils/favorites'
 
 // 获取学习进度
 const progress = getProgress()
@@ -202,6 +203,27 @@ const handleGoDiscover = () => {
 }
 const handleGoSkills = () => {
   uni.switchTab({ url: '/pages/discover/index' })
+}
+
+// 获取标签样式
+const getTagClass = (tag: string) => {
+  const tagClasses: Record<string, string> = {
+    '教程': 'border-orange/30 text-orange bg-orange/5',
+    '工具': 'border-blue-300/30 text-blue-500 bg-blue-50',
+    '案例': 'border-green-300/30 text-green-600 bg-green-50',
+    '资源': 'border-purple-300/30 text-purple-500 bg-purple-50',
+  }
+  return tagClasses[tag] || 'border-gray-200 text-gray-500 bg-gray-50'
+}
+
+// 切换收藏
+const handleToggleFavorite = (item: ResourceItem) => {
+  toggleFavorite(item)
+  if (isFavorited(item.id)) {
+    uni.showToast({ title: '已收藏', icon: 'success' })
+  } else {
+    uni.showToast({ title: '已取消收藏', icon: 'none' })
+  }
 }
 </script>
 
