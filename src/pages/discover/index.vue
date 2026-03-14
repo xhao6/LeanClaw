@@ -51,20 +51,28 @@
         <view
           v-for="(item, index) in items"
           :key="index"
-          class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-all active:scale-[0.99]"
+          class="bg-white p-4 rounded-2xl shadow-sm active:bg-gray-50 transition-all"
           @click="handleItemClick(item)"
         >
-          <image :src="item.image || getPlaceholder(item)" class="w-24 h-24 rounded-xl mr-4 object-cover bg-gray-100 shrink-0" />
-          <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
-            <view class="flex-1">
-              <view class="flex justify-between items-start mb-2">
-                 <text class="text-h2 line-clamp-2 flex-1 leading-snug">{{ item.title }}</text>
-                 <view class="flex items-center gap-1 ml-2 shrink-0 pt-0.5" @click.stop="handleToggleFavorite(item)">
-                   <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
-                 </view>
-              </view>
-              <text class="text-body line-clamp-2">{{ item.desc }}</text>
+          <!-- 标题 -->
+          <view class="flex justify-between items-start mb-2">
+            <text class="text-h2 line-clamp-2 flex-1 leading-snug pr-2">{{ item.title }}</text>
+            <view class="flex items-center gap-1 shrink-0" @click.stop="handleToggleFavorite(item)">
+              <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
             </view>
+          </view>
+          <!-- 描述 -->
+          <text class="text-body text-gray-500 line-clamp-2 mb-3">{{ item.desc }}</text>
+          <!-- 标签 -->
+          <view v-if="item.tags && item.tags.length" class="flex flex-wrap gap-2">
+            <text
+              v-for="(tag, tagIndex) in item.tags"
+              :key="tagIndex"
+              class="px-3 py-1 text-xs rounded-full border"
+              :class="getTagClass(tag)"
+            >
+              {{ tag }}
+            </text>
           </view>
         </view>
 
@@ -174,6 +182,41 @@ const getPlaceholder = (item: ResourceItem) => {
   if (item.type === 'case') return '/static/images/placeholder/case.svg'
   if (item.category === 'video') return '/static/images/placeholder/video.svg'
   return '/static/images/placeholder/article.svg'
+}
+
+// 标签颜色循环 - 15种多巴胺色（基于标签内容 hash 随机分配）
+const tagColors = [
+  'border-orange-200 text-orange-600 bg-orange-50',
+  'border-blue-200 text-blue-600 bg-blue-50',
+  'border-green-200 text-green-600 bg-green-50',
+  'border-purple-200 text-purple-600 bg-purple-50',
+  'border-pink-200 text-pink-600 bg-pink-50',
+  'border-amber-200 text-amber-600 bg-amber-50',
+  'border-cyan-200 text-cyan-600 bg-cyan-50',
+  'border-indigo-200 text-indigo-600 bg-indigo-50',
+  'border-rose-200 text-rose-600 bg-rose-50',
+  'border-teal-200 text-teal-600 bg-teal-50',
+  'border-lime-200 text-lime-600 bg-lime-50',
+  'border-fuchsia-200 text-fuchsia-600 bg-fuchsia-50',
+  'border-violet-200 text-violet-600 bg-violet-50',
+  'border-sky-200 text-sky-600 bg-sky-50',
+  'border-emerald-200 text-emerald-600 bg-emerald-50',
+]
+
+// 简单的哈希函数，用于生成随机颜色
+const hashCode = (str: string) => {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i)
+    hash = hash & hash // 转换为 32 位整数
+  }
+  return Math.abs(hash)
+}
+
+const getTagClass = (tag: string) => {
+  // 基于标签内容生成随机颜色，同一标签在不同卡片中颜色一致
+  const index = hashCode(tag) % tagColors.length
+  return tagColors[index]
 }
 
 const handleSearch = () => {
