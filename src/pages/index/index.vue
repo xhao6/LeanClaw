@@ -99,15 +99,26 @@
 
         <!-- 推荐列表 -->
         <view v-else class="space-y-3">
-          <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
-            <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-contain bg-gray-100 shrink-0" />
-            <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
-              <view class="flex-1">
-                <view class="flex justify-between items-start">
-                     <text class="font-bold text-sm text-gray-800 line-clamp-3 mb-1">{{ item.title }}</text>
-                  </view>
-                <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ item.desc }}</text>
+          <view v-for="item in recommendations" :key="item.id" class="bg-white p-4 rounded-2xl shadow-sm active:bg-gray-50 transition-all" @click="handleRecommendClick(item)">
+            <!-- 标题 -->
+            <view class="flex justify-between items-start mb-2">
+              <text class="text-h2 line-clamp-2 flex-1 leading-snug pr-2">{{ item.title }}</text>
+              <view class="flex items-center gap-1 shrink-0" @click.stop="handleToggleFavorite(item)">
+                <wd-icon :name="isFavorited(item.id) ? 'star-filled' : 'star'" size="20px" :class="isFavorited(item.id) ? 'text-orange' : 'text-gray-300'" />
               </view>
+            </view>
+            <!-- 描述 -->
+            <text class="text-body text-gray-500 line-clamp-2 mb-3">{{ item.desc }}</text>
+            <!-- 标签 -->
+            <view v-if="item.tags && item.tags.length" class="flex flex-wrap gap-2">
+              <text
+                v-for="(tag, tagIndex) in item.tags"
+                :key="tagIndex"
+                class="px-3 py-1 text-xs rounded-full border"
+                :class="getTagClass(tag)"
+              >
+                {{ tag }}
+              </text>
             </view>
           </view>
         </view>
