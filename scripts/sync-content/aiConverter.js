@@ -33,14 +33,18 @@ turndownService.addRule('images', {
 
 const SYSTEM_PROMPT = `你是一个专业的技术文章整理助手。请将以下HTML内容转换为干净的Markdown格式。
 
+## 原始文章标题
+[TITLE_PLACEHOLDER]
+
 要求：
-1. 保留标题结构（# ## ###）
-2. 保留代码块（用\`\`\`包裹）
-3. 保留图片（用![描述](URL)格式）
-4. 移除广告、导航栏、页脚等无关内容
-5. 代码块保留原始缩进
-6. 列表保持原有结构
-7. 链接保留，只保留文字描述
+1. 文章第一行必须是 # 后面跟着原始文章标题
+2. 保留标题结构（# ## ###）
+3. 保留代码块（用\`\`\`包裹）
+4. 保留图片（用![描述](URL)格式）
+5. 移除广告、导航栏、页脚等无关内容
+6. 代码块保留原始缩进
+7. 列表保持原有结构
+8. 链接保留，只保留文字描述
 
 ## 重要：添加导读和出处
 
@@ -71,10 +75,14 @@ export function basicConvert(html) {
  * @param {string} html - HTML 内容
  * @param {string} sourceUrl - 原始 URL（用于转载出处）
  * @param {string} sourceName - 来源网站名称
+ * @param {string} title - 原始文章标题
  */
-async function aiOptimize(html, sourceUrl = '', sourceName = '') {
+async function aiOptimize(html, sourceUrl = '', sourceName = '', title = '') {
   try {
     console.log('[AIConverter] 调用魔搭 API...')
+
+    // 替换 SYSTEM_PROMPT 中的标题占位符
+    const systemPrompt = SYSTEM_PROMPT.replace('[TITLE_PLACEHOLDER]', title || '(无)')
 
     // 构建用户提示，包含原始 URL 和来源信息
     let userPrompt = `请将以下HTML内容转换为Markdown：\n\n${html.substring(0, 15000)}`
@@ -89,7 +97,7 @@ async function aiOptimize(html, sourceUrl = '', sourceName = '') {
     const response = await getClient().chat.completions.create({
       model: config.modelscope.model,
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt }
       ],
       temperature: 0.3,
@@ -116,8 +124,9 @@ async function aiOptimize(html, sourceUrl = '', sourceName = '') {
  * @param {string} html - HTML 内容
  * @param {string} sourceUrl - 原始 URL（用于转载出处）
  * @param {string} sourceName - 来源网站名称（可选，默认从 URL 提取）
+ * @param {string} title - 原始文章标题（可选）
  */
-export async function convertHtmlToMarkdown(html, sourceUrl = '', sourceName = '') {
+export async function convertHtmlToMarkdown(html, sourceUrl = '', sourceName = '', title = '') {
   if (!html || html.trim().length === 0) {
     return ''
   }
@@ -136,7 +145,7 @@ export async function convertHtmlToMarkdown(html, sourceUrl = '', sourceName = '
   }
 
   // 优先使用 AI 转换
-  return await aiOptimize(html, sourceUrl, sourceName)
+  return await aiOptimize(html, sourceUrl, sourceName, title)
 }
 
 /**

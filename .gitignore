@@ -17,3 +17,5 @@ test-results/
 
 # E2E test reports
 playwright-report/
+scripts/sync-content/output/
+scripts/sync-content/.env

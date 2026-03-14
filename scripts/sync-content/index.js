@@ -55,7 +55,7 @@ async function processResource(resource) {
 
   // 4. AI 转换
   console.log('[Main] 步骤4: AI 转换...')
-  const markdown = await convertHtmlToMarkdown(processedHtml, resource.url)
+  const markdown = await convertHtmlToMarkdown(processedHtml, resource.url, '', resource.title)
 
   // 5. 上传
   console.log('[Main] 步骤5: 上传到静态托管...')
