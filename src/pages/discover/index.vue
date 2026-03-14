@@ -198,13 +198,13 @@ const handleItemClick = (item: ResourceItem) => {
     })
   } else if (item.markdownUrl) {
     // 优先使用已转换的 Markdown（避免 webview 风险提示）
-    // 将 .md URL 转换为 .html URL
-    const htmlUrl = item.markdownUrl.replace(/\.md$/, '.html')
+    // 使用在线 markdown 渲染服务
+    const markdownUrl = item.markdownUrl
     // #ifdef H5
-    window.open(htmlUrl, '_blank')
+    window.open(`https://markdown.net.cn/render?url=${encodeURIComponent(markdownUrl)}`, '_blank')
     // #endif
     // #ifndef H5
-    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(htmlUrl)}` })
+    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(markdownUrl)}` })
     // #endif
   } else if (item.url) {
     // #ifdef H5
