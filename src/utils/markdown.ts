@@ -41,8 +41,9 @@ export const renderMarkdown = (content: string): string => {
 
   let rendered = md.render(content)
 
-  // 修复图片路径：/images/days/ -> /static/images/days/
-  rendered = rendered.replace(/\/images\/days\//g, '/static/images/days/')
+  // 修复图片路径：/images/days/ -> 云存储 URL
+  const CLOUD_IMAGE_BASE = 'https://leanmind-1gjtoa502716c21d-1410913126.tcloudbaseapp.com/images'
+  rendered = rendered.replace(/\/images\/days\//g, `${CLOUD_IMAGE_BASE}/days/`)
 
   // 添加样式类名
   rendered = applyStyles(rendered)
