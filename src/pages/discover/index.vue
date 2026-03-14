@@ -196,6 +196,16 @@ const handleItemClick = (item: ResourceItem) => {
     uni.navigateTo({
       url: `/pages/skill/detail?name=${encodeURIComponent(item.title)}`
     })
+  } else if (item.markdownUrl) {
+    // 优先使用已转换的 Markdown（避免 webview 风险提示）
+    // 将 .md URL 转换为 .html URL
+    const htmlUrl = item.markdownUrl.replace(/\.md$/, '.html')
+    // #ifdef H5
+    window.open(htmlUrl, '_blank')
+    // #endif
+    // #ifndef H5
+    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(htmlUrl)}` })
+    // #endif
   } else if (item.url) {
     // #ifdef H5
     window.open(item.url, '_blank')

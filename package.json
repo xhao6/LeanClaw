@@ -18,7 +18,10 @@
     "e2e": "playwright test",
     "e2e:headed": "playwright test --headed",
     "e2e:demo": "cross-env DEMO=true playwright test --headed",
-    "e2e:demo-single": "cross-env DEMO=true playwright test --headed --grep \"首页可访问\""
+    "e2e:demo-single": "cross-env DEMO=true playwright test --headed --grep \"首页可访问\"",
+    "sync:content": "node scripts/sync-content/index.js",
+    "sync:content:dev": "NODE_ENV=development node scripts/sync-content/index.js",
+    "sync:test": "node scripts/sync-content/tests/crawler.test.js"
   },
   "dependencies": {
     "@alova/adapter-uniapp": "^2.0.16",
