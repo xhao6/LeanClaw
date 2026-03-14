@@ -86,8 +86,8 @@ const applyStyles = (html: string): string => {
   styled = styled.replace(/<td>/g, '<td class="border-b border-gray-100 p-3 text-gray-600">')
   styled = styled.replace(/<tr>/g, '<tr class="hover:bg-gray-50 transition-colors">')
 
-  // 图片样式
-  styled = styled.replace(/<img/g, '<img class="w-full rounded-xl my-4 shadow-sm" mode="widthFix"')
+  // 图片样式 - 使用 aspectFit 保持原始比例，避免拉伸
+  styled = styled.replace(/<img/g, '<img class="w-full rounded-xl my-4 shadow-sm" mode="aspectFit" style="background-color: #f5f5f5;"')
 
   // 链接样式
   styled = styled.replace(/<a /g, '<a class="text-orange underline hover:text-orange-dark transition-colors" ')

@@ -15,11 +15,13 @@
         <!-- Logo -->
         <image src="/static/images/logo.webp" class="w-10 h-10 rounded-xl mr-3 shadow-sm bg-white" mode="aspectFit" />
         <view>
-          <text class="text-xl font-bold text-primary block leading-tight">轻学龙虾</text>
+          <text class="text-xl font-bold text-primary block leading-tight">轻学AI虾</text>
           <text class="text-xs text-gray-400 block mt-0.5">养只龙虾做管家</text>
         </view>
       </view>
+      <!-- #ifdef H5 -->
       <wd-icon name="notification" size="24px" class="text-gray-400" />
+      <!-- #endif -->
     </view>
 
     <!-- Learning Progress Card -->
@@ -98,7 +100,7 @@
         <!-- 推荐列表 -->
         <view v-else class="space-y-3">
           <view v-for="item in recommendations" :key="item.id" class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-colors" @click="handleRecommendClick(item)">
-            <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
+            <image :src="item.image || '/static/images/placeholder/article.svg'" class="w-24 h-24 rounded-xl mr-3 object-contain bg-gray-100 shrink-0" />
             <view class="flex-1 flex flex-col justify-between py-1 min-h-0">
               <view class="flex-1">
                 <view class="flex justify-between items-start">
@@ -167,7 +169,12 @@ const handleRecommendClick = (item: ResourceItem) => {
   addToViewed(item.id)
   // 跳转到对应页面
   if (item.url) {
+    // #ifdef H5
     window.open(item.url, '_blank')
+    // #endif
+    // #ifndef H5
+    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(item.url)}` })
+    // #endif
   }
 }
 
