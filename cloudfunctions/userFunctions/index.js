@@ -66,7 +66,9 @@ exports.main = async (event, context) => {
 
       // ---------------- Learning Progress ----------------
       case 'updateProgress': {
-        const { lessonId, status } = data;
+        // Support both data object and top-level params
+        const params = data || event;
+        const { lessonId, status } = params;
         if (!lessonId) return { success: false, message: 'Missing lessonId' };
 
         const { data: progress } = await progressCollection.where({ 
@@ -99,7 +101,9 @@ exports.main = async (event, context) => {
 
       // ---------------- Favorites System ----------------
       case 'toggleFavorite': {
-        const { resourceId, resourceType, action } = data; // action: 'add', 'remove', 'toggle'
+        // Support both data object and top-level params
+        const params = data || event;
+        const { resourceId, resourceType, action } = params; // action: 'add', 'remove', 'toggle'
         if (!resourceId) return { success: false, message: 'Missing resourceId' };
 
         const { data: existing } = await favoritesCollection.where({ 
