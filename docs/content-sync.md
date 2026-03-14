@@ -23,7 +23,7 @@ cp .env.example .env
 ```
 
 必需的配置项：
-- `DASHSCOPE_API_KEY` - 魔搭 API Key（用于 AI 转换）
+- `MODELSCOPE_API_KEY` - 魔搭 API Key（用于 AI 转换）
 - `CLOUDBASE_ENV_ID` - CloudBase 环境 ID
 - `CLOUDBASE_SECRET_ID` - CloudBase Secret ID
 - `CLOUDBASE_SECRET_KEY` - CloudBase Secret Key
