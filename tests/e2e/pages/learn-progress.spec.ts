@@ -212,7 +212,7 @@ test.describe('学习进度测试', () => {
   // ==================== 学习详情页测试 ====================
 
   test('学习详情页：可访问', async ({ page }) => {
-    await page.goto(BASE_URL + '/#/pages/learn/detail/index?day=1')
+    await page.goto(BASE_URL + '/#/pages_learn/detail/index?day=1')
     await page.waitForTimeout(1000)
 
     // 页面应有课程内容或任务区域
@@ -220,7 +220,7 @@ test.describe('学习进度测试', () => {
   })
 
   test('学习详情页：Day 1 内容正确加载', async ({ page }) => {
-    await page.goto(BASE_URL + '/#/pages/learn/detail/index?day=1')
+    await page.goto(BASE_URL + '/#/pages_learn/detail/index?day=1')
     await page.waitForTimeout(1000)
 
     // 应该有任务

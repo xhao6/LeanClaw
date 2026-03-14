@@ -19,7 +19,7 @@ test.describe('学习页面测试', () => {
   })
 
   test('学习详情页可访问', async ({ page }) => {
-    await page.goto(BASE_URL + '/#/pages/learn/detail/index?day=1')
+    await page.goto(BASE_URL + '/#/pages_learn/detail/index?day=1')
     await expect(page.locator('text=课程详情').first()).toBeVisible()
   })
 
