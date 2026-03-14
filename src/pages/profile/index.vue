@@ -64,7 +64,6 @@
     <view class="p-4 mt-2 space-y-4">
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
-          <wd-cell title="我的收藏" is-link icon="star" size="large" @click="goToFavorites" />
           <wd-cell title="我的证书" is-link icon="thumb-up" size="large" @click="goToCertificate" />
           <wd-cell title="学习统计" is-link icon="chart-bar" size="large" @click="goToStats" />
         </wd-cell-group>
