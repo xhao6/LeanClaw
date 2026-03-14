@@ -29,7 +29,8 @@ import {
   getFavorites,
   isFavorited,
   toggleFavorite,
-  clearAllFavorites
+  clearAllFavorites,
+  syncFavorites
 } from '../favorites'
 
 describe('favorites 收藏功能', () => {
@@ -119,6 +120,57 @@ describe('favorites 收藏功能', () => {
       mockApiToggleFavorite.mockClear()
       removeFavorite(mockItem.id)
       expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'remove')
+    })
+  })
+
+  describe('syncFavorites 云端同步', () => {
+    it('合并云端和本地收藏（取并集）', () => {
+      // 先添加本地收藏
+      addFavorite(mockItem)
+      expect(getFavorites()).toHaveLength(1)
+
+      // 云端有不同数据
+      const cloudData = [
+        { _id: 'cloud-1', resourceId: 'cloud-resource-1', resourceType: 'resource' },
+        { _id: 'cloud-2', resourceId: 'cloud-resource-2', resourceType: 'skill' }
+      ]
+
+      // 同步
+      syncFavorites(cloudData)
+
+      // 应该合并双方的收藏
+      const favorites = getFavorites()
+      expect(favorites).toHaveLength(3)
+      const ids = favorites.map(f => f.id)
+      expect(ids).toContain('test-1')
+      expect(ids).toContain('cloud-resource-1')
+      expect(ids).toContain('cloud-resource-2')
+    })
+
+    it('本地详情应被保留', () => {
+      addFavorite(mockItem)
+
+      // 云端有相同 id
+      const cloudData = [
+        { _id: 'cloud-1', resourceId: 'test-1', resourceType: 'resource' }
+      ]
+
+      syncFavorites(cloudData)
+
+      // 本地详情应保留
+      const favorites = getFavorites()
+      expect(favorites[0].title).toBe('测试资源')
+      expect(favorites[0].desc).toBe('测试描述')
+    })
+
+    it('空云端数据应保留本地收藏', () => {
+      addFavorite(mockItem)
+      expect(getFavorites()).toHaveLength(1)
+
+      syncFavorites([])
+
+      // 本地收藏应保留
+      expect(getFavorites()).toHaveLength(1)
     })
   })
 })

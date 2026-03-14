@@ -44,18 +44,18 @@
     <view class="px-4 -mt-8 relative z-20">
       <view class="bg-white rounded-2xl shadow-lg shadow-blue-900/5 p-5 flex justify-around items-center">
         <view class="text-center">
-          <view class="text-xl font-bold text-primary mb-1">{{ progress.currentDay - 1 }}</view>
-          <view class="text-xs text-gray-400">已学天数</view>
-        </view>
-        <view class="w-[1px] h-8 bg-gray-100"></view>
-        <view class="text-center">
           <view class="text-xl font-bold text-orange mb-1">{{ completedLessonsCount }}</view>
           <view class="text-xs text-gray-400">完成课程</view>
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
+        <view class="text-center" @click="goToFavorites">
+          <view class="text-xl font-bold text-primary mb-1">{{ favoritesCount }}</view>
+          <view class="text-xs text-gray-400">我的收藏</view>
+        </view>
+        <view class="w-[1px] h-8 bg-gray-100"></view>
         <view class="text-center">
           <view class="text-xl font-bold text-green-500 mb-1">{{ progress.badges?.length || 0 }}</view>
-          <view class="text-xs text-gray-400">获得徽章</view>
+          <view class="text-xs text-gray-400">我的徽章</view>
         </view>
       </view>
     </view>
@@ -73,8 +73,8 @@
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
           <wd-cell title="消息通知" is-link icon="notification" size="large" @click="goToNotifications" />
-          <wd-cell title="用户协议" is-link icon="document" size="large" @click="goToAgreement" />
-          <wd-cell title="隐私政策" is-link icon="shield" size="large" @click="goToPrivacy" />
+          <wd-cell title="用户协议" is-link icon="file" size="large" @click="goToAgreement" />
+          <wd-cell title="隐私政策" is-link icon="lock-on" size="large" @click="goToPrivacy" />
           <wd-cell title="关于 LeanClaw" is-link icon="info-circle" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
@@ -87,23 +87,38 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
 import { getProgress } from '@/utils/learnProgress'
-import { getFavoritesCount } from '@/utils/favorites'
+import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
+import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
 const progress = getProgress()
+
+// 使用 computed 实现响应式
 const favoritesCount = computed(() => getFavoritesCount())
 const completedLessonsCount = computed(() => progress.completedLessons?.length || 0)
 
-onShow(() => {
+onShow(async () => {
   if (isLoggedIn.value) {
     userStore.fetchProfile()
+
+    // 同步云端收藏数据
+    try {
+      const res = await getCloudFavorites()
+      if (res.success && res.data) {
+        syncFavorites(res.data)
+      } else if (res.success === false) {
+        console.warn('同步收藏失败:', res.message)
+      }
+    } catch (e) {
+      console.warn('同步收藏失败', e)
+    }
   }
 })
 

@@ -113,3 +113,50 @@ export const getFavoritesCount = (): number => {
 export const clearAllFavorites = (): void => {
   saveFavorites([])
 }
+
+// 云端收藏数据接口（与云端返回一致）
+interface CloudFavoriteItem {
+  _id?: string;
+  resourceId: string;
+  resourceType?: string;
+  createdAt?: any;
+}
+
+// 从云端同步收藏数据
+// 合并本地和云端数据（取并集），保留两边都有的收藏
+export const syncFavorites = (cloudData: CloudFavoriteItem[]): void => {
+  const localFavorites = getFavorites()
+  const cloudIds = new Set(cloudData.map(item => item.resourceId))
+
+  // 构建云端收藏 Map
+  const cloudMap = new Map(cloudData.map(item => [item.resourceId, item]))
+
+  // 合并：云端有则用云端，本地有则保留
+  const merged: FavoriteItem[] = []
+
+  // 先处理云端数据
+  cloudData.forEach(item => {
+    const localItem = localFavorites.find(f => f.id === item.resourceId)
+    merged.push({
+      id: item.resourceId,
+      type: (item.resourceType as 'resource' | 'case' | 'skill') || 'resource',
+      // 保留本地详情（如果有）
+      title: localItem?.title || '',
+      desc: localItem?.desc || '',
+      url: localItem?.url,
+      image: localItem?.image,
+      tags: localItem?.tags || [],
+      stars: localItem?.stars,
+      addedAt: item.createdAt ? new Date(item.createdAt).getTime() : (localItem?.addedAt || Date.now())
+    })
+  })
+
+  // 再添加本地独有的（云端没有的）
+  localFavorites.forEach(item => {
+    if (!cloudIds.has(item.id)) {
+      merged.push(item)
+    }
+  })
+
+  saveFavorites(merged)
+}
