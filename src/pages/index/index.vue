@@ -180,7 +180,16 @@ onMounted(() => {
 const handleRecommendClick = (item: ResourceItem) => {
   addToViewed(item.id)
   // 跳转到对应页面
-  if (item.url) {
+  if (item.markdownUrl) {
+    // 优先使用 markdownUrl
+    const markdownUrl = item.markdownUrl
+    // #ifdef H5
+    window.open(`https://markdown.net.cn/render?url=${encodeURIComponent(markdownUrl)}`, '_blank')
+    // #endif
+    // #ifndef H5
+    uni.navigateTo({ url: `/pages/webview/index?url=${encodeURIComponent(markdownUrl)}` })
+    // #endif
+  } else if (item.url) {
     // #ifdef H5
     window.open(item.url, '_blank')
     // #endif
@@ -206,14 +215,32 @@ const handleGoSkills = () => {
 }
 
 // 获取标签样式
-const getTagClass = (tag: string) => {
-  const tagClasses: Record<string, string> = {
-    '教程': 'border-orange/30 text-orange bg-orange/5',
-    '工具': 'border-blue-300/30 text-blue-500 bg-blue-50',
-    '案例': 'border-green-300/30 text-green-600 bg-green-50',
-    '资源': 'border-purple-300/30 text-purple-500 bg-purple-50',
+const tagColors = [
+  'border-orange-200 text-orange-600 bg-orange-50',
+  'border-blue-200 text-blue-600 bg-blue-50',
+  'border-green-200 text-green-600 bg-green-50',
+  'border-purple-200 text-purple-600 bg-purple-50',
+  'border-pink-200 text-pink-600 bg-pink-50',
+  'border-amber-200 text-amber-600 bg-amber-50',
+  'border-cyan-200 text-cyan-600 bg-cyan-50',
+  'border-indigo-200 text-indigo-600 bg-indigo-50',
+  'border-rose-200 text-rose-600 bg-rose-50',
+  'border-teal-200 text-teal-600 bg-teal-50',
+]
+
+// 哈希函数
+const hashCode = (str: string) => {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i)
+    hash = hash & hash
   }
-  return tagClasses[tag] || 'border-gray-200 text-gray-500 bg-gray-50'
+  return Math.abs(hash)
+}
+
+const getTagClass = (tag: string) => {
+  const index = hashCode(tag) % tagColors.length
+  return tagColors[index]
 }
 
 // 切换收藏
