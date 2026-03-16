@@ -31,25 +31,27 @@
         <view
           v-for="(item, index) in filteredFavorites"
           :key="item.id"
-          class="bg-white p-3 rounded-2xl shadow-sm flex active:bg-gray-50 transition-all"
+          class="bg-white p-4 rounded-2xl shadow-sm active:bg-gray-50 transition-all"
         >
-          <image :src="item.image || getPlaceholder(item)" class="w-20 h-20 rounded-xl mr-3 object-cover bg-gray-100 shrink-0" />
-          <view class="flex-1 flex flex-col justify-between py-1 min-w-0">
-            <view>
-              <view class="flex justify-between items-start">
-                <text class="font-bold text-sm text-gray-800 line-clamp-1 flex-1">{{ item.title }}</text>
-                <view class="ml-2" @click.stop="handleRemoveFavorite(item.id)">
-                  <wd-icon name="star-filled" size="18px" class="text-orange" />
-                </view>
-              </view>
-              <text class="text-xs text-gray-500 line-clamp-2 leading-relaxed mt-1">{{ item.desc }}</text>
+          <!-- 标题 -->
+          <view class="flex justify-between items-start mb-2">
+            <text class="text-h2 line-clamp-2 flex-1 leading-snug pr-2">{{ item.title }}</text>
+            <view class="flex items-center gap-1 shrink-0" @click.stop="handleRemoveFavorite(item.id)">
+              <wd-icon name="star-filled" size="20px" class="text-orange" />
             </view>
-            <view class="flex items-center justify-between mt-2">
-              <view class="flex items-center space-x-1">
-                <wd-tag size="small" :type="getTypeTagType(item.type)" custom-class="!h-5 !px-1.5 !text-[10px]">{{ getTypeLabel(item.type) }}</wd-tag>
-              </view>
-              <text class="text-xs text-gray-400">{{ formatDate(item.addedAt) }}</text>
-            </view>
+          </view>
+          <!-- 描述 -->
+          <text class="text-body text-gray-500 line-clamp-2 mb-3">{{ item.desc }}</text>
+          <!-- 标签 -->
+          <view v-if="item.tags && item.tags.length" class="flex flex-wrap gap-2">
+            <text
+              v-for="(tag, tagIndex) in item.tags"
+              :key="tagIndex"
+              class="px-3 py-1 text-xs rounded-full border"
+              :class="getTagClass(tag)"
+            >
+              {{ tag }}
+            </text>
           </view>
         </view>
       </view>
@@ -82,35 +84,33 @@ const filteredFavorites = computed(() => {
   return validFavorites.filter(item => item.type === activeTab.value)
 })
 
-const getPlaceholder = (item: FavoriteItem) => {
-  if (item.type === 'skill') return '/static/images/placeholder/skill.svg'
-  if (item.type === 'case') return '/static/images/placeholder/case.svg'
-  return '/static/images/placeholder/article.svg'
-}
+// 标签颜色池
+const tagColors = [
+  'border-orange-200 text-orange-600 bg-orange-50',
+  'border-blue-200 text-blue-600 bg-blue-50',
+  'border-green-200 text-green-600 bg-green-50',
+  'border-purple-200 text-purple-600 bg-purple-50',
+  'border-pink-200 text-pink-600 bg-pink-50',
+  'border-amber-200 text-amber-600 bg-amber-50',
+  'border-cyan-200 text-cyan-600 bg-cyan-50',
+  'border-indigo-200 text-indigo-600 bg-indigo-50',
+  'border-rose-200 text-rose-600 bg-rose-50',
+  'border-teal-200 text-teal-600 bg-teal-10',
+]
 
-const getTypeLabel = (type: string) => {
-  const map: Record<string, string> = {
-    resource: '资源',
-    case: '案例',
-    skill: 'Skill'
+// 哈希函数
+const hashCode = (str: string) => {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i)
+    hash = hash & hash
   }
-  return map[type] || type
+  return Math.abs(hash)
 }
 
-const getTypeTagType = (type: string): 'default' | 'primary' | 'success' | 'warning' | 'danger' => {
-  const map: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'danger'> = {
-    resource: 'primary',
-    case: 'success',
-    skill: 'warning'
-  }
-  return map[type] || 'default'
-}
-
-const formatDate = (timestamp: number) => {
-  const date = new Date(timestamp)
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  return `${month}月${day}日`
+const getTagClass = (tag: string) => {
+  const index = hashCode(tag) % tagColors.length
+  return tagColors[index]
 }
 
 const handleTabChange = () => {

@@ -1,8 +1,25 @@
 // 收藏模块
 // 使用 uni.setStorageSync / uni.getStorageSync 进行数据持久化
 
+import { reactive, shallowRef } from 'vue'
 import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite as apiToggleFavorite } from '@/api/modules/user'
+
+// 响应式收藏状态追踪器
+const favoriteIds = shallowRef<Set<string>>(new Set())
+const favoritesVersion = reactive({ value: 0 })
+
+// 初始化加载收藏 ID
+const loadFavoriteIds = () => {
+  const list = getFavorites()
+  favoriteIds.value = new Set(list.map(item => item.id))
+}
+
+// 触发收藏状态更新
+export const refreshFavoriteStatus = () => {
+  loadFavoriteIds()
+  favoritesVersion.value++
+}
 
 // 收藏项接口
 export interface FavoriteItem {
@@ -42,10 +59,16 @@ const saveFavorites = (favorites: FavoriteItem[]): void => {
   }
 }
 
-// 检查是否已收藏
+// 检查是否已收藏（响应式）
 export const isFavorited = (id: string): boolean => {
-  const favorites = getFavorites()
-  return favorites.some(item => item.id === id)
+  // 访问 favoritesVersion 以追踪依赖
+  void favoritesVersion.value
+  return favoriteIds.value.has(id)
+}
+
+// 初始化（在模块加载时执行）
+if (typeof uni !== 'undefined') {
+  loadFavoriteIds()
 }
 
 // 添加收藏
@@ -74,6 +97,8 @@ export const addFavorite = (item: ResourceItem): boolean => {
 
   favorites.unshift(favoriteItem)  // 添加到列表头部
   saveFavorites(favorites)
+  // 触发响应式更新
+  refreshFavoriteStatus()
   return true
 }
 
@@ -92,6 +117,8 @@ export const removeFavorite = (id: string): boolean => {
 
   favorites.splice(index, 1)
   saveFavorites(favorites)
+  // 触发响应式更新
+  refreshFavoriteStatus()
   return true
 }
 
@@ -112,6 +139,8 @@ export const getFavoritesCount = (): number => {
 // 清空所有收藏
 export const clearAllFavorites = (): void => {
   saveFavorites([])
+  // 触发响应式更新
+  refreshFavoriteStatus()
 }
 
 // 云端收藏数据接口（与云端返回一致）
@@ -159,4 +188,6 @@ export const syncFavorites = (cloudData: CloudFavoriteItem[]): void => {
   })
 
   saveFavorites(merged)
+  // 触发响应式更新
+  refreshFavoriteStatus()
 }
