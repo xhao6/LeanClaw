@@ -16,8 +16,13 @@ export const getResources = async (params: any = {}) => {
     const cloudRes = await callFunctionWeb('getResources', { type, tag, page: safePage, limit: safeLimit })
     if (cloudRes && cloudRes.success && cloudRes.list) {
       console.log('[Resources] Using cloud function data')
+      // 将 _id 映射为 id（云数据库返回 _id，前端期望 id）
+      const list = cloudRes.list.map((item: any) => ({
+        ...item,
+        id: item._id || item.id
+      }))
       return {
-        list: cloudRes.list,
+        list,
         total: cloudRes.total
       }
     }

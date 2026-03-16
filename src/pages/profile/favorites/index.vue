@@ -74,10 +74,12 @@ const tabs = [
 const favorites = ref<FavoriteItem[]>(getFavorites())
 
 const filteredFavorites = computed(() => {
+  // 过滤掉没有标题的无效收藏
+  const validFavorites = favorites.value.filter(item => item.title)
   if (activeTab.value === 'all') {
-    return favorites.value
+    return validFavorites
   }
-  return favorites.value.filter(item => item.type === activeTab.value)
+  return validFavorites.filter(item => item.type === activeTab.value)
 })
 
 const getPlaceholder = (item: FavoriteItem) => {
