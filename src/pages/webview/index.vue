@@ -35,10 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, useCssModule } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import ArticleFooter from '@/components/ArticleFooter.vue'
+
+// 强制引用组件，避免被微信小程序依赖分析过滤
+const _ArticleFooter = ArticleFooter
 
 const url = ref('')
 const resourceInfo = ref<{
