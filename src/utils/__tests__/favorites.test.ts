@@ -121,7 +121,6 @@ describe('favorites 收藏功能', () => {
       removeFavorite(mockItem.id)
       expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'remove')
     })
-  })
 
   describe('syncFavorites 云端同步', () => {
     it('合并云端和本地收藏（取并集）', () => {

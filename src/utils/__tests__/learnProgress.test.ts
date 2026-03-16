@@ -263,4 +263,30 @@ describe('learnProgress 工具函数', () => {
       expect(progress.currentDay).toBe(2)
     })
   })
+
+  describe('getProgress 数据一致性', () => {
+    it('应返回存储中最新的进度数据', () => {
+      // 初始状态
+      const progress1 = getProgress()
+      expect(progress1.completedLessons).toEqual([])
+
+      // 直接修改存储
+      storage['learn_progress'] = {
+        currentDay: 3,
+        completedLessons: ['day-1', 'day-2'],
+        totalTime: 120,
+        streak: 2,
+        lastLearnDate: '2024-01-01',
+        badges: ['badge-1'],
+        certificate: false
+      }
+
+      // 再次获取应返回最新数据
+      const progress2 = getProgress()
+      expect(progress2.completedLessons).toHaveLength(2)
+      expect(progress2.completedLessons).toContain('day-1')
+      expect(progress2.completedLessons).toContain('day-2')
+      expect(progress2.currentDay).toBe(3)
+    })
+  })
 })
