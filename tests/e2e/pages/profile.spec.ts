@@ -15,6 +15,13 @@ test.describe('我的页面测试', () => {
     await expect(page.locator('text=登录同步学习进度')).toBeVisible()
   })
 
+  test('未登录时不显示退出登录按钮', async ({ page }) => {
+    await page.goto(`${BASE_URL}/#/pages/profile/index`)
+
+    // 验证未登录时不显示退出登录按钮
+    await expect(page.locator('text=退出登录')).not.toBeVisible()
+  })
+
   test('显示学习统计', async ({ page }) => {
     await page.goto(`${BASE_URL}/#/pages/profile/index`)
 

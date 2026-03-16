@@ -5,9 +5,12 @@ import { callFunction } from '../core/cloud'
  * Uses wx.login internally (optional, as CloudBase automatically handles OpenID)
  * But calling 'userFunctions' ensures user record exists in DB
  */
-export const login = async () => {
+export const login = async (data?: { userInfo: any }) => {
   try {
-    const res = await callFunction('userFunctions', { type: 'login' })
+    const res = await callFunction('userFunctions', {
+      type: 'login',
+      data
+    })
     return res
   } catch (err) {
     console.error('Login failed', err)

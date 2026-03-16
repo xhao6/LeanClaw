@@ -122,12 +122,38 @@ onShow(async () => {
 
 const handleLogin = async () => {
   if (isLoggedIn.value) return
-  
+
   uni.showLoading({ title: '登录中...' })
+
   try {
-    await userStore.login()
+    let wechatUserInfo = null
+
+    // #ifdef MP-WEIXIN
+    // 微信小程序：尝试获取用户授权信息（可选，用户可拒绝）
+    try {
+      wechatUserInfo = await new Promise<any>((resolve) => {
+        wx.getUserProfile({
+          desc: '用于完善用户资料',
+          success: (res: any) => {
+            resolve(res.userInfo)
+          },
+          fail: () => {
+            // 用户拒绝授权，继续登录但不传递用户信息
+            resolve(null)
+          }
+        })
+      })
+    } catch (e) {
+      console.log('获取授权失败，继续登录:', e)
+    }
+    // #endif
+
+    // 调用云函数登录
+    await userStore.login(wechatUserInfo)
+
     uni.showToast({ title: '登录成功', icon: 'success' })
   } catch (e) {
+    console.error('登录失败:', e)
     uni.showToast({ title: '登录失败', icon: 'none' })
   } finally {
     uni.hideLoading()

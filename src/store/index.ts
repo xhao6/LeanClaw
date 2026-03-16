@@ -28,36 +28,49 @@ export const useUserStore = defineStore('user', () => {
   const fetchProfile = async () => {
     try {
       const res = await apiGetProfile()
-      if (res.success && res.user) {
-        setUserInfo(res.user)
-        
+      // 适配云函数返回格式：res.data.user
+      if (res.success && res.data && res.data.user) {
+        const user = res.data.user
+        setUserInfo({
+          id: user._id || user._openid,
+          name: user.name || '龙虾驯养员',
+          avatar: user.avatar || '',
+          level: user.level || 1,
+          exp: user.exp || 0
+        })
+
         // Fetch and sync progress
         const progressRes = await apiGetProgress()
-        if (progressRes.success && Array.isArray(progressRes.data)) {
-           syncCloudProgress(progressRes.data)
+        if (progressRes.success && progressRes.data && progressRes.data.list) {
+           syncCloudProgress(progressRes.data.list)
         }
       }
       return res
     } catch (err) {
       console.error('Fetch profile failed', err)
-      // Silent fail is okay if just checking status
     }
   }
 
-  const login = async () => {
+  const login = async (wechatUserInfo?: any) => {
     try {
-      // Call Cloud Function Login
-      const res = await apiLogin()
-      if (res.success) {
-        setUserInfo(res.user)
-        if (res.token) {
-            setToken(res.token)
-        }
-        
+      // Call Cloud Function Login，传递微信用户信息
+      const res = await apiLogin(wechatUserInfo ? { userInfo: wechatUserInfo } : undefined)
+      // 适配云函数返回格式：res.data
+      if (res.success && res.data) {
+        const user = res.data
+        setUserInfo({
+          id: user._id || user._openid,
+          name: user.name || wechatUserInfo?.nickName || '龙虾驯养员',
+          avatar: user.avatar || wechatUserInfo?.avatarUrl || '',
+          level: user.level || 1,
+          exp: user.exp || 0
+        })
+        // 不需要 token，CloudBase 自动管理 OpenID
+
         // Fetch and sync progress
         const progressRes = await apiGetProgress()
-        if (progressRes.success && Array.isArray(progressRes.data)) {
-           syncCloudProgress(progressRes.data)
+        if (progressRes.success && progressRes.data && progressRes.data.list) {
+           syncCloudProgress(progressRes.data.list)
         }
       }
       return res
