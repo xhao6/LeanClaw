@@ -138,9 +138,11 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
-import { useTagColors } from '@/composables/useTagColors'
+import { getTagClass } from '@/composables/useTagColors'
+import { useUserStore } from '@/store'
 import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
 
@@ -149,9 +151,6 @@ const progress = getProgress()
 
 // 今日推荐
 const { recommendations, loading, hasMore, error, loadRecommendations, loadMore, addToViewed } = useRecommendations()
-
-// 标签颜色
-const { getTagClass } = useTagColors()
 
 // 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
@@ -220,6 +219,24 @@ const handleGoSkills = () => {
 
 // 切换收藏
 const handleToggleFavorite = (item: ResourceItem) => {
+  // 检查登录状态
+  const userStore = useUserStore()
+  const { isLoggedIn } = storeToRefs(userStore)
+
+  if (!isLoggedIn.value) {
+    uni.showModal({
+      title: '提示',
+      content: '登录后可收藏内容，是否前往登录？',
+      success: (res) => {
+        if (res.confirm) {
+          uni.switchTab({ url: '/pages/profile/index' })
+        }
+      }
+    })
+    return
+  }
+
+  // 原有逻辑
   toggleFavorite(item)
   if (isFavorited(item.id)) {
     uni.showToast({ title: '已收藏', icon: 'success' })

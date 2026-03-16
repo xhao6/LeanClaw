@@ -91,9 +91,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
-import { useTagColors } from '@/composables/useTagColors'
+import { getTagClass } from '@/composables/useTagColors'
+import { useUserStore } from '@/store'
 import type { ResourceItem } from '@/types/resource'
 
 const searchValue = ref('')
@@ -104,9 +106,6 @@ const items = ref<ResourceItem[]>([])
 const currentPage = ref(1)
 const hasMore = ref(true)
 const PAGE_SIZE = 20
-
-// 标签颜色
-const { getTagClass } = useTagColors()
 
 const tabs = [
   { label: '优质资源', name: 'resource' },
@@ -229,6 +228,24 @@ const handleItemClick = (item: ResourceItem) => {
 }
 
 const handleToggleFavorite = (item: ResourceItem) => {
+  // 检查登录状态
+  const userStore = useUserStore()
+  const { isLoggedIn } = storeToRefs(userStore)
+
+  if (!isLoggedIn.value) {
+    uni.showModal({
+      title: '提示',
+      content: '登录后可收藏内容，是否前往登录？',
+      success: (res) => {
+        if (res.confirm) {
+          uni.switchTab({ url: '/pages/profile/index' })
+        }
+      }
+    })
+    return
+  }
+
+  // 原有逻辑
   toggleFavorite(item)
   if (isFavorited(item.id)) {
     uni.showToast({ title: '已收藏', icon: 'success' })
