@@ -160,20 +160,34 @@ describe('favorites 收藏功能', () => {
       expect(ids).toContain('cloud-resource-2')
     })
 
-    it('本地详情应被保留', () => {
+    it('云端有完整数据时应使用云端数据', () => {
+      // 先添加本地收藏
       addFavorite(mockItem)
 
-      // 云端有相同 id
+      // 云端有相同 id 且有完整数据
       const cloudData = [
-        { _id: 'cloud-1', resourceId: 'test-1', resourceType: 'resource' }
+        {
+          _id: 'cloud-1',
+          resourceId: 'test-1',
+          resourceType: 'resource',
+          title: '云端标题',
+          desc: '云端描述',
+          url: 'https://cloud.com',
+          image: 'https://cloud.com/img.png',
+          tags: ['云端标签'],
+          createdAt: new Date('2024-01-01')
+        }
       ]
 
       syncFavorites(cloudData)
 
-      // 本地详情应保留
+      // 应使用云端数据
       const favorites = getFavorites()
-      expect(favorites[0].title).toBe('测试资源')
-      expect(favorites[0].desc).toBe('测试描述')
+      expect(favorites[0].title).toBe('云端标题')
+      expect(favorites[0].desc).toBe('云端描述')
+      expect(favorites[0].url).toBe('https://cloud.com')
+      expect(favorites[0].image).toBe('https://cloud.com/img.png')
+      expect(favorites[0].tags).toEqual(['云端标签'])
     })
 
     it('空云端数据应保留本地收藏', () => {
@@ -184,6 +198,28 @@ describe('favorites 收藏功能', () => {
 
       // 本地收藏应保留
       expect(getFavorites()).toHaveLength(1)
+    })
+
+    it('syncFavorites 应正确处理云端完整数据', () => {
+      const cloudData = [
+        {
+          resourceId: 'cloud-1',
+          resourceType: 'resource',
+          title: '测试资源标题',
+          desc: '测试资源描述',
+          url: 'https://example.com',
+          tags: ['标签1', '标签2'],
+          createdAt: new Date('2024-01-01')
+        }
+      ]
+
+      syncFavorites(cloudData)
+
+      const favorites = getFavorites()
+      expect(favorites).toHaveLength(1)
+      expect(favorites[0].title).toBe('测试资源标题')
+      expect(favorites[0].desc).toBe('测试资源描述')
+      expect(favorites[0].tags).toEqual(['标签1', '标签2'])
     })
   })
 })
