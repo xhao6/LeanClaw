@@ -54,7 +54,7 @@
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
         <view class="text-center">
-          <view class="text-xl font-bold text-green-500 mb-1">{{ progress.badges?.length || 0 }}</view>
+          <view class="text-xl font-bold text-green-500 mb-1">{{ badgesCount }}</view>
           <view class="text-xs text-gray-400">我的徽章</view>
         </view>
       </view>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
@@ -96,11 +96,10 @@ import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
-const progress = getProgress()
-
-// 使用 computed 实现响应式
+// 使用 computed 实现响应式 - 直接调用函数获取最新数据
 const favoritesCount = computed(() => getFavoritesCount())
-const completedLessonsCount = computed(() => progress.completedLessons?.length || 0)
+const completedLessonsCount = computed(() => getProgress().completedLessons?.length || 0)
+const badgesCount = computed(() => getProgress().badges?.length || 0)
 
 onShow(async () => {
   if (isLoggedIn.value) {

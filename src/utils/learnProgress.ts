@@ -9,6 +9,11 @@ import { createCertificate, type Certificate } from '@/data/certificate'
 const STORAGE_KEY = 'learn_progress'
 const CERTIFICATE_DATE_KEY = 'certificate_date'
 
+// 触发进度更新
+export const refreshProgress = (): LearnProgress => {
+  return getProgress()
+}
+
 // LearnProgress 接口定义
 export interface LearnProgress {
   currentDay: number;        // 当前学习第几天 (1-7)
