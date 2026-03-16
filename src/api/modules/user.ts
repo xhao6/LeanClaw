@@ -47,16 +47,28 @@ export const getProgress = async () => {
 
 /**
  * Toggle Favorite
- * @param resourceId Resource ID
- * @param resourceType Resource Type
- * @param action 'add' | 'remove' | 'toggle'
+ * @param params.resourceId Resource ID
+ * @param params.resourceType Resource Type
+ * @param params.title Resource Title
+ * @param params.desc Resource Description
+ * @param params.url Resource URL
+ * @param params.image Resource Image URL
+ * @param params.tags Resource Tags
+ * @param params.action 'add' | 'remove' | 'toggle'
  */
-export const toggleFavorite = async (resourceId: string, resourceType: string = 'resource', action: 'add' | 'remove' | 'toggle' = 'toggle') => {
+export const toggleFavorite = async (params: {
+  resourceId: string
+  resourceType?: string
+  title?: string
+  desc?: string
+  url?: string
+  image?: string
+  tags?: string[]
+  action?: 'add' | 'remove' | 'toggle'
+}) => {
   return callFunction('userFunctions', {
     type: 'toggleFavorite',
-    resourceId,
-    resourceType,
-    action
+    ...params
   })
 }
 

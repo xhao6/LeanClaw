@@ -79,7 +79,16 @@ export const addFavorite = (item: ResourceItem): boolean => {
   }
 
   // Cloud Sync
-  apiToggleFavorite(item.id, item.type, 'add').catch(e => console.warn('Cloud add fav failed', e))
+  apiToggleFavorite({
+    resourceId: item.id,
+    resourceType: item.type,
+    title: item.title,
+    desc: item.desc,
+    url: item.url,
+    image: item.image,
+    tags: item.tags,
+    action: 'add'
+  }).catch(e => console.warn('Cloud add fav failed', e))
 
   const favorites = getFavorites()
 
@@ -131,9 +140,9 @@ export const toggleFavorite = (item: ResourceItem): boolean => {
   }
 }
 
-// 获取收藏数量
+// 获取收藏数量（过滤掉没有标题的无效收藏）
 export const getFavoritesCount = (): number => {
-  return getFavorites().length
+  return getFavorites().filter(item => item.title).length
 }
 
 // 清空所有收藏
