@@ -43,7 +43,7 @@
     <!-- Stats Card -->
     <view class="px-4 -mt-8 relative z-20">
       <view class="bg-white rounded-2xl shadow-lg shadow-blue-900/5 p-5 flex justify-around items-center">
-        <view class="text-center" @click="goToStats">
+        <view class="text-center" @click="goToLearn">
           <view class="text-xl font-bold text-orange mb-1">{{ completedLessonsCount }}</view>
           <view class="text-xs text-gray-400">完成课程</view>
         </view>
@@ -139,7 +139,7 @@ onShow(async () => {
 const handleLogin = async () => {
   if (isLoggedIn.value) return
 
-  uni.showLoading({ title: '登录中...' })
+  uni.showLoading({ title: '登录中...', mask: true })
 
   try {
     let wechatUserInfo = null
@@ -197,6 +197,13 @@ const goToFavorites = () => {
 const goToCertificate = () => {
   uni.navigateTo({
     url: '/pages/profile/certificate/index'
+  })
+}
+
+// 跳转学习页
+const goToLearn = () => {
+  uni.switchTab({
+    url: '/pages/learn/index'
   })
 }
 
