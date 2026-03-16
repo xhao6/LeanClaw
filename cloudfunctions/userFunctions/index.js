@@ -103,22 +103,36 @@ exports.main = async (event, context) => {
       case 'toggleFavorite': {
         // Support both data object and top-level params
         const params = data || event;
-        const { resourceId, resourceType, action } = params; // action: 'add', 'remove', 'toggle'
+        const {
+          resourceId,
+          resourceType,
+          title,
+          desc,
+          url,
+          image,
+          tags,
+          action
+        } = params; // action: 'add', 'remove', 'toggle'
         if (!resourceId) return { success: false, message: 'Missing resourceId' };
 
-        const { data: existing } = await favoritesCollection.where({ 
+        const { data: existing } = await favoritesCollection.where({
           _openid: openid,
-          resourceId 
+          resourceId
         }).get();
 
         let isFavorited = false;
-        
+
         const doAdd = async () => {
           await favoritesCollection.add({
             data: {
               _openid: openid,
               resourceId,
-              resourceType,
+              resourceType: resourceType || 'resource',
+              title: title || '',
+              desc: desc || '',
+              url: url || '',
+              image: image || '',
+              tags: tags || [],
               createdAt: db.serverDate()
             }
           });
