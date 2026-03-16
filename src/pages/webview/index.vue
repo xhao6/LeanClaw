@@ -25,6 +25,12 @@
     <view v-else class="content-view">
       <rich-text :nodes="renderedHtml"></rich-text>
     </view>
+
+    <!-- 底栏 -->
+    <ArticleFooter
+      v-if="resourceInfo"
+      :resource="resourceInfo"
+    />
   </view>
 </template>
 
@@ -32,8 +38,17 @@
 import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
+import ArticleFooter from '@/components/ArticleFooter.vue'
 
 const url = ref('')
+const resourceInfo = ref<{
+  id: string
+  type: string
+  title: string
+  desc: string
+  url?: string
+  tags: string[]
+} | null>(null)
 const loading = ref(true)
 const error = ref('')
 const renderedHtml = ref('')
@@ -46,7 +61,7 @@ const md = new MarkdownIt({
 })
 
 // 从 URL 中提取 markdown 文件路径并加载
-const loadMarkdown = async (markdownUrl: string) => {
+const loadMarkdown = async (markdownUrl: string, resourceId: string) => {
   loading.value = true
   error.value = ''
 
@@ -93,6 +108,14 @@ const loadMarkdown = async (markdownUrl: string) => {
       uni.setNavigationBarTitle({
         title: titleMatch[1].slice(0, 20)
       })
+      resourceInfo.value = {
+        id: resourceId,
+        type: 'resource',
+        title: titleMatch[1],
+        desc: '',
+        url: resourceId,
+        tags: []
+      }
     }
 
     loading.value = false
@@ -110,7 +133,7 @@ onLoad((options: any) => {
 
     // 检查是否是 markdown 文件
     if (decodedUrl.endsWith('.md')) {
-      loadMarkdown(decodedUrl)
+      loadMarkdown(decodedUrl, decodedUrl)
     } else {
       error.value = '不支持的文件类型'
       loading.value = false
@@ -126,6 +149,7 @@ onLoad((options: any) => {
 .container {
   min-height: 100vh;
   background: #f8f8f8;
+  padding-bottom: 120rpx;
 }
 
 .loading-view {
