@@ -43,7 +43,7 @@
     <!-- Stats Card -->
     <view class="px-4 -mt-8 relative z-20">
       <view class="bg-white rounded-2xl shadow-lg shadow-blue-900/5 p-5 flex justify-around items-center">
-        <view class="text-center">
+        <view class="text-center" @click="goToStats">
           <view class="text-xl font-bold text-orange mb-1">{{ completedLessonsCount }}</view>
           <view class="text-xs text-gray-400">完成课程</view>
         </view>
@@ -53,7 +53,7 @@
           <view class="text-xs text-gray-400">我的收藏</view>
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
-        <view class="text-center">
+        <view class="text-center" @click="goToCertificate">
           <view class="text-xl font-bold text-green-500 mb-1">{{ badgesCount }}</view>
           <view class="text-xs text-gray-400">我的徽章</view>
         </view>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
@@ -96,12 +96,27 @@ import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
-// 使用 computed 实现响应式 - 直接调用函数获取最新数据
-const favoritesCount = computed(() => getFavoritesCount())
-const completedLessonsCount = computed(() => getProgress().completedLessons?.length || 0)
-const badgesCount = computed(() => getProgress().badges?.length || 0)
+// 响应式标记，用于强制更新统计数据
+const statsVersion = ref(0)
+
+// 使用 computed 实现响应式 - 添加响应式依赖
+const favoritesCount = computed(() => {
+  void statsVersion.value // 追踪依赖
+  return getFavoritesCount()
+})
+const completedLessonsCount = computed(() => {
+  void statsVersion.value // 追踪依赖
+  return getProgress().completedLessons?.length || 0
+})
+const badgesCount = computed(() => {
+  void statsVersion.value // 追踪依赖
+  return getProgress().badges?.length || 0
+})
 
 onShow(async () => {
+  // 触发统计数据更新
+  statsVersion.value++
+
   if (isLoggedIn.value) {
     userStore.fetchProfile()
 
@@ -110,6 +125,8 @@ onShow(async () => {
       const res = await getCloudFavorites()
       if (res.success && res.data) {
         syncFavorites(res.data)
+        // 同步后更新统计
+        statsVersion.value++
       } else if (res.success === false) {
         console.warn('同步收藏失败:', res.message)
       }
@@ -150,6 +167,9 @@ const handleLogin = async () => {
     // 调用云函数登录
     await userStore.login(wechatUserInfo)
 
+    // 登录成功后更新统计
+    statsVersion.value++
+
     uni.showToast({ title: '登录成功', icon: 'success' })
   } catch (e) {
     console.error('登录失败:', e)
@@ -161,6 +181,8 @@ const handleLogin = async () => {
 
 const handleLogout = () => {
   userStore.logout()
+  // 退出登录后更新统计
+  statsVersion.value++
   uni.showToast({ title: '已退出', icon: 'none' })
 }
 

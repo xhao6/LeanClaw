@@ -1,10 +1,8 @@
-// 标签颜色 composable
+// 标签颜色工具函数
 // 统一管理多巴胺配色标签样式
 
-import { computed } from 'vue'
-
 // 15种多巴胺色
-const TAG_COLORS = [
+export const TAG_COLORS = [
   'border-orange-200 text-orange-600 bg-orange-50',
   'border-blue-200 text-blue-600 bg-blue-50',
   'border-green-200 text-green-600 bg-green-50',
@@ -32,19 +30,8 @@ const hashCode = (str: string): number => {
   return Math.abs(hash)
 }
 
-export function useTagColors() {
-  // 根据标签名获取颜色class
-  const getTagClass = (tag: string): string => {
-    const index = hashCode(tag) % TAG_COLORS.length
-    return TAG_COLORS[index]
-  }
-
-  // 获取所有颜色（用于静态展示等场景）
-  const allTagColors = computed(() => TAG_COLORS)
-
-  return {
-    getTagClass,
-    allTagColors,
-    TAG_COLORS
-  }
+// 根据标签名获取颜色class
+export const getTagClass = (tag: string): string => {
+  const index = hashCode(tag) % TAG_COLORS.length
+  return TAG_COLORS[index]
 }

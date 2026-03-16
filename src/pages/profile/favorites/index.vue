@@ -35,13 +35,13 @@
         >
           <!-- 标题 -->
           <view class="flex justify-between items-start mb-2">
-            <text class="text-h2 line-clamp-2 flex-1 leading-snug pr-2">{{ item.title }}</text>
+            <text class="text-h2 line-clamp-2 flex-1 leading-snug pr-2">{{ item.title || '未知收藏' }}</text>
             <view class="flex items-center gap-1 shrink-0" @click.stop="handleRemoveFavorite(item.id)">
               <wd-icon name="star-filled" size="20px" class="text-orange" />
             </view>
           </view>
           <!-- 描述 -->
-          <text class="text-body text-gray-500 line-clamp-2 mb-3">{{ item.desc }}</text>
+          <text class="text-body text-gray-500 line-clamp-2 mb-3">{{ item.desc || '无描述' }}</text>
           <!-- 标签 -->
           <view v-if="item.tags && item.tags.length" class="flex flex-wrap gap-2">
             <text
@@ -63,10 +63,7 @@
 import { ref, computed } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { getFavorites, removeFavorite, type FavoriteItem } from '@/utils/favorites'
-import { useTagColors } from '@/composables/useTagColors'
-
-// 标签颜色
-const { getTagClass } = useTagColors()
+import { getTagClass } from '@/composables/useTagColors'
 
 const activeTab = ref<string>('all')
 
@@ -80,12 +77,11 @@ const tabs = [
 const favorites = ref<FavoriteItem[]>(getFavorites())
 
 const filteredFavorites = computed(() => {
-  // 过滤掉没有标题的无效收藏
-  const validFavorites = favorites.value.filter(item => item.title)
+  // 不过滤标题，确保显示所有收藏（包括云端同步后标题为空的数据）
   if (activeTab.value === 'all') {
-    return validFavorites
+    return favorites.value
   }
-  return validFavorites.filter(item => item.type === activeTab.value)
+  return favorites.value.filter(item => item.type === activeTab.value)
 })
 
 const handleTabChange = () => {
