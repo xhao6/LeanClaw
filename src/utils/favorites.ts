@@ -122,7 +122,11 @@ export const removeFavorite = (id: string): boolean => {
 
   // Cloud Sync
   const item = favorites[index]
-  apiToggleFavorite(id, item.type, 'remove').catch(e => console.warn('Cloud remove fav failed', e))
+  apiToggleFavorite({
+    resourceId: id,
+    resourceType: item.type,
+    action: 'remove'
+  }).catch(e => console.warn('Cloud remove fav failed', e))
 
   favorites.splice(index, 1)
   saveFavorites(favorites)

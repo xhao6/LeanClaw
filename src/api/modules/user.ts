@@ -64,6 +64,7 @@ export const toggleFavorite = async (params: {
   url?: string
   image?: string
   tags?: string[]
+  stars?: string
   action?: 'add' | 'remove' | 'toggle'
 }) => {
   return callFunction('userFunctions', {

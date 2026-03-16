@@ -112,15 +112,29 @@ describe('favorites 收藏功能', () => {
     it('addFavorite should call cloud API with add', () => {
       mockApiToggleFavorite.mockClear()
       addFavorite(mockItem)
-      expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'add')
+      expect(mockApiToggleFavorite).toHaveBeenCalledWith({
+        resourceId: mockItem.id,
+        resourceType: mockItem.type,
+        title: mockItem.title,
+        desc: mockItem.desc,
+        url: mockItem.url,
+        image: mockItem.image,
+        tags: mockItem.tags,
+        action: 'add'
+      })
     })
 
     it('removeFavorite should call cloud API with remove', () => {
       addFavorite(mockItem)
       mockApiToggleFavorite.mockClear()
       removeFavorite(mockItem.id)
-      expect(mockApiToggleFavorite).toHaveBeenCalledWith(mockItem.id, mockItem.type, 'remove')
+      expect(mockApiToggleFavorite).toHaveBeenCalledWith({
+        resourceId: mockItem.id,
+        resourceType: mockItem.type,
+        action: 'remove'
+      })
     })
+  })
 
   describe('syncFavorites 云端同步', () => {
     it('合并云端和本地收藏（取并集）', () => {
