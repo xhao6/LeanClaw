@@ -45,11 +45,14 @@ const handleFavorite = () => {
     return
   }
 
+  const wasFavorited = isFavorited.value // 保存切换前的状态
   toggleFavorite(props.resource)
-  if (isFavorited.value) {
-    uni.showToast({ title: '已收藏', icon: 'success' })
-  } else {
+
+  // 根据切换前的状态显示提示（切换后状态相反）
+  if (wasFavorited) {
     uni.showToast({ title: '已取消收藏', icon: 'none' })
+  } else {
+    uni.showToast({ title: '已收藏', icon: 'success' })
   }
 }
 </script>
