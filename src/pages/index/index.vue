@@ -140,6 +140,7 @@
 import { computed, onMounted } from 'vue'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
+import { useTagColors } from '@/composables/useTagColors'
 import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
 
@@ -148,6 +149,9 @@ const progress = getProgress()
 
 // 今日推荐
 const { recommendations, loading, hasMore, error, loadRecommendations, loadMore, addToViewed } = useRecommendations()
+
+// 标签颜色
+const { getTagClass } = useTagColors()
 
 // 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
@@ -212,35 +216,6 @@ const handleGoDiscover = () => {
 }
 const handleGoSkills = () => {
   uni.switchTab({ url: '/pages/discover/index' })
-}
-
-// 获取标签样式
-const tagColors = [
-  'border-orange-200 text-orange-600 bg-orange-50',
-  'border-blue-200 text-blue-600 bg-blue-50',
-  'border-green-200 text-green-600 bg-green-50',
-  'border-purple-200 text-purple-600 bg-purple-50',
-  'border-pink-200 text-pink-600 bg-pink-50',
-  'border-amber-200 text-amber-600 bg-amber-50',
-  'border-cyan-200 text-cyan-600 bg-cyan-50',
-  'border-indigo-200 text-indigo-600 bg-indigo-50',
-  'border-rose-200 text-rose-600 bg-rose-50',
-  'border-teal-200 text-teal-600 bg-teal-50',
-]
-
-// 哈希函数
-const hashCode = (str: string) => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i)
-    hash = hash & hash
-  }
-  return Math.abs(hash)
-}
-
-const getTagClass = (tag: string) => {
-  const index = hashCode(tag) % tagColors.length
-  return tagColors[index]
 }
 
 // 切换收藏

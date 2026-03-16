@@ -93,6 +93,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
+import { useTagColors } from '@/composables/useTagColors'
 import type { ResourceItem } from '@/types/resource'
 
 const searchValue = ref('')
@@ -103,6 +104,9 @@ const items = ref<ResourceItem[]>([])
 const currentPage = ref(1)
 const hasMore = ref(true)
 const PAGE_SIZE = 20
+
+// 标签颜色
+const { getTagClass } = useTagColors()
 
 const tabs = [
   { label: '优质资源', name: 'resource' },
@@ -182,41 +186,6 @@ const getPlaceholder = (item: ResourceItem) => {
   if (item.type === 'case') return '/static/images/placeholder/case.svg'
   if (item.category === 'video') return '/static/images/placeholder/video.svg'
   return '/static/images/placeholder/article.svg'
-}
-
-// 标签颜色循环 - 15种多巴胺色（基于标签内容 hash 随机分配）
-const tagColors = [
-  'border-orange-200 text-orange-600 bg-orange-50',
-  'border-blue-200 text-blue-600 bg-blue-50',
-  'border-green-200 text-green-600 bg-green-50',
-  'border-purple-200 text-purple-600 bg-purple-50',
-  'border-pink-200 text-pink-600 bg-pink-50',
-  'border-amber-200 text-amber-600 bg-amber-50',
-  'border-cyan-200 text-cyan-600 bg-cyan-50',
-  'border-indigo-200 text-indigo-600 bg-indigo-50',
-  'border-rose-200 text-rose-600 bg-rose-50',
-  'border-teal-200 text-teal-600 bg-teal-50',
-  'border-lime-200 text-lime-600 bg-lime-50',
-  'border-fuchsia-200 text-fuchsia-600 bg-fuchsia-50',
-  'border-violet-200 text-violet-600 bg-violet-50',
-  'border-sky-200 text-sky-600 bg-sky-50',
-  'border-emerald-200 text-emerald-600 bg-emerald-50',
-]
-
-// 简单的哈希函数，用于生成随机颜色
-const hashCode = (str: string) => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i)
-    hash = hash & hash // 转换为 32 位整数
-  }
-  return Math.abs(hash)
-}
-
-const getTagClass = (tag: string) => {
-  // 基于标签内容生成随机颜色，同一标签在不同卡片中颜色一致
-  const index = hashCode(tag) % tagColors.length
-  return tagColors[index]
 }
 
 const handleSearch = () => {
