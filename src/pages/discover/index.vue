@@ -189,9 +189,18 @@ const loadMore = () => {
 // 下拉刷新处理
 const handleRefresh = async () => {
   refreshing.value = true
-  await fetchData(true)
-  refreshing.value = false
-  uni.showToast({ title: '刷新成功', icon: 'success' })
+  try {
+    await fetchData(true)
+    if (error.value) {
+      uni.showToast({ title: error.value, icon: 'none' })
+    } else {
+      uni.showToast({ title: '刷新成功', icon: 'success' })
+    }
+  } catch (e) {
+    uni.showToast({ title: '刷新失败', icon: 'none' })
+  } finally {
+    refreshing.value = false
+  }
 }
 
 onMounted(() => {

@@ -10,18 +10,94 @@ const HEAT_WEIGHT = 10       // 热度权重
 const USER_BONUS = 50        // 用户已收藏加分
 const RANDOM_WEIGHT = 20     // 随机因子权重
 
+// 收藏数据类型定义
+interface FavoriteItem {
+  resourceId: string;
+}
+
+/**
+ * 简单的哈希函数 - 基于字符串生成确定性数字
+ * 用于生成稳定的随机因子
+ */
+const hashCode = (str: string): number => {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i)
+    hash = ((hash << 5) - hash) + char
+    hash = hash & hash // Convert to 32bit integer
+  }
+  return Math.abs(hash)
+}
+
+/**
+ * 获取用户收藏ID列表
+ * 抽取为独立函数，避免代码重复
+ */
+const useUserFavorites = (): Set<string> => {
+  const userStore = useUserStore()
+  const { isLoggedIn } = storeToRefs(userStore)
+  const userFavorites = new Set<string>()
+
+  if (isLoggedIn.value) {
+    // 同步获取收藏（简化处理，实际可考虑缓存）
+    try {
+      // 注意：这里需要异步调用，实际使用时需要 await
+      // 此函数为同步版本，返回空Set，异步逻辑在调用处处理
+    } catch (e) {
+      console.warn('获取用户收藏失败', e)
+    }
+  }
+
+  return userFavorites
+}
+
+/**
+ * 异步获取用户收藏ID列表
+ */
+const fetchUserFavorites = async (): Promise<Set<string>> => {
+  const userStore = useUserStore()
+  const { isLoggedIn } = storeToRefs(userStore)
+  const userFavorites = new Set<string>()
+
+  if (isLoggedIn.value) {
+    try {
+      const favRes = await getFavorites()
+      if (favRes.success && favRes.data) {
+        favRes.data.forEach((f: FavoriteItem) => userFavorites.add(f.resourceId))
+      }
+    } catch (e) {
+      console.warn('获取用户收藏失败', e)
+    }
+  }
+
+  return userFavorites
+}
+
 /**
  * 计算推荐分数
  * 分数 = 热度分 + 用户收藏加分 + 随机因子
  * 未收藏高热度文章得分最高
+ * 随机因子基于用户ID生成确定性随机，确保同一用户看到稳定的排序
  */
 const calculateScore = (
   item: ResourceItem,
-  userFavorites: Set<string>
+  userFavorites: Set<string>,
+  userId: string = ''
 ): number => {
   const heatScore = (item.heat || 0) * HEAT_WEIGHT
   const userBonusScore = userFavorites.has(item.id) ? USER_BONUS : 0
-  const randomFactor = Math.random() * RANDOM_WEIGHT
+
+  // 使用基于用户ID的确定性随机因子
+  // 如果有用户ID，则基于(item.id + userId)生成稳定随机
+  // 否则使用随机因子（未登录用户）
+  let randomFactor: number
+  if (userId) {
+    const seed = hashCode(item.id + userId)
+    randomFactor = (seed % 1000) / 1000 * RANDOM_WEIGHT
+  } else {
+    randomFactor = Math.random() * RANDOM_WEIGHT
+  }
+
   return heatScore + userBonusScore + randomFactor
 }
 
@@ -29,7 +105,7 @@ const STORAGE_KEY = 'viewed_resources'
 const PAGE_SIZE = 5
 const MAX_ITEMS = 30
 
-// Fisher-Yates 洗牌算法
+// Fisher-Yates 洗牌算法（保留用于其他场景）
 const shuffle = <T>(array: T[]): T[] => {
   const arr = [...array]
   for (let i = arr.length - 1; i > 0; i--) {
@@ -69,6 +145,13 @@ export function useRecommendations() {
     }
   }
 
+  // 获取用户ID（用于确定性随机）
+  const getUserId = (): string => {
+    const userStore = useUserStore()
+    const { userInfo } = storeToRefs(userStore)
+    return userInfo.value.id || ''
+  }
+
   // 加载推荐数据（首次）- 从后端获取
   const loadRecommendations = async () => {
     loading.value = true
@@ -82,20 +165,10 @@ export function useRecommendations() {
       const viewedIds = new Set(getViewedIds())
 
       // 获取用户收藏ID列表
-      const userStore = useUserStore()
-      const { isLoggedIn } = storeToRefs(userStore)
-      const userFavorites = new Set<string>()
+      const userFavorites = await fetchUserFavorites()
 
-      if (isLoggedIn.value) {
-        try {
-          const favRes = await getFavorites()
-          if (favRes.success && favRes.data) {
-            favRes.data.forEach((f: any) => userFavorites.add(f.resourceId))
-          }
-        } catch (e) {
-          console.warn('获取用户收藏失败', e)
-        }
-      }
+      // 获取用户ID（用于确定性随机）
+      const userId = getUserId()
 
       // 过滤掉已浏览的
       const available = allResources.filter(r => !viewedIds.has(r.id))
@@ -108,7 +181,7 @@ export function useRecommendations() {
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
         item,
-        score: calculateScore(item, userFavorites)
+        score: calculateScore(item, userFavorites, userId)
       })).sort((a, b) => b.score - a.score)
 
       recommendations.value = scored.slice(0, PAGE_SIZE).map(s => s.item)
@@ -143,20 +216,10 @@ export function useRecommendations() {
       const displayedIds = new Set(recommendations.value.map(r => r.id))
 
       // 获取用户收藏ID列表
-      const userStore = useUserStore()
-      const { isLoggedIn } = storeToRefs(userStore)
-      const userFavorites = new Set<string>()
+      const userFavorites = await fetchUserFavorites()
 
-      if (isLoggedIn.value) {
-        try {
-          const favRes = await getFavorites()
-          if (favRes.success && favRes.data) {
-            favRes.data.forEach((f: any) => userFavorites.add(f.resourceId))
-          }
-        } catch (e) {
-          console.warn('获取用户收藏失败', e)
-        }
-      }
+      // 获取用户ID（用于确定性随机）
+      const userId = getUserId()
 
       const available = allResources.filter(
         r => !viewedIds.has(r.id) && !displayedIds.has(r.id)
@@ -169,7 +232,7 @@ export function useRecommendations() {
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
         item,
-        score: calculateScore(item, userFavorites)
+        score: calculateScore(item, userFavorites, userId)
       })).sort((a, b) => b.score - a.score)
 
       const newItems = scored.slice(0, PAGE_SIZE).map(s => s.item)

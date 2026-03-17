@@ -165,9 +165,18 @@ const refreshing = ref(false)
 // 下拉刷新处理
 const handleRefresh = async () => {
   refreshing.value = true
-  await loadRecommendations()
-  refreshing.value = false
-  uni.showToast({ title: '刷新成功', icon: 'success' })
+  try {
+    await loadRecommendations()
+    if (error.value) {
+      uni.showToast({ title: error.value, icon: 'none' })
+    } else {
+      uni.showToast({ title: '刷新成功', icon: 'success' })
+    }
+  } catch (e) {
+    uni.showToast({ title: '刷新失败', icon: 'none' })
+  } finally {
+    refreshing.value = false
+  }
 }
 
 // 计算进度百分比：基于已完成的课程数
