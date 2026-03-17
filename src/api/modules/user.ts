@@ -79,3 +79,14 @@ export const toggleFavorite = async (params: {
 export const getFavorites = async () => {
   return callFunction('userFunctions', { type: 'getFavorites' })
 }
+
+/**
+ * Update User Profile
+ * @param data { name?: string, avatar?: string }
+ */
+export const updateProfile = async (data: { name?: string; avatar?: string }) => {
+  return callFunction('userFunctions', {
+    type: 'updateProfile',
+    data
+  })
+}
