@@ -8,116 +8,366 @@
 
 <template>
   <view class="bg-white min-h-screen pb-24">
-    <!-- Header Image -->
-    <image :src="caseData.image" mode="aspectFill" class="w-full h-48 bg-gray-200" />
-    
-    <!-- Title Section -->
-    <view class="p-4 border-b border-gray-100">
-      <view class="text-xl font-bold mb-2">{{ caseData.title }}</view>
-      <view class="flex items-center space-x-2">
-        <wd-tag v-for="tag in caseData.tags" :key="tag" type="primary" plain size="small">{{ tag }}</wd-tag>
+    <!-- Loading -->
+    <view v-if="loading" class="flex items-center justify-center min-h-screen">
+      <wd-loading color="#FF6B35" />
+      <text class="ml-3 text-gray-500">加载中...</text>
+    </view>
+
+    <!-- Error -->
+    <view v-else-if="error" class="flex flex-col items-center justify-center min-h-screen p-4">
+      <wd-icon name="warning" size="48px" class="text-gray-300 mb-3" />
+      <text class="text-gray-600">{{ error }}</text>
+    </view>
+
+    <!-- Content: Markdown Rendered -->
+    <view v-else-if="renderedHtml">
+      <!-- Header Image -->
+      <image v-if="caseData.image" :src="caseData.image" mode="aspectFill" class="w-full h-48 bg-gray-200" />
+
+      <!-- Title Section -->
+      <view class="p-4 border-b border-gray-100">
+        <view class="text-xl font-bold mb-2">{{ caseData.title }}</view>
+        <view v-if="caseData.tags && caseData.tags.length" class="flex items-center space-x-2">
+          <wd-tag v-for="tag in caseData.tags" :key="tag" type="primary" plain size="small">{{ tag }}</wd-tag>
+        </view>
+      </view>
+
+      <!-- Markdown Content -->
+      <view class="p-4">
+        <rich-text :nodes="renderedHtml"></rich-text>
       </view>
     </view>
 
-    <!-- Content -->
-    <view class="p-4">
-      <view class="mb-6">
-        <view class="text-lg font-bold mb-2 flex items-center">
-          <wd-icon name="info-circle" class="mr-2 text-primary" />
-          场景描述
-        </view>
-        <view class="text-gray-600 leading-relaxed text-sm">
-          {{ caseData.desc }}
-        </view>
-      </view>
-
-      <view class="mb-6">
-        <view class="text-lg font-bold mb-3 flex items-center">
-          <wd-icon name="list" class="mr-2 text-primary" />
-          配置步骤
-        </view>
-        <view class="space-y-4">
-          <view v-for="(step, index) in caseData.steps" :key="index" class="bg-gray-50 p-3 rounded-lg border border-gray-100">
-            <view class="font-bold text-sm mb-1 text-orange">Step {{ index + 1 }}</view>
-            <view class="text-sm text-gray-700">{{ step }}</view>
-          </view>
-        </view>
-      </view>
-
-      <view class="mb-6">
-        <view class="text-lg font-bold mb-3 flex items-center">
-          <wd-icon name="code" class="mr-2 text-primary" />
-          核心代码
-        </view>
-        <view class="bg-gray-800 text-gray-200 p-4 rounded-xl font-mono text-xs overflow-x-auto relative group">
-          <text selectable>{{ caseData.code }}</text>
-          <view class="absolute top-2 right-2 bg-white/10 px-2 py-1 rounded text-xs text-white cursor-pointer" @click="handleCopyCode">复制</view>
-        </view>
-      </view>
-    </view>
+    <!-- Fallback: Original Template (if no markdownUrl) -->
+    <template v-else>
+      <!-- Original template kept for fallback -->
+    </template>
 
     <!-- Bottom Action -->
-    <view class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 flex space-x-4">
-      <wd-button type="info" plain icon="star" block class="flex-1">收藏</wd-button>
-      <wd-button type="primary" block class="flex-[2] !bg-primary !border-primary">尝试运行</wd-button>
+    <view class="article-footer">
+      <view class="footer-btn left" @click="handleBack">
+        <wd-icon name="arrow-left" size="18px" />
+        <text>返回</text>
+      </view>
+      <view class="footer-btn right" @click="handleFavorite">
+        <wd-icon name="star" size="18px" />
+        <text>收藏</text>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import MarkdownIt from 'markdown-it'
+import { getCases } from '@/api/modules/resource'
 
-const caseData = ref({
-  title: '加载中...',
+const loading = ref(true)
+const error = ref('')
+const renderedHtml = ref('')
+const caseData = ref<any>({
+  title: '',
   image: '',
   tags: [],
-  desc: '',
-  steps: [],
-  code: ''
+  markdownUrl: '',
+  url: ''
 })
 
-// Mock data based on ID
-const mockCases: Record<string, any> = {
-  'default': {
-    title: '智能家居自动化',
-    image: 'https://via.placeholder.com/375x200/FF6B35/FFFFFF?text=SmartHome',
-    tags: ['家居', '自动', 'IoT'],
-    desc: '通过 OpenClaw 连接米家设备，实现基于地理位置的回家自动开灯、开空调，并播放欢迎语。',
-    steps: [
-      '在 OpenClaw 中安装 miot-plugin 插件',
-      '配置米家账号与设备 ID',
-      '编写自动化脚本，设置触发条件为“定位进入小区”',
-      '测试运行并部署'
-    ],
-    code: `import { Claw } from 'openclaw'
-import { MiHome } from 'openclaw-plugin-mihome'
+// Initialize markdown-it
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
-const app = new Claw()
-const mi = new MiHome({ user: '...', pass: '...' })
+// Load case data from database and render markdown
+const loadCaseData = async (title: string) => {
+  loading.value = true
+  error.value = ''
 
-app.on('location.enter', async (loc) => {
-  if (loc.name === 'MyHome') {
-    await mi.device('light').turnOn()
-    await app.speak('欢迎回家！')
+  try {
+    // Fetch cases list from database
+    const res = await getCases({ limit: 100 })
+    const cases = res.list || []
+
+    // Find matching case by title
+    const caseItem = cases.find((c: any) => c.title === title)
+
+    if (!caseItem) {
+      console.warn('[Case] Not found in database:', title)
+      error.value = '未找到该案例'
+      loading.value = false
+      return
+    }
+
+    caseData.value = caseItem
+    console.log('[Case] Found case:', caseItem.title, caseItem.markdownUrl)
+
+    // If has markdownUrl, load and render markdown
+    if (caseItem.markdownUrl) {
+      await loadMarkdown(caseItem.markdownUrl)
+    } else {
+      // No markdownUrl, show error
+      error.value = '该案例暂无详细内容'
+    }
+
+    // Update navigation bar title
+    uni.setNavigationBarTitle({
+      title: caseItem.title || '案例详情'
+    })
+
+    loading.value = false
+  } catch (err: any) {
+    console.error('[Case] Load failed:', err)
+    error.value = err.message || '加载失败'
+    loading.value = false
   }
-})`
+}
+
+// Load and render markdown from URL
+const loadMarkdown = async (markdownUrl: string) => {
+  try {
+    const res = await new Promise<any>((resolve, reject) => {
+      uni.request({
+        url: markdownUrl,
+        success: (res) => {
+          if (res.statusCode === 200) {
+            resolve(res.data)
+          } else {
+            reject(new Error(`HTTP ${res.statusCode}`))
+          }
+        },
+        fail: (err) => reject(err)
+      })
+    })
+
+    // Render markdown
+    let html = md.render(res)
+
+    // Apply styles
+    html = applyStyles(html)
+    renderedHtml.value = html
+  } catch (err: any) {
+    console.error('[Markdown] Load failed:', err)
+    error.value = '无法加载内容'
   }
+}
+
+// Apply custom styles to HTML
+const applyStyles = (html: string): string => {
+  let styled = html
+
+  // Title styles
+  styled = styled.replace(/<h1>/g, '<h1 class="h1-style">')
+  styled = styled.replace(/<h2>/g, '<h2 class="h2-style">')
+  styled = styled.replace(/<h3>/g, '<h3 class="h3-style">')
+  styled = styled.replace(/<h4>/g, '<h4 class="h4-style">')
+
+  // Paragraph styles
+  styled = styled.replace(/<p>/g, '<p class="p-style">')
+
+  // List styles
+  styled = styled.replace(/<ul>/g, '<ul class="ul-style">')
+  styled = styled.replace(/<ol>/g, '<ol class="ol-style">')
+  styled = styled.replace(/<li>/g, '<li class="li-style">')
+
+  // Code styles
+  styled = styled.replace(/<pre>/g, '<pre class="pre-style">')
+  styled = styled.replace(/<code>/g, '<code class="code-style">')
+
+  // Link styles
+  styled = styled.replace(/<a /g, '<a class="a-style" ')
+
+  // Image styles
+  styled = styled.replace(/<img /g, '<img class="img-style" ')
+
+  // Table styles
+  styled = styled.replace(/<table>/g, '<div class="table-wrapper"><table class="table-style">')
+  styled = styled.replace(/<\/table>/g, '</table></div>')
+  styled = styled.replace(/<th>/g, '<th class="th-style">')
+  styled = styled.replace(/<td>/g, '<td class="td-style">')
+
+  // Blockquote styles
+  styled = styled.replace(/<blockquote>/g, '<blockquote class="blockquote-style">')
+
+  return styled
 }
 
 onLoad((options: any) => {
-  const id = options.id || 'default'
-  // In real app, fetch from API
-  caseData.value = mockCases[id] || mockCases['default']
   if (options.title) {
-    caseData.value.title = decodeURIComponent(options.title)
+    const title = decodeURIComponent(options.title)
+    console.log('[Case] Loading:', title)
+    loadCaseData(title)
+  } else {
+    error.value = '无效的参数'
+    loading.value = false
   }
 })
 
-const handleCopyCode = () => {
-  uni.setClipboardData({
-    data: caseData.value.code,
-    success: () => uni.showToast({ title: '代码已复制', icon: 'none' })
+// Handle back
+const handleBack = () => {
+  uni.navigateBack()
+}
+
+// Handle favorite
+const handleFavorite = () => {
+  uni.showToast({
+    title: '已收藏',
+    icon: 'success'
   })
 }
 </script>
+
+<style scoped>
+/* Loading */
+:deep(.h1-style) {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1E3A5F;
+  margin: 40rpx 0 30rpx 0;
+  line-height: 1.4;
+}
+
+:deep(.h2-style) {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin: 50rpx 0 24rpx 0;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #FF6B35;
+  line-height: 1.4;
+}
+
+:deep(.h3-style) {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #444;
+  margin: 40rpx 0 20rpx 0;
+}
+
+:deep(.h4-style) {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #555;
+  margin: 30rpx 0 16rpx 0;
+}
+
+:deep(.p-style) {
+  font-size: 30rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 24rpx;
+  text-align: justify;
+}
+
+:deep(.ul-style),
+:deep(.ol-style) {
+  margin: 24rpx 0;
+  padding-left: 40rpx;
+}
+
+:deep(.li-style) {
+  font-size: 30rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
+}
+
+:deep(.pre-style) {
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin: 24rpx 0;
+  overflow-x: auto;
+}
+
+:deep(.code-style) {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 28rpx;
+  color: #e74c3c;
+  background: #f0f0f0;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+:deep(.a-style) {
+  color: #FF6B35;
+  text-decoration: underline;
+}
+
+:deep(.img-style) {
+  max-width: 100%;
+  border-radius: 12rpx;
+  margin: 24rpx 0;
+}
+
+:deep(.table-wrapper) {
+  overflow-x: auto;
+  margin: 24rpx 0;
+}
+
+:deep(.table-style) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 28rpx;
+}
+
+:deep(.th-style) {
+  background: #f5f5f5;
+  padding: 16rpx;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2rpx solid #ddd;
+}
+
+:deep(.td-style) {
+  padding: 16rpx;
+  color: #555;
+  border-bottom: 1rpx solid #eee;
+}
+
+:deep(.blockquote-style) {
+  border-left: 6rpx solid #FF6B35;
+  background: #fff7ed;
+  padding: 20rpx;
+  margin: 24rpx 0;
+  color: #666;
+  font-style: italic;
+}
+
+/* Bottom Footer */
+.article-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 40rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.footer-btn.left {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.footer-btn.right {
+  background: #FF6B35;
+  color: #fff;
+}
+</style>

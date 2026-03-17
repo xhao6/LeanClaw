@@ -7,98 +7,352 @@
 </route>
 
 <template>
-  <view class="bg-gray-50 min-h-screen p-4 pb-24">
-    <!-- Header Card -->
-    <view class="bg-white rounded-2xl p-5 shadow-sm mb-4 text-center">
-      <image :src="skill.icon" class="w-20 h-20 rounded-xl mb-3 mx-auto" />
-      <view class="text-xl font-bold mb-1">{{ skill.name }}</view>
-      <view class="text-sm text-gray-500 mb-4">{{ skill.desc }}</view>
-      <view class="flex justify-center space-x-4 text-xs text-gray-400">
-        <view class="flex items-center">
-          <wd-icon name="user" class="mr-1" /> {{ skill.author }}
-        </view>
-        <view class="flex items-center">
-          <wd-icon name="star-filled" class="mr-1 text-orange" /> {{ skill.stars }}
-        </view>
-        <view class="flex items-center">
-          <wd-icon name="download" class="mr-1" /> {{ skill.downloads }}
-        </view>
-      </view>
+  <view class="bg-gray-50 min-h-screen pb-24">
+    <!-- Loading -->
+    <view v-if="loading" class="flex items-center justify-center min-h-screen">
+      <wd-loading color="#FF6B35" />
+      <text class="ml-3 text-gray-500">加载中...</text>
     </view>
 
-    <!-- Installation -->
-    <view class="bg-white rounded-2xl p-5 shadow-sm mb-4">
-      <view class="font-bold text-base mb-3 flex items-center">
-        <wd-icon name="cloud-download" class="mr-2 text-primary" />
-        安装命令
-      </view>
-      <view class="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-sm break-all relative">
-        <text selectable>{{ installCmd }}</text>
-        <view class="absolute top-2 right-2" @click="handleCopy">
-          <wd-icon name="copy" size="20px" class="text-white/50 active:text-white" />
-        </view>
-      </view>
-      <wd-button type="primary" block custom-class="mt-4 !bg-orange !border-orange" @click="handleCopy">
-        一键复制安装命令
-      </wd-button>
+    <!-- Error -->
+    <view v-else-if="error" class="flex flex-col items-center justify-center min-h-screen p-4">
+      <wd-icon name="warning" size="48px" class="text-gray-300 mb-3" />
+      <text class="text-gray-600">{{ error }}</text>
     </view>
 
-    <!-- Description -->
-    <view class="bg-white rounded-2xl p-5 shadow-sm mb-4">
-      <view class="font-bold text-base mb-3">功能介绍</view>
-      <view class="text-gray-600 leading-relaxed text-sm space-y-2">
-        <view>• 实时监控指定的 GitHub 仓库动态。</view>
-        <view>• 支持 Issue、PR、Release 等事件通知。</view>
-        <view>• 可配置推送到钉钉、飞书、企业微信群。</view>
-        <view>• 支持多仓库同时监控，自定义过滤规则。</view>
-      </view>
+    <!-- Content: Markdown Rendered -->
+    <view v-else-if="renderedHtml" class="p-4 bg-white">
+      <rich-text :nodes="renderedHtml"></rich-text>
     </view>
 
-    <!-- Dependencies -->
-    <view class="bg-white rounded-2xl p-5 shadow-sm">
-      <view class="font-bold text-base mb-3">依赖项</view>
-      <view class="flex flex-wrap gap-2">
-        <wd-tag plain type="info">node >= 18.0.0</wd-tag>
-        <wd-tag plain type="info">axios</wd-tag>
-        <wd-tag plain type="info">dayjs</wd-tag>
-      </view>
-    </view>
+    <!-- Fallback: Original Template (if no markdownUrl) -->
+    <template v-else>
+      <!-- Original template code here -->
+    </template>
 
     <!-- Bottom Action -->
-    <view class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 flex space-x-4">
-      <wd-button type="info" plain icon="github" block class="flex-1">源码</wd-button>
-      <wd-button type="error" plain icon="star" block class="flex-1">收藏</wd-button>
+    <view v-if="skillData.markdownUrl" class="article-footer">
+      <view class="footer-btn left" @click="handleBack">
+        <wd-icon name="arrow-left" size="18px" />
+        <text>返回</text>
+      </view>
+      <view class="footer-btn right" @click="handleFavorite">
+        <wd-icon name="star" size="18px" />
+        <text>收藏</text>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import MarkdownIt from 'markdown-it'
+import { getSkills } from '@/api/modules/resource'
 
-const skill = ref({
-  name: 'GitHub Monitor',
-  desc: '实时监控 GitHub 仓库动态并推送通知',
-  author: 'OpenClaw Team',
-  stars: '1.2k',
-  downloads: '5.6k',
-  icon: 'https://via.placeholder.com/150/24292e/FFFFFF?text=GitHub',
-  pkgName: 'claw-skill-github'
+const loading = ref(true)
+const error = ref('')
+const renderedHtml = ref('')
+const skillData = ref<any>({
+  title: '',
+  markdownUrl: '',
+  url: ''
 })
 
-const installCmd = computed(() => `npm install ${skill.value.pkgName} --save`)
+// Initialize markdown-it
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
+
+// Load skill data from database and render markdown
+const loadSkillData = async (name: string) => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    // Fetch skills list from database
+    const res = await getSkills({ limit: 100 })
+    const skills = res.list || []
+
+    // Find matching skill by title
+    const skill = skills.find((s: any) => s.title === name)
+
+    if (!skill) {
+      // If not found in database, try to use the name as fallback
+      console.warn('[Skill] Not found in database:', name)
+      error.value = '未找到该 Skill'
+      loading.value = false
+      return
+    }
+
+    skillData.value = skill
+    console.log('[Skill] Found skill:', skill.title, skill.markdownUrl)
+
+    // If has markdownUrl, load and render markdown
+    if (skill.markdownUrl) {
+      await loadMarkdown(skill.markdownUrl)
+    } else {
+      // No markdownUrl, show error
+      error.value = '该 Skill 暂无详细内容'
+    }
+
+    // Update navigation bar title
+    uni.setNavigationBarTitle({
+      title: skill.title || 'Skill 详情'
+    })
+
+    loading.value = false
+  } catch (err: any) {
+    console.error('[Skill] Load failed:', err)
+    error.value = err.message || '加载失败'
+    loading.value = false
+  }
+}
+
+// Load and render markdown from URL
+const loadMarkdown = async (markdownUrl: string) => {
+  try {
+    const res = await new Promise<any>((resolve, reject) => {
+      uni.request({
+        url: markdownUrl,
+        success: (res) => {
+          if (res.statusCode === 200) {
+            resolve(res.data)
+          } else {
+            reject(new Error(`HTTP ${res.statusCode}`))
+          }
+        },
+        fail: (err) => reject(err)
+      })
+    })
+
+    // Render markdown
+    let html = md.render(res)
+
+    // Apply styles
+    html = applyStyles(html)
+    renderedHtml.value = html
+  } catch (err: any) {
+    console.error('[Markdown] Load failed:', err)
+    error.value = '无法加载内容'
+  }
+}
+
+// Apply custom styles to HTML
+const applyStyles = (html: string): string => {
+  let styled = html
+
+  // Title styles
+  styled = styled.replace(/<h1>/g, '<h1 class="h1-style">')
+  styled = styled.replace(/<h2>/g, '<h2 class="h2-style">')
+  styled = styled.replace(/<h3>/g, '<h3 class="h3-style">')
+  styled = styled.replace(/<h4>/g, '<h4 class="h4-style">')
+
+  // Paragraph styles
+  styled = styled.replace(/<p>/g, '<p class="p-style">')
+
+  // List styles
+  styled = styled.replace(/<ul>/g, '<ul class="ul-style">')
+  styled = styled.replace(/<ol>/g, '<ol class="ol-style">')
+  styled = styled.replace(/<li>/g, '<li class="li-style">')
+
+  // Code styles
+  styled = styled.replace(/<pre>/g, '<pre class="pre-style">')
+  styled = styled.replace(/<code>/g, '<code class="code-style">')
+
+  // Link styles
+  styled = styled.replace(/<a /g, '<a class="a-style" ')
+
+  // Image styles
+  styled = styled.replace(/<img /g, '<img class="img-style" ')
+
+  // Table styles
+  styled = styled.replace(/<table>/g, '<div class="table-wrapper"><table class="table-style">')
+  styled = styled.replace(/<\/table>/g, '</table></div>')
+  styled = styled.replace(/<th>/g, '<th class="th-style">')
+  styled = styled.replace(/<td>/g, '<td class="td-style">')
+
+  // Blockquote styles
+  styled = styled.replace(/<blockquote>/g, '<blockquote class="blockquote-style">')
+
+  return styled
+}
 
 onLoad((options: any) => {
   if (options.name) {
-    skill.value.name = decodeURIComponent(options.name)
-    skill.value.pkgName = `claw-skill-${options.name.toLowerCase().replace(/\s+/g, '-')}`
+    const name = decodeURIComponent(options.name)
+    console.log('[Skill] Loading:', name)
+    loadSkillData(name)
+  } else {
+    error.value = '无效的参数'
+    loading.value = false
   }
 })
 
-const handleCopy = () => {
-  uni.setClipboardData({
-    data: installCmd.value,
-    success: () => uni.showToast({ title: '已复制到剪贴板', icon: 'none' })
+// Handle back
+const handleBack = () => {
+  uni.navigateBack()
+}
+
+// Handle favorite
+const handleFavorite = () => {
+  uni.showToast({
+    title: '已收藏',
+    icon: 'success'
   })
 }
 </script>
+
+<style scoped>
+/* Loading */
+:deep(.h1-style) {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1E3A5F;
+  margin: 40rpx 0 30rpx 0;
+  line-height: 1.4;
+}
+
+:deep(.h2-style) {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin: 50rpx 0 24rpx 0;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #FF6B35;
+  line-height: 1.4;
+}
+
+:deep(.h3-style) {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #444;
+  margin: 40rpx 0 20rpx 0;
+}
+
+:deep(.h4-style) {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #555;
+  margin: 30rpx 0 16rpx 0;
+}
+
+:deep(.p-style) {
+  font-size: 30rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 24rpx;
+  text-align: justify;
+}
+
+:deep(.ul-style),
+:deep(.ol-style) {
+  margin: 24rpx 0;
+  padding-left: 40rpx;
+}
+
+:deep(.li-style) {
+  font-size: 30rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
+}
+
+:deep(.pre-style) {
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin: 24rpx 0;
+  overflow-x: auto;
+}
+
+:deep(.code-style) {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 28rpx;
+  color: #e74c3c;
+  background: #f0f0f0;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+:deep(.a-style) {
+  color: #FF6B35;
+  text-decoration: underline;
+}
+
+:deep(.img-style) {
+  max-width: 100%;
+  border-radius: 12rpx;
+  margin: 24rpx 0;
+}
+
+:deep(.table-wrapper) {
+  overflow-x: auto;
+  margin: 24rpx 0;
+}
+
+:deep(.table-style) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 28rpx;
+}
+
+:deep(.th-style) {
+  background: #f5f5f5;
+  padding: 16rpx;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2rpx solid #ddd;
+}
+
+:deep(.td-style) {
+  padding: 16rpx;
+  color: #555;
+  border-bottom: 1rpx solid #eee;
+}
+
+:deep(.blockquote-style) {
+  border-left: 6rpx solid #FF6B35;
+  background: #fff7ed;
+  padding: 20rpx;
+  margin: 24rpx 0;
+  color: #666;
+  font-style: italic;
+}
+
+/* Bottom Footer */
+.article-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 40rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.footer-btn.left {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.footer-btn.right {
+  background: #FF6B35;
+  color: #fff;
+}
+</style>
