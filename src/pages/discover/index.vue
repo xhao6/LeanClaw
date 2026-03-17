@@ -90,8 +90,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, onShow } from 'vue'
-import { getCurrentPages } from '@dcloudio/uni-app'
+import { ref, onMounted, watch } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
@@ -182,10 +182,7 @@ onMounted(() => {
 })
 
 // 从URL参数读取初始tab
-onShow(() => {
-  const pages = getCurrentPages()
-  const currentPage = pages[pages.length - 1]
-  const options = (currentPage as any).$page?.options || (currentPage as any).options || {}
+onLoad((options: Record<string, string>) => {
   if (options.tab) {
     activeTab.value = options.tab
     fetchData(true)
