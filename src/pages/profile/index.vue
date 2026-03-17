@@ -83,26 +83,6 @@
     </view>
   </view>
 
-  <!-- 修改昵称弹窗 -->
-  <wd-popup
-    v-model:show="showNicknameModal"
-    position="bottom"
-    round
-  >
-    <view class="p-4">
-      <view class="text-base font-bold mb-4 text-center">修改昵称</view>
-      <input
-        v-model="nicknameInput"
-        class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
-        placeholder="请输入新昵称"
-        maxlength="20"
-      />
-      <view class="flex gap-3 mt-4">
-        <wd-button block @click="showNicknameModal = false">取消</wd-button>
-        <wd-button block type="primary" @click="handleConfirmNickname">确定</wd-button>
-      </view>
-    </view>
-  </wd-popup>
 </template>
 
 <script setup lang="ts">
@@ -118,24 +98,33 @@ const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
 // 修改昵称相关
-const showNicknameModal = ref(false)
 const nicknameInput = ref('')
 
 const handleEditNickname = () => {
   nicknameInput.value = userInfo.value.name || ''
-  showNicknameModal.value = true
+  uni.showModal({
+    title: '修改昵称',
+    placeholderText: '请输入新昵称',
+    content: nicknameInput.value,
+    editable: true,
+    success: (res) => {
+      if (res.confirm && res.content && res.content.trim()) {
+        handleConfirmNickname(res.content.trim())
+      }
+    }
+  })
 }
 
-const handleConfirmNickname = async () => {
-  if (!nicknameInput.value.trim()) {
+const handleConfirmNickname = async (newNickname?: string) => {
+  const name = newNickname || nicknameInput.value.trim()
+  if (!name) {
     uni.showToast({ title: '昵称不能为空', icon: 'none' })
     return
   }
 
-  const res = await userStore.updateUserInfo({ name: nicknameInput.value.trim() })
+  const res = await userStore.updateUserInfo({ name })
   if (res.success) {
     uni.showToast({ title: '修改成功', icon: 'success' })
-    showNicknameModal.value = false
   } else {
     uni.showToast({ title: res.message || '修改失败', icon: 'none' })
   }
