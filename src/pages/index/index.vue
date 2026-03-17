@@ -58,23 +58,23 @@
 
     <!-- Quick Entries -->
     <view class="grid grid-cols-3 gap-3 mb-8">
-      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoLearn">
+      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoCase">
         <view class="w-12 h-12 rounded-2xl bg-orange/10 flex-center mb-2 overflow-hidden">
-           <image src="/static/images/placeholder/study.svg" class="w-8 h-8" mode="aspectFit" />
+           <image src="/static/images/placeholder/quick-case.svg" class="w-8 h-8" mode="aspectFit" />
         </view>
-        <text class="text-sm font-medium text-gray-700">今日学习</text>
-      </view>
-      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoDiscover">
-        <view class="w-12 h-12 rounded-2xl bg-blue-500/10 flex-center mb-2 overflow-hidden">
-           <image src="/static/images/placeholder/hot.svg" class="w-8 h-8" mode="aspectFit" />
-        </view>
-        <text class="text-sm font-medium text-gray-700">热门资源</text>
+        <text class="text-sm font-medium text-gray-700">精选案例</text>
       </view>
       <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoSkills">
-        <view class="w-12 h-12 rounded-2xl bg-green-500/10 flex-center mb-2 overflow-hidden">
-           <image src="/static/images/placeholder/skill.svg" class="w-8 h-8" mode="aspectFit" />
+        <view class="w-12 h-12 rounded-2xl bg-blue-500/10 flex-center mb-2 overflow-hidden">
+           <image src="/static/images/placeholder/quick-skills.svg" class="w-8 h-8" mode="aspectFit" />
         </view>
-        <text class="text-sm font-medium text-gray-700">推荐Skill</text>
+        <text class="text-sm font-medium text-gray-700">Skills大全</text>
+      </view>
+      <view class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm active:scale-95 transition-transform" @click="handleGoFavorites">
+        <view class="w-12 h-12 rounded-2xl bg-green-500/10 flex-center mb-2 overflow-hidden">
+           <image src="/static/images/placeholder/quick-fav.svg" class="w-8 h-8" mode="aspectFit" />
+        </view>
+        <text class="text-sm font-medium text-gray-700">我的收藏</text>
       </view>
     </view>
 
@@ -213,8 +213,14 @@ const handleGoLearn = () => {
 const handleGoDiscover = () => {
   uni.switchTab({ url: '/pages/discover/index' })
 }
+const handleGoCase = () => {
+  uni.switchTab({ url: '/pages/discover/index?tab=case' })
+}
 const handleGoSkills = () => {
-  uni.switchTab({ url: '/pages/discover/index' })
+  uni.switchTab({ url: '/pages/discover/index?tab=skill' })
+}
+const handleGoFavorites = () => {
+  uni.navigateTo({ url: '/pages/profile/favorites/index' })
 }
 
 // 切换收藏
