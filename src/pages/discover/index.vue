@@ -37,8 +37,14 @@
     </view>
 
     <!-- Content List -->
-    <view class="p-4 pt-0">
-      <view v-if="loading" class="flex-center py-10">
+    <scroll-view
+      class="p-4 pt-0 h-[calc(100vh-200px)]"
+      scroll-y
+      refresher-enabled
+      :refresher-triggered="refreshing"
+      @refresherrefresh="handleRefresh"
+    >
+      <view v-if="loading && !refreshing" class="flex-center py-10">
         <wd-loading color="#FF6B35" />
       </view>
 
@@ -85,7 +91,7 @@
           <text>没有更多了</text>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -103,6 +109,7 @@ const searchValue = ref('')
 const activeTab = ref<string>('resource')
 const loading = ref(false)
 const loadingMore = ref(false)
+const refreshing = ref(false)
 const items = ref<ResourceItem[]>([])
 const currentPage = ref(1)
 const hasMore = ref(true)
@@ -175,6 +182,14 @@ const loadMore = () => {
     currentPage.value++
     fetchData(false)
   }
+}
+
+// 下拉刷新处理
+const handleRefresh = async () => {
+  refreshing.value = true
+  await fetchData(true)
+  refreshing.value = false
+  uni.showToast({ title: '刷新成功', icon: 'success' })
 }
 
 onMounted(() => {
