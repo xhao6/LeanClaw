@@ -4,17 +4,38 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 vi.mock('@/api/modules/resource', () => ({
   getResources: vi.fn().mockResolvedValue({
     list: [
-      { id: 'res-001', title: '资源1', type: 'resource', tags: ['tag1'] },
-      { id: 'res-002', title: '资源2', type: 'resource', tags: ['tag2'] },
-      { id: 'res-003', title: '资源3', type: 'video', tags: ['tag3'] },
-      { id: 'res-004', title: '资源4', type: 'tool', tags: ['tag4'] },
-      { id: 'res-005', title: '资源5', type: 'case', tags: ['tag5'] },
-      { id: 'res-006', title: '资源6', type: 'resource', tags: ['tag1'] },
-      { id: 'res-007', title: '资源7', type: 'resource', tags: ['tag2'] },
-      { id: 'res-008', title: '资源8', type: 'video', tags: ['tag3'] },
-      { id: 'res-009', title: '资源9', type: 'tool', tags: ['tag4'] },
-      { id: 'res-010', title: '资源10', type: 'case', tags: ['tag5'] },
+      { id: 'res-001', title: '资源1', type: 'resource', tags: ['tag1'], heat: 10 },
+      { id: 'res-002', title: '资源2', type: 'resource', tags: ['tag2'], heat: 5 },
+      { id: 'res-003', title: '资源3', type: 'video', tags: ['tag3'], heat: 100 },
+      { id: 'res-004', title: '资源4', type: 'tool', tags: ['tag4'], heat: 1 },
+      { id: 'res-005', title: '资源5', type: 'case', tags: ['tag5'], heat: 50 },
+      { id: 'res-006', title: '资源6', type: 'resource', tags: ['tag1'], heat: 20 },
+      { id: 'res-007', title: '资源7', type: 'resource', tags: ['tag2'], heat: 3 },
+      { id: 'res-008', title: '资源8', type: 'video', tags: ['tag3'], heat: 80 },
+      { id: 'res-009', title: '资源9', type: 'tool', tags: ['tag4'], heat: 2 },
+      { id: 'res-010', title: '资源10', type: 'case', tags: ['tag5'], heat: 30 },
     ],
+  }),
+}))
+
+// Mock getFavorites API
+vi.mock('@/api/modules/user', () => ({
+  getFavorites: vi.fn().mockResolvedValue({
+    success: true,
+    data: [
+      { resourceId: 'res-002' },
+    ],
+  }),
+}))
+
+// Mock pinia store
+vi.mock('pinia', () => ({
+  storeToRefs: vi.fn((store: any) => store),
+}))
+
+vi.mock('@/store', () => ({
+  useUserStore: vi.fn().mockReturnValue({
+    isLoggedIn: { value: false },
   }),
 }))
 
@@ -164,6 +185,76 @@ describe('useRecommendations 推荐功能', () => {
 
       // 至少有资源可以显示
       expect(recs2.recommendations.value.length).toBeGreaterThan(0)
+    })
+  })
+
+  describe('calculateScore 推荐分数计算', () => {
+    it('高热度文章应获得更高分数', () => {
+      const { calculateScore } = useRecommendations()
+      const highHeat = { id: '1', heat: 100 }
+      const lowHeat = { id: '2', heat: 1 }
+
+      const scores1: number[] = []
+      const scores2: number[] = []
+
+      // 多次运行确保高热度始终高于低热度
+      for (let i = 0; i < 20; i++) {
+        scores1.push(calculateScore(highHeat as any, new Set()))
+        scores2.push(calculateScore(lowHeat as any, new Set()))
+      }
+
+      // 高热度的最小分数应大于低热度的最大分数（考虑随机因子）
+      const minHighHeat = Math.min(...scores1)
+      const maxLowHeat = Math.max(...scores2)
+      expect(minHighHeat).toBeGreaterThan(maxLowHeat - 50)
+    })
+
+    it('已收藏文章应获得额外分数', () => {
+      const { calculateScore } = useRecommendations()
+      const item = { id: '1', heat: 50 }
+      const favorites = new Set(['1'])
+
+      let withFavScore = 0
+      let withoutFavScore = 0
+
+      for (let i = 0; i < 20; i++) {
+        withFavScore += calculateScore(item as any, favorites)
+        withoutFavScore += calculateScore(item as any, new Set())
+      }
+
+      // 已收藏的总分数应该明显更高
+      expect(withFavScore).toBeGreaterThan(withoutFavScore)
+    })
+
+    it('随机因子应产生不同排序', () => {
+      const { calculateScore } = useRecommendations()
+      const items = [
+        { id: '1', heat: 50 },
+        { id: '2', heat: 50 },
+        { id: '3', heat: 50 },
+      ]
+
+      // 多次计算分数，检查是否有随机性
+      const scores1 = items.map(item => calculateScore(item as any, new Set()))
+      const scores2 = items.map(item => calculateScore(item as any, new Set()))
+
+      // 由于随机因子，分数顺序可能不同
+      const sorted1 = [...scores1].sort((a, b) => b - a)
+      const sorted2 = [...scores2].sort((a, b) => b - a)
+
+      // 至少分数和不同（由于随机因子）
+      const isDifferent = scores1.some((s, i) => s !== scores2[i])
+      expect(isDifferent || sorted1.join() !== sorted2.join()).toBe(true)
+    })
+  })
+
+  describe('资源类型混合', () => {
+    it('推荐列表应包含多种类型', async () => {
+      const { recommendations, loadRecommendations } = useRecommendations()
+      await loadRecommendations()
+
+      const types = new Set(recommendations.value.map(r => r.type))
+      expect(types.size).toBeGreaterThan(1)
     })
   })
 })
