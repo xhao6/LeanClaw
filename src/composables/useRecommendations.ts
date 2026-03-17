@@ -1,6 +1,29 @@
 import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store'
 import { getResources } from '@/api/modules/resource'
+import { getFavorites } from '@/api/modules/user'
 import type { ResourceItem } from '@/types/resource'
+
+// 推荐算法权重配置
+const HEAT_WEIGHT = 10       // 热度权重
+const USER_BONUS = 50        // 用户已收藏加分
+const RANDOM_WEIGHT = 20     // 随机因子权重
+
+/**
+ * 计算推荐分数
+ * 分数 = 热度分 + 用户收藏加分 + 随机因子
+ * 未收藏高热度文章得分最高
+ */
+const calculateScore = (
+  item: ResourceItem,
+  userFavorites: Set<string>
+): number => {
+  const heatScore = (item.heat || 0) * HEAT_WEIGHT
+  const userBonusScore = userFavorites.has(item.id) ? USER_BONUS : 0
+  const randomFactor = Math.random() * RANDOM_WEIGHT
+  return heatScore + userBonusScore + randomFactor
+}
 
 const STORAGE_KEY = 'viewed_resources'
 const PAGE_SIZE = 5
@@ -58,6 +81,22 @@ export function useRecommendations() {
       // 获取浏览历史
       const viewedIds = new Set(getViewedIds())
 
+      // 获取用户收藏ID列表
+      const userStore = useUserStore()
+      const { isLoggedIn } = storeToRefs(userStore)
+      const userFavorites = new Set<string>()
+
+      if (isLoggedIn.value) {
+        try {
+          const favRes = await getFavorites()
+          if (favRes.success && favRes.data) {
+            favRes.data.forEach((f: any) => userFavorites.add(f.resourceId))
+          }
+        } catch (e) {
+          console.warn('获取用户收藏失败', e)
+        }
+      }
+
       // 过滤掉已浏览的
       const available = allResources.filter(r => !viewedIds.has(r.id))
 
@@ -66,7 +105,13 @@ export function useRecommendations() {
         r => !viewedIds.has(r.id)
       )
 
-      recommendations.value = shuffle(pool).slice(0, PAGE_SIZE)
+      // 使用混合推荐算法排序
+      const scored = pool.map(item => ({
+        item,
+        score: calculateScore(item, userFavorites)
+      })).sort((a, b) => b.score - a.score)
+
+      recommendations.value = scored.slice(0, PAGE_SIZE).map(s => s.item)
       allLoaded.value = recommendations.value.length >= MAX_ITEMS || pool.length <= PAGE_SIZE
     } catch (err) {
       console.error('Load recommendations failed', err)
@@ -97,6 +142,22 @@ export function useRecommendations() {
       const viewedIds = new Set(getViewedIds())
       const displayedIds = new Set(recommendations.value.map(r => r.id))
 
+      // 获取用户收藏ID列表
+      const userStore = useUserStore()
+      const { isLoggedIn } = storeToRefs(userStore)
+      const userFavorites = new Set<string>()
+
+      if (isLoggedIn.value) {
+        try {
+          const favRes = await getFavorites()
+          if (favRes.success && favRes.data) {
+            favRes.data.forEach((f: any) => userFavorites.add(f.resourceId))
+          }
+        } catch (e) {
+          console.warn('获取用户收藏失败', e)
+        }
+      }
+
       const available = allResources.filter(
         r => !viewedIds.has(r.id) && !displayedIds.has(r.id)
       )
@@ -105,7 +166,13 @@ export function useRecommendations() {
         r => !displayedIds.has(r.id)
       )
 
-      const newItems = shuffle(pool).slice(0, PAGE_SIZE)
+      // 使用混合推荐算法排序
+      const scored = pool.map(item => ({
+        item,
+        score: calculateScore(item, userFavorites)
+      })).sort((a, b) => b.score - a.score)
+
+      const newItems = scored.slice(0, PAGE_SIZE).map(s => s.item)
       recommendations.value = [...recommendations.value, ...newItems]
       allLoaded.value = recommendations.value.length >= MAX_ITEMS || newItems.length < PAGE_SIZE
     } catch (err) {
@@ -134,5 +201,6 @@ export function useRecommendations() {
     loadMore,
     addToViewed,
     clearViewedHistory,
+    calculateScore, // 导出用于测试
   }
 }
