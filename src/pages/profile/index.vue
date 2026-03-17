@@ -23,7 +23,7 @@
         <template v-if="isLoggedIn">
           <view class="text-xl font-bold flex items-center">
             {{ userInfo.name || '龙虾驯养员' }}
-            <wd-icon name="edit" size="16px" class="ml-2 opacity-70" />
+            <wd-icon name="edit" size="16px" class="ml-2 opacity-70" @click.stop="handleEditNickname" />
           </view>
           <view class="text-xs text-white/70 mt-1 bg-white/10 px-2 py-0.5 rounded-full inline-block">ID: {{ userInfo.id ? userInfo.id.substring(0, 8) : '...' }}</view>
         </template>
@@ -82,6 +82,23 @@
       </view>
     </view>
   </view>
+
+  <!-- 修改昵称弹窗 -->
+  <wd-modal
+    v-model:show="showNicknameModal"
+    title="修改昵称"
+    show-cancel
+    @confirm="handleConfirmNickname"
+  >
+    <view class="p-4">
+      <input
+        v-model="nicknameInput"
+        class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+        placeholder="请输入新昵称"
+        maxlength="20"
+      />
+    </view>
+  </wd-modal>
 </template>
 
 <script setup lang="ts">
@@ -95,6 +112,30 @@ import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
+
+// 修改昵称相关
+const showNicknameModal = ref(false)
+const nicknameInput = ref('')
+
+const handleEditNickname = () => {
+  nicknameInput.value = userInfo.value.name || ''
+  showNicknameModal.value = true
+}
+
+const handleConfirmNickname = async () => {
+  if (!nicknameInput.value.trim()) {
+    uni.showToast({ title: '昵称不能为空', icon: 'none' })
+    return
+  }
+
+  const res = await userStore.updateUserInfo({ name: nicknameInput.value.trim() })
+  if (res.success) {
+    uni.showToast({ title: '修改成功', icon: 'success' })
+    showNicknameModal.value = false
+  } else {
+    uni.showToast({ title: res.message || '修改失败', icon: 'none' })
+  }
+}
 
 // 响应式标记，用于强制更新统计数据
 const statsVersion = ref(0)
