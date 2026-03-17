@@ -59,6 +59,34 @@ exports.main = async (event, context) => {
       .orderBy('heat', 'desc')
       .get()
 
+    // 获取每个资源的收藏数
+    const resourcesList = res.data || []
+    if (resourcesList.length > 0) {
+      try {
+        const favoritesRes = await db.collection('favorites')
+          .groupBy('resourceId')
+          .aggregate({
+            count: db.command.aggregate.sum(1)
+          })
+
+        // 构建收藏数映射
+        const heatMap = {}
+        if (favoritesRes.list) {
+          favoritesRes.list.forEach(item => {
+            heatMap[item.resourceId] = item.count
+          })
+        }
+
+        // 给每个资源附加 heat 字段（使用收藏数）
+        resourcesList.forEach(item => {
+          item.heat = heatMap[item._id] || item.heat || 0
+        })
+      } catch (e) {
+        console.warn('获取收藏数失败:', e)
+        // 失败时使用原有的 heat 字段
+      }
+    }
+
     // Get total count
     let totalQuery = db.collection('resources')
     if (Object.keys(queryConditions).length > 0) {
@@ -68,7 +96,7 @@ exports.main = async (event, context) => {
 
     return {
       success: true,
-      list: res.data,
+      list: resourcesList,
       total: countRes.total
     }
   } catch (err) {
