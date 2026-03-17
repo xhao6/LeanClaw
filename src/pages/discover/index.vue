@@ -37,14 +37,15 @@
     </view>
 
     <!-- Content List -->
-    <scroll-view
-      class="p-4 pt-0 h-[calc(100vh-200px)]"
-      scroll-y
-      refresher-enabled
-      :refresher-triggered="refreshing"
-      @refresherrefresh="handleRefresh"
-    >
-      <view v-if="loading && !refreshing" class="flex-center py-10">
+    <view class="p-4 pt-0 flex-1 overflow-hidden">
+      <scroll-view
+        scroll-y
+        class="h-full"
+        refresher-enabled
+        :refresher-triggered="refreshing"
+        @refresherrefresh="handleRefresh"
+      >
+        <view v-if="loading && !refreshing" class="flex-center py-10">
         <wd-loading color="#FF6B35" />
       </view>
 
@@ -91,7 +92,8 @@
           <text>没有更多了</text>
         </view>
       </view>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
 </template>
 
