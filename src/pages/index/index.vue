@@ -214,10 +214,10 @@ const handleGoDiscover = () => {
   uni.switchTab({ url: '/pages/discover/index' })
 }
 const handleGoCase = () => {
-  uni.switchTab({ url: '/pages/discover/index?tab=case' })
+  uni.navigateTo({ url: '/pages/discover/index?tab=case' })
 }
 const handleGoSkills = () => {
-  uni.switchTab({ url: '/pages/discover/index?tab=skill' })
+  uni.navigateTo({ url: '/pages/discover/index?tab=skill' })
 }
 const handleGoFavorites = () => {
   uni.navigateTo({ url: '/pages/profile/favorites/index' })
