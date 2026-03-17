@@ -1,6 +1,6 @@
 /**
  * Resource item type definition
- * 从 @/data/mock 抽取的类型，避免直接引用 mock 文件
+ * 资源数据类型定义
  */
 export interface ResourceItem {
   id: string;
