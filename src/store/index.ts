@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { login as apiLogin, getProfile as apiGetProfile, getProgress as apiGetProgress } from '@/api/modules/user'
+import { login as apiLogin, getProfile as apiGetProfile, getProgress as apiGetProgress, updateProfile as apiUpdateProfile } from '@/api/modules/user'
 import { syncCloudProgress } from '@/utils/learnProgress'
 
 export const useUserStore = defineStore('user', () => {
@@ -109,6 +109,20 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const updateUserInfo = async (info: { name?: string; avatar?: string }) => {
+    try {
+      const res = await apiUpdateProfile(info)
+      if (res.success) {
+        setUserInfo(info)
+        return { success: true }
+      }
+      return res
+    } catch (err) {
+      console.error('Update user info failed', err)
+      return { success: false, message: '更新失败' }
+    }
+  }
+
   return {
     token,
     userInfo,
@@ -117,6 +131,7 @@ export const useUserStore = defineStore('user', () => {
     setUserInfo,
     login,
     fetchProfile,
-    logout
+    logout,
+    updateUserInfo
   }
 })
