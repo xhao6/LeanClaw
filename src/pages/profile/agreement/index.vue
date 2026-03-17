@@ -14,7 +14,7 @@
       <view class="bg-white rounded-2xl shadow-sm p-5">
         <view class="text-base font-bold text-gray-800 mb-3">一、服务条款</view>
         <view class="text-sm text-gray-500 leading-relaxed space-y-2">
-          <view>欢迎使用 LeanClaw 轻学AI虾平台（以下简称"本平台"）。本平台由 LeanClaw 团队运营，您在使用本平台服务之前，请仔细阅读以下服务条款。</view>
+          <view>欢迎使用 轻学Claw 轻学AI虾平台（以下简称"本平台"）。本平台由 轻学Claw 团队运营，您在使用本平台服务之前，请仔细阅读以下服务条款。</view>
           <view>您通过任何方式访问或使用本平台，即表示您已阅读、理解并同意接受本协议的所有条款和条件。如果您不同意本协议的任何内容，请立即停止使用本平台。</view>
         </view>
       </view>
@@ -94,7 +94,7 @@
     <!-- 底部版权 -->
     <view class="p-8 text-center">
       <view class="text-xs text-gray-300">
-        © 2026 LeanClaw. All rights reserved.
+        © 2026 轻学Claw. All rights reserved.
       </view>
       <view class="text-xs text-gray-300 mt-1">
         最后更新: 2026年3月14日

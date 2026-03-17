@@ -72,7 +72,7 @@ const notifications = ref<Notification[]>([
   {
     type: 'system',
     title: '欢迎使用',
-    content: '欢迎加入 LeanClaw，7 天帮你掌握 OpenClaw！',
+    content: '欢迎加入 轻学Claw，7 天帮你掌握 OpenClaw！',
     time: '3天前',
     read: true
   }

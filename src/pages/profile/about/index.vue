@@ -13,7 +13,7 @@
       <view class="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-primary to-ocean-light flex items-center justify-center shadow-lg shadow-primary/20">
         <text class="text-5xl">🦞</text>
       </view>
-      <view class="text-2xl font-bold text-gray-800 mt-6">轻学AI虾</view>
+      <view class="text-2xl font-bold text-gray-800 mt-6">轻学Claw</view>
       <view class="text-sm text-gray-400 mt-2">AI学习好帮手</view>
       <view class="text-xs text-primary font-medium mt-2">v{{ version }}</view>
     </view>
@@ -23,7 +23,7 @@
       <view class="bg-white rounded-2xl shadow-sm p-5">
         <view class="text-base font-bold text-gray-800 mb-3">关于我们</view>
         <view class="text-sm text-gray-500 leading-relaxed">
-          LeanClaw 是一个专注于 OpenClaw AI 助手学习的平台。我们提供 7 天完整的学习路径，帮助用户从零开始掌握 AI 助手的使用技巧，开启智能生活新体验。
+          轻学Claw 是一个专注于 OpenClaw AI 助手学习的平台。我们提供 7 天完整的学习路径，帮助用户从零开始掌握 AI 助手的使用技巧，开启智能生活新体验。
         </view>
       </view>
     </view>
@@ -90,7 +90,7 @@
     <!-- 底部版权 -->
     <view class="p-8 text-center">
       <view class="text-xs text-gray-300">
-        © 2024 LeanClaw. All rights reserved.
+        © 2024 轻学Claw. All rights reserved.
       </view>
       <view class="text-xs text-gray-300 mt-1">
         Made with ❤️ for AI learners

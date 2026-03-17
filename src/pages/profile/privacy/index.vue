@@ -110,7 +110,7 @@
     <!-- 底部版权 -->
     <view class="p-8 text-center">
       <view class="text-xs text-gray-300">
-        © 2026 LeanClaw. All rights reserved.
+        © 2026 轻学Claw. All rights reserved.
       </view>
       <view class="text-xs text-gray-300 mt-1">
         最后更新: 2026年3月14日

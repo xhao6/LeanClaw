@@ -42,7 +42,7 @@
               <text class="text-gray-400">v{{ version }}</text>
             </template>
           </wd-cell>
-          <wd-cell title="关于 LeanClaw" is-link icon="link" size="large" @click="goToAbout" />
+          <wd-cell title="关于 轻学Claw" is-link icon="link" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
     </view>

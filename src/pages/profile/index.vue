@@ -73,7 +73,7 @@
         <wd-cell-group border>
           <wd-cell title="用户协议" is-link icon="file" size="large" @click="goToAgreement" />
           <wd-cell title="隐私政策" is-link icon="lock-on" size="large" @click="goToPrivacy" />
-          <wd-cell title="关于 LeanClaw" is-link icon="info-circle" size="large" @click="goToAbout" />
+          <wd-cell title="关于 轻学Claw" is-link icon="info-circle" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
 

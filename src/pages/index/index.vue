@@ -15,7 +15,7 @@
         <!-- Logo -->
         <image src="/static/images/logo.webp" class="w-10 h-10 rounded-xl mr-3 shadow-sm bg-white" mode="aspectFit" />
         <view>
-          <text class="text-xl font-bold text-primary block leading-tight">轻学AI虾</text>
+          <text class="text-xl font-bold text-primary block leading-tight">轻学Claw</text>
           <text class="text-xs text-gray-400 block mt-0.5">养只龙虾做管家</text>
         </view>
       </view>
