@@ -320,7 +320,6 @@ const handleFavorite = () => {
   padding: 20rpx;
   margin: 24rpx 0;
   color: #666;
-  font-style: italic;
 }
 
 /* Bottom Footer */

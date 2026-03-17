@@ -168,14 +168,16 @@ const loadContent = async () => {
       rendered = rendered.replace(/<p>/g, '<p class="mb-4 text-gray-600 leading-7 text-justify">')
       rendered = rendered.replace(/<ul>/g, '<ul class="mb-4 pl-5 space-y-2 list-disc text-gray-600">')
       rendered = rendered.replace(/<li>/g, '<li class="pl-1">')
-      rendered = rendered.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 italic rounded-r-lg">')
+      rendered = rendered.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 rounded-r-lg">')
       rendered = rendered.replace(/<code>/g, '<code class="bg-gray-100 text-orange px-1.5 py-0.5 rounded text-sm font-mono">')
       rendered = rendered.replace(/<pre>/g, '<pre class="bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto my-4 text-sm font-mono shadow-sm">')
       rendered = rendered.replace(/<img/g, '<img class="w-full rounded-xl my-4 shadow-sm" mode="widthFix"')
       rendered = rendered.replace(/<table>/g, '<div class="overflow-x-auto my-4"><table class="w-full border-collapse text-sm text-left">')
       rendered = rendered.replace(/<th>/g, '<th class="border-b border-gray-200 bg-gray-50 p-3 font-bold text-gray-700">')
       rendered = rendered.replace(/<td>/g, '<td class="border-b border-gray-100 p-3 text-gray-600">')
-      
+      // 移除斜体样式
+      rendered = rendered.replace(/<em>/g, '<em class="text-gray-600">')
+
       htmlContent.value = rendered
       
       // Reset tasks for demo (in real app, load from storage)

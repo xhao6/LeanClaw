@@ -74,7 +74,7 @@ const applyStyles = (html: string): string => {
   styled = styled.replace(/<li>/g, '<li class="pl-1">')
 
   // 引用块样式
-  styled = styled.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 italic rounded-r-lg">')
+  styled = styled.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 rounded-r-lg">')
 
   // 行内代码样式
   styled = styled.replace(/<code>/g, '<code class="bg-gray-100 text-orange px-1.5 py-0.5 rounded text-sm font-mono">')
@@ -97,7 +97,7 @@ const applyStyles = (html: string): string => {
 
   // 强调和加粗
   styled = styled.replace(/<strong>/g, '<strong class="font-bold text-gray-800">')
-  styled = styled.replace(/<em>/g, '<em class="italic text-gray-600">')
+  styled = styled.replace(/<em>/g, '<em class="text-gray-600">')
 
   return styled
 }
