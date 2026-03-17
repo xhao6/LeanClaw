@@ -170,9 +170,41 @@ exports.main = async (event, context) => {
 
       case 'getFavorites': {
         const { data: list } = await favoritesCollection.where({ _openid: openid }).get();
-        // Ideally we should join with resources collection here, 
+        // Ideally we should join with resources collection here,
         // but for simple NoSQL, client can fetch details or we do it here
         return { success: true, data: list };
+      }
+
+      case 'updateProfile': {
+        const { name, avatar } = data
+
+        if (!openid) {
+          return { success: false, message: '无法获取用户信息' }
+        }
+
+        try {
+          const userRes = await usersCollection.where({
+            _openid: openid
+          }).get()
+
+          if (userRes.data && userRes.data.length > 0) {
+            const userId = userRes.data[0]._id
+            const updateData = {}
+            if (name !== undefined) updateData.name = name
+            if (avatar !== undefined) updateData.avatar = avatar
+
+            await usersCollection.doc(userId).update({
+              data: updateData
+            })
+
+            return { success: true, message: '更新成功' }
+          } else {
+            return { success: false, message: '用户不存在' }
+          }
+        } catch (err) {
+          console.error('Update profile failed', err)
+          return { success: false, message: '更新失败' }
+        }
       }
 
       default:
