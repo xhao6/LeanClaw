@@ -90,7 +90,14 @@
         </text>
       </view>
 
-      <scroll-view scroll-y class="h-[400px]" @scrolltolower="handleLoadMore">
+      <scroll-view
+        scroll-y
+        class="h-[400px]"
+        refresher-enabled
+        :refresher-triggered="refreshing"
+        @refresherrefresh="handleRefresh"
+        @scrolltolower="handleLoadMore"
+      >
         <!-- 空状态 / 错误状态 -->
         <view v-if="error" class="flex flex-col items-center justify-center py-12 text-gray-400">
           <wd-icon name="warning" size="32px" class="mb-2" />
@@ -137,7 +144,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
@@ -151,6 +158,17 @@ const progress = getProgress()
 
 // 今日推荐
 const { recommendations, loading, hasMore, error, loadRecommendations, loadMore, addToViewed } = useRecommendations()
+
+// 下拉刷新状态
+const refreshing = ref(false)
+
+// 下拉刷新处理
+const handleRefresh = async () => {
+  refreshing.value = true
+  await loadRecommendations()
+  refreshing.value = false
+  uni.showToast({ title: '刷新成功', icon: 'success' })
+}
 
 // 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
