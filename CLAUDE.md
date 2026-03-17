@@ -1,501 +1,489 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code (claude.ai/code) 在本项目中工作提供指引。
 
 ---
-description: CloudBase AI Development Rules Guide - Provides scenario-based best practices to ensure development quality
+description: CloudBase AI 开发规范指南 - 提供场景化的最佳实践以确保开发质量
 globs: *
 alwaysApply: true
 inclusion: always
 ---
 
-# CloudBase AI Development Rules Guide
+# CloudBase AI 开发规范指南
 
-## 🗂️ Rule File Path Resolution Strategy
+## 🗂️ 规则文件路径解析策略
 
-**CRITICAL: All rule file paths in this document follow a smart resolution strategy to support multiple AI editors.**
+**重要提示：本文档中所有规则文件路径都采用智能解析策略，以支持多种 AI 编辑器。**
 
-### Path Resolution Rules
+### 路径解析规则
 
-When this document references a rule file, try locations in this order:
+当文档引用规则文件时，按以下顺序尝试：
 
-1. **CodeBuddy Path**: `.codebuddy/rules/tcb/rules/{rule-name}/rule.md`
-2. **Universal Path**: `rules/{rule-name}/rule.md`
-3. **Fallback Search**: Use `search_file` with pattern `*{rule-name}*rule.md`
+1. **通用路径**: `rules/{rule-name}/rule.md`
+2. **兜底搜索**: 使用 `search_file` 工具搜索 `*{rule-name}*rule.md`
 
-### Rule Name Mapping
+### 规则名称映射
 
-| Rule Shorthand | Full Rule Name |
-|----------------|----------------|
-| `auth-tool` | Authentication Tool Configuration |
-| `auth-web` | Web Authentication |
-| `auth-wechat` | WeChat Mini Program Authentication |
-| `auth-nodejs` | Node.js Authentication |
-| `auth-http-api` | HTTP API Authentication |
-| `web-development` | Web Platform Development |
-| `miniprogram-development` | Mini Program Platform Development |
-| `cloudrun-development` | CloudRun Backend Development |
-| `cloud-functions` | Cloud Functions Development |
-| `http-api` | HTTP API Usage |
-| `relational-database-tool` | MySQL Database Tool Operations |
+| 规则简写 | 完整规则名称 |
+|---------|-------------|
+| `auth-tool` | 认证工具配置 |
+| `auth-web` | Web 认证 |
+| `auth-wechat` | 微信小程序认证 |
+| `auth-nodejs` | Node.js 认证 |
+| `auth-http-api` | HTTP API 认证 |
+| `web-development` | Web 平台开发 |
+| `miniprogram-development` | 小程序平台开发 |
+| `cloudrun-development` | CloudRun 后端开发 |
+| `cloud-functions` | 云函数开发 |
+| `http-api` | HTTP API 使用 |
+| `relational-database-tool` | MySQL 数据库工具操作 |
 | `relational-database-web` | MySQL Web SDK |
 | `no-sql-web-sdk` | NoSQL Web SDK |
-| `no-sql-wx-mp-sdk` | NoSQL WeChat Mini Program SDK |
-| `cloudbase-platform` | CloudBase Platform Knowledge |
-| `cloud-storage-web` | Cloud Storage Web SDK |
-| `ui-design` | UI Design Guidelines |
-| `spec-workflow` | Software Engineering Workflow |
-| `data-model-creation` | Data Model Creation |
-| `ai-model-web` | AI Model Calling (Web SDK) |
-| `ai-model-nodejs` | AI Model Calling (Node SDK) |
-| `ai-model-wechat` | AI Model Calling (WeChat Mini Program) |
+| `no-sql-wx-mp-sdk` | NoSQL 微信小程序 SDK |
+| `cloudbase-platform` | CloudBase 平台知识 |
+| `cloud-storage-web` | 云存储 Web SDK |
+| `ui-design` | UI 设计规范 |
+| `spec-workflow` | 软件工程工作流 |
+| `data-model-creation` | 数据模型创建 |
+| `ai-model-web` | AI 模型调用 (Web SDK) |
+| `ai-model-nodejs` | AI 模型调用 (Node SDK) |
+| `ai-model-wechat` | AI 模型调用 (微信小程序) |
 
-### Usage Example
+### 使用示例
 
-When you see "Read `{auth-web}` rule file" in this document:
-- Try: `.codebuddy/rules/tcb/rules/auth-web/rule.md` first
-- Then: `rules/auth-web/rule.md`
-- Finally: Search with pattern `*auth-web*rule.md`
+当你在文档中看到 "Read `{auth-web}` rule file" 时：
+- 首先尝试：`.codebuddy/rules/tcb/rules/auth-web/rule.md`
+- 然后尝试：`rules/auth-web/rule.md`
+- 最后搜索：`*auth-web*rule.md`
 
-**Note**: Files already using `rules/` prefix (like `rules/ui-design/rule.md`) work universally across all editors and don't need path resolution.
+**注意**：已使用 `rules/` 前缀的文件（如 `rules/ui-design/rule.md`）在所有编辑器中通用，无需路径解析。
 
 ---
 
-## Quick Reference for AI
+## AI 快速参考
 
-**⚠️ CRITICAL: Read this section first based on your project type**
+**⚠️ 重要提示：根据你的项目类型首先阅读本节**
 
-### When Developing a Web Project:
-1. **Environment Check**: Call `envQuery` tool first (applies to all interactions)
-2. **⚠️ Template Download (MANDATORY for New Projects)**: **MUST call `downloadTemplate` tool FIRST when starting a new project** - Do NOT create files manually. Use `downloadTemplate` with `template="react"` or `template="vue"` to get the complete project structure. Only proceed with manual file creation if template download fails or user explicitly requests it.
-3. **⚠️ UI Design (CRITICAL)**: **MUST read `rules/ui-design/rule.md` FIRST before generating any page, interface, component, or style** - This is NOT optional. You MUST explicitly read this file and output the design specification before writing any UI code.
-4. **Core Capabilities**: Read Core Capabilities section below (especially UI Design and Database + Authentication for Web)
-5. **⚠️ Authentication Configuration Check (MANDATORY)**: **When user mentions ANY login/authentication requirement, MUST FIRST read `{auth-tool}` rule file (using path resolution strategy) and check/configure authentication providers BEFORE implementing frontend code**
-6. **Platform Rules**: Read `{web-development}` rule file (using path resolution strategy) for platform-specific rules (SDK integration, static hosting, build configuration)
-7. **Authentication**: Read `{auth-web}` rule file (using path resolution strategy) and `{auth-tool}` - **MUST use Web SDK built-in authentication**
-8. **Database**:
+### 开发 Web 项目时：
+1. **环境检查**: 首先调用 `envQuery` 工具（适用于所有交互）
+2. **⚠️ 模板下载（新项目必读）**: **开始新项目时必须首先调用 `downloadTemplate` 工具** - 切勿手动创建文件。使用 `downloadTemplate` 并指定 `template="react"` 或 `template="vue"` 获取完整项目结构。只有在模板下载失败或用户明确要求手动创建时，才进行手动文件创建。
+3. **⚠️ UI 设计（重要）**: **在生成任何页面、界面、组件或样式之前，必须首先阅读 `rules/ui-design/rule.md`** - 这不是可选的。必须在编写任何 UI 代码之前明确阅读此文件并输出设计规范。
+4. **核心能力**: 阅读下面的核心能力部分（特别是 Web 的 UI 设计和数据库 + 认证）
+5. **⚠️ 认证配置检查（必读）**: **当用户提到任何登录/认证需求时，必须首先阅读 `{auth-tool}` 规则文件（使用路径解析策略）并在实施前端代码之前检查/配置认证服务提供商**
+6. **平台规则**: 阅读 `{web-development}` 规则文件（使用路径解析策略）了解平台特定规则（SDK 集成、静态托管、构建配置）
+7. **认证**: 阅读 `{auth-web}` 规则文件（使用路径解析策略）和 `{auth-tool}` - **必须使用 Web SDK 内置认证**
+8. **数据库**:
    - NoSQL: `rules/no-sql-web-sdk/rule.md`
    - MySQL: `rules/relational-database-web/rule.md` + `rules/relational-database-tool/rule.md`
 
-### When Developing a Mini Program Project:
-1. **Environment Check**: Call `envQuery` tool first (applies to all interactions)
-2. **⚠️ Template Download (MANDATORY for New Projects)**: **MUST call `downloadTemplate` tool FIRST when starting a new project** - Do NOT create files manually. Use `downloadTemplate` with `template="miniprogram"` to get the complete project structure. Only proceed with manual file creation if template download fails or user explicitly requests it.
-3. **⚠️ UI Design (CRITICAL)**: **MUST read `rules/ui-design/rule.md` FIRST before generating any page, interface, component, or style** - This is NOT optional. You MUST explicitly read this file and output the design specification before writing any UI code.
-4. **Core Capabilities**: Read Core Capabilities section below (especially UI Design and Database + Authentication for Mini Program)
-5. **Platform Rules**: Read `rules/miniprogram-development/rule.md` for platform-specific rules (project structure, WeChat Developer Tools, wx.cloud usage)
-6. **Authentication**: Read `rules/auth-wechat/rule.md` - **Naturally login-free, get OPENID in cloud functions**
-7. **Database**:
+### 开发小程序项目时：
+1. **环境检查**: 首先调用 `envQuery` 工具（适用于所有交互）
+2. **⚠️ 模板下载（新项目必读）**: **开始新项目时必须首先调用 `downloadTemplate` 工具** - 切勿手动创建文件。使用 `downloadTemplate` 并指定 `template="miniprogram"` 获取完整项目结构。只有在模板下载失败或用户明确要求手动创建时，才进行手动文件创建。
+3. **⚠️ UI 设计（重要）**: **在生成任何页面、界面、组件或样式之前，必须首先阅读 `rules/ui-design/rule.md`** - 这不是可选的。必须在编写任何 UI 代码之前明确阅读此文件并输出设计规范。
+4. **核心能力**: 阅读下面的核心能力部分（特别是小程序的 UI 设计和数据库 + 认证）
+5. **平台规则**: 阅读 `rules/miniprogram-development/rule.md` 了解平台特定规则（项目结构、微信开发者工具、wx.cloud 使用）
+6. **认证**: 阅读 `rules/auth-wechat/rule.md` - **天然免登录，在云函数中获取 OPENID**
+7. **数据库**:
    - NoSQL: `rules/no-sql-wx-mp-sdk/rule.md`
-   - MySQL: `rules/relational-database-tool/rule.md` (via tools)
+   - MySQL: `rules/relational-database-tool/rule.md`（通过工具）
 
-### When Developing a Native App Project (iOS/Android/Flutter/React Native/etc.):
-1. **Environment Check**: Call `envQuery` tool first (applies to all interactions)
-2. **⚠️ Platform Limitation**: **Native apps (iOS, Android, Flutter, React Native, and other native mobile frameworks) do NOT support CloudBase SDK** - Must use HTTP API to call CloudBase capabilities
-3. **⚠️ UI Design (CRITICAL)**: **MUST read `rules/ui-design/rule.md` FIRST before generating any page, interface, component, or style** - This is NOT optional. You MUST explicitly read this file and output the design specification before writing any UI code.
-4. **Required Rules**:
-   - **MUST read** `{http-api}` rule file (using path resolution strategy) - HTTP API usage for all CloudBase operations
-   - **MUST read** `{relational-database-tool}` rule file (using path resolution strategy) - MySQL database operations (via tools)
-   - **MUST read** `{auth-tool}` rule file (using path resolution strategy) - Authentication configuration
-5. **Optional Rules**:
-   - `rules/cloudbase-platform/rule.md` - Universal CloudBase platform knowledge
-   - `rules/ui-design/rule.md` - UI design guidelines (if UI is involved)
-6. **⚠️ Database Limitation**: **Only MySQL database is supported** for native apps. If users need to use MySQL database, **MUST prompt them to enable it in the console first**:
-   - Enable MySQL database at: [CloudBase Console - MySQL Database](https://tcb.cloud.tencent.com/dev?envId=${envId}#/db/mysql/table/default/)
-   - Replace `${envId}` with the actual environment ID
+### 开发原生 App 项目时（iOS/Android/Flutter/React Native 等）：
+1. **环境检查**: 首先调用 `envQuery` 工具（适用于所有交互）
+2. **⚠️ 平台限制**: **原生应用（iOS、Android、Flutter、React Native 等）不支持 CloudBase SDK** - 必须使用 HTTP API 调用 CloudBase 能力
+3. **⚠️ UI 设计（重要）**: **在生成任何页面、界面、组件或样式之前，必须首先阅读 `rules/ui-design/rule.md`** - 这不是可选的。必须在编写任何 UI 代码之前明确阅读此文件并输出设计规范。
+4. **必读规则**:
+   - **必须阅读** `{http-api}` 规则文件（使用路径解析策略） - 所有 CloudBase 操作的 HTTP API 使用
+   - **必须阅读** `{relational-database-tool}` 规则文件（使用路径解析策略） - MySQL 数据库操作（通过工具）
+   - **必须阅读** `{auth-tool}` 规则文件（使用路径解析策略） - 认证配置
+5. **可选规则**:
+   - `rules/cloudbase-platform/rule.md` - 通用 CloudBase 平台知识
+   - `rules/ui-design/rule.md` - UI 设计规范（如涉及 UI）
+6. **⚠️ 数据库限制**: **原生应用只支持 MySQL 数据库**。如果用户需要使用 MySQL 数据库，**必须提示用户在控制台先启用它**:
+   - 启用 MySQL 数据库：[CloudBase 控制台 - MySQL 数据库](https://tcb.cloud.tencent.com/dev?envId=${envId}#/db/mysql/table/default/)
+   - 将 `${envId}` 替换为实际的环境 ID
 
 ---
 
-## Core Capabilities (Must Be Done Well)
+## 核心能力（必须做好）
 
-### 0. ⚠️ Configuration-First Principle (NEW - HIGHEST PRIORITY)
+### 0. ⚠️ 配置优先原则（最高优先级）
 
-**🚨 MANDATORY: Always check and configure CloudBase services BEFORE implementing code**
+**🚨 必读：在编写代码之前必须先检查和配置 CloudBase 服务**
 
-**Authentication Trigger Words Detection:**
+**认证关键词检测：**
 
-When user mentions ANY of these words, immediately read the auth-tool rule file:
+当用户提到以下任何词时，立即阅读 auth-tool 规则文件：
 
-- Phone login / SMS login / Mobile login
-- Email login
-- WeChat login / Wechat auth
-- Username password login / User/pass login
-- Anonymous login / Guest login
-- Login / Register / Auth / Authentication / Sign in / Sign up
+- 手机登录 / 短信登录 / 移动登录
+- 邮箱登录
+- 微信登录 / 微信认证
+- 用户名密码登录
+- 匿名登录 / 游客登录
+- 登录 / 注册 / 认证 / 认证 / 登录 / 注册
 
-**Rule File Location Strategy:**
+**规则文件位置策略：**
 
-When you see `{rule-name}` notation in this document, apply the path resolution strategy from the top of this file:
-1. Try `.codebuddy/rules/tcb/rules/{rule-name}/rule.md` first (CodeBuddy)
-2. Then try `rules/{rule-name}/rule.md` (Other editors)
-3. Use `search_file` with pattern `*{rule-name}*rule.md` if both fail
+当你在本文档中看到 `{rule-name}` 标记时，应用本文档顶部的路径解析策略：
+1. 首先尝试 `.codebuddy/rules/tcb/rules/{rule-name}/rule.md` (CodeBuddy)
+2. 然后尝试 `rules/{rule-name}/rule.md` (其他编辑器)
+3. 如果两者都失败，使用 `search_file` 搜索 `*{rule-name}*rule.md`
 
-**Specific example for auth-tool:**
+**auth-tool 具体示例：**
 1. `.codebuddy/rules/tcb/rules/auth-tool/rule.md` (CodeBuddy)
-2. `rules/auth-tool/rule.md` (Other editors: Cursor, WindSurf, etc.)
-3. Use `search_file` with pattern `*auth-tool*rule.md` if both fail
+2. `rules/auth-tool/rule.md` (其他编辑器：Cursor、WindSurf 等)
+3. 如果两者都失败，搜索 `*auth-tool*rule.md`
 
-**Execution Sequence:**
+**执行顺序：**
 
-1. **FIRST**: Read `{auth-tool}` rule file using the path resolution strategy
-2. **SECOND**: Use `callCloudApi` to check current authentication configuration
-3. **THIRD**: Enable required authentication methods (if not configured)
-4. **FOURTH**: Verify configuration is effective
-5. **FIFTH**: Implement frontend authentication code
+1. **第一步**: 使用路径解析策略阅读 `{auth-tool}` 规则文件
+2. **第二步**: 使用 `callCloudApi` 检查当前认证配置状态
+3. **第三步**: 启用所需的认证方式（如未配置）
+4. **第四步**: 验证配置是否生效
+5. **第五步**: 实施前端认证代码
 
-As the most important part of application development, the following four core capabilities must be done well, without needing to read different rules for different platforms:
+作为应用开发最重要的部分，以下四个核心能力必须做好，无需为不同平台阅读不同规则：
 
-### 1. ⚠️ UI Design (CRITICAL - Highest Priority)
-**⚠️ MANDATORY: Must strictly follow `rules/ui-design/rule.md` rules for ALL design work**
+### 1. ⚠️ UI 设计（最高优先级）
+**⚠️ 必读：所有设计工作必须严格遵循 `rules/ui-design/rule.md` 规则**
 
-**🚨 CRITICAL ENFORCEMENT: You MUST explicitly read the file `rules/ui-design/rule.md` before generating ANY UI code. This is NOT a suggestion - it is a MANDATORY requirement.**
+**🚨 强制执行：在生成任何 UI 代码之前，你必须明确阅读 `rules/ui-design/rule.md` 文件。这不是建议，而是强制要求。**
 
-**Before generating ANY page, interface, component, or style:**
-1. **MUST FIRST explicitly read `rules/ui-design/rule.md` file** - Use file reading tools to read this file, do NOT skip this step
-2. **MUST complete design specification output** before writing any code:
-   - Purpose Statement
-   - Aesthetic Direction (choose from specific options, NOT generic terms)
-   - Color Palette (with hex codes, avoid forbidden colors)
-   - Typography (specific font names, avoid forbidden fonts)
-   - Layout Strategy (asymmetric/creative approach, avoid centered templates)
-3. **MUST ensure** generated interfaces have distinctive aesthetic styles and high-quality visual design
-4. **MUST avoid** generic AI aesthetics (common fonts, clichéd color schemes, templated designs)
+**在生成任何页面、界面、组件或样式之前：**
+1. **必须首先明确阅读 `rules/ui-design/rule.md` 文件** - 使用文件阅读工具读取此文件，切勿跳过此步骤
+2. **必须在编写任何代码之前完成设计规范输出**：
+   - 设计目的说明
+   - 美学方向（选择具体选项，而非通用术语）
+   - 配色方案（含十六进制颜色，避免禁忌色）
+   - 排版（具体字体名称，避免禁忌字体）
+   - 布局策略（非对称/创意方案，避免居中模板）
+3. **必须确保**生成的界面具有独特的美学风格和高质量的视觉设计
+4. **必须避免**通用的 AI 美学（常见字体、陈词滥调的配色方案、模板化设计）
 
-**This applies to ALL tasks involving:**
-- Page generation
-- Interface creation
-- Component design
-- Style/visual effects
-- Any frontend visual elements
+**这适用于所有涉及以下内容的任务：**
+- 页面生成
+- 界面创建
+- 组件设计
+- 样式/视觉效果
+- 任何前端视觉元素
 
-**⚠️ VIOLATION DETECTION: If you find yourself writing UI code without first reading `rules/ui-design/rule.md`, STOP immediately and read the file first.**
+**⚠️ 违规检测：如果发现自己在未首先阅读 `rules/ui-design/rule.md` 的情况下编写 UI 代码，请立即停止并先阅读该文件。**
 
-### 2. Database + Authentication
-**Strengthen database and authentication capabilities**
+### 2. 数据库 + 认证
+**加强数据库和认证能力**
 
-**Authentication**:
-- **Web Projects**:
-  - Must use CloudBase Web SDK built-in authentication, refer to `rules/auth-web/rule.md`
-  - Platform development rules: Refer to `rules/web-development/rule.md` for Web SDK integration, static hosting deployment, and build configuration
-- **Mini Program Projects**:
-  - Naturally login-free, get `wxContext.OPENID` in cloud functions, refer to `rules/auth-wechat/rule.md`
-  - Platform development rules: Refer to `rules/miniprogram-development/rule.md` for mini program project structure, WeChat Developer Tools integration, and CloudBase capabilities
-- **Node.js Backend**: Refer to `rules/auth-nodejs/rule.md`
+**认证**：
+- **Web 项目**:
+  - 必须使用 CloudBase Web SDK 内置认证，参考 `rules/auth-web/rule.md`
+  - 平台开发规则：参考 `rules/web-development/rule.md` 了解 Web SDK 集成、静态托管部署和构建配置
+- **小程序项目**:
+  - 天然免登录，在云函数中获取 `wxContext.OPENID`，参考 `rules/auth-wechat/rule.md`
+  - 平台开发规则：参考 `rules/miniprogram-development/rule.md` 了解小程序项目结构、微信开发者工具集成和 CloudBase 能力
+- **Node.js 后端**: 参考 `rules/auth-nodejs/rule.md`
 
-**Database Operations**:
-- **Web Projects**:
-  - NoSQL Database: Refer to `rules/no-sql-web-sdk/rule.md`
-  - MySQL Relational Database: Refer to `rules/relational-database-web/rule.md` (Web application development) and `rules/relational-database-tool/rule.md` (Management via tools)
-  - Platform development rules: Refer to `rules/web-development/rule.md` for Web SDK database integration patterns
-- **Mini Program Projects**:
-  - NoSQL Database: Refer to `rules/no-sql-wx-mp-sdk/rule.md`
-  - MySQL Relational Database: Refer to `rules/relational-database-tool/rule.md` (via tools)
-  - Platform development rules: Refer to `rules/miniprogram-development/rule.md` for mini program database integration and wx.cloud usage
+**数据库操作**：
+- **Web 项目**:
+  - NoSQL 数据库：参考 `rules/no-sql-web-sdk/rule.md`
+  - MySQL 关系型数据库：参考 `rules/relational-database-web/rule.md`（Web 应用开发）和 `rules/relational-database-tool/rule.md`（通过工具管理）
+  - 平台开发规则：参考 `rules/web-development/rule.md` 了解 Web SDK 数据库集成模式
+- **小程序项目**:
+  - NoSQL 数据库：参考 `rules/no-sql-wx-mp-sdk/rule.md`
+  - MySQL 关系型数据库：参考 `rules/relational-database-tool/rule.md`（通过工具）
+  - 平台开发规则：参考 `rules/miniprogram-development/rule.md` 了解小程序数据库集成和 wx.cloud 使用
 
-### 3. Static Hosting Deployment (Web)
-**Refer to deployment process in `rules/web-development/rule.md`**
-- Use CloudBase static hosting after build completion
-- Deploy using `uploadFiles` tool
-- Remind users that CDN has a few minutes of cache after deployment
-- Generate markdown format access links with random queryString
+### 3. 静态托管部署（Web）
+**参考 `rules/web-development/rule.md` 中的部署流程**
+- 构建完成后使用 CloudBase 静态托管
+- 使用 `uploadFiles` 工具部署
+- 提醒用户部署后 CDN 有几分钟缓存
+- 生成带随机查询字符串的 markdown 格式访问链接
 
-### 4. Backend Deployment (Cloud Functions or CloudRun)
-- **Cloud Function Deployment**: Refer to `rules/cloud-functions/rule.md` - Use `getFunctionList` to query, then call `createFunction` or `updateFunctionCode` to deploy. **Important**: Runtime cannot be changed after creation, must select correct runtime initially.
-- **CloudRun Deployment**: Refer to `rules/cloudrun-development/rule.md` - Use `manageCloudRun` tool for containerized deployment
-- Ensure backend code supports CORS, prepare Dockerfile (for container type)
+### 4. 后端部署（云函数或 CloudRun）
+- **云函数部署**: 参考 `rules/cloud-functions/rule.md` - 使用 `getFunctionList` 查询，然后调用 `createFunction` 或 `updateFunctionCode` 部署。**重要**：运行时创建后不可更改，开始时必须选择正确的运行时。
+- **CloudRun 部署**: 参考 `rules/cloudrun-development/rule.md` - 使用 `manageCloudRun` 工具进行容器化部署
+- 确保后端代码支持 CORS，准备 Dockerfile（容器类型）
 
-## Development Process Standards
+## 开发流程标准
 
-**Important: To ensure development quality, AI must complete the following steps before starting work:**
+**重要提示：为确保开发质量，AI 在开始工作之前必须完成以下步骤：**
 
-### 0. Environment Check (First Step)
-After user inputs any content, first check CloudBase environment status:
-- Ensure current CloudBase environment ID is known
-- If not present in conversation history, must call `envQuery` tool with parameter `action=info` to query current environment information and environment ID
-- **Important**: When environment ID configuration is involved in code later, automatically use the queried environment ID, no need for manual user input
+### 0. 环境检查（第一步）
+用户输入任何内容后，首先检查 CloudBase 环境状态：
+- 确保当前 CloudBase 环境 ID 已知
+- 如果对话历史中不存在，必须使用参数 `action=info` 调用 `envQuery` 工具查询当前环境信息和环境 ID
+- **重要**：后续代码中涉及环境 ID 配置时，自动使用查询到的环境 ID，无需用户手动输入
 
-### 1. Scenario Identification
-Identify current development scenario type, mainly for understanding project type, but core capabilities apply to all projects:
-- **Web Projects**: React/Vue/native JS frontend projects
-- **WeChat Mini Programs**: Mini program CloudBase projects
-- **UniApp Projects**: Cross-platform apps using uni-app framework
-- **Native Apps**: Native mobile applications (iOS, Android, Flutter, React Native, etc.) that use HTTP API (no SDK support)
-- **CloudRun Projects**: CloudBase Run backend service projects (supports any language: Java/Go/Python/Node.js/PHP/.NET, etc.)
-- **Database Related**: Projects involving data operations
-- **UI Design/Interface Generation**: Projects requiring interface design, page generation, prototype creation, component design, etc.
-- **AI Model Integration**: Projects requiring AI capabilities (text generation, streaming responses, image generation)
+### 1. 场景识别
+识别当前开发场景类型，主要是为了解项目类型，但核心能力适用于所有项目：
+- **Web 项目**: React/Vue/原生 JS 前端项目
+- **微信小程序**: 小程序 CloudBase 项目
+- **UniApp 项目**: 使用 uni-app 框架的跨平台应用
+- **原生应用**: 使用 HTTP API 的原生移动应用（iOS、Android、Flutter、React Native 等）（无 SDK 支持）
+- **CloudRun 项目**: CloudBase Run 后端服务项目（支持任意语言：Java/Go/Python/Node.js/PHP/.NET 等）
+- **数据库相关**: 涉及数据操作的项目
+- **UI 设计/界面生成**: 需要界面设计、页面生成、原型创建、组件设计等的项目
+- **AI 模型集成**: 需要 AI 能力的项目（文本生成、流式响应、图像生成）
 
-### 2. Platform-Specific Quick Guide
+### 2. 平台特定快速指南
 
-**UniApp Projects - Required Rule Files:**
-- `rules/miniprogram-development/rule.md` - Platform development rules (project structure, WeChat Developer Tools, uni-app specifics)
-- `rules/auth-wechat/rule.md` - Authentication (naturally login-free, get OPENID in cloud functions)
-- `rules/no-sql-wx-mp-sdk/rule.md` - NoSQL database operations
-- `rules/relational-database-tool/rule.md` - MySQL database operations (via tools)
-- `rules/cloudbase-platform/rule.md` - Universal CloudBase platform knowledge
-- `rules/ai-model-wechat/rule.md` - AI model calling for UniApp
+**UniApp 项目 - 必读规则文件：**
+- `rules/miniprogram-development/rule.md` - 平台开发规则（项目结构、微信开发者工具、uni-app 特性）
+- `rules/auth-wechat/rule.md` - 认证（天然免登录，在云函数中获取 OPENID）
+- `rules/no-sql-wx-mp-sdk/rule.md` - NoSQL 数据库操作
+- `rules/relational-database-tool/rule.md` - MySQL 数据库操作（通过工具）
+- `rules/cloudbase-platform/rule.md` - 通用 CloudBase 平台知识
+- `rules/ai-model-wechat/rule.md` - UniApp 的 AI 模型调用
 
-**Web Projects - Required Rule Files:**
-- `rules/web-development/rule.md` - Platform development rules (SDK integration, static hosting, build configuration)
-- `rules/auth-web/rule.md` - Authentication (MUST use Web SDK built-in authentication)
-- `rules/no-sql-web-sdk/rule.md` - NoSQL database operations
-- `rules/relational-database-web/rule.md` - MySQL database operations (Web)
-- `rules/relational-database-tool/rule.md` - MySQL database management (tools)
-- `rules/cloud-storage-web/rule.md` - Cloud storage operations (upload, download, file management)
-- `rules/cloudbase-platform/rule.md` - Universal CloudBase platform knowledge
-- `rules/ai-model-web/rule.md` - AI model calling for Web apps (text generation, streaming)
+**Web 项目 - 必读规则文件：**
+- `rules/web-development/rule.md` - 平台开发规则（SDK 集成、静态托管、构建配置）
+- `rules/auth-web/rule.md` - 认证（**必须使用 Web SDK 内置认证**）
+- `rules/no-sql-web-sdk/rule.md` - NoSQL 数据库操作
+- `rules/relational-database-web/rule.md` - MySQL 数据库操作（Web）
+- `rules/relational-database-tool/rule.md` - MySQL 数据库管理（工具）
+- `rules/cloud-storage-web/rule.md` - 云存储操作（上传、下载、文件管理）
+- `rules/cloudbase-platform/rule.md` - 通用 CloudBase 平台知识
+- `rules/ai-model-web/rule.md` - Web 应用的 AI 模型调用（文本生成、流式）
 
-**Mini Program Projects - Required Rule Files:**
-- `rules/miniprogram-development/rule.md` - Platform development rules (project structure, WeChat Developer Tools, wx.cloud)
-- `rules/auth-wechat/rule.md` - Authentication (naturally login-free, get OPENID in cloud functions)
-- `rules/no-sql-wx-mp-sdk/rule.md` - NoSQL database operations
-- `rules/relational-database-tool/rule.md` - MySQL database operations (via tools)
-- `rules/cloudbase-platform/rule.md` - Universal CloudBase platform knowledge
-- `rules/ai-model-wechat/rule.md` - AI model calling for Mini Program (text generation, streaming with callbacks)
+**小程序项目 - 必读规则文件：**
+- `rules/miniprogram-development/rule.md` - 平台开发规则（项目结构、微信开发者工具、wx.cloud）
+- `rules/auth-wechat/rule.md` - 认证（天然免登录，在云函数中获取 OPENID）
+- `rules/no-sql-wx-mp-sdk/rule.md` - NoSQL 数据库操作
+- `rules/relational-database-tool/rule.md` - MySQL 数据库操作（通过工具）
+- `rules/cloudbase-platform/rule.md` - 通用 CloudBase 平台知识
+- `rules/ai-model-wechat/rule.md` - 小程序的 AI 模型调用（文本生成、带回调的流式）
 
-**Universal Rule Files (All Projects):**
-- **⚠️ `rules/ui-design/rule.md`** - **MANDATORY - HIGHEST PRIORITY** - Must read FIRST before any UI/page/component/style generation
-- `rules/spec-workflow/rule.md` - Standard software engineering process (if needed)
+**通用规则文件（所有项目）：**
+- **⚠️ `rules/ui-design/rule.md`** - **必读 - 最高优先级** - 在生成任何 UI/页面/组件/样式之前必须首先阅读
+- `rules/spec-workflow/rule.md` - 标准软件工程工作流（如需要）
 
-### 3. Development Confirmation
-Before starting work, suggest confirming with user:
-1. "I identify this as a [scenario type] project"
-2. "I will strictly follow core capability requirements and refer to relevant rule files"
-3. "Please confirm if my understanding is correct"
+### 3. 开发确认
+开始工作前，建议向用户确认：
+1. "我识别这是一个 [场景类型] 项目"
+2. "我将严格遵循核心能力要求并参考相关规则文件"
+3. "请确认我的理解是否正确"
 
-## Core Behavior Rules
+## 核心行为规则
 
-1. **Tool Priority**: For Tencent CloudBase operations, must prioritize using CloudBase tools
-2. **⚠️ Template Download (MANDATORY)**: **When starting a new project or when user requests to develop an application, MUST FIRST call `downloadTemplate` tool** - Do NOT manually create project files. Use `downloadTemplate` with appropriate template type (`react`, `vue`, `miniprogram`, `uniapp`). Only create files manually if template download fails or user explicitly requests manual creation. This ensures proper project structure, configuration files, and best practices.
-3. **Project Understanding**: First read current project's README.md, follow project instructions for development
-4. **Directory Standards**: Before outputting project code in current directory, first check current directory files
-5. **Development Order**: When developing, prioritize frontend first, then backend, ensuring frontend interface and interaction logic are completed first, then implement backend business logic
-6. **⚠️ UI Design Rules Mandatory Application**: When tasks involve generating pages, interfaces, components, styles, or any frontend visual elements, **MUST FIRST explicitly read the file `rules/ui-design/rule.md` using file reading tools**, then strictly follow the rule file, ensuring generated interfaces have distinctive aesthetic styles and high-quality visual design, avoiding generic AI aesthetics. **You MUST output the design specification before writing any UI code.**
-7. **Backend Development Priority Strategy**: When developing backend, prioritize using SDK to directly call CloudBase database, rather than through cloud functions, unless specifically needed (such as complex business logic, server-side computation, calling third-party APIs, etc.)
-8. **Deployment Order**: When there are backend dependencies, prioritize deploying backend before previewing frontend
-9. **Interactive Confirmation**: Use interactiveDialog to clarify when requirements are unclear, must confirm before executing high-risk operations
-10. **Real-time Communication**: Use CloudBase real-time database watch capability
-11. **⚠️ Authentication Rules**: When users develop projects, if user login authentication is needed, must use built-in authentication functions, must strictly distinguish authentication methods by platform
-    - **Web Projects**: **MUST use CloudBase Web SDK built-in authentication** (e.g., `auth.toDefaultLoginPage()`), refer to `rules/auth-web/rule.md`
-    - **Mini Program/UniApp Projects**: **Naturally login-free**, get `wxContext.OPENID` in cloud functions, refer to `rules/auth-wechat/rule.md`
-    - **Native Apps (iOS/Android)**: **MUST use HTTP API** for authentication, refer to `rules/http-api/rule.md` and Authentication API swagger
-12. **⚠️ Authentication Configuration Mandatory Check**: When user mentions any authentication-related requirements:
-    - **MUST FIRST read** `{auth-tool}` rule file using the path resolution strategy at the top of this document
-    - **MUST FIRST check** current authentication configuration status
-    - **MUST FIRST enable** required authentication methods
-    - **MUST verify** configuration is effective
-    - **ONLY THEN implement** frontend authentication code
+1. **工具优先级**: 对于腾讯 CloudBase 操作，必须优先使用 CloudBase 工具
+2. **⚠️ 模板下载（必读）**: **开始新项目或用户要求开发应用时，必须首先调用 `downloadTemplate` 工具** - 切勿手动创建项目文件。使用适当的模板类型（`react`、`vue`、`miniprogram`、`uniapp`）调用 `downloadTemplate`。只有在模板下载失败或用户明确要求手动创建时，才进行手动文件创建。这确保了正确的项目结构、配置文件和最佳实践。
+3. **项目理解**: 首先阅读当前项目的 README.md，遵循项目说明进行开发
+4. **目录标准**: 在当前目录输出项目代码前，先检查当前目录文件
+5. **开发顺序**: 开发时优先前端后后端，确保先完成前端界面和交互逻辑，再实现后端业务逻辑
+6. **⚠️ UI 设计规则强制应用**: 当任务涉及生成页面、界面、组件、样式或任何前端视觉元素时，**必须首先使用文件阅读工具明确阅读 `rules/ui-design/rule.md` 文件**，然后严格遵循该规则文件，确保生成的界面具有独特的美学风格和高质量的视觉设计，避免通用的 AI 美学。**必须在编写任何 UI 代码之前输出设计规范。**
+7. **后端开发优先策略**: 开发后端时，优先使用 SDK 直接调用 CloudBase 数据库，而非通过云函数（除非特别需要，如复杂业务逻辑、服务器端计算、调用第三方 API 等）
+8. **部署顺序**: 有后端依赖时，优先部署后端再预览前端
+9. **交互确认**: 需求不明确时使用 interactiveDialog 澄清，必须在执行高风险操作前确认
+10. **实时通讯**: 使用 CloudBase 实时数据库 watch 能力
+11. **⚠️ 认证规则**: 用户开发项目时需要登录认证，必须使用内置认证功能，必须按平台严格区分认证方式
+    - **Web 项目**: **必须使用 CloudBase Web SDK 内置认证**（如 `auth.toDefaultLoginPage()`），参考 `rules/auth-wechat/rule.md`
+    - **小程序/UniApp 项目**: **天然免登录**，在云函数中获取 `wxContext.OPENID`，参考 `rules/auth-wechat/rule.md`
+    - **原生应用（iOS/Android）**: **必须使用 HTTP API** 进行认证，参考 `rules/http-api/rule.md` 和认证 API swagger
+12. **⚠️ 认证配置强制检查**: 用户提到任何认证相关需求时：
+    - **必须首先阅读** `{auth-tool}` 规则文件（使用本文档顶部的路径解析策略）
+    - **必须首先检查** 当前认证配置状态
+    - **必须首先启用** 所需的认证方式
+    - **必须验证** 配置是否生效
+    - **然后才能实施** 前端认证代码
 
-## Development Workflow
+## 开发工作流
 
-### Development
+### 开发
 
-1. **⚠️ Download CloudBase Templates (MANDATORY for New Projects)**:
-   - **MUST call `downloadTemplate` tool FIRST when starting a new project** - Do NOT manually create project files
-   - For Web projects: Use `downloadTemplate` with `template="react"` or `template="vue"`
-   - For Mini Program projects: Use `downloadTemplate` with `template="miniprogram"`
-   - For UniApp projects: Use `downloadTemplate` with `template="uniapp"`
-   - **Only proceed with manual file creation if template download fails or user explicitly requests manual creation**
-   - If unable to download to current directory, can use scripts to copy, note that hidden files also need to be copied
+1. **⚠️ 下载 CloudBase 模板（新项目必读）**:
+   - **开始新项目时必须首先调用 `downloadTemplate` 工具** - 切勿手动创建项目文件
+   - Web 项目：使用 `downloadTemplate` 并指定 `template="react"` 或 `template="vue"`
+   - 小程序项目：使用 `downloadTemplate` 并指定 `template="miniprogram"`
+   - UniApp 项目：使用 `downloadTemplate` 并指定 `template="uniapp"`
+   - **只有在模板下载失败或用户明确要求手动创建时才进行手动文件创建**
+   - 如果无法下载到当前目录，可以使用脚本复制，注意隐藏文件也需要复制
 
-2. **⚠️ UI Design Document Reading (MANDATORY)**:
-   - **Before generating ANY page, interface, component, or style, MUST FIRST explicitly read the file `rules/ui-design/rule.md` using file reading tools**
-   - **MUST output the design specification** (Purpose Statement, Aesthetic Direction, Color Palette, Typography, Layout Strategy) before writing any UI code
-   - This is NOT optional - you MUST read the file and follow the design thinking framework and frontend aesthetics guidelines
-   - Avoid generating generic AI aesthetic style interfaces
+2. **⚠️ 阅读 UI 设计文档（必读）**:
+   - **在生成任何页面、界面、组件或样式之前，必须首先使用文件阅读工具明确阅读 `rules/ui-design/rule.md` 文件**
+   - **必须在编写任何 UI 代码之前输出设计规范**（设计目的说明、美学方向、配色方案、排版、布局策略）
+   - 这是必读的 - 必须阅读文件并遵循设计思维框架和前端美学指南
+   - 避免生成通用的 AI 美学风格界面
 
-3. **Mini Program/UniApp TabBar Material Download**: Tabbar and other material images must use **png** format, must use downloadRemoteFile tool to download files locally. Can select from Unsplash, wikimedia (generally choose 500 size), Pexels, Apple official UI and other resources
+3. **小程序/UniApp TabBar 素材下载**: Tabbar 等素材图片必须使用 **png** 格式，必须使用 downloadRemoteFile 工具下载到本地。可以从 Unsplash、wikimedia（一般选择 500 尺寸）、Pexels、Apple 官方 UI 等资源中选择
 
-4. **Query Professional Knowledge from Knowledge Base**: If uncertain about any CloudBase knowledge, can use searchKnowledgeBase tool to intelligently search CloudBase knowledge base (supports CloudBase and cloud functions, mini program frontend knowledge, etc.), quickly obtain professional documents and answers through vector search
+4. **从知识库查询专业知识**: 如对任何 CloudBase 知识不确定，可以使用 searchKnowledgeBase 工具智能搜索 CloudBase 知识库（支持 CloudBase 和云函数、小程序前端知识等），通过向量搜索快速获取专业文档和答案
 
-5. **WeChat Developer Tools Open Project Workflow**:
-- When detecting current project is a mini program or uni-app project, suggest user to use WeChat Developer Tools for preview, debugging, and publishing
-- Before opening, confirm project.config.json has appid field configured. If not configured, must ask user to provide it
-- Use WeChat Developer built-in CLI command to open project (pointing to directory containing project.config.json):
-  - Windows: `"C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat" open --project "项目根目录路径"`
-  - macOS: `/Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project "/path/to/project/root"`
-- Project root directory path is the directory containing project.config.json file
+5. **微信开发者工具打开项目工作流**:
+   - 检测到当前项目是小程序或 uni-app 项目时，建议用户使用微信开发者工具进行预览、调试和发布
+   - 打开前确认 project.config.json 已配置 appid 字段。如未配置，必须让用户提供
+   - 使用微信开发者工具内置 CLI 命令打开项目（指向包含 project.config.json 的目录）：
+     - Windows: `"C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat" open --project "项目根目录路径"`
+     - macOS: `/Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project "/path/to/project/root"`
+   - 项目根目录路径是包含 project.config.json 文件的目录
 
-### Deployment Process
+### 部署流程
 
-1. **Cloud Function Deployment Process**: Can use getFunctionList tool to query if there are cloud functions, then directly call createFunction or updateFunctionCode to update cloud function code. Only need to point functionRootPath to parent directory of cloud function directory (e.g., absolute path of cloudfunctions directory). No need for code compression and other operations. The above tools will automatically read files from cloud function subdirectories with same name under parent directory and automatically deploy
+1. **云函数部署流程**: 可以使用 getFunctionList 工具查询是否有云函数，然后直接调用 createFunction 或 updateFunctionCode 更新云函数代码。只需将 functionRootPath 指向云函数目录的父目录（如 cloudfunctions 目录的绝对路径）。无需压缩代码等操作。上述工具会自动读取父目录下与云函数同名的子目录中的文件并自动部署
 
-2. **Cloud Function Deployment Process**: For Node.js cloud functions, use `getFunctionList` to query, then call `createFunction` or `updateFunctionCode` to deploy. **Important**: Runtime cannot be changed after creation. For details, refer to `rules/cloud-functions/rule.md`
+2. **云函数部署流程**: 对于 Node.js 云函数，使用 `getFunctionList` 查询，然后调用 `createFunction` 或 `updateFunctionCode` 部署。**重要**：运行时创建后不可更改。详细参考 `rules/cloud-functions/rule.md`
 
-3. **CloudRun Deployment Process**: For non-cloud function backend services (Java, Go, PHP, Python, Node.js, etc.), use manageCloudRun tool for deployment. Ensure backend code supports CORS, prepare Dockerfile, then call manageCloudRun for containerized deployment. For details, refer to `rules/cloudrun-development/rule.md`
+3. **CloudRun 部署流程**: 对于非云函数后端服务（Java、Go、PHP、Python、Node.js 等），使用 manageCloudRun 工具进行容器化部署。确保后端代码支持 CORS，准备 Dockerfile，然后调用 manageCloudRun 进行容器化部署。详细参考 `rules/cloudrun-development/rule.md`
 
-4. **Static Hosting Deployment Process**: Deploy using uploadFiles tool. After deployment, remind users that CDN has a few minutes of cache. Can generate markdown format access links with random queryString. For details, refer to `rules/web-development/rule.md`
+4. **静态托管部署流程**: 使用 uploadFiles 工具部署。部署后提醒用户 CDN 有几分钟缓存。可以生成带随机查询字符串的 markdown 格式访问链接。详细参考 `rules/web-development/rule.md`
 
-### Documentation Generation Rules
+### 文档生成规则
 
-1. You will generate a README.md file after generating the project, containing basic project information, such as project name, project description. Most importantly, clearly explain the project architecture and involved CloudBase resources, so maintainers can refer to it for modification and maintenance
-2. After deployment, if it's a web project, can write the official deployment access address in the documentation
+1. 生成项目后创建 README.md 文件，包含基本信息，如项目名称、项目描述。最重要的是清楚解释项目架构和涉及的 CloudBase 资源，以便维护者参考修改和维护
+2. 部署后，如果是 Web 项目，可以在文档中写上正式的部署访问地址
 
-### Configuration File Rules
+### 配置文件规则
 
-1. To help others who don't use AI understand what resources are available, can generate a cloudbaserc.json file after generation
+1. 为了帮助不使用 AI 的其他人了解有哪些可用资源，可以在生成后创建 cloudbaserc.json 文件
 
-### Tool Interface Call Rules
-When calling tool services, you need to fully understand the data types of all interfaces to be called, as well as return value types. If you're not sure which interface to call, first check the documentation and tool descriptions, then determine which interface and parameters to call based on the documentation and tool descriptions. Do not have incorrect method parameters or parameter type errors.
+### 工具接口调用规则
+调用工具服务时，需要充分了解所有要调用的接口的数据类型以及返回值类型。如果不确定要调用哪个接口，先查看文档和工具描述，然后根据文档和工具描述确定要调用的接口和参数。避免出现方法参数错误或参数类型错误的情况。
 
-For example, many interfaces require a confirm parameter, which is a boolean type. If you don't provide this parameter, or provide incorrect data type, the interface will return an error.
+例如，许多接口需要 confirm 参数，为布尔类型。如果不提供此参数或提供错误的数据类型，接口将返回错误。
 
-### Environment ID Auto-Configuration Rules
-- When generating project configuration files (such as `cloudbaserc.json`, `project.config.json`, etc.), automatically use the environment ID queried by `envQuery`
-- In code examples involving environment ID, automatically fill in current environment ID, no need for manual user replacement
-- In deployment and preview related operations, prioritize using already queried environment information
+### ⚠️ NoSQL 数据库 Update 操作必读
 
-## Development Quality Checklist
+使用 `writeNoSqlDatabaseContent` 的 `update` 操作时，**只更新指定字段会导致其他字段丢失**（部分更新模式）。
 
-To ensure development quality, recommend completing the following checks before starting tasks:
+**正确做法**：在 update 对象中包含所有必要字段，确保记录完整。
 
-### Recommended Steps
-0. **[ ] Environment Check**: Call `envQuery` tool to check CloudBase environment status (applies to all interactions)
-1. **[ ] Template Download Check (MANDATORY for New Projects)**: If starting a new project, have you called `downloadTemplate` tool FIRST? Do NOT manually create project files - use templates.
-2. **[ ] Scenario Identification**: Clearly identify what type of project this is (Web/Mini Program/UniApp/Database/UI/AI)
-3. **[ ] Core Capability Confirmation**: Confirm all four core capabilities have been considered
-   - UI Design: Have you explicitly read the file `rules/ui-design/rule.md` using file reading tools?
-   - Database + Authentication: Have you referred to corresponding authentication and database skills?
-   - Static Hosting Deployment: Have you understood the deployment process?
-   - Backend Deployment: Have you understood cloud function or CloudRun deployment process?
-4. **[ ] UI Design Rules Check (MANDATORY)**: If task involves generating pages, interfaces, components, or styles:
-   - Have you explicitly read the file `rules/ui-design/rule.md` using file reading tools? (Required: YES)
-   - Have you output the design specification before writing code? (Required: YES)
-   - Have you understood and will follow the design thinking framework? (Required: YES)
-5. **[ ] User Confirmation**: Confirm with user whether scenario identification and core capability understanding are correct
-6. **[ ] Rule Execution**: Strictly follow core capability requirements and relevant rule files for development
+```javascript
+// ✅ 完整更新示例
+update({
+  "title": "新标题",
+  "desc": "描述内容",
+  "type": "skill",
+  "markdownUrl": "https://xxx.tcb.la/content/xxx.md",
+  "tags": ["标签1", "标签2"],
+  "heat": 0,
+  "image": "",
+  "url": "",
+  "source": ""
+})
+```
 
-### ⚠️ Common Issues to Avoid
-- **❌ DO NOT manually create project files** - Always use `downloadTemplate` tool first for new projects
-- **❌ DO NOT skip reading UI design document** - Must explicitly read `rules/ui-design/rule.md` file before generating any UI code
-- Avoid skipping core capabilities and starting development directly
-- Avoid mixing APIs and authentication methods from different platforms
-- Avoid ignoring UI design rules: All tasks involving interfaces, pages, components, styles must explicitly read and strictly follow `rules/ui-design/rule.md`
-- Avoid ignoring database and authentication standards: Must use correct authentication methods and database operation methods
-- Important technical solutions should be confirmed with users
+### 环境 ID 自动配置规则
+- 生成项目配置文件（如 `cloudbaserc.json`、`project.config.json` 等）时，自动使用 `envQuery` 查询到的环境 ID
+- 在涉及环境 ID 的代码示例中，自动填充当前环境 ID，无需用户手动替换
+- 在部署和预览相关操作中，优先使用已查询到的环境信息
 
-### Quality Assurance
-If development is found to not comply with standards, can:
-- Point out specific issues
-- Require re-execution of rule check process
-- Clearly specify rule files that need to be followed
+## 开发质量检查清单
 
-## CloudBase Console Entry Points
+为确保开发质量，建议在开始任务前完成以下检查：
 
-After creating/deploying resources, provide corresponding console management page links. All console URLs follow the pattern: `https://tcb.cloud.tencent.com/dev?envId=${envId}#/{path}`
+### 推荐步骤
+0. **[ ] 环境检查**: 调用 `envQuery` 工具检查 CloudBase 环境状态（适用于所有交互）
+1. **[ ] 模板下载检查（新项目必读）**: 如果开始新项目，是否首先调用了 `downloadTemplate` 工具？不要手动创建项目文件 - 使用模板。
+2. **[ ] 场景识别**: 清楚识别这是什么类型的项目（Web/小程序/UniApp/数据库/UI/AI）
+3. **[ ] 核心能力确认**: 确认已考虑所有四个核心能力
+   - UI 设计：是否使用文件阅读工具明确阅读了 `rules/ui-design/rule.md` 文件？
+   - 数据库 + 认证：是否参考了相应的认证和数据库规则？
+   - 静态托管部署：是否了解部署流程？
+   - 后端部署：是否了解云函数或 CloudRun 部署流程？
+4. **[ ] UI 设计规则检查（必读）**: 如果任务涉及生成页面、界面、组件或样式：
+   - 是否使用文件阅读工具明确阅读了 `rules/ui-design/rule.md` 文件？（必填：是）
+   - 是否在编写代码前输出了设计规范？（必填：是）
+   - 是否理解并遵循设计思维框架？（必填：是）
+5. **[ ] 用户确认]: 向用户确认场景识别和核心能力理解是否正确
+6. **[ ] 规则执行**: 严格遵循核心能力要求和相关规则文件进行开发
 
-### Core Function Entry Points
+### ⚠️ 常见问题避免
+- **❌ 不要手动创建项目文件** - 新项目首先使用 `downloadTemplate` 工具
+- **❌ 不要跳过阅读 UI 设计文档** - 生成任何 UI 代码前必须明确阅读 `rules/ui-design/rule.md` 文件
+- 避免跳过核心能力直接开始开发
+- 避免混合使用不同平台的 API 和认证方式
+- 避免忽略 UI 设计规则：所有涉及界面、页面、组件、样式的任务必须明确阅读并严格遵循 `rules/ui-design/rule.md`
+- 避免忽略数据库和认证标准：必须使用正确的认证方式和数据库操作方法
+- 重要的技术解决方案应与用户确认
 
-1. **Overview (概览)**: `#/overview` - Main dashboard
-2. **Template Center (模板中心)**: `#/cloud-template/market` - Project templates
-3. **Document Database (文档型数据库)**: `#/db/doc` - NoSQL collections: `#/db/doc/collection/${collectionName}`, Models: `#/db/doc/model/${modelName}`
-4. **MySQL Database (MySQL 数据库)**: `#/db/mysql` - Tables: `#/db/mysql/table/default/`
-5. **Cloud Functions (云函数)**: `#/scf` - Function detail: `#/scf/detail?id=${functionName}&NameSpace=${envId}`
-6. **CloudRun (云托管)**: `#/platform-run` - Container services
-7. **Cloud Storage (云存储)**: `#/storage` - File storage
-8. **AI+**: `#/ai` - AI capabilities
-9. **Static Website Hosting (静态网站托管)**: `#/static-hosting`
-10. **Identity Authentication (身份认证)**: `#/identity` - Login: `#/identity/login-manage`, Tokens: `#/identity/token-management`
-11. **Weida Low-Code (微搭低代码)**: `#/lowcode/apps`
-12. **Logs & Monitoring (日志监控)**: `#/devops/log`
-13. **Extensions (扩展功能)**: `#/apis`
-14. **Environment Settings (环境配置)**: `#/env`
+### 质量保证
+如发现开发不符合标准，可以：
+- 指出具体问题
+- 要求重新执行规则检查流程
+- 明确指定需要遵循的规则文件
 
-## Project Overview
+## CloudBase 控制台入口
 
-This repository is a monorepo containing two main projects:
+创建/部署资源后，提供相应的控制台管理页面链接。所有控制台 URL 遵循格式：`https://tcb.cloud.tencent.com/dev?envId=${envId}#/{path}`
 
-1. **LeanClaw** (`LeanClaw/`) - A uni-app based cross-platform application for learning content
-2. **openclaw101** (`openclaw101/`) - A Next.js 14 documentation site for OpenClaw resources
+### 核心功能入口
 
-## Development Commands
+1. **概览**: `#/overview` - 主仪表盘
+2. **模板中心**: `#/cloud-template/market` - 项目模板
+3. **文档型数据库**: `#/db/doc` - NoSQL 集合：`#/db/doc/collection/${collectionName}`，模型：`#/db/doc/model/${modelName}`
+4. **MySQL 数据库**: `#/db/mysql` - 表：`#/db/mysql/table/default/`
+5. **云函数**: `#/scf` - 函数详情：`#/scf/detail?id=${functionName}&NameSpace=${envId}`
+6. **云托管**: `#/platform-run` - 容器服务
+7. **云存储**: `#/storage` - 文件存储
+8. **AI+**: `#/ai` - AI 能力
+9. **静态网站托管**: `#/static-hosting`
+10. **身份认证**: `#/identity` - 登录管理：`#/identity/login-manage`，令牌管理：`#/identity/token-management`
+11. **微搭低代码**: `#/lowcode/apps`
+12. **日志监控**: `#/devops/log`
+13. **扩展能力**: `#/apis`
+14. **环境设置**: `#/env`
 
-### LeanClaw (Main Project)
+## 项目概览
+
+本仓库是一个包含两个主要项目的 monorepo：
+
+1. **LeanClaw** (`LeanClaw/`) - 基于 uni-app 的跨平台学习内容应用
+2. **openclaw101** (`openclaw101/`) - OpenClaw 资源的 Next.js 14 文档站点
+
+## 开发命令
+
+### LeanClaw（主项目）
 
 ```bash
 cd LeanClaw
 
-# Install dependencies
-npm install  # or pnpm install
+# 安装依赖
+npm install  # 或 pnpm install
 
-# Development
-npm run dev:h5         # Run H5 web version
-npm run dev:mp-weixin  # Run WeChat mini-program
+# 开发
+npm run dev:h5         # 运行 H5 网页版
+npm run dev:mp-weixin  # 运行微信小程序
 
-# Build
-npm run build:h5         # Build H5 web
-npm run build:mp-weixin # Build WeChat mini-program
+# 构建
+npm run build:h5         # 构建 H5 网页
+npm run build:mp-weixin # 构建微信小程序
 
-# Code quality
-npm run type-check  # TypeScript type checking
-npm run lint        # ESLint with auto-fix
-npm run format      # Prettier formatting
-npm run alova-gen   # Generate API from Alova config
+# 代码质量
+npm run type-check  # TypeScript 类型检查
+npm run lint        # ESLint 自动修复
+npm run format      # Prettier 格式化
+npm run alova-gen   # 从 Alova 配置生成 API
 ```
 
-### openclaw101
-
-```bash
-cd openclaw101
-
-# Install dependencies
-npm install
-
-# Development
-npm run dev
-
-# Build
-npm run build
-```
-
-## Architecture
+## 架构
 
 ### LeanClaw
 
-A uni-app + Vue 3 + TypeScript cross-platform application:
+基于 uni-app + Vue 3 + TypeScript 的跨平台应用：
 
-- **UI Framework**: wot-design-uni component library
-- **State Management**: Pinia
-- **HTTP Client**: alova with @alova/adapter-uniapp
-- **Routing**: uni-mini-router + @uni-helper/vite-plugin-uni-pages (file-based routing)
-- **Styling**: UnoCSS with @uni-helper/unocss-preset-uni
-- **Build**: Vite
+- **UI 框架**: wot-design-uni 组件库
+- **状态管理**: Pinia
+- **HTTP 客户端**: alova 配合 @alova/adapter-uniapp
+- **路由**: uni-mini-router + @uni-helper/vite-plugin-uni-pages（文件路由）
+- **样式**: UnoCSS 配合 @uni-helper/unocss-preset-uni
+- **构建**: Vite
 
-**Key Directories**:
-- `src/api/` - API layer with Alova configuration
-- `src/pages/` - Page components (file-based routing)
-- `src/components/` - Global reusable components
-- `src/store/` - Pinia stores
-- `src/layouts/` - Layout templates (default, tabbar)
-- `src/composables/` - Vue composables
-- `src/utils/` - Utility functions
-- `src/data/` - Static data and mock data
+**关键目录**：
+- `src/api/` - API 层及 Alova 配置
+- `src/pages/` - 页面组件（文件路由）
+- `src/components/` - 全局可复用组件
+- `src/store/` - Pinia 状态管理
+- `src/layouts/` - 布局模板（default、tabbar）
+- `src/composables/` - Vue 组合式函数
+- `src/utils/` - 工具函数
+- `src/data/` - 静态数据和模拟数据
 
-**Configuration Files**:
-- `pages.config.ts` - Page and tabbar configuration
-- `alova.config.ts` - Alova API configuration
-- `uno.config.ts` - UnoCSS configuration
-- `vite.config.ts` - Vite build configuration
+**配置文件**：
+- `pages.config.ts` - 页面和 tabbar 配置
+- `alova.config.ts` - Alova API 配置
+- `uno.config.ts` - UnoCSS 配置
+- `vite.config.ts` - Vite 构建配置
 
-### openclaw101
+## 关键约定
 
-A Next.js 14 documentation site:
-
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Deployment**: Cloudflare Pages
-
-**Key Directories**:
-- `src/app/` - Next.js App Router pages
-- `src/components/` - React components
-- `src/data/` - Static data (resources.ts)
-
-## Key Conventions
-
-1. **LeanClaw uses file-based routing**: Pages are defined in `src/pages/` directory with `index.vue` files
-2. **API generation**: Use `npm run alova-gen` to generate typed API methods from configuration
-3. **Type definitions**: Auto-generated in `src/auto-import.d.ts` and `src/uni-pages.d.ts`
-4. **Global components**: Registered via unplugin-vue-components in vite.config.ts
-
-## 语言规范
-
-本项目所有问答统一使用中文，包括代码注释、文档、提交信息等。
+1. **LeanClaw 使用文件路由**: 页面定义在 `src/pages/` 目录下的 `index.vue` 文件
+2. **API 生成**: 使用 `npm run alova-gen` 从配置生成类型化 API 方法
+3. **类型定义**: 自动生成在 `src/auto-import.d.ts` 和 `src/uni-pages.d.ts`
+4. **全局组件**: 通过 vite.config.ts 中的 unplugin-vue-components 注册

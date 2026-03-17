@@ -84,21 +84,25 @@
   </view>
 
   <!-- 修改昵称弹窗 -->
-  <wd-modal
+  <wd-popup
     v-model:show="showNicknameModal"
-    title="修改昵称"
-    show-cancel
-    @confirm="handleConfirmNickname"
+    position="bottom"
+    round
   >
     <view class="p-4">
+      <view class="text-base font-bold mb-4 text-center">修改昵称</view>
       <input
         v-model="nicknameInput"
         class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
         placeholder="请输入新昵称"
         maxlength="20"
       />
+      <view class="flex gap-3 mt-4">
+        <wd-button block @click="showNicknameModal = false">取消</wd-button>
+        <wd-button block type="primary" @click="handleConfirmNickname">确定</wd-button>
+      </view>
     </view>
-  </wd-modal>
+  </wd-popup>
 </template>
 
 <script setup lang="ts">
