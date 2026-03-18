@@ -40,12 +40,12 @@
             <view class="mt-3 mb-6 px-4">
               <view class="flex justify-between items-center mb-2">
                 <text class="text-xs text-gray-400">学习进度</text>
-                <text class="text-xs font-medium text-lobster-orange">{{ Math.round((learningDays / 7) * 100) }}%</text>
+                <text class="text-xs font-medium text-lobster-orange">{{ progressPercent }}%</text>
               </view>
               <view class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                 <view
-                  class="h-full bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-full transition-all duration-500"
-                  :style="{ width: `${(learningDays / 7) * 100}%` }"
+                  class="h-full rounded-full transition-all duration-500"
+                  :style="{ width: progressPercent + '%', backgroundColor: progressPercent > 0 ? '#e67e22' : '#f3f4f6' }"
                 ></view>
               </view>
             </view>
@@ -125,6 +125,9 @@ const learningDays = computed(() => {
   return count
 })
 
+// 进度百分比
+const progressPercent = computed(() => Math.round((learningDays.value / 7) * 100))
+
 // 徽章数量 - 每次重新获取最新进度数据以确保响应式
 const badgeCount = computed(() => {
   const progress = getProgress()
@@ -159,20 +162,19 @@ const saveToAlbum = () => {
   ctx.fillText(certificate.value.subtitle, 150, 85)
 
   // 绘制学习进度条
-  const progressPercent = (learningDays.value / 7) * 100
   ctx.setFillStyle('#666666')
   ctx.setFontSize(10)
   ctx.setTextAlign('left')
   ctx.fillText('学习进度', 40, 115)
   ctx.setFillStyle('#e67e22')
-  ctx.fillText(`${Math.round(progressPercent)}%`, 260, 115)
+  ctx.fillText(`${progressPercent.value}%`, 260, 115)
 
   // 进度条背景
   ctx.setFillStyle('#f3f4f6')
   ctx.fillRect(40, 120, 220, 6)
   // 进度条前景
   ctx.setFillStyle('#e67e22')
-  ctx.fillRect(40, 120, 220 * (progressPercent / 100), 6)
+  ctx.fillRect(40, 120, 220 * (progressPercent.value / 100), 6)
 
   // 绘制描述 - 居中显示
   ctx.setFillStyle('#666666')
