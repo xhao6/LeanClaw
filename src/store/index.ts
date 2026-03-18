@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', () => {
   const token = ref(uni.getStorageSync('token') || '')
   const userInfo = ref({
     id: '',
-    name: '龙虾驯养员',
+    name: '',
     avatar: '',
     level: 1,
     exp: 0
@@ -102,7 +102,7 @@ export const useUserStore = defineStore('user', () => {
     uni.removeStorageSync('token')
     userInfo.value = {
         id: '',
-        name: '龙虾驯养员',
+        name: '',
         avatar: '',
         level: 1,
         exp: 0

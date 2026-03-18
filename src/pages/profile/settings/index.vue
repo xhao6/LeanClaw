@@ -11,13 +11,24 @@
     <!-- 用户信息卡片 -->
     <view class="p-4">
       <view class="bg-white rounded-2xl shadow-sm p-5">
-        <view class="flex items-center space-x-4">
+        <!-- 已登录状态 -->
+        <view v-if="isLoggedIn" class="flex items-center space-x-4">
           <view class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-            <text class="text-3xl">🦞</text>
+            <text class="text-3xl">{{ userInfo.avatar || '🦞' }}</text>
           </view>
           <view>
-            <view class="text-lg font-bold text-gray-800">龙虾驯养员</view>
-            <view class="text-xs text-gray-400 mt-1">ID: 10245678</view>
+            <view class="text-lg font-bold text-gray-800">{{ userInfo.name || '用户' }}</view>
+            <view class="text-xs text-gray-400 mt-1">ID: {{ userInfo.id }}</view>
+          </view>
+        </view>
+        <!-- 未登录状态 -->
+        <view v-else class="flex items-center space-x-4">
+          <view class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
+            <text class="text-3xl">👤</text>
+          </view>
+          <view>
+            <view class="text-lg font-bold text-gray-400">未登录</view>
+            <view class="text-xs text-gray-400 mt-1">点击登录账号</view>
           </view>
         </view>
       </view>
@@ -62,8 +73,14 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store'
 import { clearAllFavorites } from '@/utils/favorites'
 import { resetProgress } from '@/utils/learnProgress'
+
+// 用户状态
+const userStore = useUserStore()
+const { userInfo, isLoggedIn } = storeToRefs(userStore)
 
 // 版本号
 const version = '1.0.0'
