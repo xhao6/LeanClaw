@@ -84,9 +84,36 @@
         <view class="text-base font-bold text-gray-800 mb-3">七、联系我们</view>
         <view class="text-sm text-gray-500 leading-relaxed space-y-2">
           <view>如您对本协议有任何疑问、意见或建议，欢迎通过以下方式联系我们：</view>
-          <view>1. GitHub: OpenClaw</view>
-          <view>2. 邮箱: hello@openclaw.com</view>
+          <view>邮箱: xhaoca@foxmail.com</view>
           <view>我们将在收到您的反馈后尽快回复。</view>
+        </view>
+      </view>
+
+      <!-- 版权声明 -->
+      <view class="bg-white rounded-2xl shadow-sm p-5">
+        <view class="text-base font-bold text-gray-800 mb-3">八、版权声明</view>
+        <view class="text-sm text-gray-500 leading-relaxed space-y-2">
+          <view>1. 本小程序中所引用的「7天学习路径」内容，源自 GitHub 开源项目：https://github.com/mengjian-github/openclaw101</view>
+          <view>2. 该项目的版权归原作者 mengjian-github 所有，采用 MIT 开源许可协议授权</view>
+          <view>3. 本小程序对该教程的使用遵循 MIT 协议要求，保留原项目的版权声明及许可声明，未篡改原教程的核心内容</view>
+        </view>
+      </view>
+
+      <!-- MIT 协议摘要 -->
+      <view class="bg-white rounded-2xl shadow-sm p-5">
+        <view class="text-base font-bold text-gray-800 mb-3">MIT 协议摘要</view>
+        <view class="text-xs text-gray-400 leading-relaxed space-y-2 font-mono bg-gray-50 p-3 rounded">
+          <view>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</view>
+          <view class="mt-2">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</view>
+          <view class="mt-2">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</view>
+        </view>
+      </view>
+
+      <!-- 完整协议链接 -->
+      <view class="bg-white rounded-2xl shadow-sm p-5">
+        <view class="text-base font-bold text-gray-800 mb-3">完整协议链接</view>
+        <view class="text-sm text-gray-500 leading-relaxed">
+          <text class="text-orange underline">如需查看 MIT 协议完整文本，可访问：https://opensource.org/licenses/MIT</text>
         </view>
       </view>
     </view>
