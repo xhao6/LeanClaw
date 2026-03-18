@@ -89,6 +89,9 @@
         <text class="text-xs text-gray-500">完成 7 天学习即可获得证书</text>
       </view>
     </view>
+
+    <!-- 隐藏的 canvas 用于生成证书图片 -->
+    <canvas canvas-id="certificateCanvas" style="width: 300px; height: 420px; position: absolute; left: -9999px;"></canvas>
   </view>
 </template>
 
@@ -118,18 +121,126 @@ const badgeCount = computed(() => progress.value.badges.length)
 
 // 保存到相册
 const saveToAlbum = () => {
-  uni.showLoading({ title: '保存中...' })
+  uni.showLoading({ title: '生成中...' })
 
-  // 这里生成证书图片并保存
-  // 由于 uni-app 保存图片需要使用 canvas 或 renderjs
-  // 这里演示保存逻辑，实际需要根据具体实现
-  setTimeout(() => {
-    uni.hideLoading()
-    uni.showToast({
-      title: '保存成功',
-      icon: 'success',
-    })
-  }, 1000)
+  const ctx = uni.createCanvasContext('certificateCanvas')
+
+  // 绘制背景
+  ctx.setFillStyle('#ffffff')
+  ctx.fillRect(0, 0, 300, 420)
+
+  // 绘制装饰圆
+  ctx.setFillStyle('rgba(230, 126, 34, 0.1)')
+  ctx.beginPath()
+  ctx.arc(280, 40, 60, 0, 2 * Math.PI)
+  ctx.fill()
+
+  // 绘制标题
+  ctx.setFillStyle('#0c2d48')
+  ctx.setFontSize(20)
+  ctx.setTextAlign('center')
+  ctx.fillText(certificate.value.title, 150, 60)
+
+  // 绘制副标题
+  ctx.setFillStyle('#999999')
+  ctx.setFontSize(12)
+  ctx.fillText(certificate.value.subtitle, 150, 85)
+
+  // 绘制分隔线
+  ctx.setStrokeStyle('#e67e22')
+  ctx.beginPath()
+  ctx.moveTo(100, 100)
+  ctx.lineTo(200, 100)
+  ctx.stroke()
+
+  // 绘制描述
+  ctx.setFillStyle('#666666')
+  ctx.setFontSize(12)
+  const desc = certificate.value.desc
+  const descLines = desc.match(/.{1,20}/g) || [desc]
+  descLines.forEach((line: string, i: number) => {
+    ctx.fillText(line, 150, 130 + i * 18)
+  })
+
+  // 绘制持有人信息
+  ctx.setFillStyle('#333333')
+  ctx.setFontSize(14)
+  ctx.textAlign = 'left'
+  ctx.fillText(`持有人: ${certificate.value.holderName}`, 40, 200)
+  ctx.fillText(`颁发日期: ${certificate.value.issuedDate}`, 40, 230)
+
+  // 绘制统计
+  ctx.setFillStyle('#0c2d48')
+  ctx.setFontSize(24)
+  ctx.textAlign = 'center'
+  ctx.fillText(String(learningDays.value), 100, 290)
+  ctx.setFillStyle('#666666')
+  ctx.setFontSize(10)
+  ctx.fillText('学习天数', 100, 310)
+
+  ctx.setFillStyle('#e67e22')
+  ctx.setFontSize(24)
+  ctx.fillText(String(badgeCount.value), 200, 290)
+  ctx.setFillStyle('#666666')
+  ctx.setFontSize(10)
+  ctx.fillText('获得徽章', 200, 310)
+
+  // 绘制底部提示
+  ctx.setFillStyle('#999999')
+  ctx.setFontSize(10)
+  ctx.textAlign = 'center'
+  ctx.fillText('完成 7 天学习即可获得证书', 150, 380)
+
+  // 绘制 Logo
+  ctx.setFontSize(30)
+  ctx.fillText('🦞', 150, 160)
+
+  ctx.draw(false, () => {
+    setTimeout(() => {
+      uni.canvasToTempFilePath({
+        canvasId: 'certificateCanvas',
+        success: (res: { tempFilePath: string }) => {
+          const tempFilePath = res.tempFilePath
+          uni.saveImageToPhotosAlbum({
+            filePath: tempFilePath,
+            success: () => {
+              uni.hideLoading()
+              uni.showToast({
+                title: '已保存到相册',
+                icon: 'success',
+              })
+            },
+            fail: (err: { errMsg: string }) => {
+              uni.hideLoading()
+              if (err.errMsg.includes('auth deny')) {
+                uni.showModal({
+                  title: '提示',
+                  content: '需要授权保存到相册权限',
+                  success: (res: { confirm: boolean }) => {
+                    if (res.confirm) {
+                      uni.openSetting()
+                    }
+                  }
+                })
+              } else {
+                uni.showToast({
+                  title: '保存失败',
+                  icon: 'none',
+                })
+              }
+            }
+          })
+        },
+        fail: () => {
+          uni.hideLoading()
+          uni.showToast({
+            title: '生成图片失败',
+            icon: 'none',
+          })
+        }
+      })
+    }, 500)
+  })
 }
 
 onMounted(() => {
