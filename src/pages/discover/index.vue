@@ -49,9 +49,9 @@
         <wd-loading color="#FF6B35" />
       </view>
 
-      <view v-else-if="items.length === 0" class="flex-col-center py-20 text-gray-400">
+      <view v-else-if="loadError && items.length === 0" class="flex-col-center py-20 text-gray-400">
         <wd-icon name="warning" size="48px" class="mb-3 text-gray-300" />
-        <text>未找到相关内容</text>
+        <text>{{ loadError === 'empty' ? '暂无内容' : loadError }}</text>
       </view>
 
       <view v-else class="space-y-4">
@@ -115,6 +115,7 @@ const refreshing = ref(false)
 const items = ref<ResourceItem[]>([])
 const currentPage = ref(1)
 const hasMore = ref(true)
+const loadError = ref<string | null>(null)
 const PAGE_SIZE = 20
 
 const tabs = [
@@ -128,6 +129,7 @@ const fetchData = async (reset = true) => {
     loading.value = true
     currentPage.value = 1
     items.value = []
+    loadError.value = null
   } else {
     loadingMore.value = true
   }
@@ -159,6 +161,10 @@ const fetchData = async (reset = true) => {
 
     if (reset) {
       items.value = fetchedItems
+      // 当数据库返回空数组且是 reset 刷新时，设置 loadError.value = 'empty'
+      if (fetchedItems.length === 0) {
+        loadError.value = 'empty'
+      }
     } else {
       items.value = [...items.value, ...fetchedItems]
     }
@@ -170,8 +176,10 @@ const fetchData = async (reset = true) => {
     }
   } catch (error) {
     console.error('Fetch resources failed', error)
+    // 当 fetch 捕获异常时，设置 loadError.value = '加载失败，请检查网络'
     if (reset) {
       items.value = []
+      loadError.value = '加载失败，请检查网络'
     }
   } finally {
     loading.value = false
@@ -191,9 +199,14 @@ const handleRefresh = async () => {
   refreshing.value = true
   try {
     await fetchData(true)
-    if (error.value) {
-      uni.showToast({ title: error.value, icon: 'none' })
+    // 检查 loadError.value === 'empty' 时显示"暂无新内容"
+    if (loadError.value === 'empty') {
+      uni.showToast({ title: '暂无新内容', icon: 'none' })
+    } else if (loadError.value) {
+      // 检查 loadError 有错误时显示对应错误信息
+      uni.showToast({ title: loadError.value, icon: 'none' })
     } else {
+      // 否则显示"刷新成功"
       uni.showToast({ title: '刷新成功', icon: 'success' })
     }
   } catch (e) {
