@@ -86,7 +86,7 @@
 
       <!-- 底部提示 -->
       <view class="text-center mt-6">
-        <text class="text-xs text-white/50">完成 7 天学习即可获得证书</text>
+        <text class="text-xs text-gray-500">完成 7 天学习即可获得证书</text>
       </view>
     </view>
   </view>
