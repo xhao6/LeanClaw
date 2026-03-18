@@ -10,8 +10,8 @@
   <view class="bg-gray-50 min-h-screen box-border">
     <!-- Logo区域 -->
     <view class="bg-white py-12 px-4 text-center">
-      <view class="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-primary to-ocean-light flex items-center justify-center shadow-lg shadow-primary/20">
-        <text class="text-5xl">🦞</text>
+      <view class="w-24 h-24 mx-auto rounded-3xl bg-white flex items-center justify-center shadow-lg shadow-primary/20 overflow-hidden">
+  <image src="/static/images/logo.webp" mode="aspectFit" class="w-16 h-16" />
       </view>
       <view class="text-2xl font-bold text-gray-800 mt-6">轻学Claw</view>
       <view class="text-sm text-gray-400 mt-2">AI学习好帮手</view>
@@ -69,19 +69,12 @@
       <view class="bg-white rounded-2xl shadow-sm p-5">
         <view class="text-base font-bold text-gray-800 mb-4">联系我们</view>
         <view class="space-y-3">
-          <view class="flex items-center justify-between py-2 border-b border-gray-50">
-            <view class="flex items-center space-x-2">
-              <wd-icon name="github" size="18px" />
-              <text class="text-sm text-gray-600">GitHub</text>
-            </view>
-            <text class="text-xs text-gray-400">OpenClaw</text>
-          </view>
           <view class="flex items-center justify-between py-2">
             <view class="flex items-center space-x-2">
               <wd-icon name="mail" size="18px" />
               <text class="text-sm text-gray-600">邮箱</text>
             </view>
-            <text class="text-xs text-gray-400">hello@openclaw.com</text>
+            <text class="text-xs text-gray-400">xhaoca@foxmail.com</text>
           </view>
         </view>
       </view>
@@ -90,7 +83,7 @@
     <!-- 底部版权 -->
     <view class="p-8 text-center">
       <view class="text-xs text-gray-300">
-        © 2024 轻学Claw. All rights reserved.
+        © 2026 轻学Claw. All rights reserved.
       </view>
       <view class="text-xs text-gray-300 mt-1">
         Made with ❤️ for AI learners
