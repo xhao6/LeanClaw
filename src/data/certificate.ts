@@ -25,6 +25,6 @@ export const createCertificate = (holderName: string = '龙虾驯养员'): Certi
   return {
     ...certificateInfo,
     issuedDate: `${year}年${month}月${day}日`,
-    holderName,
+    holderName: holderName || '龙虾驯养员',
   }
 }

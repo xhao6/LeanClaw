@@ -17,6 +17,11 @@ describe('certificate 证书数据', () => {
       expect(cert.holderName).toBe('测试用户')
     })
 
+    it('无昵称时应使用默认名称', () => {
+      const cert = createCertificate('')
+      expect(cert.holderName).toBe('龙虾驯养员')
+    })
+
     it('应生成正确的颁发日期格式', () => {
       const cert = createCertificate()
       const date = new Date()

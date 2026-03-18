@@ -32,8 +32,22 @@
             </view>
 
             <!-- 副标题 -->
-            <view class="text-center mb-6">
+            <view class="text-center mb-2">
               <text class="text-sm text-gray-400">{{ certificate.subtitle }}</text>
+            </view>
+
+            <!-- 学习进度条 -->
+            <view class="mt-3 mb-6 px-4">
+              <view class="flex justify-between items-center mb-2">
+                <text class="text-xs text-gray-400">学习进度</text>
+                <text class="text-xs font-medium text-lobster-orange">{{ Math.round((learningDays / 7) * 100) }}%</text>
+              </view>
+              <view class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                <view
+                  class="h-full bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-full transition-all duration-500"
+                  :style="{ width: `${(learningDays / 7) * 100}%` }"
+                ></view>
+              </view>
             </view>
 
             <!-- 分隔线 -->
@@ -74,7 +88,7 @@
 
             <!-- 保存按钮 -->
             <button
-              class="w-full h-12 bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-xl text-white font-medium flex items-center justify-center"
+              class="w-full h-12 bg-gradient-to-r from-lobster-orange to-lobster-orange-90 rounded-xl text-gray-900 font-medium flex items-center justify-center"
               @click="saveToAlbum"
             >
               <wd-icon name="photo" size="18px" class="mr-2" />
@@ -84,10 +98,7 @@
         </view>
       </view>
 
-      <!-- 底部提示 -->
-      <view class="text-center mt-6">
-        <text class="text-xs text-gray-500">完成 7 天学习即可获得证书</text>
-      </view>
+      <!-- 底部提示已移除 -->
     </view>
 
     <!-- 隐藏的 canvas 用于生成证书图片 -->
@@ -97,11 +108,16 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { getCertificate, getProgress, type LearnProgress } from '@/utils/learnProgress'
 import { createCertificate, type Certificate } from '@/data/certificate'
+import { useUserStore } from '@/store'
 
-// 证书信息
-const certificate = ref<Certificate>(createCertificate())
+const userStore = useUserStore()
+const { userInfo } = storeToRefs(userStore)
+
+// 证书信息 - 使用用户昵称，无昵称时使用默认名称
+const certificate = ref<Certificate>(createCertificate(userInfo.value.name || ''))
 const progress = ref<LearnProgress>(getProgress())
 
 // 计算学习天数
@@ -185,15 +201,9 @@ const saveToAlbum = () => {
   ctx.setFontSize(10)
   ctx.fillText('获得徽章', 200, 310)
 
-  // 绘制底部提示
-  ctx.setFillStyle('#999999')
-  ctx.setFontSize(10)
-  ctx.textAlign = 'center'
-  ctx.fillText('完成 7 天学习即可获得证书', 150, 380)
-
-  // 绘制 Logo
+  // 绘制 Logo - 右上角靠近边缘 5% 处
   ctx.setFontSize(30)
-  ctx.fillText('🦞', 150, 160)
+  ctx.fillText('🦞', 270, 60)
 
   ctx.draw(false, () => {
     setTimeout(() => {
