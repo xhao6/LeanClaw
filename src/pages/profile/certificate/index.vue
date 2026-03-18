@@ -118,11 +118,11 @@ const { userInfo } = storeToRefs(userStore)
 
 // 证书信息 - 使用用户昵称，无昵称时使用默认名称
 const certificate = ref<Certificate>(createCertificate(userInfo.value.name || ''))
-const progress = ref<LearnProgress>(getProgress())
 
-// 计算学习天数
+// 计算学习天数 - 每次重新获取最新进度数据以确保响应式
 const learningDays = computed(() => {
-  const completedSet = new Set(progress.value.completedLessons || [])
+  const progress = getProgress()
+  const completedSet = new Set(progress.completedLessons || [])
   let count = 0
   for (let i = 1; i <= 7; i++) {
     if (completedSet.has(`day-${i}`)) {
@@ -132,8 +132,11 @@ const learningDays = computed(() => {
   return count
 })
 
-// 徽章数量
-const badgeCount = computed(() => progress.value.badges.length)
+// 徽章数量 - 每次重新获取最新进度数据以确保响应式
+const badgeCount = computed(() => {
+  const progress = getProgress()
+  return progress.badges?.length || 0
+})
 
 // 保存到相册
 const saveToAlbum = () => {
@@ -259,8 +262,6 @@ onMounted(() => {
   if (cert) {
     certificate.value = cert
   }
-  // 刷新进度
-  progress.value = getProgress()
 })
 </script>
 
