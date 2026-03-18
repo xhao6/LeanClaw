@@ -184,9 +184,7 @@ export function useRecommendations() {
       const available = allResources.filter(r => !viewedIds.has(r.id))
 
       // 优先从未浏览的中选择，不够则从全部中选择
-      const pool = available.length > 0 ? available : allResources.filter(
-        r => !viewedIds.has(r.id)
-      )
+      const pool = available.length > 0 ? available : allResources
 
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
@@ -235,9 +233,7 @@ export function useRecommendations() {
         r => !viewedIds.has(r.id) && !displayedIds.has(r.id)
       )
 
-      const pool = available.length > 0 ? available : allResources.filter(
-        r => !displayedIds.has(r.id)
-      )
+      const pool = available.length > 0 ? available : allResources
 
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
