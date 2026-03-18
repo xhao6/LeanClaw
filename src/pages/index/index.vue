@@ -188,19 +188,20 @@ const handleRefresh = async () => {
 
 // 计算进度百分比：基于已完成的课程数
 const progressPercent = computed(() => {
-  return Math.round((progress.completedLessons.length / 7) * 100)
+  const lessons = progress.value.completedLessons || []
+  return Math.round((lessons.length / 7) * 100)
 })
 
 // 获取下一章标题：基于已完成课程数显示下一课
 const nextChapter = computed(() => {
   const dayTitles = ['', '初识 OpenClaw', '你的第一个 AI 助手', '记忆与灵魂', '技能系统 (Skills)', '自动化工作流', '本地化与隐私', '进阶与未来']
-  const completedCount = progress.completedLessons.length
+  const completedCount = progress.value.completedLessons?.length || 0
   if (completedCount >= 7) return '全部完成'
   return dayTitles[completedCount + 1] || '开始学习'
 })
 
 // 是否已完成所有课程
-const allCompleted = computed(() => progress.completedLessons.length >= 7)
+const allCompleted = computed(() => (progress.value.completedLessons?.length || 0) >= 7)
 
 // 按钮文字
 const buttonText = computed(() => {

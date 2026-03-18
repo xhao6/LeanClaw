@@ -103,7 +103,7 @@ const progress = ref<LearnProgress>(getProgress())
 
 // 计算学习天数
 const learningDays = computed(() => {
-  const completedSet = new Set(progress.value.completedLessons)
+  const completedSet = new Set(progress.value.completedLessons || [])
   let count = 0
   for (let i = 1; i <= 7; i++) {
     if (completedSet.has(`day-${i}`)) {
