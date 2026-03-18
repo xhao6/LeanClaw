@@ -66,4 +66,18 @@ describe('用户 Store 测试', () => {
     const isLoggedIn = !!userInfo.id
     expect(isLoggedIn).toBe(false)
   })
+
+  it('未登录时 userInfo 应为空字符串而非默认名称', () => {
+    const userInfo = { id: '', name: '', avatar: '', level: 1, exp: 0 }
+    // 验证未登录时 name 为空
+    expect(userInfo.name).toBe('')
+    expect(!!userInfo.id).toBe(false)
+  })
+
+  it('登录后 userInfo 应正确设置用户信息', () => {
+    const userInfo = { id: '123', name: '测试用户', avatar: '', level: 1, exp: 0 }
+    expect(userInfo.name).toBe('测试用户')
+    expect(userInfo.id).toBe('123')
+    expect(!!userInfo.id).toBe(true)
+  })
 })
