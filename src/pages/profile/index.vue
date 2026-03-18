@@ -35,9 +35,10 @@
         </template>
       </view>
 
-      <view class="absolute right-6 top-14 text-white/80" @click="goToSettings">
+      <!-- 设置入口已隐藏 -->
+      <!-- <view class="absolute right-6 top-14 text-white/80" @click="goToSettings">
         <wd-icon name="setting" size="24px" />
-      </view>
+      </view> -->
     </view>
 
     <!-- Stats Card -->
