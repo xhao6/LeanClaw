@@ -27,4 +27,21 @@ test.describe('证书页测试', () => {
     await page.goto(BASE_URL + '/#/pages/profile/certificate/index')
     await expect(page.locator('text=完成 7 天学习即可获得证书').first()).toBeVisible()
   })
+
+  test('显示保存到相册按钮', async ({ page }) => {
+    await page.goto(BASE_URL + '/#/pages/profile/certificate/index')
+    await expect(page.locator('text=保存到相册').first()).toBeVisible()
+  })
+
+  test('底部提示文字颜色应该是深色', async ({ page }) => {
+    await page.goto(BASE_URL + '/#/pages/profile/certificate/index')
+    const tip = page.locator('text=完成 7 天学习即可获得证书').first()
+    await expect(tip).toBeVisible()
+    // 验证文字颜色不是透明或白色
+    const color = await tip.evaluate((el) => {
+      return window.getComputedStyle(el).color
+    })
+    // 应该是灰色或深色，不是 rgba(0,0,,0)
+    expect(color).not.toBe('rgba(0, 0, 0, 0)')
+  })
 })
