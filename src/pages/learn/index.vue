@@ -14,7 +14,7 @@
       <view class="flex items-center flex-1">
         <wd-icon name="warning" size="20px" class="text-orange mr-3 flex-shrink-0" />
         <view class="text-sm text-gray-700">
-          <text>未登录状态下无法同步学习进度</text>
+          <text> 未登录状态下无法同步云端学习进度</text>
         </view>
       </view>
       <wd-button size="small" type="primary" custom-class="!bg-orange !border-orange !rounded-lg ml-3" data-testid="login-button" @click="goToLogin">

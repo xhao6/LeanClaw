@@ -206,7 +206,7 @@ const allCompleted = computed(() => (progress.value.completedLessons?.length || 
 // 按钮文字
 const buttonText = computed(() => {
   if (allCompleted.value) return '恭喜完成全部课程 🎉'
-  return `继续学习 Day ${progress.currentDay}`
+  return `继续学习 Day ${progress.value.currentDay}`
 })
 
 onMounted(() => {
