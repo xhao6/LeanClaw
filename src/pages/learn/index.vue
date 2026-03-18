@@ -9,6 +9,19 @@
 
 <template>
   <view class="p-4 bg-gray-50 min-h-screen box-border">
+    <!-- 未登录提醒 -->
+    <view v-if="!userStore.isLoggedIn" class="mx-4 mt-4 p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl border border-orange-200 flex items-center justify-between" data-testid="login-reminder">
+      <view class="flex items-center flex-1">
+        <wd-icon name="warning" size="20px" class="text-orange mr-3 flex-shrink-0" />
+        <view class="text-sm text-gray-700">
+          <text>未登录状态下无法同步学习进度</text>
+        </view>
+      </view>
+      <wd-button size="small" type="primary" custom-class="!bg-orange !border-orange !rounded-lg ml-3" data-testid="login-button" @click="goToLogin">
+        去登录
+      </wd-button>
+    </view>
+
     <view class="mb-6 pt-2">
       <text class="text-xl font-bold text-primary block">7天学习路径</text>
       <text class="text-xs text-gray-500 block mt-1">从零开始掌握 OpenClaw，养一只"龙虾"做自己的 AI 管家</text>
@@ -64,6 +77,10 @@
 import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { getProgress } from '@/utils/learnProgress'
+import { useUserStore } from '@/store'
+
+// 用户状态
+const userStore = useUserStore()
 
 // 用于触发重新计算
 const refreshKey = ref(0)
@@ -131,6 +148,13 @@ const handleDayClick = (day: any) => {
   const dayNum = day.id.replace('day-', '')
   uni.navigateTo({
     url: `/pages_learn/detail/index?id=${dayNum}`
+  })
+}
+
+const goToLogin = () => {
+  // 跳转到个人中心页面触发登录
+  uni.switchTab({
+    url: '/pages/profile/index'
   })
 }
 </script>
