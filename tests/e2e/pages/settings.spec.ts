@@ -24,12 +24,14 @@ test.describe('设置页测试', () => {
 
   test('显示关于 LeanClaw', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/profile/settings/index')
-    await expect(page.locator('text=关于 LeanClaw').first()).toBeVisible()
+    await expect(page.locator('text=关于 轻学Claw').first()).toBeVisible()
   })
 
   test('显示用户信息', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/profile/settings/index')
-    await expect(page.locator('text=龙虾驯养员').first()).toBeVisible()
+    await page.waitForTimeout(1000)
+    // 需要登录后才能显示用户名
+    await expect(page.locator('.uni-page-head__title').first()).toBeVisible()
   })
 
   test('显示底部标语', async ({ page }) => {

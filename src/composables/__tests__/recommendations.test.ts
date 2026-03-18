@@ -247,6 +247,40 @@ describe('useRecommendations 推荐功能', () => {
       const isDifferent = scores1.some((s, i) => s !== scores2[i])
       expect(isDifferent || sorted1.join() !== sorted2.join()).toBe(true)
     })
+
+    it('有用户ID时应产生确定性随机', () => {
+      const { calculateScore } = useRecommendations()
+      const item = { id: 'test-item', heat: 50 }
+      const favorites = new Set()
+      const userId = 'user-123'
+
+      // 同一用户ID多次计算应该得到相同分数
+      const score1 = calculateScore(item as any, favorites, userId)
+      const score2 = calculateScore(item as any, favorites, userId)
+      expect(score1).toBe(score2)
+    })
+
+    it('不同用户ID应产生不同分数', () => {
+      const { calculateScore } = useRecommendations()
+      const item = { id: 'test-item', heat: 50 }
+      const favorites = new Set()
+
+      const score1 = calculateScore(item as any, favorites, 'user-1')
+      const score2 = calculateScore(item as any, favorites, 'user-2')
+
+      // 不同用户ID应该产生不同的随机因子
+      expect(score1).not.toBe(score2)
+    })
+
+    it('无热度数据时分数应为0+随机因子', () => {
+      const { calculateScore } = useRecommendations()
+      const item = { id: 'test-item' } // 无 heat 字段
+
+      const score = calculateScore(item as any, new Set())
+
+      // 分数应该只有随机因子部分
+      expect(score).toBeLessThan(20) // RANDOM_WEIGHT = 20
+    })
   })
 
   describe('资源类型混合', () => {

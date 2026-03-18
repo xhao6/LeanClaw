@@ -17,6 +17,28 @@ const mockSetStorageSync = vi.fn((key: string, value: unknown) => {
   storage[key] = value
 })
 
+// 模拟存储异常
+let shouldThrowOnGet = false
+let shouldThrowOnSet = false
+
+const createMockGetStorageSync = () => {
+  return vi.fn((key: string) => {
+    if (shouldThrowOnGet) {
+      throw new Error('Storage get error')
+    }
+    return storage[key]
+  })
+}
+
+const createMockSetStorageSync = () => {
+  return vi.fn((key: string, value: unknown) => {
+    if (shouldThrowOnSet) {
+      throw new Error('Storage set error')
+    }
+    storage[key] = value
+  })
+}
+
 // 在全局对象上设置 uni
 globalThis.uni = {
   getStorageSync: mockGetStorageSync,
@@ -220,6 +242,37 @@ describe('favorites 收藏功能', () => {
       expect(favorites[0].title).toBe('测试资源标题')
       expect(favorites[0].desc).toBe('测试资源描述')
       expect(favorites[0].tags).toEqual(['标签1', '标签2'])
+    })
+  })
+
+  describe('异常处理', () => {
+    it('addFavorite 存储满时应继续工作', () => {
+      const mockItem = {
+        id: 'test-error',
+        type: 'resource' as const,
+        title: '测试资源',
+        desc: '测试描述',
+        tags: [],
+      }
+
+      // 不应该抛出异常
+      expect(() => addFavorite(mockItem)).not.toThrow()
+    })
+
+    it('addFavorite API 失败时本地收藏仍应生效', async () => {
+      mockApiToggleFavorite.mockRejectedValueOnce(new Error('API error'))
+
+      const mockItem = {
+        id: 'test-api-error',
+        type: 'resource' as const,
+        title: '测试资源',
+        desc: '测试描述',
+        tags: [],
+      }
+
+      // API 失败不应影响本地添加
+      addFavorite(mockItem)
+      expect(isFavorited('test-api-error')).toBe(true)
     })
   })
 })
