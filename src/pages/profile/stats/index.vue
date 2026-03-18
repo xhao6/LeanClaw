@@ -42,33 +42,6 @@
 
         <view class="h-[1px] bg-gray-100"></view>
 
-        <!-- 学习时长 -->
-        <view class="flex items-center justify-between">
-          <view class="flex items-center">
-            <view class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center mr-3">
-              <wd-icon name="time" size="20px" color="#22C55E" />
-            </view>
-            <view>
-              <view class="text-sm text-gray-500">学习时长</view>
-              <view class="text-xl font-bold text-green-500">{{ progress.totalTime }} <text class="text-sm font-normal text-gray-400">分钟</text></view>
-            </view>
-          </view>
-        </view>
-
-        <view class="h-[1px] bg-gray-100"></view>
-
-        <!-- 连续打卡 -->
-        <view class="flex items-center justify-between">
-          <view class="flex items-center">
-            <view class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mr-3">
-              <wd-icon name="fire" size="20px" color="#EAB308" />
-            </view>
-            <view>
-              <view class="text-sm text-gray-500">连续打卡</view>
-              <view class="text-xl font-bold text-yellow-500">{{ progress.streak }} <text class="text-sm font-normal text-gray-400">天</text></view>
-            </view>
-          </view>
-        </view>
       </view>
     </view>
 
