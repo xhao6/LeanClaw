@@ -53,7 +53,7 @@
           <view class="text-xs text-gray-400">我的收藏</view>
         </view>
         <view class="w-[1px] h-8 bg-gray-100"></view>
-        <view class="text-center" @click="goToCertificate">
+        <view class="text-center" @click="goToStats">
           <view class="text-xl font-bold text-green-500 mb-1">{{ badgesCount }}</view>
           <view class="text-xs text-gray-400">我的徽章</view>
         </view>
