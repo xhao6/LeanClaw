@@ -36,6 +36,7 @@ vi.mock('pinia', () => ({
 vi.mock('@/store', () => ({
   useUserStore: vi.fn().mockReturnValue({
     isLoggedIn: { value: false },
+    userInfo: { value: { id: '' } },
   }),
 }))
 
