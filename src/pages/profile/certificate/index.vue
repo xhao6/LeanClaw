@@ -50,15 +50,8 @@
               </view>
             </view>
 
-            <!-- 分隔线 -->
-            <view class="flex items-center justify-center mb-6">
-              <view class="w-16 h-[1px] bg-gradient-to-r from-transparent via-lobster-orange to-transparent"></view>
-              <text class="mx-3 text-lobster-orange">✦</text>
-              <view class="w-16 h-[1px] bg-gradient-to-r from-transparent via-lobster-orange to-transparent"></view>
-            </view>
-
             <!-- 证书描述 -->
-            <view class="text-center mb-6 px-2">
+            <view class="text-center my-8 px-4">
               <text class="text-sm text-gray-500 leading-relaxed">{{ certificate.desc }}</text>
             </view>
 
@@ -165,44 +158,54 @@ const saveToAlbum = () => {
   ctx.setFontSize(12)
   ctx.fillText(certificate.value.subtitle, 150, 85)
 
-  // 绘制分隔线
-  ctx.setStrokeStyle('#e67e22')
-  ctx.beginPath()
-  ctx.moveTo(100, 100)
-  ctx.lineTo(200, 100)
-  ctx.stroke()
+  // 绘制学习进度条
+  const progressPercent = (learningDays.value / 7) * 100
+  ctx.setFillStyle('#666666')
+  ctx.setFontSize(10)
+  ctx.setTextAlign('left')
+  ctx.fillText('学习进度', 40, 115)
+  ctx.setFillStyle('#e67e22')
+  ctx.fillText(`${Math.round(progressPercent)}%`, 260, 115)
 
-  // 绘制描述
+  // 进度条背景
+  ctx.setFillStyle('#f3f4f6')
+  ctx.fillRect(40, 120, 220, 6)
+  // 进度条前景
+  ctx.setFillStyle('#e67e22')
+  ctx.fillRect(40, 120, 220 * (progressPercent / 100), 6)
+
+  // 绘制描述 - 居中显示
   ctx.setFillStyle('#666666')
   ctx.setFontSize(12)
+  ctx.setTextAlign('center')
   const desc = certificate.value.desc
   const descLines = desc.match(/.{1,20}/g) || [desc]
   descLines.forEach((line: string, i: number) => {
-    ctx.fillText(line, 150, 130 + i * 18)
+    ctx.fillText(line, 150, 160 + i * 20)
   })
 
   // 绘制持有人信息
   ctx.setFillStyle('#333333')
   ctx.setFontSize(14)
-  ctx.textAlign = 'left'
-  ctx.fillText(`持有人: ${certificate.value.holderName}`, 40, 200)
-  ctx.fillText(`颁发日期: ${certificate.value.issuedDate}`, 40, 230)
+  ctx.setTextAlign('left')
+  ctx.fillText(`持有人: ${certificate.value.holderName}`, 40, 262)
+  ctx.fillText(`颁发日期: ${certificate.value.issuedDate}`, 40, 292)
 
   // 绘制统计
   ctx.setFillStyle('#0c2d48')
   ctx.setFontSize(24)
-  ctx.textAlign = 'center'
-  ctx.fillText(String(learningDays.value), 100, 290)
+  ctx.setTextAlign('center')
+  ctx.fillText(String(learningDays.value), 100, 352)
   ctx.setFillStyle('#666666')
   ctx.setFontSize(10)
-  ctx.fillText('学习天数', 100, 310)
+  ctx.fillText('学习天数', 100, 372)
 
   ctx.setFillStyle('#e67e22')
   ctx.setFontSize(24)
-  ctx.fillText(String(badgeCount.value), 200, 290)
+  ctx.fillText(String(badgeCount.value), 200, 352)
   ctx.setFillStyle('#666666')
   ctx.setFontSize(10)
-  ctx.fillText('获得徽章', 200, 310)
+  ctx.fillText('获得徽章', 200, 372)
 
   // 绘制 Logo - 右上角靠近边缘 5% 处
   ctx.setFontSize(30)

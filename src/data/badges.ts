@@ -49,7 +49,7 @@ export const badges: Badge[] = [
     id: 'day5-badge',
     name: '技能解锁者',
     desc: '完成第5天学习',
-    icon: '🔓',
+    icon: '🗝️',
     condition: (progress: LearnProgress) => isDayCompleted(progress, 5),
   },
   {
