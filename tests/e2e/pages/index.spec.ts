@@ -7,25 +7,40 @@ test.describe('首页测试', () => {
     await waitForPageLoad(page)
   })
 
-  test('默认进度显示 Day 1, 0%', async ({ page }) => {
+  test('首页可访问', async ({ page }) => {
     await page.goto(BASE_URL)
-    await expect(page.locator('text=Day 1 /').first()).toBeVisible()
-    await expect(page.locator('text=0%').first()).toBeVisible()
+    await page.waitForTimeout(1000)
+    // 验证首页标题
+    await expect(page.locator('text=首页').first()).toBeVisible()
   })
 
-  test('下一章标题为初识 OpenClaw', async ({ page }) => {
+  test('默认进度显示 Day 1', async ({ page }) => {
     await page.goto(BASE_URL)
-    await expect(page.locator('text=下一章：初识 OpenClaw').first()).toBeVisible()
+    await page.waitForTimeout(1000)
+    await expect(page.locator('text=Day 1').first()).toBeVisible()
+    await expect(page.locator('text=/ 7').first()).toBeVisible()
   })
 
-  test('继续学习按钮存在', async ({ page }) => {
+  test('显示当前进度区域', async ({ page }) => {
     await page.goto(BASE_URL)
-    await expect(page.locator('text=继续学习').first()).toBeVisible()
+    await page.waitForTimeout(1000)
+    // 验证当前进度文字
+    await expect(page.locator('text=当前进度').first()).toBeVisible()
   })
 
-  test('显示推荐资源卡片', async ({ page }) => {
+  test('显示快速入口', async ({ page }) => {
     await page.goto(BASE_URL)
-    await expect(page.locator('text=热门资源推荐').first()).toBeVisible()
+    await page.waitForTimeout(1000)
+    // 验证快速入口
+    await expect(page.locator('text=精选案例').first()).toBeVisible()
+    await expect(page.locator('text=Skills大全').first()).toBeVisible()
+    await expect(page.locator('text=我的收藏').first()).toBeVisible()
+  })
+
+  test('显示推荐区域', async ({ page }) => {
+    await page.goto(BASE_URL)
+    await page.waitForTimeout(1000)
+    await expect(page.locator('text=今日推荐').first()).toBeVisible()
   })
 
   test('有进度时显示对应数据', async ({ page }) => {

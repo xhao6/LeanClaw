@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { clearStorage, initProgress, initFavorites, waitForPageLoad, BASE_URL } from '../utils/testHelpers'
+import { clearStorage, initProgress, initFavorites, initLoginState, waitForPageLoad, BASE_URL } from '../utils/testHelpers'
 
 test.describe('我的页面测试', () => {
   test.beforeEach(async ({ page }) => {
@@ -38,14 +38,14 @@ test.describe('我的页面测试', () => {
     // 验证功能入口 - 收藏在 Stats Card 和 menu 中都有
     await expect(page.locator('text=我的证书')).toBeVisible()
     await expect(page.locator('text=学习统计')).toBeVisible()
-    await expect(page.locator('text=关于 LeanClaw')).toBeVisible()
+    await expect(page.locator('text=关于 轻学Claw')).toBeVisible()
   })
 
   test('点击关于跳转到关于页面', async ({ page }) => {
     await page.goto(`${BASE_URL}/#/pages/profile/index`)
 
     // 点击关于
-    await page.click('text=关于 LeanClaw')
+    await page.click('text=关于 轻学Claw')
 
     // 验证跳转
     await expect(page).toHaveURL(/pages\/profile\/about/)
@@ -79,5 +79,16 @@ test.describe('我的页面测试', () => {
 
     // 验证跳转到收藏页面
     await expect(page).toHaveURL(/pages\/profile\/favorites/)
+  })
+
+  // ==================== 登录状态测试 ====================
+
+  test('未登录时设置页应显示"未登录"', async ({ page }) => {
+    await page.goto(`${BASE_URL}/#/pages/profile/settings/index`)
+    await page.waitForTimeout(500)
+
+    // 验证未登录状态
+    await expect(page.locator('text=未登录').first()).toBeVisible()
+    await expect(page.locator('text=点击登录账号').first()).toBeVisible()
   })
 })

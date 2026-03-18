@@ -65,3 +65,42 @@ export async function initFavorites(
 export async function waitForPageLoad(page: Page): Promise<void> {
   await page.waitForLoadState('networkidle')
 }
+
+/**
+ * 初始化登录状态
+ */
+export async function initLoginState(
+  page: Page,
+  userData: {
+    id: string
+    name: string
+    avatar?: string
+    level?: number
+    exp?: number
+  }
+): Promise<void> {
+  await page.goto(BASE_URL)
+  await page.evaluate((user) => {
+    // 设置 token
+    uni.setStorageSync('token', 'mock-token-' + user.id)
+    // 设置用户信息（模拟登录后的状态）
+    uni.setStorageSync('userInfo', {
+      id: user.id,
+      name: user.name,
+      avatar: user.avatar || '',
+      level: user.level || 1,
+      exp: user.exp || 0
+    })
+  }, userData)
+}
+
+/**
+ * 初始化未登录状态（清除所有用户数据）
+ */
+export async function initLoggedOutState(page: Page): Promise<void> {
+  await page.goto(BASE_URL)
+  await page.evaluate(() => {
+    uni.removeStorageSync('token')
+    uni.removeStorageSync('userInfo')
+  })
+}
