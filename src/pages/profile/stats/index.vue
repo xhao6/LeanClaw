@@ -115,12 +115,11 @@ const dayProgress = computed(() => {
   }))
 })
 
-// 徽章状态
+// 徽章状态 - 使用 badges 中定义的 condition 函数自动判断解锁状态
 const allBadges = computed(() => {
-  const earnedBadges = new Set(progress.badges || [])
   return badges.map(badge => ({
     ...badge,
-    unlocked: earnedBadges.has(badge.id)
+    unlocked: badge.condition(progress)
   }))
 })
 </script>
