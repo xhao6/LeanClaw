@@ -74,10 +74,18 @@ const fetchUserFavorites = async (): Promise<Set<string>> => {
 }
 
 /**
+ * 获取基于日期的确定性随机种子
+ * 每天变化，同一天内保持稳定
+ */
+const getDailyRandomSeed = (): number => {
+  const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+  return hashCode(today + '_daily')
+}
+
+/**
  * 计算推荐分数
  * 分数 = 热度分 + 用户收藏加分 + 随机因子
- * 未收藏高热度文章得分最高
- * 随机因子基于用户ID生成确定性随机，确保同一用户看到稳定的排序
+ * 随机因子基于日期生成，确保同一天内排序稳定
  */
 const calculateScore = (
   item: ResourceItem,
@@ -87,15 +95,17 @@ const calculateScore = (
   const heatScore = (item.heat || 0) * HEAT_WEIGHT
   const userBonusScore = userFavorites.has(item.id) ? USER_BONUS : 0
 
-  // 使用基于用户ID的确定性随机因子
-  // 如果有用户ID，则基于(item.id + userId)生成稳定随机
-  // 否则使用随机因子（未登录用户）
+  // 使用基于日期的确定性随机因子
+  // 如果有用户ID，则基于(item.id + userId + 日期)生成稳定随机
+  // 否则使用基于日期的随机（未登录用户每天看到相同排序）
   let randomFactor: number
   if (userId) {
-    const seed = hashCode(item.id + userId)
+    const seed = hashCode(item.id + userId + new Date().toISOString().slice(0, 10))
     randomFactor = (seed % 1000) / 1000 * RANDOM_WEIGHT
   } else {
-    randomFactor = Math.random() * RANDOM_WEIGHT
+    // 未登录用户：基于日期 + item.id 生成确定性随机
+    const seed = hashCode(item.id + new Date().toISOString().slice(0, 10))
+    randomFactor = (seed % 1000) / 1000 * RANDOM_WEIGHT
   }
 
   return heatScore + userBonusScore + randomFactor
@@ -174,9 +184,7 @@ export function useRecommendations() {
       const available = allResources.filter(r => !viewedIds.has(r.id))
 
       // 优先从未浏览的中选择，不够则从全部中选择
-      const pool = available.length > 0 ? available : allResources.filter(
-        r => !viewedIds.has(r.id)
-      )
+      const pool = available.length > 0 ? available : allResources
 
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
@@ -225,9 +233,7 @@ export function useRecommendations() {
         r => !viewedIds.has(r.id) && !displayedIds.has(r.id)
       )
 
-      const pool = available.length > 0 ? available : allResources.filter(
-        r => !displayedIds.has(r.id)
-      )
+      const pool = available.length > 0 ? available : allResources
 
       // 使用混合推荐算法排序
       const scored = pool.map(item => ({
