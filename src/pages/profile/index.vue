@@ -202,6 +202,16 @@ const handleLogin = async () => {
     // 调用云函数登录
     await userStore.login(wechatUserInfo)
 
+    // 登录成功后同步云端收藏数据
+    try {
+      const res = await getCloudFavorites()
+      if (res.success && res.data) {
+        syncFavorites(res.data)
+      }
+    } catch (e) {
+      console.warn('同步收藏失败', e)
+    }
+
     // 登录成功后更新统计
     statsVersion.value++
 

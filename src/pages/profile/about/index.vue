@@ -10,8 +10,8 @@
   <view class="bg-gray-50 min-h-screen box-border">
     <!-- Logo区域 -->
     <view class="bg-white py-12 px-4 text-center">
-      <view class="w-24 h-24 mx-auto rounded-3xl bg-white flex items-center justify-center shadow-lg shadow-primary/20 overflow-hidden">
-  <image src="/static/images/logo-v1.png" mode="aspectFit" class="w-16 h-16" />
+      <view class="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-primary/5 to-orange/5 flex items-center justify-center shadow-lg shadow-primary/10 overflow-hidden">
+        <image src="/static/images/logo-v1.png" mode="aspectFill" class="w-full h-full" />
       </view>
       <view class="text-2xl font-bold text-gray-800 mt-6">轻学Claw</view>
       <view class="text-sm text-gray-400 mt-2">AI学习好帮手</view>
