@@ -83,12 +83,5 @@ test.describe('我的页面测试', () => {
 
   // ==================== 登录状态测试 ====================
 
-  test('未登录时设置页应显示"未登录"', async ({ page }) => {
-    await page.goto(`${BASE_URL}/#/pages/profile/settings/index`)
-    await page.waitForTimeout(500)
-
-    // 验证未登录状态
-    await expect(page.locator('text=未登录').first()).toBeVisible()
-    await expect(page.locator('text=点击登录账号').first()).toBeVisible()
-  })
+  // 注意：设置入口已隐藏，相关测试已移除
 })
