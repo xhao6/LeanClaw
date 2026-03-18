@@ -144,7 +144,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onShow, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
@@ -153,8 +153,14 @@ import { useUserStore } from '@/store'
 import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
 
-// 获取学习进度
-const progress = getProgress()
+// 获取学习进度（响应式）
+const progressRef = ref(getProgress())
+const progress = computed(() => progressRef.value)
+
+// 页面显示时刷新进度
+onShow(() => {
+  progressRef.value = getProgress()
+})
 
 // 今日推荐
 const { recommendations, loading, hasMore, error, loadRecommendations, loadMore, addToViewed } = useRecommendations()
