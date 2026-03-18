@@ -144,7 +144,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onShow, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { getProgress } from '@/utils/learnProgress'
 import { useRecommendations } from '@/composables/useRecommendations'
