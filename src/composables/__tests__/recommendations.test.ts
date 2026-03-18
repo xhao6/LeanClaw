@@ -227,7 +227,7 @@ describe('useRecommendations 推荐功能', () => {
       expect(withFavScore).toBeGreaterThan(withoutFavScore)
     })
 
-    it('随机因子应产生不同排序', () => {
+    it('未登录用户同一天应产生确定性随机', () => {
       const { calculateScore } = useRecommendations()
       const items = [
         { id: '1', heat: 50 },
@@ -235,17 +235,13 @@ describe('useRecommendations 推荐功能', () => {
         { id: '3', heat: 50 },
       ]
 
-      // 多次计算分数，检查是否有随机性
+      // 多次计算分数，同一天应得到相同结果
       const scores1 = items.map(item => calculateScore(item as any, new Set()))
       const scores2 = items.map(item => calculateScore(item as any, new Set()))
 
-      // 由于随机因子，分数顺序可能不同
-      const sorted1 = [...scores1].sort((a, b) => b - a)
-      const sorted2 = [...scores2].sort((a, b) => b - a)
-
-      // 至少分数和不同（由于随机因子）
-      const isDifferent = scores1.some((s, i) => s !== scores2[i])
-      expect(isDifferent || sorted1.join() !== sorted2.join()).toBe(true)
+      // 未登录用户：基于日期的确定性随机，同一天结果应相同
+      const isSame = scores1.every((s, i) => s === scores2[i])
+      expect(isSame).toBe(true)
     })
 
     it('有用户ID时应产生确定性随机', () => {
