@@ -102,12 +102,14 @@ import { computed } from 'vue'
 import { getProgress } from '@/utils/learnProgress'
 import { badges } from '@/data/badges'
 
-const progress = getProgress()
-
-const completedLessonsCount = computed(() => progress.completedLessons?.length || 0)
+const completedLessonsCount = computed(() => {
+  const progress = getProgress()
+  return progress.completedLessons?.length || 0
+})
 
 // 每日进度
 const dayProgress = computed(() => {
+  const progress = getProgress()
   const completedSet = new Set(progress.completedLessons || [])
   return Array.from({ length: 7 }, (_, i) => ({
     day: i + 1,
@@ -117,9 +119,13 @@ const dayProgress = computed(() => {
 
 // 徽章状态 - 使用 badges 中定义的 condition 函数自动判断解锁状态
 const allBadges = computed(() => {
+  const progress = getProgress()
   return badges.map(badge => ({
     ...badge,
     unlocked: badge.condition(progress)
   }))
 })
+
+// 当前进度
+const progress = computed(() => getProgress())
 </script>
