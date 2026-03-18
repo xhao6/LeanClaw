@@ -217,10 +217,11 @@ describe('learnProgress 工具函数', () => {
 
   describe('checkAndUnlockBadges', () => {
     it('应在满足条件时解锁新徽章', () => {
+      // markLessonComplete 会自动调用 checkAndUnlockBadges
       markLessonComplete('day-1')
-      const newBadges = checkAndUnlockBadges()
-      expect(newBadges.length).toBeGreaterThan(0)
-      expect(newBadges[0].id).toBe('day1-badge')
+      // 验证徽章已自动解锁
+      const progress = getProgress()
+      expect(progress.badges.includes('day1-badge')).toBe(true)
     })
 
     it('不应重复解锁已拥有的徽章', () => {

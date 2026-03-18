@@ -106,8 +106,11 @@ export const syncCloudProgress = (cloudData: any[]) => {
     }
     
     saveProgress(progress)
+
+    // 新增：检查并解锁徽章
+    checkAndUnlockBadges()
   }
-  
+
   return progress
 }
 
@@ -128,6 +131,9 @@ export const markLessonComplete = (lessonId: string): LearnProgress => {
       progress.currentDay = 7
     }
     saveProgress(progress)
+
+    // 新增：检查并解锁徽章
+    checkAndUnlockBadges()
   }
   return progress
 }
