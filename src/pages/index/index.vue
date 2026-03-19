@@ -95,6 +95,7 @@
         class="h-[400px]"
         refresher-enabled
         :refresher-triggered="refreshing"
+        :refresher-threshold="400"
         @refresherrefresh="handleRefresh"
         @scrolltolower="handleLoadMore"
       >

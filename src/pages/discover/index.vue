@@ -43,6 +43,7 @@
         class="h-full"
         refresher-enabled
         :refresher-triggered="refreshing"
+        :refresher-threshold="400"
         @refresherrefresh="handleRefresh"
       >
         <view v-if="loading && !refreshing" class="flex-center py-10">
