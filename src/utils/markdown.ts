@@ -42,7 +42,7 @@ export const renderMarkdown = (content: string): string => {
   let rendered = md.render(content)
 
   // 修复图片路径：/images/days/ -> 云存储 URL
-  const CLOUD_IMAGE_BASE = 'https://ssl.deyan.tech/images'
+  const CLOUD_IMAGE_BASE = 'https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/images'
   rendered = rendered.replace(/\/images\/days\//g, `${CLOUD_IMAGE_BASE}/days/`)
 
   // 添加样式类名
