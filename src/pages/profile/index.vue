@@ -74,6 +74,7 @@
         <wd-cell-group border>
           <wd-cell title="用户协议" is-link icon="file" size="large" @click="goToAgreement" />
           <wd-cell title="隐私政策" is-link icon="lock-on" size="large" @click="goToPrivacy" />
+          <wd-cell title="清除缓存" is-link icon="delete" size="large" @click="handleClearCache" />
           <wd-cell title="关于 轻学Claw" is-link icon="info-circle" size="large" @click="goToAbout" />
         </wd-cell-group>
       </view>
@@ -91,6 +92,7 @@ import { ref, computed } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
+import { CacheService } from '@/services/CacheService'
 import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
 import { getFavorites as getCloudFavorites } from '@/api/modules/user'
@@ -271,6 +273,11 @@ const goToPrivacy = () => {
   uni.navigateTo({
     url: '/pages/profile/privacy/index'
   })
+}
+
+// 清除缓存
+const handleClearCache = () => {
+  CacheService.confirmAndClear()
 }
 
 // 跳转关于页面
