@@ -72,11 +72,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
-import { clearAllFavorites } from '@/utils/favorites'
-import { resetProgress } from '@/utils/learnProgress'
+import { CacheService } from '@/services/CacheService'
 
 // 用户状态
 const userStore = useUserStore()
@@ -85,52 +84,12 @@ const { userInfo, isLoggedIn } = storeToRefs(userStore)
 // 版本号
 const version = '1.0.0'
 
-// 缓存大小（模拟显示）
-const cacheSize = computed(() => '2.3 MB')
+// 缓存大小（动态获取）
+const cacheSize = computed(() => CacheService.getCacheSize())
 
 // 清除缓存
 const handleClearCache = () => {
-  uni.showModal({
-    title: '清除缓存',
-    content: '确定要清除所有缓存数据吗？这将清除学习进度、收藏等本地数据，且无法恢复。',
-    success: (res) => {
-      if (res.confirm) {
-        confirmClearCache()
-      }
-    }
-  })
-}
-
-// 确认清除缓存
-const confirmClearCache = () => {
-  // 清除学习进度
-  resetProgress()
-  // 清除收藏
-  clearAllFavorites()
-  // 清除其他可能的缓存
-  try {
-    const keysToKeep = ['uni-id-token', 'uni-id-token-expire']
-    const allKeys = uni.getStorageInfoSync().keys
-    allKeys.forEach(key => {
-      if (!keysToKeep.includes(key)) {
-        uni.removeStorageSync(key)
-      }
-    })
-  } catch (e) {
-    console.error('清除缓存失败:', e)
-  }
-
-  uni.showToast({
-    title: '缓存已清除',
-    icon: 'success',
-  })
-
-  // 延迟刷新页面
-  setTimeout(() => {
-    uni.reLaunch({
-      url: '/pages/index/index',
-    })
-  }, 1000)
+  CacheService.confirmAndClear()
 }
 
 // 跳转到关于页面
