@@ -1,5 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
+// Mock @dcloudio/uni-app
+vi.mock('@dcloudio/uni-app', () => ({
+  onBackPress: vi.fn(),
+}))
+
 // Mock uni 对象
 const mockUni = {
   redirectTo: vi.fn(),
