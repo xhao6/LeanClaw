@@ -1,6 +1,6 @@
 ---
 name: content-sync-workflow
-description: 将外部网页内容同步到 LeanClaw 小程序数据库。用于：1) 用户说"同步文章"、"导入内容"、"抓取网页"时；2) 用户说"运行内容同步脚本"；3) 用户提供 URL 要求转换为 Markdown 并导入小程序。此工作流会自动处理爬取→AI转换→静态托管→数据库记录的全流程。使用此 skill 时必须严格按照步骤执行，不要跳过任何步骤。
+description: 将外部网页内容同步到 LeanClaw 小程序数据库。用于：1) 用户说"同步文章"、"导入内容"、"抓取网页"时；2) 用户说"运行内容同步脚本"；3) 用户提供 URL 要求转换为 Markdown 并导入小程序。此工作流会自动处理爬取→AI转换→云存储→数据库记录的全流程。使用此 skill 时必须严格按照步骤执行，不要跳过任何步骤。
 ---
 
 # 内容同步工作流
@@ -10,7 +10,7 @@ description: 将外部网页内容同步到 LeanClaw 小程序数据库。用于
 ## 核心思路
 
 ```
-外部URL → baoyu-url-to-markdown 抓取 → AI过滤无关内容 → 静态托管 → 数据库记录
+外部URL → baoyu-url-to-markdown 抓取 → AI过滤无关内容 → 云存储 → 数据库记录
 ```
 
 目的：避免小程序 webview 加载外部网页时的风险提示，实现流畅阅读体验。
@@ -70,7 +70,11 @@ node scripts/content-sync-workflow/ai-process.js <输入Markdown文件> <输出M
 5. 添加导读和转载信息
 6. 保存到输出文件
 
-### 步骤 4：上传到静态托管
+### 步骤 4：上传到云存储
+
+> **云存储配置**：
+> - 存储桶：`6c65-leanmind-1gjtoa502716c21d-1410913126`
+> - 资源目录：`/content/markdown`
 
 1. **生成文件名**：使用 URL 的 MD5 哈希值作为文件名
    - 例如：`cloud-tencent-com-developer-article-2625147.md`
@@ -79,8 +83,8 @@ node scripts/content-sync-workflow/ai-process.js <输入Markdown文件> <输出M
    - **cloudPath**: `content/markdown/<文件名>.md`
    - **localPath**: 步骤 3 生成的 Markdown 文件路径
 
-3. **获取访问 URL**：上传后会返回 `markdownUrl`
-   - 格式：`https://<envId>.tcb.qcloud.la/content/markdown/<filename>.md`
+3. **获取访问 URL**：上传后会返回云存储临时 URL
+   - 正确格式：`https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/markdown/<filename>.md`
 
 ### 步骤 5：添加到数据库
 

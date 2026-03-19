@@ -1,6 +1,6 @@
 ---
 name: skills-sync-workflow
-description: 将英文 Skills 文档翻译并改写为中文格式。用于：1) 用户说"翻译 Skills"、"同步 Skills"、"处理 Skills 文档"时；2) 用户提供一个或多个 md 文件要求翻译为中文；3) 用户提到"skills 改写"或"skills 翻译"。此工作流会读取英文 md 文件，使用大模型翻译为流畅中文，按固定格式输出，保存到 output 目录，用户确认后上传到静态托管并添加数据库记录。使用此 skill 时必须严格按照步骤执行，不要跳过任何步骤。
+description: 将英文 Skills 文档翻译并改写为中文格式。用于：1) 用户说"翻译 Skills"、"同步 Skills"、"处理 Skills 文档"时；2) 用户提供一个或多个 md 文件要求翻译为中文；3) 用户提到"skills 改写"或"skills 翻译"。此工作流会读取英文 md 文件，使用大模型翻译为流畅中文，按固定格式输出，保存到 output 目录，用户确认后上传到云存储并添加数据库记录。使用此 skill 时必须严格按照步骤执行，不要跳过任何步骤。
 ---
 
 # Skills 同步工作流
@@ -10,7 +10,7 @@ description: 将英文 Skills 文档翻译并改写为中文格式。用于：1)
 ## 核心思路
 
 ```
-用户输入 md 文件 → 大模型翻译改写 → 固定格式输出 → 用户确认 → 静态托管 → 数据库记录
+用户输入 md 文件 → 大模型翻译改写 → 固定格式输出 → 用户确认 → 云存储 → 数据库记录
 ```
 
 目的：将英文 Skills 文档优雅地翻译为中文，按统一格式输出，供 LeanClaw 小程序使用。
@@ -100,7 +100,11 @@ npx clawhub@latest install <skill-name>
 - 如果有问题：根据用户反馈修改
 - 如果确认无误：继续步骤 6
 
-### 步骤 6：上传到静态托管
+### 步骤 6：上传到云存储
+
+> **云存储配置**：
+> - 存储桶：`6c65-leanmind-1gjtoa502716c21d-1410913126`
+> - 资源目录：`/content/skills`
 
 1. **生成文件名**：使用原文标题的 MD5 哈希值或保留原文件名
    - 例如：`web-frontend-skills-collection.md`
@@ -109,8 +113,8 @@ npx clawhub@latest install <skill-name>
    - **cloudPath**: `content/skills/<filename>.md`
    - **localPath**: 步骤 4 生成的 Markdown 文件路径
 
-3. **获取访问 URL**：上传后会返回 `markdownUrl`
-   - 格式：`https://<envId>.tcb.qcloud.la/content/skills/<filename>.md`
+3. **获取访问 URL**：上传后会返回云存储临时 URL
+   - 正确格式：`https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/skills/<filename>.md`
 
 ### 步骤 7：添加到数据库
 
