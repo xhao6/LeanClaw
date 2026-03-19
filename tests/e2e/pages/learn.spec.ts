@@ -1,10 +1,32 @@
 import { test, expect } from '@playwright/test'
-import { clearStorage, initProgress, waitForPageLoad, BASE_URL } from '../utils/testHelpers'
+import { clearStorage, initProgress, initLoggedOutState, waitForPageLoad, BASE_URL } from '../utils/testHelpers'
 
 test.describe('学习页面测试', () => {
   test.beforeEach(async ({ page }) => {
     await clearStorage(page)
     await waitForPageLoad(page)
+  })
+
+  test('未登录时点击"去登录"按钮应触发登录而非跳转', async ({ page }) => {
+    // 确保处于未登录状态
+    await initLoggedOutState(page)
+    await page.goto(BASE_URL + '/#/pages/learn/index')
+
+    // 验证登录提醒可见
+    await expect(page.locator('[data-testid="login-reminder"]')).toBeVisible()
+    await expect(page.locator('[data-testid="login-button"]')).toBeVisible()
+
+    // 获取当前 URL
+    const currentUrl = page.url()
+
+    // 点击"去登录"按钮，触发登录（不应跳转页面）
+    await page.locator('[data-testid="login-button"]').click()
+
+    // 等待一段时间让登录逻辑执行
+    await page.waitForTimeout(1000)
+
+    // 页面 URL 不应改变（没有跳转到 profile 等其他页面）
+    expect(page.url()).toBe(currentUrl)
   })
 
   test('默认状态：Day 1 进行中，其他锁定', async ({ page }) => {
