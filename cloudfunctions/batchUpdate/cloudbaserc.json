@@ -1,0 +1,6 @@
+{
+  "name": "batchUpdate",
+  "version": "1.0.0",
+  "envId": "{{envId}}",
+  "main": "index.js"
+}
