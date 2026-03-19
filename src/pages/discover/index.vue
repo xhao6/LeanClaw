@@ -37,7 +37,7 @@
     </view>
 
     <!-- Content List -->
-    <view class="p-4 pt-0 flex-1 overflow-hidden" style="height: 0; min-height: 500px;">
+    <view class="p-4 pt-0 flex-1 overflow-hidden">
       <scroll-view
         scroll-y
         class="h-full"
