@@ -151,10 +151,13 @@ const handleDayClick = (day: any) => {
   })
 }
 
-const goToLogin = () => {
-  // 跳转到个人中心页面触发登录
-  uni.switchTab({
-    url: '/pages/profile/index'
-  })
+const goToLogin = async () => {
+  try {
+    await userStore.login()
+    uni.showToast({ title: '登录成功', icon: 'success' })
+  } catch (e) {
+    console.error('登录失败:', e)
+    uni.showToast({ title: '登录失败', icon: 'none' })
+  }
 }
 </script>
