@@ -98,8 +98,7 @@ for (const path in mdModules) {
 // #endif
 
 // #ifndef MP-WEIXIN
-// H5 使用动态加载
-const dayContents: Record<string, string> = {}
+// H5 使用动态加载，dayContents 在 loadContent 中定义
 // #endif
 
 const md = new MarkdownIt({
@@ -128,16 +127,18 @@ const loadContent = async () => {
   error.value = ''
 
   try {
+    let contentText: string
+
     // #ifdef MP-WEIXIN
-    const res = dayContents[dayId.value]
+    contentText = dayContents[dayId.value]
     // #endif
 
     // #ifndef MP-WEIXIN
-    const res = await new Promise((resolve, reject) => {
+    contentText = await new Promise<string>((resolve, reject) => {
       uni.request({
         url: `/pages_learn/static/content/days/day${dayId.value}.md`,
         success: (res) => {
-          if (res.statusCode === 200) resolve(res.data)
+          if (res.statusCode === 200) resolve(res.data as string)
           else reject(new Error(`File not found: day${dayId.value}.md`))
         },
         fail: (err) => reject(err)
@@ -145,47 +146,45 @@ const loadContent = async () => {
     })
     // #endif
 
-    if (!res) {
+    if (!contentText) {
       throw new Error(`课程 ${dayId.value} 不存在`)
     }
 
-    if (typeof res === 'string') {
-      const content = fm(res)
-      title.value = (content.attributes as any).title || `Day ${dayId.value}`
+    const content = fm(contentText)
+    title.value = (content.attributes as any).title || `Day ${dayId.value}`
 
-      // Process markdown
-      let rendered = md.render(content.body)
-      
-      // Fix image paths: /images/days/ -> 云存储 URL
-      const CLOUD_IMAGE_BASE = 'https://leanmind-1gjtoa502716c21d-1410913126.tcloudbaseapp.com/images'
-      rendered = rendered.replace(/\/images\/days\//g, `${CLOUD_IMAGE_BASE}/days/`)
-      
-      // Improve styling for rich-text
-      // Add class to standard tags for better styling control if needed
-      rendered = rendered.replace(/<h1>/g, '<h1 class="text-2xl font-bold mt-6 mb-4 text-primary">')
-      rendered = rendered.replace(/<h2>/g, '<h2 class="text-xl font-bold mt-8 mb-4 text-gray-800 border-l-4 border-orange pl-3">')
-      rendered = rendered.replace(/<h3>/g, '<h3 class="text-lg font-bold mt-6 mb-3 text-gray-800">')
-      rendered = rendered.replace(/<p>/g, '<p class="mb-4 text-gray-600 leading-7 text-justify">')
-      rendered = rendered.replace(/<ul>/g, '<ul class="mb-4 pl-5 space-y-2 list-disc text-gray-600">')
-      rendered = rendered.replace(/<li>/g, '<li class="pl-1">')
-      rendered = rendered.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 rounded-r-lg">')
-      rendered = rendered.replace(/<code>/g, '<code class="bg-gray-100 text-orange px-1.5 py-0.5 rounded text-sm font-mono">')
-      rendered = rendered.replace(/<pre>/g, '<pre class="bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto my-4 text-sm font-mono shadow-sm">')
-      rendered = rendered.replace(/<img/g, '<img class="w-full rounded-xl my-4 shadow-sm" mode="widthFix"')
-      rendered = rendered.replace(/<table>/g, '<div class="overflow-x-auto my-4"><table class="w-full border-collapse text-sm text-left">')
-      rendered = rendered.replace(/<th>/g, '<th class="border-b border-gray-200 bg-gray-50 p-3 font-bold text-gray-700">')
-      rendered = rendered.replace(/<td>/g, '<td class="border-b border-gray-100 p-3 text-gray-600">')
-      // 移除斜体样式
-      rendered = rendered.replace(/<em>/g, '<em class="text-gray-600">')
+    // Process markdown
+    let rendered = md.render(content.body)
 
-      htmlContent.value = rendered
-      
-      // Reset tasks for demo (in real app, load from storage)
-      tasks.value = [
-        { text: '阅读并理解本章内容', checked: false },
-        { text: '完成文末的思考题', checked: false }
-      ]
-    }
+    // Fix image paths: /images/days/ -> 云存储 URL
+    const CLOUD_IMAGE_BASE = 'https://ssl.deyan.tech/images'
+    rendered = rendered.replace(/\/images\/days\//g, `${CLOUD_IMAGE_BASE}/days/`)
+
+    // Improve styling for rich-text
+    // Add class to standard tags for better styling control if needed
+    rendered = rendered.replace(/<h1>/g, '<h1 class="text-2xl font-bold mt-6 mb-4 text-primary">')
+    rendered = rendered.replace(/<h2>/g, '<h2 class="text-xl font-bold mt-8 mb-4 text-gray-800 border-l-4 border-orange pl-3">')
+    rendered = rendered.replace(/<h3>/g, '<h3 class="text-lg font-bold mt-6 mb-3 text-gray-800">')
+    rendered = rendered.replace(/<p>/g, '<p class="mb-4 text-gray-600 leading-7 text-justify">')
+    rendered = rendered.replace(/<ul>/g, '<ul class="mb-4 pl-5 space-y-2 list-disc text-gray-600">')
+    rendered = rendered.replace(/<li>/g, '<li class="pl-1">')
+    rendered = rendered.replace(/<blockquote>/g, '<blockquote class="border-l-4 border-gray-200 pl-4 py-2 my-4 bg-gray-50 text-gray-500 rounded-r-lg">')
+    rendered = rendered.replace(/<code>/g, '<code class="bg-gray-100 text-orange px-1.5 py-0.5 rounded text-sm font-mono">')
+    rendered = rendered.replace(/<pre>/g, '<pre class="bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto my-4 text-sm font-mono shadow-sm">')
+    rendered = rendered.replace(/<img/g, '<img class="w-full rounded-xl my-4 shadow-sm" mode="widthFix"')
+    rendered = rendered.replace(/<table>/g, '<div class="overflow-x-auto my-4"><table class="w-full border-collapse text-sm text-left">')
+    rendered = rendered.replace(/<th>/g, '<th class="border-b border-gray-200 bg-gray-50 p-3 font-bold text-gray-700">')
+    rendered = rendered.replace(/<td>/g, '<td class="border-b border-gray-100 p-3 text-gray-600">')
+    // 移除斜体样式
+    rendered = rendered.replace(/<em>/g, '<em class="text-gray-600">')
+
+    htmlContent.value = rendered
+
+    // Reset tasks for demo (in real app, load from storage)
+    tasks.value = [
+      { text: '阅读并理解本章内容', checked: false },
+      { text: '完成文末的思考题', checked: false }
+    ]
   } catch (e: any) {
     console.error(e)
     error.value = '加载课程内容失败，请检查网络或稍后重试'
