@@ -78,6 +78,10 @@ import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { getProgress } from '@/utils/learnProgress'
 import { useUserStore } from '@/store'
+import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
+
+// 拦截返回键，跳转到首页
+useBackButtonRedirect('/pages/index/index')
 
 // 用户状态
 const userStore = useUserStore()

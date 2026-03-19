@@ -96,6 +96,10 @@ import { CacheService } from '@/services/CacheService'
 import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
 import { getFavorites as getCloudFavorites } from '@/api/modules/user'
+import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
+
+// 拦截返回键，跳转到首页
+useBackButtonRedirect('/pages/index/index')
 
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)

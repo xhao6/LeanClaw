@@ -37,13 +37,14 @@
     </view>
 
     <!-- Content List -->
-    <view class="p-4 pt-0 flex-1 overflow-hidden">
+    <view class="p-4 pt-0 flex-1 overflow-hidden" style="height: 0; min-height: 500px;">
       <scroll-view
         scroll-y
         class="h-full"
-        refresher-enabled
+        :refresher-enabled="true"
         :refresher-triggered="refreshing"
         :refresher-threshold="400"
+        refresher-default-style="none"
         @refresherrefresh="handleRefresh"
       >
         <view v-if="loading && !refreshing" class="flex-center py-10">
@@ -106,7 +107,11 @@ import { getResources } from '@/api/modules/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
 import { getTagClass } from '@/composables/useTagColors'
 import { useUserStore } from '@/store'
+import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
 import type { ResourceItem } from '@/types/resource'
+
+// 拦截返回键，跳转到首页
+useBackButtonRedirect('/pages/index/index')
 
 const searchValue = ref('')
 const activeTab = ref<string>('resource')
