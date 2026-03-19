@@ -3,6 +3,9 @@
  * 用于在 TabBar 页面拦截返回键并跳转到首页
  */
 
+import { onUnmounted } from 'vue'
+import { onBackPress } from '@dcloudio/uni-app'
+
 /**
  * 拦截返回键并跳转到首页
  * @param targetPagePath 目标页面路径（默认首页）
@@ -27,6 +30,11 @@ export function useBackButtonRedirect(targetPagePath: string = '/pages/index/ind
     // 返回 true 表示阻止默认返回行为
     return true
   }
+
+  // 自动注册返回键监听
+  onBackPress((options) => {
+    return handleBackPress()
+  })
 
   return {
     handleBackPress,
