@@ -38,6 +38,7 @@ test.describe('我的页面测试', () => {
     // 验证功能入口 - 收藏在 Stats Card 和 menu 中都有
     await expect(page.locator('text=我的证书')).toBeVisible()
     await expect(page.locator('text=学习统计')).toBeVisible()
+    await expect(page.locator('text=清除缓存')).toBeVisible()
     await expect(page.locator('text=关于 轻学Claw')).toBeVisible()
   })
 
