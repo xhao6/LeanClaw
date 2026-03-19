@@ -70,11 +70,7 @@ node scripts/content-sync-workflow/ai-process.js <输入Markdown文件> <输出M
 5. 添加导读和转载信息
 6. 保存到输出文件
 
-### 步骤 4：上传到云存储
-
-> **云存储配置**：
-> - 存储桶：`6c65-leanmind-1gjtoa502716c21d-1410913126`
-> - 资源目录：`/content/markdown`
+### 步骤 4：上传到静态托管
 
 1. **生成文件名**：使用 URL 的 MD5 哈希值作为文件名
    - 例如：`cloud-tencent-com-developer-article-2625147.md`
@@ -83,38 +79,27 @@ node scripts/content-sync-workflow/ai-process.js <输入Markdown文件> <输出M
    - **cloudPath**: `content/markdown/<文件名>.md`
    - **localPath**: 步骤 3 生成的 Markdown 文件路径
 
-3. **获取访问 URL**：上传后会返回云存储临时 URL
-   - 正确格式：`https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/markdown/<filename>.md`
-   - 自定义域名（可选）：`https://ssl.deyan.tech/content/markdown/<filename>.md`
+3. **获取访问 URL**：上传后会返回 `markdownUrl`
+   - 格式：`https://<envId>.tcb.qcloud.la/content/markdown/<filename>.md`
 
 ### 步骤 5：添加到数据库
 
-使用 MCP 工具 `executeWriteSQL` 将记录插入 MySQL 数据库：
+使用 MCP 工具 `writeNoSqlDatabaseContent` 将记录插入数据库：
 
-**表名**：`resources`
+**集合名**：`resources`
 
-**SQL 语句**：
+**必需字段**：
 
-```sql
-INSERT INTO resources (nosql_id, title, type, `desc`, tags, source, url, heat, image, markdown_url)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-ON DUPLICATE KEY UPDATE title=VALUES(title)
-```
-
-**参数说明**：
-
-| 参数位置 | 字段 | 来源 | 示例 |
-|----------|------|------|------|
-| 1 | nosql_id | 使用 MD5 生成唯一 ID | MD5(url + timestamp) |
-| 2 | title | 从 Markdown 第一行提取 | "腾讯云 — OpenClaw 接入企业微信完全指南" |
-| 3 | type | 固定值 | "resource" |
-| 4 | `desc` | 从文章摘要提取，AI 导读可用 | "详细讲解如何将 OpenClaw..." |
-| 5 | tags | JSON 格式: JSON.stringify(人工指定的标签数组) | '["cloud-deploy","wework"]' |
-| 6 | source | 从 URL 提取域名 | "cloud.tencent.com" |
-| 7 | url | 用户提供的原始 URL | "https://cloud.tencent.com/..." |
-| 8 | heat | 固定值 | 0 |
-| 9 | image | 固定值 | "" |
-| 10 | markdown_url | 从步骤 4 获取 | "https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/markdown/..." |
+| 字段 | 来源 | 示例 |
+|------|------|------|
+| `title` | 从 Markdown 第一行提取 | "腾讯云 — OpenClaw 接入企业微信完全指南" |
+| `url` | 用户提供的原始 URL | "https://cloud.tencent.com/..." |
+| `markdownUrl` | 从步骤 4 获取 | "https://...tcb.qcloud.la/content/..." |
+| `type` | 固定值 | "resource" |
+| `tags` | 人工指定 | ["cloud-deploy", "wework"] |
+| `desc` | 从文章摘要提取，AI 导读可用 | "详细讲解如何将 OpenClaw..." |
+| `heat` | 固定值 | 0 |
+| `source` | 从 URL 提取域名 | "cloud.tencent.com" |
 
 ### 步骤 6：验证
 
@@ -130,7 +115,7 @@ ON DUPLICATE KEY UPDATE title=VALUES(title)
 | 步骤 2 抓取失败 | 提示用户检查 URL 是否正确、是否需要登录 |
 | 步骤 3 AI 失败 | 记录错误，人工处理或使用基础转换 |
 | 步骤 4 上传失败 | 保存到本地 output/ 目录，提示手动上传 |
-| 步骤 5 插入失败 | 检查 MySQL 表权限，使用 executeWriteSQL 工具确认 SQL 正确 |
+| 步骤 5 插入失败 | 检查数据库权限，记录错误 |
 
 ## 关键约束
 
