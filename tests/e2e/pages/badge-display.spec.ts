@@ -18,14 +18,14 @@ test.describe('徽章显示测试', () => {
 
   test('首页 Logo 图片应该存在', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/index/index')
-    // 检查图片元素存在
-    const logo = page.locator('image').first()
+    // 检查图片元素存在 (H5编译后是img标签)
+    const logo = page.locator('img').first()
     await expect(logo).toBeVisible()
   })
 
   test('关于页 Logo 图片应该存在', async ({ page }) => {
     await page.goto(BASE_URL + '/#/pages/profile/about/index')
-    const logo = page.locator('image').first()
+    const logo = page.locator('img').first()
     await expect(logo).toBeVisible()
   })
 })

@@ -29,7 +29,7 @@ describe('markdown 渲染工具', () => {
 
     it('应修复图片路径为云存储 URL', () => {
       const html = renderMarkdown('![img](/images/days/test.jpg)')
-      expect(html).toContain('leanmind-1gjtoa502716c21d-1410913126.tcloudbaseapp.com/images/days/test.jpg')
+      expect(html).toContain('tcb.qcloud.la/images/days/test.jpg')
     })
   })
 
