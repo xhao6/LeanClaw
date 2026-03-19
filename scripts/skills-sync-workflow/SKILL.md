@@ -100,7 +100,11 @@ npx clawhub@latest install <skill-name>
 - 如果有问题：根据用户反馈修改
 - 如果确认无误：继续步骤 6
 
-### 步骤 6：上传到静态托管
+### 步骤 6：上传到云存储
+
+> **云存储配置**：
+> - 存储桶：`6c65-leanmind-1gjtoa502716c21d-1410913126`
+> - Skills 目录：`/content/skills`
 
 1. **生成文件名**：使用原文标题的 MD5 哈希值或保留原文件名
    - 例如：`web-frontend-skills-collection.md`
@@ -109,28 +113,38 @@ npx clawhub@latest install <skill-name>
    - **cloudPath**: `content/skills/<filename>.md`
    - **localPath**: 步骤 4 生成的 Markdown 文件路径
 
-3. **获取访问 URL**：上传后会返回 `markdownUrl`
-   - 格式：`https://<envId>.tcb.qcloud.la/content/skills/<filename>.md`
+3. **获取访问 URL**：上传后会返回云存储临时 URL
+   - 正确格式：`https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/skills/<filename>.md`
+   - 自定义域名（可选）：`https://ssl.deyan.tech/content/skills/<filename>.md`
 
 ### 步骤 7：添加到数据库
 
-使用 MCP 工具 `writeNoSqlDatabaseContent` 将记录插入数据库：
+使用 MCP 工具 `executeWriteSQL` 将记录插入 MySQL 数据库：
 
-**集合名**：`resources`
+**表名**：`resources`
 
-**必需字段**：
+**SQL 语句**：
 
-| 字段 | 来源 | 示例 |
-|------|------|------|
-| `title` | 从 Markdown 第一行提取（去掉 emoji） | "网页 & 前端 Skills 合集" |
-| `url` | 固定占位符 | "skills://local" |
-| `markdownUrl` | 从步骤 6 获取 | "https://...tcb.qcloud.la/content/skills/..." |
-| `image` | 固定占位图或留空 | "" |
-| `type` | 固定值 | "skill" |
-| `tags` | 从内容提取 | ["网页", "前端", "CLI"] |
-| `desc` | 从内容摘要提取 | "Collection of web and frontend skills..." |
-| `heat` | 固定值 | 0 |
-| `source` | 固定值 | "skills-local" |
+```sql
+INSERT INTO resources (nosql_id, title, type, `desc`, tags, source, url, heat, image, markdown_url)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE title=VALUES(title)
+```
+
+**参数说明**：
+
+| 参数位置 | 字段 | 来源 | 示例 |
+|----------|------|------|------|
+| 1 | nosql_id | 使用 MD5 生成唯一 ID | MD5(title + timestamp) |
+| 2 | title | 从 Markdown 第一行提取（去掉 emoji） | "网页 & 前端 Skills 合集" |
+| 3 | type | 固定值 | "skill" |
+| 4 | `desc` | 从内容摘要提取 | "Collection of web and frontend skills..." |
+| 5 | tags | JSON 格式: JSON.stringify(从内容提取的标签数组) | '["网页","前端","CLI"]' |
+| 6 | source | 固定值 | "skills-local" |
+| 7 | url | 固定占位符 | "skills://local" |
+| 8 | heat | 固定值 | 0 |
+| 9 | image | 固定值 | "" |
+| 10 | markdown_url | 从步骤 6 获取 | "https://6c65-leanmind-1gjtoa502716c21d-1410913126.tcb.qcloud.la/content/skills/..." |
 
 ### 步骤 8：验证
 
@@ -147,7 +161,7 @@ npx clawhub@latest install <skill-name>
 | 步骤 3 AI 失败 | 记录错误，提示用户检查 API 配置 |
 | 步骤 4 保存失败 | 检查目录权限，确保 output 目录存在 |
 | 步骤 6 上传失败 | 保存到本地，提示手动上传 |
-| 步骤 7 插入失败 | 检查数据库权限，记录错误 |
+| 步骤 7 插入失败 | 检查 MySQL 表权限，使用 executeWriteSQL 工具确认 SQL 正确 |
 
 ## 关键约束
 
