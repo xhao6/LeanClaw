@@ -487,3 +487,31 @@ npm run alova-gen   # 从 Alova 配置生成 API
 2. **API 生成**: 使用 `npm run alova-gen` 从配置生成类型化 API 方法
 3. **类型定义**: 自动生成在 `src/auto-import.d.ts` 和 `src/uni-pages.d.ts`
 4. **全局组件**: 通过 vite.config.ts 中的 unplugin-vue-components 注册
+
+## gstack
+
+使用 gstack 进行所有网页浏览操作，never use mcp__claude-in-chrome__* tools.
+
+## 可用技能
+
+- /office-hours - 头脑风暴新想法
+- /plan-ceo-review - 评审商业计划
+- /plan-eng-review - 评审技术架构
+- /plan-design-review - 评审设计计划
+- /design-consultation - 设计系统咨询
+- /review - 代码审查
+- /ship - 部署/创建PR
+- /browse - 网页浏览（主要工具）
+- /qa - 测试应用
+- /qa-only - 仅测试
+- /design-review - 视觉设计审查
+- /setup-browser-cookies - 设置浏览器Cookie
+- /retro - 回顾
+- /investigate - 调试错误
+- /document-release - 文档发布
+- /codex - 额外审查
+- /careful - 生产环境操作
+- /freeze - 限制编辑范围
+- /guard - 最大安全模式
+- /unfreeze - 解除编辑限制
+- /gstack-upgrade - 升级gstack
