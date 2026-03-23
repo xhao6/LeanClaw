@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { badges, getBadgeById, getAllBadges, isBadgeUnlocked } from '../badges'
 
 describe('badges 徽章数据', () => {
-  it('应包含 7 个徽章', () => {
-    expect(badges).toHaveLength(7)
+  it('应包含 8 个徽章（7天徽章 + 1连续打卡徽章）', () => {
+    expect(badges).toHaveLength(8)
   })
 
   it('每个徽章应有必需字段', () => {
@@ -29,7 +29,7 @@ describe('badges 徽章数据', () => {
 
   it('getAllBadges 应返回所有徽章', () => {
     const all = getAllBadges()
-    expect(all).toHaveLength(7)
+    expect(all).toHaveLength(8)
     expect(all).toEqual(badges)
   })
 

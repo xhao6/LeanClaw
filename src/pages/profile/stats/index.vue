@@ -20,7 +20,7 @@
             </view>
             <view>
               <view class="text-sm text-gray-500">已学天数</view>
-              <view class="text-xl font-bold text-primary">{{ progress.currentDay - 1 }} <text class="text-sm font-normal text-gray-400">/ 7天</text></view>
+              <view class="text-xl font-bold text-primary">{{ completedLessonsCount }} <text class="text-sm font-normal text-gray-400">/ 7天</text></view>
             </view>
           </view>
         </view>

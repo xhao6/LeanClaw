@@ -60,6 +60,13 @@ export const badges: Badge[] = [
     condition: (progress: LearnProgress) => isDayCompleted(progress, 6),
   },
   {
+    id: 'day7-badge',
+    name: '龙虾驯养师',
+    desc: '完成第7天学习',
+    icon: '🏆',
+    condition: (progress: LearnProgress) => isDayCompleted(progress, 7),
+  },
+  {
     id: 'streak-badge',
     name: '连续学习者',
     desc: '连续学习7天',
