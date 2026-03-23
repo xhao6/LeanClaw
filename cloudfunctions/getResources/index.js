@@ -63,17 +63,24 @@ exports.main = async (event, context) => {
     const resourcesList = res.data || []
     if (resourcesList.length > 0) {
       try {
+        // 使用 aggregate 替代 groupBy（wx-server-sdk 不支持 groupBy）
+        const resourceIds = resourcesList.map(item => item._id)
         const favoritesRes = await db.collection('favorites')
-          .groupBy('resourceId')
-          .aggregate({
+          .aggregate()
+          .match({
+            resourceId: db.command.in(resourceIds)
+          })
+          .group({
+            _id: '$resourceId',
             count: db.command.aggregate.sum(1)
           })
+          .end()
 
         // 构建收藏数映射
         const heatMap = {}
         if (favoritesRes.list) {
           favoritesRes.list.forEach(item => {
-            heatMap[item.resourceId] = item.count
+            heatMap[item._id] = item.count
           })
         }
 
