@@ -11,7 +11,7 @@
     <!-- Progress Indicator -->
     <view class="sticky top-0 z-10 bg-white/95 backdrop-blur px-4 py-3 border-b border-gray-100 shadow-sm">
       <view class="flex justify-between items-center mb-2">
-        <text class="text-sm font-bold text-primary">Day {{ dayId }}: {{ title }}</text>
+        <text class="text-sm font-bold text-primary">{{ title }}</text>
       </view>
       <wd-progress :percentage="scrollPercentage" color="#FF6B35" :show-pivot="false" custom-class="!h-1" />
     </view>
