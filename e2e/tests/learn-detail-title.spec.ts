@@ -115,9 +115,10 @@ test.describe('学习详情页标题显示', () => {
     const navTitle = await page.title()
 
     // 获取页面内的标题元素
-    const contentTitle = await page.locator('text=/Day 3: .+/').first().textContent()
+    const contentTitle = await page.locator('text=/Day 3: .*/').first().textContent()
 
     // 验证两者一致（去除空白）
-    expect(navTitle.trim()).toBe(contentTitle?.trim())
+    expect(contentTitle).toBeDefined()
+    expect(navTitle.trim()).toBe(contentTitle!.trim())
   })
 })
