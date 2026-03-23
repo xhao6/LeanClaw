@@ -66,7 +66,7 @@ export const badges: Badge[] = [
     icon: '🏆',
     condition: (progress: LearnProgress) => isDayCompleted(progress, 7),
   },
-  ]
+]
 
 // 获取所有徽章
 export const getAllBadges = (): Badge[] => {

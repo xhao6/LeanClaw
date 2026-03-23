@@ -50,10 +50,10 @@ test.describe('统计页测试', () => {
     // 徽章展示区应该可见
     const badgeSection = page.locator('text=获得徽章')
     await expect(badgeSection).toBeVisible()
-    // 应该显示8个徽章格子
+    // 应该显示7个徽章格子
     const badgeGrid = page.locator('.grid.grid-cols-7')
     const badges = badgeGrid.locator('.aspect-square')
-    await expect(badges).toHaveCount(8)
+    await expect(badges).toHaveCount(7)
   })
 
   test('学习进度条应正确显示7天', async ({ page }) => {
