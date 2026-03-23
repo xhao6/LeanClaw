@@ -66,14 +66,7 @@ export const badges: Badge[] = [
     icon: '🏆',
     condition: (progress: LearnProgress) => isDayCompleted(progress, 7),
   },
-  {
-    id: 'streak-badge',
-    name: '连续学习者',
-    desc: '连续学习7天',
-    icon: '🔥',
-    condition: (progress: LearnProgress) => progress.streak >= 7,
-  },
-]
+  ]
 
 // 获取所有徽章
 export const getAllBadges = (): Badge[] => {
