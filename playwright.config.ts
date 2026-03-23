@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test'
 const isDemoMode = process.env.DEMO === 'true'
 
 export default defineConfig({
-  testDir: './e2e/tests',
+  testDir: './tests/e2e',
   // DEMO模式：串行执行，方便围观
   fullyParallel: !isDemoMode,
   forbidOnly: !!process.env.CI,
