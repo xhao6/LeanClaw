@@ -73,7 +73,6 @@
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
           <wd-cell title="转发给朋友" is-link icon="share" size="large" @click="handleShareToFriend" />
-          <wd-cell title="复制链接" is-link icon="link" size="large" @click="handleCopyLink" />
           <wd-cell title="用户协议" is-link icon="file" size="large" @click="goToAgreement" />
           <wd-cell title="隐私政策" is-link icon="lock-on" size="large" @click="goToPrivacy" />
           <wd-cell title="清除缓存" is-link icon="delete" size="large" @click="handleClearCache" />
@@ -99,9 +98,6 @@ import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
 import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
-import { useShare } from '@/composables/useShare'
-
-const { copyLink } = useShare()
 
 // 拦截返回键，跳转到首页
 useBackButtonRedirect('/pages/index/index')
@@ -307,11 +303,6 @@ const handleShareToFriend = () => {
   // #ifndef MP-WEIXIN
   uni.showToast({ title: '请在微信小程序中使用', icon: 'none' })
   // #endif
-}
-
-// 复制链接
-const handleCopyLink = () => {
-  copyLink()
 }
 
 // 跳转设置页面
