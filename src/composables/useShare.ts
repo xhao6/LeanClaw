@@ -1,64 +1,72 @@
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 
-interface ShareOptions {
-  title?: string
-  path?: string
-  imageUrl?: string
+// 默认分享配置
+let defaultTitle = '轻学Claw - 7天学会OpenClaw'
+let defaultPath = '/pages/index/index'
+let defaultImageUrl = '/static/images/logo.webp'
+
+// 是否已注册全局分享
+let isGlobalShareRegistered = false
+
+/**
+ * 初始化全局分享（仅首次调用生效）
+ * 后续页面可通过 setShareConfig 更新配置
+ */
+export function initGlobalShare() {
+  if (isGlobalShareRegistered) return
+  isGlobalShareRegistered = true
+
+  // 分享到朋友
+  onShareAppMessage(() => {
+    return {
+      title: defaultTitle,
+      path: defaultPath,
+      imageUrl: defaultImageUrl
+    }
+  })
+
+  // 分享到朋友圈
+  onShareTimeline(() => {
+    return {
+      title: defaultTitle,
+      imageUrl: defaultImageUrl,
+      query: ''
+    }
+  })
 }
 
-export function useShare(options: ShareOptions = {}) {
-  const defaultTitle = '轻学Claw - 7天学会OpenClaw'
-  const defaultPath = '/pages/index/index'
-  const defaultImageUrl = '/static/images/logo.webp'
+/**
+ * 设置当前页面的分享配置
+ */
+export function setShareConfig(options: { title?: string; path?: string; imageUrl?: string }) {
+  if (options.title) defaultTitle = options.title
+  if (options.path) defaultPath = options.path
+  if (options.imageUrl) defaultImageUrl = options.imageUrl
+}
 
-  /**
-   * 分享到朋友
-   */
-  const initShareToFriend = () => {
-    onShareAppMessage((res) => {
-      if (res.from === 'button') {
-        console.log('来自页面内转发按钮')
-      }
-      return {
-        title: options.title || defaultTitle,
-        path: options.path || defaultPath,
-        imageUrl: options.imageUrl || defaultImageUrl
-      }
-    })
-  }
+/**
+ * 重置为默认分享配置
+ */
+export function resetShareConfig() {
+  defaultTitle = '轻学Claw - 7天学会OpenClaw'
+  defaultPath = '/pages/index/index'
+  defaultImageUrl = '/static/images/logo.webp'
+}
 
-  /**
-   * 分享到朋友圈
-   */
-  const initShareToTimeline = () => {
-    onShareTimeline(() => {
-      return {
-        title: options.title || defaultTitle,
-        imageUrl: options.imageUrl || defaultImageUrl,
-        query: ''
-      }
-    })
-  }
-
-  /**
-   * 复制链接
-   */
-  const copyLink = (link?: string) => {
-    const url = link || `${location.origin}${options.path || defaultPath}`
-    uni.setClipboardData({
-      data: url,
-      success: () => {
-        uni.showToast({ title: '链接已复制', icon: 'success' })
-      },
-      fail: () => {
-        uni.showToast({ title: '复制失败', icon: 'none' })
-      }
-    })
-  }
-
+/**
+ * 兼容旧 API（用于 profile 页面的"转发给朋友"入口）
+ */
+export function useShare() {
   return {
-    initShareToFriend,
-    initShareToTimeline,
-    copyLink
+    initShareToFriend: initGlobalShare,
+    initShareToTimeline: initGlobalShare,
+    copyLink: () => {
+      const url = `${location.origin}${defaultPath}`
+      uni.setClipboardData({
+        data: url,
+        success: () => uni.showToast({ title: '链接已复制', icon: 'success' }),
+        fail: () => uni.showToast({ title: '复制失败', icon: 'none' })
+      })
+    }
   }
 }
