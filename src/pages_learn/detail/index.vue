@@ -80,6 +80,15 @@ import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
 import { markLessonComplete } from '@/utils/learnProgress'
 import { updateProgress } from '@/api/modules/user'
+import { usePageShare } from '@/composables/useShare'
+import { setShareConfig } from '@/composables/useShare'
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: '轻学Claw - 7天学会OpenClaw',
+  path: '/pages_learn/detail/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 // 使用 Vite import.meta.glob 导入所有 md 文件内容
 // #ifdef MP-WEIXIN
@@ -152,6 +161,13 @@ const loadContent = async () => {
 
     const content = fm(contentText)
     title.value = (content.attributes as any).title || `Day ${dayId.value}`
+
+    // 更新分享标题为课程标题
+    setShareConfig({
+      title: `Day ${dayId.value}: ${title.value} - 轻学Claw`,
+      path: `/pages_learn/detail/index?id=${dayId.value}`,
+      imageUrl: '/static/images/logo.webp'
+    })
 
     // Process markdown
     let rendered = md.render(content.body)

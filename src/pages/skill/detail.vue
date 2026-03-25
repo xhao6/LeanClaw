@@ -49,6 +49,14 @@ import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import { getSkills } from '@/api/modules/resource'
+import { usePageShare, setShareConfig } from '@/composables/useShare'
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: 'OpenClaw Skills - 轻学Claw',
+  path: '/pages/skill/detail',
+  imageUrl: '/static/images/logo.webp'
+})
 
 const loading = ref(true)
 const error = ref('')
@@ -89,6 +97,13 @@ const loadSkillData = async (name: string) => {
 
     skillData.value = skill
     console.log('[Skill] Found skill:', skill.title, skill.markdownUrl)
+
+    // 更新分享配置
+    setShareConfig({
+      title: `${skill.title} - 轻学Claw`,
+      path: `/pages/skill/detail?name=${encodeURIComponent(skill.title)}`,
+      imageUrl: '/static/images/logo.webp'
+    })
 
     // If has markdownUrl, load and render markdown
     if (skill.markdownUrl) {
