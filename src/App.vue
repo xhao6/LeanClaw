@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
-import { onShareTimeline } from '@dcloudio/uni-app'
+import { onShareTimeline, onShareAppMessage } from '@dcloudio/uni-app'
 import { config } from '@/config'
 import { initTcbWeb } from '@/api/core/tcbWeb'
 
@@ -10,6 +10,15 @@ onShareTimeline(() => {
     title: '轻学Claw - 7天学会OpenClaw',
     imageUrl: '/static/images/logo.webp',
     query: ''
+  }
+})
+
+// 全局分享给朋友（默认配置）
+onShareAppMessage(() => {
+  return {
+    title: '轻学Claw - 7天学会OpenClaw',
+    path: '/pages/index/index',
+    imageUrl: '/static/images/logo.webp'
   }
 })
 
