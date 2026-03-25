@@ -33,6 +33,12 @@ onLaunch(() => {
       traceUser: true
     })
     console.log('CloudBase initialized (WeChat)')
+
+    // 启用分享菜单（分享给朋友和分享到朋友圈）
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   } else {
     // H5/Web 环境：使用 Web SDK 或 HTTP 触发器
     try {
