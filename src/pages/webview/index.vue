@@ -39,9 +39,17 @@ import { ref, onMounted, useCssModule } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import ArticleFooter from '@/components/ArticleFooter.vue'
+import { usePageShare, setShareConfig } from '@/composables/useShare'
 
 // 强制引用组件，避免被微信小程序依赖分析过滤
 const _ArticleFooter = ArticleFooter
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: 'OpenClaw 优质资源 - 轻学Claw',
+  path: '/pages/webview/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 const url = ref('')
 const resourceInfo = ref<{
@@ -108,17 +116,25 @@ const loadMarkdown = async (markdownUrl: string, resourceId: string) => {
     // 设置标题
     const titleMatch = res.match(/^#\s+(.+)$/m)
     if (titleMatch) {
+      const extractedTitle = titleMatch[1]
       uni.setNavigationBarTitle({
-        title: titleMatch[1].slice(0, 20)
+        title: extractedTitle.slice(0, 20)
       })
       resourceInfo.value = {
         id: resourceId,
         type: 'resource',
-        title: titleMatch[1],
+        title: extractedTitle,
         desc: '',
         url: resourceId,
         tags: []
       }
+
+      // 更新分享配置
+      setShareConfig({
+        title: `${extractedTitle} - 轻学Claw`,
+        path: `/pages/webview/index?url=${encodeURIComponent(resourceId)}`,
+        imageUrl: '/static/images/logo.webp'
+      })
     }
 
     loading.value = false

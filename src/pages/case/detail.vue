@@ -63,6 +63,14 @@ import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import MarkdownIt from 'markdown-it'
 import { getCases } from '@/api/modules/resource'
+import { usePageShare, setShareConfig } from '@/composables/useShare'
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: 'OpenClaw 精选案例 - 轻学Claw',
+  path: '/pages/case/detail',
+  imageUrl: '/static/images/logo.webp'
+})
 
 const loading = ref(true)
 const error = ref('')
@@ -104,6 +112,13 @@ const loadCaseData = async (title: string) => {
 
     caseData.value = caseItem
     console.log('[Case] Found case:', caseItem.title, caseItem.markdownUrl)
+
+    // 更新分享配置
+    setShareConfig({
+      title: `${caseItem.title} - 轻学Claw`,
+      path: `/pages/case/detail?title=${encodeURIComponent(caseItem.title)}`,
+      imageUrl: caseItem.image || '/static/images/logo.webp'
+    })
 
     // If has markdownUrl, load and render markdown
     if (caseItem.markdownUrl) {
