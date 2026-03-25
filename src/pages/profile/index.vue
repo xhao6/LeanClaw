@@ -72,7 +72,9 @@
 
       <view class="bg-white rounded-2xl shadow-sm overflow-hidden">
         <wd-cell-group border>
-          <wd-cell title="转发给朋友" is-link icon="share" size="large" @click="handleShareToFriend" />
+          <button class="share-btn" open-type="share">
+            <wd-cell title="转发给朋友" is-link icon="share" size="large" />
+          </button>
           <wd-cell title="用户协议" is-link icon="file" size="large" @click="goToAgreement" />
           <wd-cell title="隐私政策" is-link icon="lock-on" size="large" @click="goToPrivacy" />
           <wd-cell title="清除缓存" is-link icon="delete" size="large" @click="handleClearCache" />
@@ -302,19 +304,6 @@ const goToAbout = () => {
   })
 }
 
-// 转发给朋友（显示微信分享菜单）
-const handleShareToFriend = () => {
-  // #ifdef MP-WEIXIN
-  wx.showShareMenu({
-    withShareTicket: true,
-    menus: ['shareAppMessage']
-  })
-  // #endif
-  // #ifndef MP-WEIXIN
-  uni.showToast({ title: '请在微信小程序中使用', icon: 'none' })
-  // #endif
-}
-
 // 跳转设置页面
 const goToSettings = () => {
   uni.navigateTo({
@@ -324,6 +313,17 @@ const goToSettings = () => {
 </script>
 
 <style scoped>
+.share-btn {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+.share-btn::after {
+  border: none;
+}
 :deep(.wd-card) {
   margin-left: 0 !important;
   margin-right: 0 !important;
