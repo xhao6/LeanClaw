@@ -79,10 +79,17 @@ import { onLoad, onShow } from '@dcloudio/uni-app'
 import { getProgress } from '@/utils/learnProgress'
 import { useUserStore } from '@/store'
 import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
-import { setShareConfig } from '@/composables/useShare'
+import { usePageShare } from '@/composables/useShare'
 
 // 拦截返回键，跳转到首页
 useBackButtonRedirect('/pages/index/index')
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: '7天学会OpenClaw - 轻学Claw',
+  path: '/pages/learn/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 // 用户状态
 const userStore = useUserStore()
@@ -93,15 +100,6 @@ const refreshKey = ref(0)
 onShow(() => {
   // 每次页面显示时重新获取进度
   refreshKey.value++
-})
-
-// 设置分享配置
-onLoad(() => {
-  setShareConfig({
-    title: '7天学会OpenClaw - 轻学Claw',
-    path: '/pages/learn/index',
-    imageUrl: '/static/images/logo.webp'
-  })
 })
 
 const learnDays = computed(() => {

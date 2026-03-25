@@ -108,11 +108,18 @@ import { toggleFavorite, isFavorited } from '@/utils/favorites'
 import { getTagClass } from '@/composables/useTagColors'
 import { useUserStore } from '@/store'
 import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
-import { setShareConfig } from '@/composables/useShare'
+import { usePageShare } from '@/composables/useShare'
 import type { ResourceItem } from '@/types/resource'
 
 // 拦截返回键，跳转到首页
 useBackButtonRedirect('/pages/index/index')
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: 'OpenClaw 资源大全 - 轻学Claw',
+  path: '/pages/discover/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 const searchValue = ref('')
 const activeTab = ref<string>('resource')
@@ -229,11 +236,6 @@ onMounted(() => {
 
 // 从URL参数读取初始tab
 onLoad((options: Record<string, string>) => {
-  setShareConfig({
-    title: 'OpenClaw 资源大全 - 轻学Claw',
-    path: '/pages/discover/index',
-    imageUrl: '/static/images/logo.webp'
-  })
   if (options.tab) {
     activeTab.value = options.tab
     fetchData(true)

@@ -100,10 +100,17 @@ import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
 import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
-import { setShareConfig } from '@/composables/useShare'
+import { usePageShare } from '@/composables/useShare'
 
 // 拦截返回键，跳转到首页
 useBackButtonRedirect('/pages/index/index')
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: '我的学习进度 - 轻学Claw',
+  path: '/pages/profile/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 const userStore = useUserStore()
 const { userInfo, isLoggedIn } = storeToRefs(userStore)
@@ -156,15 +163,6 @@ const completedLessonsCount = computed(() => {
 const badgesCount = computed(() => {
   void statsVersion.value // 追踪依赖
   return getProgress().badges?.length || 0
-})
-
-// 设置分享配置
-onLoad(() => {
-  setShareConfig({
-    title: '我的学习进度 - 轻学Claw',
-    path: '/pages/profile/index',
-    imageUrl: '/static/images/logo.webp'
-  })
 })
 
 onShow(async () => {

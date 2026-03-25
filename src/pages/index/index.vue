@@ -154,7 +154,14 @@ import { getTagClass } from '@/composables/useTagColors'
 import { useUserStore } from '@/store'
 import type { ResourceItem } from '@/types/resource'
 import { toggleFavorite, isFavorited } from '@/utils/favorites'
-import { setShareConfig } from '@/composables/useShare'
+import { usePageShare } from '@/composables/useShare'
+
+// 启用分享功能（必须在 setup 顶层调用）
+usePageShare({
+  title: '轻学Claw - 7天学会OpenClaw',
+  path: '/pages/index/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 // 获取学习进度（响应式）
 const progressRef = ref(getProgress())
@@ -163,15 +170,6 @@ const progress = computed(() => progressRef.value)
 // 页面显示时刷新进度
 onShow(() => {
   progressRef.value = getProgress()
-})
-
-// 设置分享配置
-onLoad(() => {
-  setShareConfig({
-    title: '轻学Claw - 7天学会OpenClaw',
-    path: '/pages/index/index',
-    imageUrl: '/static/images/logo.webp'
-  })
 })
 
 // 今日推荐

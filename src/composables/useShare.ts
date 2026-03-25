@@ -1,46 +1,16 @@
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import { reactive } from 'vue'
 
-// 全局分享配置 - 使用 reactive 以便动态更新
+// 全局分享配置
 const shareState = reactive({
   title: '轻学Claw - 7天学会OpenClaw',
   path: '/pages/index/index',
   imageUrl: '/static/images/logo.webp'
 })
 
-// 是否已注册全局分享
-let isGlobalShareRegistered = false
-
-/**
- * 初始化全局分享（仅首次调用生效）
- * 在 App.vue 中调用
- */
-export function initGlobalShare() {
-  if (isGlobalShareRegistered) return
-  isGlobalShareRegistered = true
-
-  // 分享到朋友 - 返回 getter 函数，动态读取最新配置
-  onShareAppMessage(() => {
-    return {
-      title: shareState.title,
-      path: shareState.path,
-      imageUrl: shareState.imageUrl
-    }
-  })
-
-  // 分享到朋友圈
-  onShareTimeline(() => {
-    return {
-      title: shareState.title,
-      imageUrl: shareState.imageUrl,
-      query: ''
-    }
-  })
-}
-
 /**
  * 设置当前页面的分享配置
- * 在页面 onLoad 中调用
+ * 在页面 onLoad 或 setup 顶层调用
  */
 export function setShareConfig(options: { title?: string; path?: string; imageUrl?: string }) {
   if (options.title) shareState.title = options.title
@@ -69,12 +39,42 @@ export function getShareConfig() {
 }
 
 /**
+ * 启用页面分享功能
+ * 在页面 setup 顶层调用一次即可
+ * 同时设置分享配置并注册分享钩子
+ */
+export function usePageShare(options?: { title?: string; path?: string; imageUrl?: string }) {
+  // 先设置配置
+  if (options) {
+    setShareConfig(options)
+  }
+
+  // 分享给朋友
+  onShareAppMessage(() => {
+    return {
+      title: shareState.title,
+      path: shareState.path,
+      imageUrl: shareState.imageUrl
+    }
+  })
+
+  // 分享到朋友圈
+  onShareTimeline(() => {
+    return {
+      title: shareState.title,
+      imageUrl: shareState.imageUrl,
+      query: ''
+    }
+  })
+}
+
+/**
  * 兼容旧 API
  */
 export function useShare() {
   return {
-    initShareToFriend: initGlobalShare,
-    initShareToTimeline: initGlobalShare,
+    initShareToFriend: usePageShare,
+    initShareToTimeline: usePageShare,
     copyLink: () => {
       const url = `${location.origin}${shareState.path}`
       uni.setClipboardData({
