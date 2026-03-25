@@ -49,6 +49,14 @@ export function usePageShare(options?: { title?: string; path?: string; imageUrl
     setShareConfig(options)
   }
 
+  // 启用分享菜单
+  // #ifdef MP-WEIXIN
+  wx.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+  // #endif
+
   // 分享给朋友
   onShareAppMessage(() => {
     return {
