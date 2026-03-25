@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+import { onShareTimeline } from '@dcloudio/uni-app'
 import { config } from '@/config'
 import { initTcbWeb } from '@/api/core/tcbWeb'
+
+// 启用分享到朋友圈
+onShareTimeline(() => {
+  return {
+    title: '轻学Claw - 7天学会OpenClaw',
+    imageUrl: '/static/images/logo.webp',
+    query: ''
+  }
+})
 
 onLaunch(() => {
   console.log('App Launch')
