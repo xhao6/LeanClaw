@@ -1,35 +1,38 @@
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { reactive } from 'vue'
 
-// 默认分享配置
-let defaultTitle = '轻学Claw - 7天学会OpenClaw'
-let defaultPath = '/pages/index/index'
-let defaultImageUrl = '/static/images/logo.webp'
+// 全局分享配置 - 使用 reactive 以便动态更新
+const shareState = reactive({
+  title: '轻学Claw - 7天学会OpenClaw',
+  path: '/pages/index/index',
+  imageUrl: '/static/images/logo.webp'
+})
 
 // 是否已注册全局分享
 let isGlobalShareRegistered = false
 
 /**
  * 初始化全局分享（仅首次调用生效）
- * 后续页面可通过 setShareConfig 更新配置
+ * 在 App.vue 中调用
  */
 export function initGlobalShare() {
   if (isGlobalShareRegistered) return
   isGlobalShareRegistered = true
 
-  // 分享到朋友
+  // 分享到朋友 - 返回 getter 函数，动态读取最新配置
   onShareAppMessage(() => {
     return {
-      title: defaultTitle,
-      path: defaultPath,
-      imageUrl: defaultImageUrl
+      title: shareState.title,
+      path: shareState.path,
+      imageUrl: shareState.imageUrl
     }
   })
 
   // 分享到朋友圈
   onShareTimeline(() => {
     return {
-      title: defaultTitle,
-      imageUrl: defaultImageUrl,
+      title: shareState.title,
+      imageUrl: shareState.imageUrl,
       query: ''
     }
   })
@@ -37,31 +40,43 @@ export function initGlobalShare() {
 
 /**
  * 设置当前页面的分享配置
+ * 在页面 onLoad 中调用
  */
 export function setShareConfig(options: { title?: string; path?: string; imageUrl?: string }) {
-  if (options.title) defaultTitle = options.title
-  if (options.path) defaultPath = options.path
-  if (options.imageUrl) defaultImageUrl = options.imageUrl
+  if (options.title) shareState.title = options.title
+  if (options.path) shareState.path = options.path
+  if (options.imageUrl) shareState.imageUrl = options.imageUrl
 }
 
 /**
  * 重置为默认分享配置
  */
 export function resetShareConfig() {
-  defaultTitle = '轻学Claw - 7天学会OpenClaw'
-  defaultPath = '/pages/index/index'
-  defaultImageUrl = '/static/images/logo.webp'
+  shareState.title = '轻学Claw - 7天学会OpenClaw'
+  shareState.path = '/pages/index/index'
+  shareState.imageUrl = '/static/images/logo.webp'
 }
 
 /**
- * 兼容旧 API（用于 profile 页面的"转发给朋友"入口）
+ * 获取当前分享配置
+ */
+export function getShareConfig() {
+  return {
+    title: shareState.title,
+    path: shareState.path,
+    imageUrl: shareState.imageUrl
+  }
+}
+
+/**
+ * 兼容旧 API
  */
 export function useShare() {
   return {
     initShareToFriend: initGlobalShare,
     initShareToTimeline: initGlobalShare,
     copyLink: () => {
-      const url = `${location.origin}${defaultPath}`
+      const url = `${location.origin}${shareState.path}`
       uni.setClipboardData({
         data: url,
         success: () => uni.showToast({ title: '链接已复制', icon: 'success' }),
