@@ -90,7 +90,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
+import { onLoad, onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
 import { CacheService } from '@/services/CacheService'
@@ -98,6 +98,7 @@ import { getProgress } from '@/utils/learnProgress'
 import { getFavoritesCount, syncFavorites } from '@/utils/favorites'
 import { getFavorites as getCloudFavorites } from '@/api/modules/user'
 import { useBackButtonRedirect } from '@/composables/useBackButtonRedirect'
+import { setShareConfig } from '@/composables/useShare'
 
 // 拦截返回键，跳转到首页
 useBackButtonRedirect('/pages/index/index')
@@ -153,6 +154,15 @@ const completedLessonsCount = computed(() => {
 const badgesCount = computed(() => {
   void statsVersion.value // 追踪依赖
   return getProgress().badges?.length || 0
+})
+
+// 设置分享配置
+onLoad(() => {
+  setShareConfig({
+    title: '我的学习进度 - 轻学Claw',
+    path: '/pages/profile/index',
+    imageUrl: '/static/images/logo.webp'
+  })
 })
 
 onShow(async () => {
