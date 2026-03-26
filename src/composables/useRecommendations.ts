@@ -17,28 +17,6 @@ interface FavoriteItem {
 }
 
 /**
- * 获取用户收藏ID列表
- * 抽取为独立函数，避免代码重复
- */
-const useUserFavorites = (): Set<string> => {
-  const userStore = useUserStore()
-  const { isLoggedIn } = storeToRefs(userStore)
-  const userFavorites = new Set<string>()
-
-  if (isLoggedIn.value) {
-    // 同步获取收藏（简化处理，实际可考虑缓存）
-    try {
-      // 注意：这里需要异步调用，实际使用时需要 await
-      // 此函数为同步版本，返回空Set，异步逻辑在调用处处理
-    } catch (e) {
-      console.warn('获取用户收藏失败', e)
-    }
-  }
-
-  return userFavorites
-}
-
-/**
  * 异步获取用户收藏ID列表
  */
 const fetchUserFavorites = async (): Promise<Set<string>> => {
@@ -101,16 +79,6 @@ const calculateScore = (
 const STORAGE_KEY = 'viewed_resources'
 const PAGE_SIZE = 5
 const MAX_ITEMS = 30
-
-// Fisher-Yates 洗牌算法（保留用于其他场景）
-const shuffle = <T>(array: T[]): T[] => {
-  const arr = [...array]
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[arr[i], arr[j]] = [arr[j], arr[i]]
-  }
-  return arr
-}
 
 /**
  * 推荐功能 composable
