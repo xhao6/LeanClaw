@@ -1,6 +1,8 @@
 // 标签颜色工具函数
 // 统一管理多巴胺配色标签样式
 
+import { hashCode } from '@/utils/hash'
+
 // 15种多巴胺色
 export const TAG_COLORS = [
   'border-orange-200 text-orange-600 bg-orange-50',
@@ -19,16 +21,6 @@ export const TAG_COLORS = [
   'border-sky-200 text-sky-600 bg-sky-50',
   'border-emerald-200 text-emerald-600 bg-emerald-50',
 ]
-
-// 字符串哈希函数
-const hashCode = (str: string): number => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i)
-    hash = hash & hash
-  }
-  return Math.abs(hash)
-}
 
 // 根据标签名获取颜色class
 export const getTagClass = (tag: string): string => {

@@ -4,6 +4,7 @@ import { useUserStore } from '@/store'
 import { getResources } from '@/api/modules/resource'
 import { getFavorites } from '@/api/modules/user'
 import type { ResourceItem } from '@/types/resource'
+import { hashCode } from '@/utils/hash'
 
 // 推荐算法权重配置
 const HEAT_WEIGHT = 10       // 热度权重
@@ -13,20 +14,6 @@ const RANDOM_WEIGHT = 20     // 随机因子权重
 // 收藏数据类型定义
 interface FavoriteItem {
   resourceId: string;
-}
-
-/**
- * 简单的哈希函数 - 基于字符串生成确定性数字
- * 用于生成稳定的随机因子
- */
-const hashCode = (str: string): number => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i)
-    hash = ((hash << 5) - hash) + char
-    hash = hash & hash // Convert to 32bit integer
-  }
-  return Math.abs(hash)
 }
 
 /**
