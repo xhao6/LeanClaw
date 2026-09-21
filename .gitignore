@@ -24,3 +24,7 @@ output/
 temp/
 url-to-markdown/*
 .gstack/
+
+# secrets
+.env
+.env.*
